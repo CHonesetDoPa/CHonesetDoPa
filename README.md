@@ -1,16 +1,16 @@
-### Hi there 👋
+### About CH
 
-<!--
-**CHonesetDoPa/CHonesetDoPa** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
+##你好!这里是CH!目前还是在上学的吸血鬼!年龄809岁!
 
-Here are some ideas to get you started:
+#虽然说在Vercel里面已经塞了个自我介绍了，不过看起来似乎也应该在这写一个QwQ
 
-- 🔭 I’m currently working on ...
-- 🌱 I’m currently learning ...
-- 👯 I’m looking to collaborate on ...
-- 🤔 I’m looking for help with ...
-- 💬 Ask me about ...
-- 📫 How to reach me: ...
-- 😄 Pronouns: ...
-- ⚡ Fun fact: ...
--->
+总之，由于咱的想法有点奇奇怪怪，所以如果说看到任何沙雕Repo，那都不是咱干的！
+一切都是隔壁QT!
+
+关于联系方式什么的，还请看Vercel页:https://cpage.vercel.app
+
+目前所属 GAS GirlsAndScary 
+
+商业合作(不过咱真能接到商单吗QAQ):ch@ccloud.cf
+
+
