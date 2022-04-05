@@ -11,6 +11,6 @@
 
 目前所属 GAS GirlsAndScary 
 
-商业合作(不过咱真能接到商单吗QAQ):ch@ccloud.cf
+商业合作(不过咱真能接到商单吗QAQ):ch@ccloud.cf 或者 ch@nekoc.cc
 
 
