@@ -7,7 +7,7 @@
 总之，由于咱的想法有点奇奇怪怪，所以如果说看到任何沙雕Repo，那都不是咱干的！
 一切都是隔壁QT!
 
-关于联系方式什么的，还请看Vercel页:https://cpage.vercel.app
+关于联系方式什么的，还请看Vercel页:https://me.nekoc.cc
 
 目前所属 GAS GirlsAndScary 
 
