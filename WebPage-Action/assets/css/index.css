@@ -267,7 +267,7 @@ aside_content .card-info .author-info__description {
 #footer {
     position: relative;
     margin-top: 3rem;
-    font-size : 5px;
+    font-size : 1em;
     background-attachment: local;
     background-position: bottom;
     background-size: cover;
