@@ -1,6 +1,6 @@
 ### About CH
 
-![](images/Half-CH.png")
+<img align='right' src='https://me.nekoc.cc/assets/images/Half-CH.png' width='410px'>
 
 你好!这里是CH!目前还是在上学的吸血鬼萝莉女仆!
 
