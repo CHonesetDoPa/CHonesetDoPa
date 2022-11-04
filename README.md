@@ -8,7 +8,7 @@
 
 Hello! This Is CH! At Present, The Vampire Loli Succubus Is Still In School!
 
-总之，由于咱的想法有点奇奇怪怪，所以如果说看到任何沙雕repo，那都不是咱干的！一切都是隔壁qt!
+总之，由于咱的想法有点奇奇怪怪，所以如果说看到任何沙雕repo，那都不是咱干的！一切都是隔壁QT!
 
 In A Word, My Ideas Are A Little Strange, So If You See Any Sand Sculpture Repo, It's Not My Job! Everything Is Next Door QT!
 
