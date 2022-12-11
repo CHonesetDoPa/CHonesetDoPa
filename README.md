@@ -6,24 +6,24 @@
 
 你好!这里是CH!目前还是在上学的吸血鬼萝莉魅魔!
 
-Hello! This Is CH! At Present, The Vampire Loli Succubus Is Still In School!
-
 总之，由于咱的想法有点奇奇怪怪，所以如果说看到任何沙雕repo，那都不是咱干的！一切都是隔壁QT!
-
-In A Word, My Ideas Are A Little Strange, So If You See Any Sand Sculpture Repo, It's Not My Job! Everything Is Next Door QT!
 
 关于联系方式什么的，还请看home页:https://me.nekoc.cc
 
-For Contact Information, Please Refer To The Home Page: https://me.nekoc.cc
-
 目前所属 Gas Girlsandscary
-
-Current Gas Girlsandscary
 
 喜欢的事物有很多,但是目前最喜欢的是睡觉.
 
-I Like Many Things, But I Like Sleeping Best
-
 商业合作请发邮件(不过咱真能接到商单吗qaq).
+
+Hello! This Is CH! At Present, The Vampire Loli Succubus Is Still In School!
+
+In A Word, My Ideas Are A Little Strange, So If You See Any Sand Sculpture Repo, It's Not My Job! Everything Is Next Door QT!
+
+For Contact Information, Please Refer To The Home Page: https://me.nekoc.cc
+
+Current Gas Girlsandscary
+
+I Like Many Things, But I Like Sleeping Best
 
 Please Send Email For Business Cooperation (But Can I Really Receive The Business Order Qaq)
