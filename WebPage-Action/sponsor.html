@@ -50,7 +50,7 @@
     	<a class="shang_close" href="javascript:void(0)" onclick="dashangToggle()" title="关闭"><img src="assets/images/sponsor/close.jpg" alt="取消" /></a>
        
     	<div class="shang_tit">
-    		<p>感谢您的支持，我会继续努力的!</p>
+    		<p>感谢您的支持，CC会继续努力的!</p>
     	</div>
     	<div class="shang_payimg">
     		<a href="#"><img src="assets/images/sponsor/app3.png" alt="扫码支持" title="扫一扫" /></a>
@@ -83,11 +83,13 @@
     	$(".pay_item").click(function(){
     		$(this).addClass('checked').siblings('.pay_item').removeClass('checked');
     		var dataid=$(this).attr('data-id');
-            $(".shang_payimg a").attr("href","#");
             if(dataid == "app4"){
                 $(".shang_payimg a").attr("href","https://patreon.com/CHonesetDoPa");
                 $(".shang_payimg img").attr("title","点击前往Patreon");
-            };
+            }else{
+                $(".shang_payimg a").attr("href","#");
+                $(".shang_payimg img").attr("title","扫一扫");
+            }
     		$(".shang_payimg img").attr("src","assets/images/sponsor/"+dataid+".png");
     	});
     });
