@@ -528,6 +528,8 @@ table.dataTable td {
     clear: both
     box-sizing: content-box;
     border: 2px solid;
+    background-color:white;
+    opacity: 0.8;
 }
 
 .dataTables_wrapper .dataTables_length {
