@@ -72,12 +72,7 @@ a {
     cursor: url(https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/cursor/ayuda.cur), auto;
 }
 
-body {
-    background-image: url('../images/sponsor/bg.png');
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
-    background-attachment: fixed;
-}
+
 
 strong {
     color: #FF0066;
