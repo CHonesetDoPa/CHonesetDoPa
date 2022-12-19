@@ -187,9 +187,9 @@ h1 {
     margin: 15px 10px;
     background: #eee;
     height: 30px;
-    border-radius: 35px;
-    -moz-border-radius: 35px;
     -webkit-border-radius: 35px;
+    -moz-border-radius: 35px;
+    border-radius: 35px;
     -webkit-transition: 0.4s linear;
     -moz-transition: 0.4s linear;
     -o-transition: 0.4s linear;
@@ -207,9 +207,9 @@ h1 {
     width: 110px;
     font-size: 0.9rem;
     color: #ffffff;
-    border-radius: 35px;
-    -webkit-border-radius: 35px;
     -moz-border-radius: 35px;
+    -webkit-border-radius: 35px;
+    border-radius: 35px;
 }
 
 .skillbar .skillbar-title span {
@@ -218,9 +218,9 @@ h1 {
     padding: 0 20px;
     height: 30px;
     line-height: 30px;
-    border-radius: 35px;
-    -webkit-border-radius: 35px;
     -moz-border-radius: 35px;
+    -webkit-border-radius: 35px;
+    border-radius: 35px;
 }
 
 .skillbar .skill-bar-percent {
