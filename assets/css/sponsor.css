@@ -40,12 +40,12 @@
 
         .dashang {
             display: block;
-            width: 100px;
+            width: 100%;
             margin: 5px auto;
-            height: 25px;
+            height: 50px;
             line-height: 25px;
             padding: 10px;
-            background-color: #E74851;
+            background-color: rgba(252, 154, 255, 0.808);
             color: #fff;
             text-align: center;
             text-decoration: none;
@@ -92,7 +92,7 @@
         .shang_payimg {
             width: 140px;
             padding: 10px;
-            border: 6px solid #EA5F00;
+            border: 6px solid #c300ea;
             margin: 0 auto;
             border-radius: 3px;
             height: 140px;
@@ -101,8 +101,8 @@
         .shang_payimg img {
             display: block;
             text-align: center;
-            width: 140px;
-            height: 140px;
+            /* width: 140px; */
+            /* height: 140px; */
         }
 
         .pay_explain {
@@ -124,6 +124,12 @@
 
         .checked .radiobox {
             background: url('../images/sponsor/radio1.jpg');
+        }
+
+
+        .table th {
+            text-align: left;
+            font-size: larger;
         }
 
         .shang_payselect {
@@ -180,4 +186,11 @@
             text-indent: 2em;
             font-size: 18px;
             color: #66ff;
+        }
+
+        .dataTables_info {
+            text-align: center;
+            vertical-align: middle !important;
+            font-weight: bold;
+            font-size: larger;
         }
