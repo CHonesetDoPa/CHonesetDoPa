@@ -26,4 +26,4 @@ Current GAS GirlsAndScary
 
 I Like Many Things, But I Like Sleeping Best
 
-Please Send Email For Business Cooperation (But Can I Really Receive The Business Order Q)
+Please Send Email For Business Cooperation (But Can I Really Receive The Business Order QAQ)
