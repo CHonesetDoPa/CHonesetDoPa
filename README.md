@@ -10,7 +10,7 @@
 
 关于联系方式什么的，还请看home页:https://me.nekoc.cc
 
-目前所属 Gas Girlsandscary
+目前所属 GAS GirlsAndScary
 
 喜欢的事物有很多,但是目前最喜欢的是睡觉.
 
@@ -22,7 +22,7 @@ In A Word, My Ideas Are A Little Strange, So If You See Any Sand Sculpture Repo,
 
 For Contact Information, Please Refer To The Home Page: https://me.nekoc.cc
 
-Current Gas Girlsandscary
+Current GAS GirlsAndScary
 
 I Like Many Things, But I Like Sleeping Best
 
