@@ -1,6 +1,6 @@
 # About CH
 
-<img align='left' src='https://me.nekoc.cc/assets/images/Half-CH@1500.webp' width='25%' ></img>
+<img align='left' src='https://me.nekoc.cc/assets/images/Half-CH@1500.webp' width='30%' ></img>
 
 ***
 
@@ -15,19 +15,3 @@
 喜欢的事物有很多,但是目前最喜欢的是睡觉.
 
 商业合作请发邮件(不过咱真能接到商单吗qaq).
-
-<br>
-
-***
-
-Hello! This Is CH! At Present, The Vampire Loli Succubus Is Still In School!
-
-In A Word, My Ideas Are A Little Strange, So If You See Any Sand Sculpture Repo, It's Not My Job! Everything Is Next Door QT!
-
-For Contact Information, Please Refer To The Home Page:<a href="https://me.nekoc.cc">HomePage</a>
-
-Current GAS GirlsAndScary
-
-I Like Many Things, But I Like Sleeping Best
-
-Please Send Email For Business Cooperation (But Can I Really Receive The Business Order QAQ).
