@@ -1,6 +1,6 @@
 # About CH
 
-<img align='left' src='https://me.nekoc.cc/assets/images/Half-CH@1500.webp' width='300px'>
+<img align='left' src='https://me.nekoc.cc/assets/images/Half-CH@1500.webp' width='22%' ></img>
 
 ***
 
@@ -14,7 +14,7 @@
 
 喜欢的事物有很多,但是目前最喜欢的是睡觉.
 
-商业合作请发邮件(不过咱真能接到商单吗qaq).  讨论：<a href="https://github.com/CHonesetDoPa/CHonesetDoPa/discussions">Discussions</a>
+商业合作请发邮件(不过咱真能接到商单吗qaq).
 
 Hello! This Is CH! At Present, The Vampire Loli Succubus Is Still In School!
 
@@ -26,4 +26,4 @@ Current GAS GirlsAndScary
 
 I Like Many Things, But I Like Sleeping Best
 
-Please Send Email For Business Cooperation (But Can I Really Receive The Business Order QAQ).  Go To Discuss:<a href="https://github.com/CHonesetDoPa/CHonesetDoPa/discussions">Discussions</a>
+Please Send Email For Business Cooperation (But Can I Really Receive The Business Order QAQ).
