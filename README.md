@@ -1,6 +1,6 @@
 # About CH
 
-<img align='left' src='https://me.nekoc.cc/assets/images/Half-CH@1500.webp' width='300px' ></img>
+<img align='left' src='https://me.nekoc.cc/assets/images/Half-CH-New.webp' width='300px' ></img>
 
 ***
 
