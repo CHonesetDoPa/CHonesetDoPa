@@ -204,16 +204,18 @@
             </div>
         </footer>
     </div>
-    <script language="javaScript">
+<!-- 问候 -->
+<script language="javaScript">
+    window.onload = function () {
         now = new Date(), hour = now.getHours();
-        if (hour > 0) if (hour < 6) swal({ title: "凌晨了!", text: "注意休息~", icon: "info" });
-        else if (hour > 6) if (hour < 9) swal({ title: "早上好!", text: "Good morning", icon: "info" });
+        if (hour > 0) if (hour < 6) swal({ title: "It's early morning!", text: "Remember to rest~", icon: "info" });
+        else if (hour > 6) if (hour < 9) swal({ title: "Good Morning!", text: "Good morning", icon: "info" });
         else if (hour > 21) if (hour < 24)
             swal({
-                title: "晚上好!",
-                text: "开启夜间模式可以让页面不那么刺眼哟~",
+                title: "Good Night!",
+                text: "Turn on the night mode to make the page less dazzling~",
                 icon: "info",
-                buttons: ["夜间模式", true],
+                buttons: ["Night Mode", true],
             })
                 .then((OK) => {
                     if (OK) {
@@ -222,5 +224,6 @@
                         dark();
                     }
                 });
+    }
     </script>
 </body>

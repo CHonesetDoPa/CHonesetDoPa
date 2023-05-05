@@ -61,7 +61,7 @@
                                 <br>
                                 <button class="dark-button" onclick="dark()" style="vertical-align:middle"><span><i
                                             class="fa fa-sun-o"></i> / <i class="fa fa-moon-o"></i></span></button>
-                                            <button class="dark-button" onclick="changeLanguage('en')">English</button>
+                                <button class="dark-button" onclick="changeLanguage('en')">English</button>
                             </div>
                         </div>
                     </div>
@@ -205,22 +205,25 @@
         </footer>
     </div>
     <script language="javaScript">
-        now = new Date(), hour = now.getHours();
-        if (hour > 0) if (hour < 6) swal({ title: "凌晨了!", text: "注意休息~", icon: "info" });
-        else if (hour > 6) if (hour < 9) swal({ title: "早上好!", text: "Good morning", icon: "info" });
-        else if (hour > 21) if (hour < 24)
-            swal({
-                title: "晚上好!",
-                text: "开启夜间模式可以让页面不那么刺眼哟~",
-                icon: "info",
-                buttons: ["夜间模式", true],
-            })
-                .then((OK) => {
-                    if (OK) {
-                    }
-                    else {
-                        dark();
-                    }
-                });
+        window.onload = function () {
+            now = new Date(), hour = now.getHours();
+            if (hour > 0) if (hour < 6) swal({ title: "凌晨了!", text: "注意休息~", icon: "info" });
+            else if (hour > 6) if (hour < 9) swal({ title: "早上好!", text: "Good morning", icon: "info" });
+            else if (hour > 21) if (hour < 24)
+                swal({
+                    title: "晚上好!",
+                    text: "开启夜间模式可以让页面不那么刺眼哟~",
+                    icon: "info",
+                    buttons: ["夜间模式", true],
+                })
+                    .then((OK) => {
+                        if (OK) {
+                        }
+                        else {
+                            dark();
+                        }
+                    });
+        }
+
     </script>
 </body>
