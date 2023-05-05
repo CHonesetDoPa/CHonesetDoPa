@@ -1,25 +1,3 @@
-﻿﻿<!DOCTYPE html>
-<html lang="zh">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=5">
-    <title>CH's HomePage</title>
-    <meta name="description" content="CH's HomePage">
-    <meta name="format-detection" content="telephone=no">
-    <link rel="icon" href="./favicon.ico">
-    <link rel="stylesheet" href="./assets/css/index.css">
-    <link rel="stylesheet"
-        href="https://lf9-cdn-tos.bytecdntp.com/cdn/expire-1-M/font-awesome/4.7.0/css/font-awesome.css">
-    <link rel="stylesheet" href="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/fancybox/3.5.7/jquery.fancybox.css">
-    <script type="text/javascript">
-        if (!!window.ActiveXObject || "ActiveXObject" in window) { //is IE?
-            alert('内个,这边建议您使用Chrome/Firefox浏览器呢~');
-        }
-    </script>
-</head>
-
 <body>
     <div id="body-wrap">
         <nav class="not_index_bg" id="nav" style="background-image:url(./assets/images/bg.webp)">
@@ -83,6 +61,7 @@
                                 <br>
                                 <button class="dark-button" onclick="dark()" style="vertical-align:middle"><span><i
                                             class="fa fa-sun-o"></i> / <i class="fa fa-moon-o"></i></span></button>
+                                            <button class="dark-button" onclick="changeLanguage('zh')">Chinese</button>
                             </div>
                         </div>
                     </div>
@@ -91,20 +70,11 @@
                         <div class="card-content">
                             <div class="item-headline">
                                 <i class="fa fa-calendar" aria-hidden="true"></i>
-                                <span>公告 / Notice</span>
+                                <span>Notice</span>
                             </div>
                             <div id="">
-                                <p>最近，学习中。</p>
+                                <p>Recently, learning.</p>
                             </div>
-                        </div>
-                    </div>
-                    <div class="card-widget card-announcement">
-                        <div class="card-content">
-                            <div class="item-headline">
-                                <i class="fa fa-bullhorn" aria-hidden="true"></i>
-                                <span>一言 / A Note</span>
-                            </div>
-                            <div id="hitokoto"></div>
                         </div>
                     </div>
 
@@ -112,31 +82,30 @@
                         <div class="card-content">
                             <div class="item-headline">
                                 <i class="fa fa-file-text-o" aria-hidden="true"></i>
-                                <span>社交媒体 / SocialMedia</span>
+                                <span>SocialMedia</span>
                             </div>
                             <div id="">
                                 <li><a href="https://twitter.com/CH6306"
-                                        style="color: orange; text-decoration:none;">Twitter
+                                    style="color: orange; text-decoration:none;">Twitter
                                     </a></li>
                                 <li><a href="https://www.youtube.com/channel/UCu_wgqS21zUI8JSA1pBuQDQ"
-                                        style="color: orange; text-decoration:none;">Youtube Channel
+                                    style="color: orange; text-decoration:none;">Youtube Channel
                                     </a></li>
-                                <li><a href="https://t.me/CH6306" style="color: orange; text-decoration:none;">Telegram
+                                <li><a href="https://t.me/CH6306"
+                                    style="color: orange; text-decoration:none;">Telegram
                                     </a></li>
                                 <li><a href="https://steamcommunity.com/id/SakuraCH/"
-                                        style="color: orange; text-decoration:none;">Steam
+                                    style="color: orange; text-decoration:none;">Steam
                                     </a></li>
                                 <li><a href="https://discord.gg/x4kV2tmjNF"
                                         style="color: orange; text-decoration:none;">Discord Channel
                                     </a></li>
                                 <li><a href="https://www.twitch.tv/ch6306"
-                                        style="color: orange; text-decoration:none;">Twitch
-                                    </a></li>
+                                    style="color: orange; text-decoration:none;">Twitch
+                                    </a></li>        
                                 <li><a href="https://osu.ppy.sh/users/16438125"
-                                        style="color: orange; text-decoration:none;">OSU!
+                                    style="color: orange; text-decoration:none;">OSU!
                                     </a></li>
-
-
 
                             </div>
                         </div>
@@ -146,18 +115,18 @@
                         <div class="card-content">
                             <div class="item-headline">
                                 <i class="fa fa-line-chart" aria-hidden="true"></i>
-                                <span>站点信息 / Info</span>
+                                <span>Info</span>
                             </div>
                             <div class="webinfo">
                                 <div class="webinfo-item">
-                                    <div class="webinfo-site-name">运行状态：</div>
-                                    <div class="webinfo-site-pv-count" id="">🟢 正常</div>
+                                    <div class="webinfo-site-name">Operational Status:</div>
+                                    <div class="webinfo-site-pv-count" id="">🟢 Normal</div>
                                     <!-- <div class="webinfo-site-pv-count" id="">🟠 卡顿</div> -->
                                     <!-- <div class="webinfo-site-pv-count" id="">🔴 严重错误</div> -->
                                 </div>
                                 <div class="webinfo-item">
-                                    <div class="webinfo-site-name">站长状态：</div>
-                                    <div class="webinfo-site-pv-count" id="">🟢 活着</div>
+                                    <div class="webinfo-site-name">Webmaster Status:</div>
+                                    <div class="webinfo-site-pv-count" id="">🟢 Alive</div>
                                 </div>
                             </div>
                         </div>
@@ -167,22 +136,24 @@
                     <div class="article-container">
 
                         <hr>
-                        <h2>关于 CH</h2>
+                        <h2>About CH</h2>
                         <div class="tool">
-                            <p> 你好!这里是CH!目前还是在上学的吸血鬼萝莉魅魔!
+                            <p> Hello! This is CH! At present, the vampire Lori Phantom is still in school!!
                                 <br>
-                                由于咱的想法有点奇奇怪怪,所以如果说看到任何沙雕Repo,那都不是咱干的!一切都是隔壁QT!
+                                Because my ideas are a little strange, if you see any sand sculpture Repo, it is not my
+                                job! Everything is next door QT!
                                 <br>
-                                目前所属 GAS GirlsAndScary.
+                                Currently,CH belongs to GAS Girls And Scary.
                                 <br>
-                                喜欢的事物有很多,但是目前最喜欢的是睡觉.
+                                I like many things, but I like sleeping best.
                                 <br>
-                                商业合作请发邮件(不过咱真能接到商单吗QAQ).
+                                Please send email for business cooperation (but can I really receive the business order
+                                QAQ).
                             </p>
                         </div>
 
                         <hr>
-                        <h2>我的技能</h2>
+                        <h2>MySkills</h2>
                         <div class="skillbox">
                             <div class="skillbar">
                                 <div class="skillbar-title"
@@ -215,13 +186,12 @@
                         </div>
 
                         <hr>
-                        <h2>相关网站</h2>
+                        <h2>Website</h2>
                         <div class="tool">
-                            <li><a href="https://github.com/qtnull">隔壁QT</a></li>
-                            <li><a href="https://cloudch.nekoc.cc">CH GAS 公共文件共享</a></li>
-                            <li><a href="https://cloudqt.nekoc.cc">QT GAS 公共文件共享</a></li>
-                            <li><a href="./sponsor-zh.html">赞助CC</a></li>
-                        </div>
+                            <li><a href="https://github.com/qtnull">The Next Door QT</a></li>
+                            <li><a href="https://cloudch.nekoc.cc">CH GAS Public file sharing</a></li>
+                            <li><a href="https://cloudqt.nekoc.cc">QT GAS Public file sharing</a></li>
+                            <li><a href="content/sponsor-en.html">Sponsor CC</a></li>
 
 
                     </div>
@@ -230,105 +200,9 @@
         </main>
         <footer id="footer">
             <div id="footer-wrap">
-                Copyright 2022 CH 每一天都是新的一天
+                Copyright 2022 CH Everyday is a new day.
             </div>
         </footer>
     </div>
-    <script src="https://lf9-cdn-tos.bytecdntp.com/cdn/expire-1-M/typed.js/2.0.12/typed.js"></script>
-    <script src="https://lf9-cdn-tos.bytecdntp.com/cdn/expire-1-M/fancybox/3.5.7/jquery.fancybox.js"></script>
-    <script src="https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/instant.page/5.1.0/instantpage.js"
-        type="module"></script>
-    <script src="https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/lazysizes/5.3.2/lazysizes.min.js" async></script>
-    <script src="https://lf9-cdn-tos.bytecdntp.com/cdn/expire-1-M/sweetalert/2.1.2/sweetalert.min.js"></script>
-
-    <!-- 一言 -->
-    <script src="https://v1.hitokoto.cn/?encode=js&select=%23hitokoto" defer></script>
-    <script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script>
-
-    <!--鼠标点击效果-->
-    <script src="https://cdn.jsdelivr.net/gh/TRHX/CDN-for-itrhx.com@3.0.8/js/maodian.js"></script>
-
-    <!-- 复制内容 -->
-    <script>
-        function copy(data) {
-            let input = document.createElement("input");
-            input.setAttribute("readonly", "readonly");
-            input.value = data;
-            document.body.appendChild(input);
-            input.select();
-            document.execCommand("Copy");
-            document.body.removeChild(input);
-            swal("复制成功！");
-        }
-    </script>
-
-    <!-- 显示邮箱 -->
-    <script>
-        function email() {
-            swal({
-                title: "E-mail",
-                text: "CH@nekoc.cc",
-                buttons: ["复制", true],
-            })
-                .then((OK) => {
-                    if (OK) {
-                    }
-                    else {
-                        copy("CH@nekoc.cc");
-                    }
-                });
-        }
-    </script>
-
-    <!-- 显示URL -->
-    <script>
-        function page_url() {
-            swal({
-                title: "URL",
-                text: url,
-            })
-        }
-    </script>
-
-    <!-- 问候 -->
-    <script language="javaScript">
-        now = new Date(), hour = now.getHours();
-        if (hour > 0) if (hour < 6) swal({ title: "凌晨了!", text: "注意休息~", icon: "info" });
-        else if (hour > 6) if (hour < 9) swal({ title: "早上好!", text: "Good morning", icon: "info" });
-        else if (hour > 21) if (hour < 24)
-            swal({
-                title: "晚上好!",
-                text: "开启夜间模式可以让页面不那么刺眼哟~",
-                icon: "info",
-                buttons: ["夜间模式", true],
-            })
-                .then((OK) => {
-                    if (OK) {
-                    }
-                    else {
-                        dark();
-                    }
-                });
-    </script>
-
-    <script type="text/javascript">
-        // 控制台消息
-        console.clear();
-        console.log("每天都是新的一天", "background:#24272A; color:#ffffff", "");
-        console.log("");
-
-        // 夜间模式
-        function dark() {
-            var element = document.body;
-            element.classList.toggle("dark-mode");
-        }
-
-        // 浏览器萌标题
-
-        window.onfocus = function () { document.title = '(ฅ>ω<*ฅ) 诶嘿嘿，你回来啦！' }
-        window.onblur = function () { document.title = '╭(°A°`)╮ 你要去哪里？' }
-
-    </script>
+ 
 </body>
-
-</html>
