@@ -11,7 +11,7 @@ $(function () {
             $(".shang_payimg img").attr("title", "Scan");
             document.getElementById("info-text-0001").innerHTML = "Scan this QR Code.";
         }
-        $(".shang_payimg img").attr("src", "../assets/images/sponsor/" + dataid + ".png");
+        $(".shang_payimg img").attr("src", "../assets/img/Sponsor/" + dataid + ".png");
     });
 });
 function dashangToggle() {

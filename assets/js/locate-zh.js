@@ -11,7 +11,7 @@ $(function () {
             $(".shang_payimg img").attr("title", "扫一扫");
             document.getElementById("info-text-0001").innerHTML = "扫描这个二维码.";
         }
-        $(".shang_payimg img").attr("src", "../assets/images/sponsor/" + dataid + ".png");
+        $(".shang_payimg img").attr("src", "../assets/img/Sponsor/" + dataid + ".png");
     });
 });
 function dashangToggle() {

@@ -29,9 +29,6 @@
 <script src="https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/instant.page/5.1.0/instantpage.js" type="module"></script>
 <script src="https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/lazysizes/5.3.2/lazysizes.min.js" async></script>
 <script src="https://lf9-cdn-tos.bytecdntp.com/cdn/expire-1-M/sweetalert/2.1.2/sweetalert.min.js"></script>
-<!-- 一言 -->
-<script src="https://v1.hitokoto.cn/?encode=js&select=%23hitokoto" defer></script>
-<script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script>
 <!--鼠标点击效果-->
 <script src="https://cdn.jsdelivr.net/gh/TRHX/CDN-for-itrhx.com@3.0.8/js/maodian.js"></script>
 <!-- 复制内容 -->
@@ -44,7 +41,7 @@
         input.select();
         document.execCommand("Copy");
         document.body.removeChild(input);
-        swal("复制成功！");
+        swal("Completed！");
     }
 </script>
 <!-- 显示邮箱 -->
@@ -53,7 +50,7 @@
         swal({
             title: "E-mail",
             text: "CH@nekoc.cc",
-            buttons: ["复制", true],
+            buttons: ["Copy", true],
         })
             .then((OK) => {
                 if (OK) {
@@ -99,7 +96,7 @@
 <script type="text/javascript">
     // 控制台消息
     console.clear();
-    console.log("每天都是新的一天", "background:#24272A; color:#ffffff", "");
+    console.log('每天都是新的一天');
     console.log("");
     // 夜间模式
     function dark() {
