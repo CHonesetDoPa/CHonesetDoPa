@@ -87,7 +87,7 @@
 
                                 <button class="dark-button" onclick="dark()" style="vertical-align:middle"><span><i
                                             class="fa fa-sun-o"></i> / <i class="fa fa-moon-o"></i></span></button>
-                                <button class="dark-button" onclick="switchLanguage()">English</button>
+                                <button class="dark-button" data-en="Chinese" data-zh="English"  onclick="switchLanguage()">English</button>
                             </div>
                         </div>
                     </div>
@@ -340,7 +340,7 @@
                     case "local":
                         window.location.href = './assets/ch.asc';
                         break;
-                        
+
                     case "cloud":
                         window.location.href = 'https://keys.openpgp.org/search?q=ch%40nekoc.cc';
                         break;
