@@ -8,11 +8,11 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="viewport" content="width=device-width,initial-scale=1">
 
-    <link rel="icon" href="../favicon.ico">
-    <link rel="stylesheet" href="../assets/css/index.css">
-    <link rel="stylesheet" href="../assets/css/font-awesome.css">
-    <link rel="stylesheet" href="../assets/css/jquery.fancybox.css">
-    <link rel="stylesheet" href="../assets/css/sponsor.css">
+    <link rel="icon" href="favicon.ico">
+    <link rel="stylesheet" href="assets/css/index.css">
+    <link rel="stylesheet" href="assets/css/font-awesome.css">
+    <link rel="stylesheet" href="assets/css/jquery.fancybox.css">
+    <link rel="stylesheet" href="assets/css/sponsor.css">
 
     <script type="text/javascript">
         if (!!window.ActiveXObject || "ActiveXObject" in window) { //is IE?
@@ -26,11 +26,11 @@
 
 <body>
     <div id="body-wrap">
-        <nav class="not_index_bg" id="nav" style="background-image:url(../assets/img/BG/bg.webp)">
+        <nav class="not_index_bg" id="nav" style="background-image:url(assets/img/BG/bg.webp)">
             <div id="page_site-info">
                 <div id="site-title">
                     <span class="blogtitle"></span>
-                    <script src="../assets/js/typed.min.js"></script>
+                    <script src="assets/js/typed.min.js"></script>
                     <script>
                         var typed = new Typed(".blogtitle", {
                             strings: ['每一天都是新的一天', 'Everyday is a new day', '毎日が新しい日です'],
@@ -50,7 +50,7 @@
                     <div class="card-widget card-info">
                         <div class="card-content">
                             <div class="card-info-avatar is-center">
-                                <img class="avatar-img" src="../assets/img/V4/V4-Avatar.webp" alt="avatar">
+                                <img class="avatar-img" src="assets/img/V4/V4-Avatar.webp" alt="avatar">
                                 <div class="author-info__name">
                                     <span color="pink"><b>CH</b></span>
                                 </div>
@@ -166,8 +166,6 @@
                             <h2 data-en="Choose donation method" data-zh="选择捐赠方式">选择捐赠方式</h2>
                             <blockquote><span class="spon" onclick="sponsor_wechat()" data-en="Sponsor via WechatPay"
                                     data-zh="使用微信赞赏码捐赠">使用微信赞赏码捐赠</span><br></blockquote>
-                            <blockquote><span class="spon" onclick="sponsor_alipay()" data-en="Sponsor via AliPay"
-                                    data-zh="使用支付宝捐赠">使用支付宝捐赠</span><br></blockquote>
                             <blockquote><span class="spon" onclick="sponsor_patreon()" data-en="Sponsor via Patreon"
                                     data-zh="使用Patreon捐赠">使用Patreon捐赠</span><br></blockquote>
                             <blockquote><span class="spon" onclick="sponsor_afdian()" data-en="Sponsor via Afdian"
@@ -183,12 +181,12 @@
     </div>
 </body>
 
-<script src="../assets/js/jquery.fancybox.js"></script>
-<script src="../assets/js/instantpage.js" type="module"></script>
-<script src="../assets/js/lazysizes.min.js" async></script>
-<script src="../assets/js/sweetalert.min.js"></script>
+<script src="assets/js/jquery.fancybox.js"></script>
+<script src="assets/js/instantpage.js" type="module"></script>
+<script src="assets/js/lazysizes.min.js" async></script>
+<script src="assets/js/sweetalert.min.js"></script>
 <!--鼠标点击效果-->
-<script src="../assets/js/maodian.js"></script>
+<script src="assets/js/maodian.js"></script>
 <!-- 复制内容 -->
 <script>
     function copy(data) {
@@ -208,18 +206,7 @@
         swal({
             title: '真的要请cc喝奶茶吗',
             text: '你果然是大好人！',
-            icon: '../assets/img/Sponsor/app1.png',
-            imageWidth: 200,
-            imageHeight: 100,
-            imageAlt: 'Custom image',
-            buttons: ["No,thanks", true],
-        })
-    }
-    function sponsor_alipay() {
-        swal({
-            title: '真的要请cc喝奶茶吗',
-            text: '你果然是大好人！',
-            icon: '../assets/img/Sponsor/app2.png',
+            icon: 'assets/img/Sponsor/app1.png',
             imageWidth: 200,
             imageHeight: 100,
             imageAlt: 'Custom image',
