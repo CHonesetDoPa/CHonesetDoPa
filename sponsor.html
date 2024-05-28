@@ -201,6 +201,21 @@
     }
 </script>
 <!--捐赠面板-->
+<script src="assets/js/sponsorlist.js"></script>
+    <script>
+        let table = new DataTable('#sponsor', {
+            "autoWidth": true,
+            "scrollY": 200,
+            "scrollCollapse": true,
+            "jQueryUI": true,
+            "searching": false,
+            "data": sponsorlist,
+            "columns": [
+                { "title": "Sponsor" },
+                { "title": "Price" }
+            ]
+        });
+    </script>
 <script>
     function sponsor_wechat() {
         swal({
