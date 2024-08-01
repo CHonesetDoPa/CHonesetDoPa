@@ -177,6 +177,8 @@
                                     data-zh="使用微信赞赏码捐赠">使用微信赞赏码捐赠</span><br></blockquote>
                             <blockquote><span class="spon" onclick="sponsor_patreon()" data-en="Sponsor via Patreon"
                                     data-zh="使用Patreon捐赠">使用Patreon捐赠</span><br></blockquote>
+                            <blockquote><span class="spon" onclick="sponsor_afdian()" data-en="Sponsor via Afdian"
+                                    data-zh="使用爱发电捐赠">使用爱发电捐赠</span><br></blockquote>
                             <blockquote><span class="spon" onclick="sponsor_opencollective()" data-en="Sponsor via OpenCollective"
                                     data-zh="使用OpenCollective捐赠">使用OpenCollective捐赠</span><br></blockquote>
                         </div>
@@ -229,6 +231,20 @@
         }).then((OK) => {
             if (OK) {
                 window.location.href = 'https://patreon.com/CHonesetDoPa?utm_medium=unknown&utm_source=join_link&utm_campaign=creatorshare_creator&utm_content=copyLink';
+            }
+            else {
+
+            }
+        });
+    }
+    function sponsor_afdian() {
+        swal({
+            title: '真的要请cc喝奶茶吗',
+            text: '你果然是大好人！',
+            buttons: ["No,thanks", "OK"],
+        }).then((OK) => {
+            if (OK) {
+                window.location.href = 'https://afdian.com/a/ch6306';
             }
             else {
 
