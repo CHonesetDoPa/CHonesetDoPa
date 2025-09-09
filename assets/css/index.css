@@ -21,6 +21,7 @@ body {
     -moz-user-select: none;
     -khtml-user-select: none;
     user-select: none;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 body {
@@ -426,30 +427,37 @@ aside_content .card-info .author-info__description {
 }
 
 .dark-mode a {
-    color: #00ff6a80
+    color: #00ff6a80;
+    transition: color 0.3s ease;
 }
 
 .dark-mode #page {
     background-color: #252525;
+    transition: background-color 0.3s ease;
 }
 
 .dark-mode .tool {
     color: #ffffffbe;
+    transition: color 0.3s ease;
 }
 
 .dark-mode .card-content {
     background-color: #252525;
     color: #ffffffbe;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .dark-mode #footer {
     background-color: #252525;
+    transition: background-color 0.3s ease;
 }
 
 .dark-mode .skillbar {
     background-color: #3a3a3a;
+    transition: background-color 0.3s ease;
 }
 
 .dark-mode .skill-bar-percent {
     color: #ffffffab;
+    transition: color 0.3s ease;
 }

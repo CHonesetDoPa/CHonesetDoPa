@@ -525,7 +525,8 @@ table.dataTable td {
 
 .dataTables_wrapper {
     position: relative;
-    clear: both box-sizing: content-box;
+    clear: both;
+    box-sizing: content-box;
     border: 2px solid;
     background-color: white;
     opacity: 0.8;
