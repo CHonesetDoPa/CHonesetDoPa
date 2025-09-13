@@ -24,8 +24,6 @@
     <script src="assets/js/link-manager.js"></script>
     <!--自动夜间模式管理器-->
     <script src="assets/js/dark-mode-manager.js"></script>
-    </script>
-
 
     <link rel="icon" href="favicon.ico">
     <link rel="stylesheet" href="assets/css/index.css">
@@ -33,11 +31,7 @@
     <link rel="stylesheet" href="assets/css/jquery.fancybox.css">
     <link rel="stylesheet" href="assets/css/sponsor.css">
 
-    <script type="text/javascript">
-        if (!!window.ActiveXObject || "ActiveXObject" in window) { //is IE?
-            alert('内个,这边建议您使用Chrome/Firefox浏览器呢~');
-        }
-    </script>
+    <script src="assets/js/ie-check.js"></script>
 
     <title data-i18n="site.title">CH's HomePage</title>
 
@@ -50,16 +44,7 @@
                 <div id="site-title">
                     <span class="blogtitle"></span>
                     <script src="assets/js/typed.min.js"></script>
-                    <script>
-                        var typed = new Typed(".blogtitle", {
-                            strings: ['每一天都是新的一天', 'Everyday is a new day', '毎日が新しい日です'],
-                            startDelay: 300,
-                            typeSpeed: 100,
-                            loop: true,
-                            backSpeed: 50,
-                            showCursor: true
-                        });
-                    </script>
+                    <script src="assets/js/typed-init.js"></script>
                 </div>
             </div>
         </nav>
@@ -181,99 +166,11 @@
 <!--鼠标点击效果-->
 <script src="assets/js/maodian.js"></script>
 <!-- 复制内容 -->
-<script>
-    function copy(data, callback) {
-        // 优先使用现代的 Clipboard API
-        if (navigator.clipboard && navigator.clipboard.writeText) {
-            navigator.clipboard.writeText(data).then(function() {
-                swal("Completed！");
-                if (callback && typeof callback === 'function') {
-                    callback(true);
-                }
-            }).catch(function(err) {
-                console.error('Clipboard API failed, falling back to legacy method:', err);
-                copyFallback(data, callback);
-            });
-        } else {
-            // 回退到旧方法作为兼容性支持
-            copyFallback(data, callback);
-        }
-    }
-
-    function copyFallback(data, callback) {
-        try {
-            let input = document.createElement("input");
-            input.setAttribute("readonly", "readonly");
-            input.value = data;
-            document.body.appendChild(input);
-            input.select();
-            
-            // 使用已废弃的方法作为最后的回退选项
-            let success = document.execCommand("Copy");
-            document.body.removeChild(input);
-            
-            if (success) {
-                swal("Completed！");
-                if (callback && typeof callback === 'function') {
-                    callback(true);
-                }
-            } else {
-                swal("Copy failed!");
-                if (callback && typeof callback === 'function') {
-                    callback(false);
-                }
-            }
-        } catch (err) {
-            console.error('Fallback copy method failed:', err);
-            swal("Copy failed!");
-            if (callback && typeof callback === 'function') {
-                callback(false);
-            }
-        }
-    }
-</script>
+<script src="assets/js/clipboard-utils.js"></script>
 <!--捐赠面板现在由 link-manager.js 处理-->    
 <!-- 显示邮箱等函数现在由 link-manager.js 处理 -->
-<!-- 显示URL -->
-<script>
-    function page_url() {
-        swal({
-            title: "URL",
-            text: url,
-        })
-    }
-</script>
 <!-- 问候 -->
-<script language="javaScript">
-    window.onload = function () {
-        // 确保自动夜间模式管理器已初始化
-        setTimeout(() => {
-            now = new Date(), hour = now.getHours();
-            if (hour > 0) if (hour < 6) swal({ title: "凌晨了!", text: "注意休息~", icon: "info" });
-            else if (hour > 6) if (hour < 9) swal({ title: "早上好!", text: "Good morning", icon: "info" });
-            else if (hour > 21) if (hour < 24) {
-                const currentMode = isDarkModeActive() ? "夜间模式" : "浅色模式";
-                swal({
-                    title: "晚上好!",
-                    text: `当前已自动设置为${currentMode}，系统会根据您的设备偏好自动调整~`,
-                    icon: "info",
-                    timer: 4000,
-                    buttons: false
-                });
-            }
-        }, 100);
-    }
-</script>
-<script type="text/javascript">
-    // 控制台消息
-    console.clear();
-    console.log('每天都是新的一天');
-    console.log("");
-    // 夜间模式 - 移除重复定义，使用 dark-mode-manager.js 中的实现
-    // 浏览器萌标题
-    window.onfocus = function () { document.title = '(ฅ>ω<*ฅ) 诶嘿嘿，你回来啦！' }
-    window.onblur = function () { document.title = '╭(°A°`)╮ 你要去哪里？' }
-
-</script>
+<script src="assets/js/greeting-system.js"></script>
+<script src="assets/js/page-effects.js"></script>
 
 </html>
