@@ -16,6 +16,7 @@ body.compensate-for-scrollbar {
 
 .fancybox-container {
     -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
     height: 100%;
     left: 0;
     outline: none;
@@ -120,6 +121,7 @@ body.compensate-for-scrollbar {
 
 .fancybox-slide {
     -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
     /* Using without prefix would break IE11 */
     display: none;
     height: 100%;
@@ -182,6 +184,7 @@ body.compensate-for-scrollbar {
 .fancybox-slide--image .fancybox-content {
     animation-timing-function: cubic-bezier(.5, 0, .14, 1);
     -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
     background: transparent;
     background-repeat: no-repeat;
     background-size: 100% 100%;
@@ -511,6 +514,7 @@ body.compensate-for-scrollbar {
 /* Loading indicator */
 
 .fancybox-loading {
+    -webkit-animation: fancybox-rotate 1s linear infinite;
     animation: fancybox-rotate 1s linear infinite;
     background: transparent;
     border: 4px solid #888;
@@ -525,10 +529,29 @@ body.compensate-for-scrollbar {
     top: 50%;
     width: 50px;
     z-index: 99999;
+    will-change: transform;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+
+@-webkit-keyframes fancybox-rotate {
+    0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
 }
 
 @keyframes fancybox-rotate {
+    0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
     100% {
+        -webkit-transform: rotate(360deg);
         transform: rotate(360deg);
     }
 }
