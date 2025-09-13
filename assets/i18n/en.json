@@ -77,7 +77,18 @@
     "chFileShare": "CH GAS Public File Share Service",
     "qtFileShare": "QT GAS Public File Share Service",
     "sponsor": "Sponsor CC",
-    "pgpKey": "Download CH's PGP Public Key"
+    "pgpKey": "Download CH's PGP Public Key",
+    "links": {
+      "neighborQt": "Visit The Next Door QT's homepage",
+      "gameServerList": "View NekoC Game Server List",
+      "chFileShare": "Visit CH GAS Public File Share Service",
+      "qtFileShare": "Visit QT GAS Public File Share Service",
+      "sponsor": "Go to sponsor page",
+      "pgpKey": "Download CH's PGP public key file",
+      "servicesStatus": "View services status",
+      "qtnull": "Visit QT's GitHub homepage",
+      "nekocServer": "View NekoC server list"
+    }
   },
   "sponsor": {
     "title": "Sponsor List",
@@ -130,7 +141,20 @@
     "discord": "Discord Channel",
     "twitch": "Twitch",
     "osu": "OSU!",
-    "session": "Session"
+    "session": "Session",
+    "links": {
+      "bilibili": "Visit my Bilibili homepage",
+      "github": "Visit my GitHub homepage",
+      "email": "Click to view email address",
+      "twitter": "Visit my Twitter homepage",
+      "youtube": "Visit my Youtube channel",
+      "telegram": "Visit my Telegram channel",
+      "steam": "Visit my Steam homepage",
+      "discord": "Visit my Discord channel",
+      "twitch": "Visit my Twitch channel",
+      "osu": "Visit my OSU! homepage",
+      "session": "View Session ID"
+    }
   },
   "language": {
     "current": "Current Language",

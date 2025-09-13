@@ -77,7 +77,18 @@
     "chFileShare": "CH GAS 公共文件共享",
     "qtFileShare": "QT GAS 公共文件共享",
     "sponsor": "赞助CC",
-    "pgpKey": "下载CH的PGP公钥"
+    "pgpKey": "下载CH的PGP公钥",
+    "links": {
+      "neighborQt": "访问隔壁QT的主页",
+      "gameServerList": "查看NekoC游戏服务器列表",
+      "chFileShare": "访问CH GAS公共文件共享服务",
+      "qtFileShare": "访问QT GAS公共文件共享服务",
+      "sponsor": "前往赞助页面",
+      "pgpKey": "下载CH的PGP公钥文件",
+      "servicesStatus": "查看服务运行状态",
+      "qtnull": "访问QT的GitHub主页",
+      "nekocServer": "查看NekoC服务器列表"
+    }
   },
   "sponsor": {
     "title": "赞助列表",
@@ -130,7 +141,20 @@
     "discord": "Discord频道",
     "twitch": "Twitch",
     "osu": "OSU!",
-    "session": "Session"
+    "session": "Session",
+    "links": {
+      "bilibili": "访问我的哔哩哔哩主页",
+      "github": "访问我的GitHub主页",
+      "email": "点击查看邮箱地址",
+      "twitter": "访问我的Twitter主页",
+      "youtube": "访问我的Youtube频道",
+      "telegram": "访问我的Telegram频道",
+      "steam": "访问我的Steam主页",
+      "discord": "访问我的Discord频道",
+      "twitch": "访问我的Twitch频道",
+      "osu": "访问我的OSU!主页",
+      "session": "查看Session ID"
+    }
   },
   "language": {
     "current": "当前语言",
