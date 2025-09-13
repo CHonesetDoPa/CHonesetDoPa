@@ -6,7 +6,6 @@
     // 控制台消息
     console.clear();
     console.log('每天都是新的一天');
-    console.log("");
 
     // 浏览器萌标题切换效果
     window.addEventListener('focus', function() { 

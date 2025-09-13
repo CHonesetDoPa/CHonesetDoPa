@@ -43,6 +43,49 @@ class LinkManager {
     }
 
     /**
+     * 为元素添加无障碍属性
+     * @param {HTMLElement} element - 要添加属性的元素
+     * @param {string} i18nKey - i18n键名
+     */
+    addAccessibilityAttributes(element, i18nKey) {
+        // 设置 aria-label 和 title 属性，支持i18n
+        element.setAttribute('data-i18n-title', i18nKey);
+        element.setAttribute('data-i18n-aria-label', i18nKey);
+        
+        // 如果 i18n 系统已经加载，立即设置属性
+        if (window.t && typeof window.t === 'function') {
+            const text = window.t(i18nKey);
+            element.setAttribute('title', text);
+            element.setAttribute('aria-label', text);
+        }
+    }
+
+    /**
+     * 更新所有无障碍属性（用于语言切换后）
+     */
+    updateAccessibilityAttributes() {
+        if (!window.t || typeof window.t !== 'function') return;
+        
+        // 更新所有有 data-i18n-title 属性的元素
+        document.querySelectorAll('[data-i18n-title]').forEach(element => {
+            const key = element.getAttribute('data-i18n-title');
+            if (key) {
+                const text = window.t(key);
+                element.setAttribute('title', text);
+            }
+        });
+        
+        // 更新所有有 data-i18n-aria-label 属性的元素
+        document.querySelectorAll('[data-i18n-aria-label]').forEach(element => {
+            const key = element.getAttribute('data-i18n-aria-label');
+            if (key) {
+                const text = window.t(key);
+                element.setAttribute('aria-label', text);
+            }
+        });
+    }
+
+    /**
      * 获取个人信息
      * @returns {Object}
      */
@@ -136,6 +179,10 @@ class LinkManager {
                 link.className = 'social-icon';
                 link.href = url;
                 link.target = '_blank'; // 在新标签页打开
+                
+                // 添加无障碍属性
+                this.addAccessibilityAttributes(link, 'socialMedia.links.' + platform);
+                
                 link.innerHTML = socialIcons[platform];
                 container.appendChild(link);
             }
@@ -147,6 +194,10 @@ class LinkManager {
             emailLink.className = 'social-icon';
             emailLink.href = 'javascript:void(0);';
             emailLink.onclick = () => window.email && window.email();
+            
+            // 添加无障碍属性
+            this.addAccessibilityAttributes(emailLink, 'socialMedia.links.email');
+            
             emailLink.innerHTML = socialIcons.email;
             container.appendChild(emailLink);
         }
@@ -183,6 +234,10 @@ class LinkManager {
                 link.style.textDecoration = 'none';
                 link.target = '_blank'; // 在新标签页打开
                 link.textContent = platformNames[platform];
+                
+                // 添加无障碍属性
+                this.addAccessibilityAttributes(link, 'socialMedia.links.' + platform);
+                
                 li.appendChild(link);
                 container.appendChild(li);
             }
@@ -198,6 +253,10 @@ class LinkManager {
             link.style.textDecoration = 'none';
             link.style.cursor = 'pointer';
             link.textContent = 'Session';
+            
+            // 添加无障碍属性
+            this.addAccessibilityAttributes(link, 'socialMedia.links.session');
+            
             li.appendChild(link);
             container.appendChild(li);
         }
@@ -231,6 +290,10 @@ class LinkManager {
                 link.setAttribute('data-en', siteNames[siteKey].en);
                 link.setAttribute('data-zh', siteNames[siteKey].zh);
                 link.textContent = siteNames[siteKey].zh;
+                
+                // 添加无障碍属性
+                this.addAccessibilityAttributes(link, 'websites.links.' + siteKey);
+                
                 // 如果不是sponsor.html，在新标签页打开
                 if (url !== 'sponsor.html') {
                     link.target = '_blank';
@@ -250,6 +313,10 @@ class LinkManager {
             link.setAttribute('data-zh', '下载CH的PGP公钥');
             link.textContent = '下载CH的PGP公钥';
             link.style.cursor = 'pointer';
+            
+            // 添加无障碍属性
+            this.addAccessibilityAttributes(link, 'websites.links.pgpKey');
+            
             li.appendChild(link);
             container.appendChild(li);
         }
@@ -394,6 +461,20 @@ class LinkManager {
     }
 
     /**
+     * 处理语言切换（公开方法，供语言控制器调用）
+     */
+    handleLanguageSwitch() {
+        // 重新渲染所有组件以更新文本
+        this.renderComponents();
+        // 更新状态信息
+        this.updateStatusInfo();
+        // 更新无障碍属性
+        setTimeout(() => {
+            this.updateAccessibilityAttributes();
+        }, 100);
+    }
+
+    /**
      * 添加自定义样式
      */
     addCustomStyles() {
@@ -482,6 +563,14 @@ class LinkManager {
             this.renderRelatedSites('related-sites-list');
         }
 
+        // 更新状态信息
+        this.updateStatusInfo();
+        
+        // 更新无障碍属性
+        setTimeout(() => {
+            this.updateAccessibilityAttributes();
+        }, 100);
+
         // 更新打字机字符串
         if (this.config?.meta?.typewriterStrings) {
             // 等待 Typed.js 加载完成
@@ -516,9 +605,6 @@ class LinkManager {
                 footerWrap.textContent = this.config.meta.copyright;
             }
         }
-
-        // 更新状态信息
-        this.updateStatusInfo();
     }
 
     /**
@@ -545,6 +631,8 @@ class LinkManager {
         const servicesStatus = document.querySelector('.webinfo-item:last-child .webinfo-site-pv-count a');
         if (servicesStatus && this.config.relatedSites?.servicesStatus) {
             servicesStatus.href = this.config.relatedSites.servicesStatus;
+            // 添加无障碍属性
+            this.addAccessibilityAttributes(servicesStatus, 'websites.links.servicesStatus');
         }
     }
 }

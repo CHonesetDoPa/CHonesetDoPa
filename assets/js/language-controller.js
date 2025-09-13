@@ -959,40 +959,6 @@ document.addEventListener('DOMContentLoaded', async function() {
             storageKey: 'site-language-preference'
         });
         
-        // 暴露全局函数供 HTML 调用
-        window.switchLanguage = async function() {
-            if (languageController) {
-                await languageController.switchLanguage();
-            }
-        };
-        
-        window.setLanguage = async function(lang) {
-            if (languageController) {
-                await languageController.setLanguage(lang);
-            }
-        };
-        
-        window.getCurrentLanguage = function() {
-            return languageController ? languageController.getCurrentLanguage() : 'zh';
-        };
-        
-        window.t = function(key, options = {}) {
-            return languageController ? languageController.t(key, options) : key;
-        };
-        
-        // 暴露格式化函数
-        window.formatNumber = function(number, options = {}) {
-            return languageController ? languageController.formatNumber(number, options) : number.toString();
-        };
-        
-        window.formatCurrency = function(amount, currency = null) {
-            return languageController ? languageController.formatCurrency(amount, currency) : amount.toString();
-        };
-        
-        window.formatDate = function(date, options = {}) {
-            return languageController ? languageController.formatDate(date, options) : date.toString();
-        };
-        
         // 等待初始化完成
         await new Promise((resolve) => {
             if (languageController.isReady()) {
@@ -1014,11 +980,6 @@ document.addEventListener('DOMContentLoaded', async function() {
             setLanguage: () => console.warn('Language controller not available'),
             t: (key) => key
         };
-        
-        window.switchLanguage = languageController.switchLanguage;
-        window.setLanguage = languageController.setLanguage;
-        window.getCurrentLanguage = languageController.getCurrentLanguage;
-        window.t = languageController.t;
     }
 });
 
@@ -1029,6 +990,11 @@ document.addEventListener('i18n:languageChanged', function(event) {
     
     // 可以在这里执行额外的语言切换逻辑
     // 例如：重新加载某些组件、更新第三方插件的语言等
+    
+    // 更新链接管理器的无障碍属性
+    if (window.linkManager && typeof window.linkManager.handleLanguageSwitch === 'function') {
+        window.linkManager.handleLanguageSwitch();
+    }
 });
 
 document.addEventListener('i18n:error', function(event) {
