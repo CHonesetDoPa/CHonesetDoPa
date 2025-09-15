@@ -27,7 +27,7 @@ class LinkManager {
             if (cachedConfig) {
                 this.config = cachedConfig;
                 this.isInitialized = true;
-                console.log('链接配置从缓存加载成功');
+                console.log('Link config loaded from cache successfully');
                 return;
             }
 
@@ -40,9 +40,9 @@ class LinkManager {
             this.config = await response.json();
             this.cacheConfig(this.config); // 缓存配置
             this.isInitialized = true;
-            console.log('链接配置加载成功');
+            console.log('Link config loaded successfully');
         } catch (error) {
-            console.error('链接配置加载失败:', error);
+            console.error('Failed to load link config:', error);
             // 使用默认配置作为后备
             this.config = this.getDefaultConfig();
             this.isInitialized = true;
@@ -111,23 +111,47 @@ class LinkManager {
      * @param {string} i18nKey - i18n键名
      */
     addAccessibilityAttributes(element, i18nKey) {
-        // 使用防抖避免频繁操作
-        if (this.accessibilityDebounceTimer) {
-            clearTimeout(this.accessibilityDebounceTimer);
-        }
-
-        this.accessibilityDebounceTimer = setTimeout(() => {
-            // 设置 aria-label 和 title 属性，支持i18n
-            element.setAttribute('data-i18n-title', i18nKey);
-            element.setAttribute('data-i18n-aria-label', i18nKey);
+        // 设置 aria-label 和 title 属性，支持i18n
+        element.setAttribute('data-i18n-title', i18nKey);
+        element.setAttribute('data-i18n-aria-label', i18nKey);
+        
+        // 立即尝试设置属性
+        this.setImmediateAccessibilityAttributes(element, i18nKey);
+        
+        // 如果 i18n 系统还没加载，设置监听器
+        if (!window.t || typeof window.t !== 'function') {
+            // 监听 i18n 系统就绪事件
+            const handleI18nReady = () => {
+                this.setImmediateAccessibilityAttributes(element, i18nKey);
+                document.removeEventListener('i18nSystemReady', handleI18nReady);
+                document.removeEventListener('i18n:initialized', handleI18nReady);
+            };
             
-            // 如果 i18n 系统已经加载，立即设置属性
-            if (window.t && typeof window.t === 'function') {
-                const text = window.t(i18nKey);
+            document.addEventListener('i18nSystemReady', handleI18nReady);
+            document.addEventListener('i18n:initialized', handleI18nReady);
+            
+            // 设置延迟检查作为后备
+            setTimeout(() => {
+                if (window.t && typeof window.t === 'function') {
+                    this.setImmediateAccessibilityAttributes(element, i18nKey);
+                }
+            }, 100);
+        }
+    }
+
+    /**
+     * 立即设置可访问性属性
+     * @param {HTMLElement} element - 要设置属性的元素
+     * @param {string} i18nKey - i18n键名
+     */
+    setImmediateAccessibilityAttributes(element, i18nKey) {
+        if (window.t && typeof window.t === 'function') {
+            const text = window.t(i18nKey);
+            if (text && text !== i18nKey) {
                 element.setAttribute('title', text);
                 element.setAttribute('aria-label', text);
             }
-        }, 10);
+        }
     }
 
     /**
@@ -361,6 +385,9 @@ class LinkManager {
         // 清空容器
         container.innerHTML = '';
 
+        // 创建ul元素作为列表容器
+        const ul = document.createElement('ul');
+
         // 生成社交媒体列表
         Object.entries(this.config.socialMedia).forEach(([platform, url]) => {
             if (platformNames[platform]) {
@@ -376,7 +403,7 @@ class LinkManager {
                 this.addAccessibilityAttributes(link, 'socialMedia.links.' + platform);
                 
                 li.appendChild(link);
-                container.appendChild(li);
+                ul.appendChild(li);
             }
         });
 
@@ -395,8 +422,11 @@ class LinkManager {
             this.addAccessibilityAttributes(link, 'socialMedia.links.session');
             
             li.appendChild(link);
-            container.appendChild(li);
+            ul.appendChild(li);
         }
+
+        // 将ul添加到容器中
+        container.appendChild(ul);
     }
 
     /**
@@ -418,6 +448,9 @@ class LinkManager {
         // 清空容器
         container.innerHTML = '';
 
+        // 创建ul元素作为列表容器
+        const ul = document.createElement('ul');
+
         // 生成相关网站列表
         Object.entries(this.config.relatedSites).forEach(([siteKey, url]) => {
             if (siteNames[siteKey]) {
@@ -436,7 +469,7 @@ class LinkManager {
                     link.target = '_blank';
                 }
                 li.appendChild(link);
-                container.appendChild(li);
+                ul.appendChild(li);
             }
         });
 
@@ -455,8 +488,11 @@ class LinkManager {
             this.addAccessibilityAttributes(link, 'websites.links.pgpKey');
             
             li.appendChild(link);
-            container.appendChild(li);
+            ul.appendChild(li);
         }
+
+        // 将ul添加到容器中
+        container.appendChild(ul);
     }
 
     /**
@@ -620,70 +656,14 @@ class LinkManager {
     }
 
     /**
-     * 添加自定义样式
+     * 添加自定义样式（精简版）
      */
     addCustomStyles() {
         // 检查是否已经添加过样式
         if (document.getElementById('link-manager-styles')) return;
         
-        const style = document.createElement('style');
-        style.id = 'link-manager-styles';
-        style.textContent = `
-            /* 社交媒体列表样式 */
-            #social-media-list li {
-                list-style: none;
-                margin: 5px 0;
-                position: relative;
-                padding-left: 15px;
-            }
-            
-            #social-media-list li:before {
-                content: "·";
-                color: orange;
-                font-weight: bold;
-                position: absolute;
-                left: 0;
-            }
-            
-            #social-media-list a:hover {
-                text-decoration: underline !important;
-            }
-            
-            /* 相关网站列表样式 */
-            #related-sites-list li {
-                list-style: none;
-                margin: 5px 0;
-                position: relative;
-                padding-left: 15px;
-            }
-            
-            #related-sites-list li:before {
-                content: "·";
-                color: #333;
-                font-weight: bold;
-                position: absolute;
-                left: 0;
-            }
-            
-            #related-sites-list a:hover {
-                text-decoration: underline !important;
-                color: #0066cc !important;
-            }
-            
-            /* 社交媒体图标样式 */
-            .social-icon:hover {
-                opacity: 0.7;
-                transform: scale(1.1);
-                transition: all 0.3s ease;
-            }
-            
-            /* 确保占位符容器不影响布局 */
-            #social-media-icons-placeholder {
-                display: inline;
-            }
-        `;
-        
-        document.head.appendChild(style);
+        // 由于主要样式已经移到 index.css 中，这里只保留必要的动态样式
+        console.log('Link manager styles are now managed in index.css');
     }
 
     /**
@@ -767,7 +747,13 @@ class LinkManager {
     updateStatusInfo() {
         if (!this.config?.status) return;
 
-        const currentLang = document.documentElement.lang === 'en' ? 'en' : 'zh';
+        // 获取当前语言，vampire语言使用中文显示
+        const currentLang = (() => {
+            const lang = document.documentElement.lang;
+            if (lang === 'zh-CN' || lang === 'zh') return 'zh';
+            if (lang === 'en-US' || lang === 'en') return 'en';
+            return 'zh'; // 默认使用中文
+        })();
         
         // 更新运行状态
         const runningStatus = document.querySelector('.webinfo-item:first-child .webinfo-site-pv-count');
@@ -793,6 +779,17 @@ class LinkManager {
 
 // 创建全局实例
 window.linkManager = new LinkManager();
+
+// 监听 i18n 系统就绪事件
+document.addEventListener('i18nSystemReady', () => {
+    console.log('[LinkManager] I18n system ready, updating accessibility attributes');
+    window.linkManager.updateAccessibilityAttributes();
+});
+
+document.addEventListener('i18n:languageChanged', () => {
+    console.log('[LinkManager] Language changed, updating accessibility attributes');
+    window.linkManager.handleLanguageSwitch();
+});
 
 // 自动初始化
 window.linkManager.initializeAll();

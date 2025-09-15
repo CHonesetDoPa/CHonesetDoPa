@@ -7,7 +7,7 @@
 // ===== I18n 配置 =====
 window.I18nConfig = {
     // 支持的语言列表
-    supportedLanguages: ['zh', 'en'],
+    supportedLanguages: ['zh', 'en', 'vampire'],
     
     // 默认语言
     defaultLanguage: 'zh',
@@ -28,6 +28,7 @@ window.I18nConfig = {
     languageNames: {
         'zh': '中文',
         'en': 'English',
+        'vampire': '🦇血族古语',
         'ja': '日本語',
         'ko': '한국어',
         'fr': 'Français',
@@ -42,6 +43,7 @@ window.I18nConfig = {
     localeMapping: {
         'zh': 'zh-CN',
         'en': 'en-US',
+        'vampire': 'zh-CN', // 使用中文格式
         'ja': 'ja-JP',
         'ko': 'ko-KR',
         'fr': 'fr-FR',
@@ -525,6 +527,10 @@ class AdvancedLanguageController {
         this.cache = new Map();
         this.formatters = null;
         
+        // 吸血鬼萝莉模式相关
+        this.clickCount = 0;
+        this.vampireActivationThreshold = 20;
+        
         this.isLoading = false;
         this.isInitialized = false;
         this.eventListeners = new Map();
@@ -741,10 +747,32 @@ class AdvancedLanguageController {
             return;
         }
         
-        const currentIndex = this.supportedLanguages.indexOf(this.currentLanguage);
-        const nextIndex = (currentIndex + 1) % this.supportedLanguages.length;
-        const newLanguage = this.supportedLanguages[nextIndex];
+        // 增加点击计数
+        this.clickCount++;
+        console.log(`[I18n] Language switch clicked ${this.clickCount} times`);
         
+        // 检查是否达到吸血鬼萝莉模式激活阈值
+        if (this.clickCount === this.vampireActivationThreshold) {
+            await this.activateVampireMode();
+            // 重置计数器，重新开始计数
+            this.clickCount = 0;
+            return;
+        }
+        
+        // 正常语言切换逻辑（只在 zh 和 en 之间切换）
+        const normalLanguages = ['zh', 'en'];
+        const currentIndex = normalLanguages.indexOf(this.currentLanguage);
+        let nextIndex;
+        
+        if (currentIndex === -1) {
+            // 如果当前语言是 vampire，切换到 zh
+            nextIndex = 0;
+        } else {
+            // 在 zh 和 en 之间正常切换
+            nextIndex = (currentIndex + 1) % normalLanguages.length;
+        }
+        
+        const newLanguage = normalLanguages[nextIndex];
         await this.setLanguage(newLanguage);
     }
 
@@ -768,9 +796,19 @@ class AdvancedLanguageController {
                 to: language
             });
 
+            const wasVampireMode = previousLanguage === 'vampire';
+            
             this.currentLanguage = language;
             await this.loadTranslations(language);
             await this.applyLanguage(language);
+
+            // 根据语言决定是否应用血族效果
+            if (language === 'vampire') {
+                this.addVampireEffects();
+            } else if (wasVampireMode) {
+                // 只有从vampire语言切换出去时才移除效果
+                this.removeVampireEffects();
+            }
 
             this.saveLanguagePreference(language);
             this.updateLanguageButton();
@@ -799,6 +837,126 @@ class AdvancedLanguageController {
             
             return false;
         }
+    }
+
+    async activateVampireMode() {
+        console.log('[I18n] 🦇 Activating Vampire Loli Mode! 🦇');
+        
+        try {
+            // 显示血族萝莉风格的特殊提示
+            await this.showVampireActivationAlert();
+            
+            // 切换到吸血鬼语言包
+            await this.setLanguage('vampire');
+            
+            // 添加血族特效
+            this.addVampireEffects();
+            
+        } catch (error) {
+            console.error('[I18n] Failed to activate vampire mode:', error);
+        }
+    }
+
+    async showVampireActivationAlert() {
+        return new Promise((resolve) => {
+            if (typeof swal !== 'undefined') {
+                swal({
+                    title: "🦇 血族觉醒！",
+                    text: "",
+                    icon: "success",
+                    buttons: {
+                        confirm: {
+                            text: "哼！本大人知道了～",
+                            value: true,
+                            visible: true,
+                            className: "vampire-button",
+                            closeModal: true
+                        }
+                    },
+                    content: {
+                        element: "div",
+                        attributes: {
+                            innerHTML: `
+                                <div style="text-align: center; color: #8B0000; font-family: '微软雅黑', sans-serif; animation: vampireGlow 2s ease-in-out infinite alternate;">
+                                    <div style="font-size: 3em; margin-bottom: 15px; animation: float 3s ease-in-out infinite;">🦇✨🌙</div>
+                                    <h3 style="color: #8B0000; font-weight: bold; margin-bottom: 15px; text-shadow: 2px 2px 4px rgba(0,0,0,0.3);">
+                                        血族觉醒！吸血鬼萝莉彩蛋激活！
+                                    </h3>
+                                    <p style="color: #8B0000; font-size: 1.1em; line-height: 1.6; margin-bottom: 10px;">
+                                        呵呵呵～你终于发现了隐藏的血族秘密！
+                                    </p>
+                                    <p style="color: #CC0000; font-weight: bold; font-size: 1.1em; margin-bottom: 10px;">
+                                        现在暂时切换到<span style="color: #8B0000; text-shadow: 1px 1px 2px rgba(255,105,180,0.5);">🦇血族古语🦇</span>模式！
+                                    </p>
+                                    <p style="color: #8B0000; font-size: 1em; margin-bottom: 15px;">
+                                        继续点击20次可以再次激活血族彩蛋哦～
+                                    </p>
+                                    <div style="font-size: 2em; margin-top: 15px; animation: sparkle 1.5s linear infinite;">🩸👑🦇💫</div>
+                                    <style>
+                                        @keyframes vampireGlow {
+                                            0% { text-shadow: 0 0 5px rgba(139, 0, 0, 0.5); }
+                                            100% { text-shadow: 0 0 20px rgba(139, 0, 0, 0.8), 0 0 30px rgba(255, 105, 180, 0.6); }
+                                        }
+                                        @keyframes float {
+                                            0%, 100% { transform: translateY(0px); }
+                                            50% { transform: translateY(-10px); }
+                                        }
+                                        @keyframes sparkle {
+                                            0%, 100% { opacity: 1; transform: scale(1); }
+                                            50% { opacity: 0.7; transform: scale(1.1); }
+                                        }
+                                    </style>
+                                </div>
+                            `
+                        }
+                    }
+                }).then(() => {
+                    resolve();
+                });
+            } else {
+                // 如果 sweetalert 不可用，使用原生 alert
+                alert("🦇 血族觉醒！\n呵呵呵～你终于发现了隐藏的血族秘密！\n现在你可以使用吾之血族古语了！\n欢迎来到暗夜宫殿，吾的信徒～");
+                resolve();
+            }
+        });
+    }
+
+    addVampireEffects() {
+        // 检查是否已经有血族效果
+        const body = document.body;
+        if (body.classList.contains('vampire-mode')) {
+            return;
+        }
+        
+        // 通过系统管理器激活血族模式（样式已在CSS中定义）
+        if (window.activateVampireMode) {
+            window.activateVampireMode(false);
+        } else {
+            // 后备方案：直接添加CSS类
+            body.classList.add('vampire-mode');
+        }
+        
+        console.log('[I18n] 🦇 Vampire visual effects activated!');
+    }
+
+    removeVampireEffects() {
+        // 检查是否确实有血族效果需要移除
+        const body = document.body;
+        const hasVampireMode = body.classList.contains('vampire-mode');
+        
+        if (!hasVampireMode) {
+            return;
+        }
+        
+        // 通过系统管理器移除血族模式
+        if (window.deactivateVampireMode) {
+            window.deactivateVampireMode();
+        } else {
+            // 后备方案：直接移除CSS类
+            body.classList.remove('vampire-mode');
+        }
+        
+        console.log('[I18n] 🦇 Vampire visual effects removed!');
     }
 
     async applyLanguage(language) {
@@ -860,11 +1018,35 @@ class AdvancedLanguageController {
     updateLanguageButton() {
         const button = document.getElementById('language-switch-btn');
         if (button) {
-            const nextLanguage = this.getNextLanguage();
-            const nextLanguageName = this.t(`language.${nextLanguage}`) || 
-                                   (nextLanguage === 'zh' ? '中文' : 'English');
+            // 正常模式下显示下一个语言选项
+            const normalLanguages = ['zh', 'en'];
+            const currentIndex = normalLanguages.indexOf(this.currentLanguage);
+            let nextLanguage, nextLanguageName;
+            
+            if (currentIndex === -1) {
+                // 如果当前语言是 vampire，下一个是 zh
+                nextLanguage = 'zh';
+                nextLanguageName = this.t(`language.${nextLanguage}`) || 
+                                 this.config.languageNames[nextLanguage] ||
+                                 '中文';
+            } else {
+                // 在 zh 和 en 之间正常切换
+                const nextIndex = (currentIndex + 1) % normalLanguages.length;
+                nextLanguage = normalLanguages[nextIndex];
+                nextLanguageName = this.t(`language.${nextLanguage}`) || 
+                                 this.config.languageNames[nextLanguage] ||
+                                 (nextLanguage === 'zh' ? '中文' : 'English');
+            }
+            
             button.textContent = nextLanguageName;
             button.setAttribute('title', this.t('common.switchLanguage') || 'Switch Language');
+            
+            // 如果当前是血族语言，添加特殊样式
+            if (this.currentLanguage === 'vampire') {
+                button.classList.add('vampire-mode-btn');
+            } else {
+                button.classList.remove('vampire-mode-btn');
+            }
         }
     }
 
@@ -875,7 +1057,9 @@ class AdvancedLanguageController {
     }
 
     updateDocumentLanguage() {
-        document.documentElement.lang = this.currentLanguage;
+        // 将vampire语言映射为zh-CN，因为它使用中文语法
+        const documentLanguage = this.currentLanguage === 'vampire' ? 'zh-CN' : this.currentLanguage;
+        document.documentElement.lang = documentLanguage;
         document.documentElement.setAttribute('dir', this.getTextDirection(this.currentLanguage));
     }
 
@@ -1395,8 +1579,9 @@ function setupEventListeners() {
     document.addEventListener('i18n:languageChanged', (event) => {
         const { language, previousLanguage } = event.detail;
         
-        // 更新文档语言属性
-        document.documentElement.lang = language;
+        // 更新文档语言属性（使用有效的语言代码）
+        const documentLanguage = language === 'vampire' ? 'zh-CN' : language;
+        document.documentElement.lang = documentLanguage;
         
         // 更新页面标题（如果有翻译）
         const titleKey = document.title.getAttribute ? document.title.getAttribute('data-i18n') : null;

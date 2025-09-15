@@ -273,6 +273,7 @@ img {
 #aside_content .card-info .author-info__name {
     font-weight: 500;
     font-size: 1.1rem;
+    color: #ffc1ca;
 }
 
 aside_content .card-info .author-info__description {
@@ -289,28 +290,127 @@ aside_content .card-info .author-info__description {
     font-size: 1.5rem;
 }
 
+/* 社交媒体图标样式 - 通用样式 */
+.social-icon:hover {
+    opacity: 0.7;
+    transform: scale(1.1);
+    transition: all 0.3s ease;
+}
+
+/* 社交媒体列表样式 */
+#social-media-list ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+#social-media-list li {
+    list-style: none;
+    margin: 5px 0;
+    position: relative;
+    padding-left: 15px;
+}
+
+#social-media-list li:before {
+    content: "·";
+    color: orange;
+    font-weight: bold;
+    position: absolute;
+    left: 0;
+}
+
+#social-media-list a:hover {
+    text-decoration: underline !important;
+}
+
+/* 相关网站列表样式 */
+#related-sites-list ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+#related-sites-list li {
+    list-style: none;
+    margin: 5px 0;
+    position: relative;
+    padding-left: 15px;
+}
+
+#related-sites-list li:before {
+    content: "·";
+    color: #333;
+    font-weight: bold;
+    position: absolute;
+    left: 0;
+}
+
+#related-sites-list a:hover {
+    text-decoration: underline !important;
+    color: #0066cc !important;
+}
+
+/* 确保占位符容器不影响布局 */
+#social-media-icons-placeholder {
+    display: inline;
+}
+
 #aside_content .item-headline {
     font-size: .8rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
 }
 
 #aside_content .item-headline span {
     margin-left: .5rem;
 }
 
+#aside_content .item-headline i {
+    flex-shrink: 0;
+}
+
+#aside_content .item-headline h3 {
+    margin: 0;
+    flex: 1;
+}
+
+/* 主内容区域的标题样式 */
+.article-container .item-headline {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.article-container .item-headline i {
+    flex-shrink: 0;
+    font-size: 1.2rem;
+    color: #ff6b6b;
+}
+
+.article-container .item-headline h2 {
+    margin: 0;
+    flex: 1;
+}
+
 #aside_content .card-webinfo .webinfo {
     padding: .2rem 1rem;
 }
 
-#aside_content .card-webinfo .webinfo .webinfo-item {
+#aside_content .card-webinfo .webinfo .webinfo-item,
+#aside_content .card-webinfo .webinfo .webinfo-row {
     display: block;
     padding: 4px 0 0;
 }
 
-#aside_content .card-webinfo .webinfo .webinfo-item div:first-child {
+#aside_content .card-webinfo .webinfo .webinfo-item div:first-child,
+#aside_content .card-webinfo .webinfo .webinfo-row span:first-child {
     display: inline-block;
 }
 
-#aside_content .card-webinfo .webinfo .webinfo-item div:last-child {
+#aside_content .card-webinfo .webinfo .webinfo-item div:last-child,
+#aside_content .card-webinfo .webinfo .webinfo-row span:last-child {
     float: right;
 }
 
@@ -462,4 +562,179 @@ aside_content .card-info .author-info__description {
 .dark-mode .skill-bar-percent {
     color: #ffffffab;
     transition: color 0.3s ease;
+}
+
+/* 暗黑模式下的社交媒体和相关网站列表样式 */
+.dark-mode #social-media-list li:before,
+.dark-mode #related-sites-list li:before {
+    color: #00ff6a80;
+}
+
+.dark-mode #social-media-list a,
+.dark-mode #related-sites-list a {
+    color: #00ff6a80;
+}
+
+.dark-mode #social-media-list a:hover,
+.dark-mode #related-sites-list a:hover {
+    color: #00ff6a !important;
+}
+
+.spon {
+    background-color: #7cd1f9;
+    color: #fff;
+    border: none;
+    box-shadow: none;
+    border-radius: 5px;
+    font-weight: 600;
+    font-size: 14px;
+    padding: 10px 24px;
+    margin: 0;
+    cursor: pointer;
+}
+
+/* ========== 血族萝莉模式样式 ========== */
+.vampire-mode {
+    --vampire-primary: #8B0000;
+    --vampire-secondary: #CC0000;
+    --vampire-accent: #FF69B4;
+    --vampire-shadow: rgba(139, 0, 0, 0.3);
+    --vampire-glow: rgba(139, 0, 0, 0.8);
+    --vampire-text: #ffffffbe;
+    --vampire-background: #1a0000;
+    --vampire-card-bg: #2d0000;
+    
+    background-color: var(--vampire-background);
+    transition: all 0.5s ease;
+}
+
+.vampire-mode .card-widget {
+    background-color: var(--vampire-card-bg);
+    border: 1px solid var(--vampire-primary);
+    box-shadow: 0 0 10px var(--vampire-shadow), 0 0 20px rgba(139, 0, 0, 0.1);
+    transition: all 0.5s ease;
+}
+
+.vampire-mode .card-content {
+    background-color: var(--vampire-card-bg);
+    color: var(--vampire-text);
+    transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+.vampire-mode #page {
+    background-color: var(--vampire-card-bg);
+    transition: background-color 0.5s ease;
+}
+
+.vampire-mode .tool {
+    color: var(--vampire-text);
+    transition: color 0.5s ease;
+}
+
+.vampire-mode #footer {
+    background-color: var(--vampire-card-bg);
+    transition: background-color 0.5s ease;
+}
+
+.vampire-mode .author-info__name {
+    color: var(--vampire-primary);
+    text-shadow: 0 0 5px var(--vampire-shadow);
+    transition: all 0.5s ease;
+}
+
+.vampire-mode .author-info__description {
+    color: var(--vampire-accent);
+    text-shadow: 0 0 3px rgba(255, 105, 180, 0.3);
+}
+
+.vampire-mode #language-switch-btn,
+.vampire-mode .vampire-mode-btn {
+    background: linear-gradient(45deg, var(--vampire-primary), var(--vampire-secondary)) !important;
+    color: white !important;
+    border: 1px solid var(--vampire-accent) !important;
+    transition: all 0.3s ease;
+}
+
+.vampire-mode .dark-button {
+    background: linear-gradient(45deg, var(--vampire-primary), var(--vampire-secondary));
+    color: white;
+    border: 1px solid var(--vampire-accent);
+}
+
+.vampire-mode .skillbar {
+    background-color: #3a0000;
+    border: 1px solid var(--vampire-primary);
+    transition: all 0.5s ease;
+}
+
+.vampire-mode .skill-bar-percent {
+    color: var(--vampire-text);
+    transition: color 0.5s ease;
+}
+
+.vampire-mode a {
+    color: var(--vampire-accent);
+    transition: color 0.3s ease;
+}
+
+.vampire-mode a:hover {
+    color: var(--vampire-secondary);
+    text-shadow: 0 0 5px var(--vampire-shadow);
+}
+
+.vampire-mode #social-media-list li:before,
+.vampire-mode #related-sites-list li:before {
+    color: var(--vampire-primary);
+}
+
+.vampire-mode #social-media-list a,
+.vampire-mode #related-sites-list a {
+    color: var(--vampire-accent);
+}
+
+.vampire-mode #social-media-list a:hover,
+.vampire-mode #related-sites-list a:hover {
+    color: var(--vampire-secondary) !important;
+    text-shadow: 0 0 5px var(--vampire-shadow);
+}
+
+.vampire-mode h1,
+.vampire-mode h2,
+.vampire-mode h3,
+.vampire-mode h4,
+.vampire-mode h5,
+.vampire-mode h6 {
+    color: var(--vampire-primary);
+    text-shadow: 0 0 5px var(--vampire-shadow);
+}
+
+.vampire-mode hr {
+    border-color: var(--vampire-primary);
+}
+
+.vampire-mode hr:before {
+    color: var(--vampire-accent);
+}
+
+
+.vampire-mode .card-widget:hover {
+    box-shadow: 0 0 15px var(--vampire-shadow), 0 0 30px rgba(139, 0, 0, 0.2);
+}
+
+/* 血族模式下的社交图标特效 */
+.vampire-mode .social-icon {
+    filter: hue-rotate(315deg) brightness(1.2);
+    transition: all 0.3s ease;
+}
+
+.vampire-mode .social-icon:hover {
+    filter: hue-rotate(315deg) brightness(1.5);
+    transform: scale(1.1);
+}
+
+/* SweetAlert 血族样式 */
+.vampire-button {
+    background: linear-gradient(45deg, #8B0000, #CC0000) !important;
+    color: white !important;
+    border: 1px solid #FF69B4 !important;
 }

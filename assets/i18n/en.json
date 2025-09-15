@@ -101,7 +101,13 @@
     "openCollective": "Sponsor via OpenCollective",
     "reallyTreat": "Really want to treat CC to milk tea?",
     "goodPerson": "You are really a good person!",
-    "noThanks": "No, thanks"
+    "noThanks": "No, thanks",
+    "buttonTitles": {
+      "wechatPay": "Click to sponsor via WeChat Pay QR code",
+      "patreon": "Click to sponsor via Patreon platform",
+      "afdian": "Click to sponsor via Afdian platform",
+      "openCollective": "Click to sponsor via OpenCollective platform"
+    }
   },
   "messages": {
     "copyCompleted": "Completed!",
@@ -167,7 +173,8 @@
   "theme": {
     "dark": "Dark Mode",
     "light": "Light Mode",
-    "toggle": "Toggle Theme"
+    "toggle": "Toggle Theme",
+    "buttonTitle": "Toggle dark/light mode"
   },
   "time": {
     "formats": {

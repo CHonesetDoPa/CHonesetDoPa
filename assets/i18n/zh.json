@@ -101,7 +101,13 @@
     "openCollective": "使用OpenCollective捐赠",
     "reallyTreat": "真的要请cc喝奶茶吗",
     "goodPerson": "你果然是大好人！",
-    "noThanks": "不了，谢谢"
+    "noThanks": "不了，谢谢",
+    "buttonTitles": {
+      "wechatPay": "点击使用微信赞赏码进行捐赠",
+      "patreon": "点击使用Patreon平台进行捐赠",
+      "afdian": "点击使用爱发电平台进行捐赠",
+      "openCollective": "点击使用OpenCollective平台进行捐赠"
+    }
   },
   "messages": {
     "copyCompleted": "复制完成！",
@@ -168,7 +174,8 @@
   "theme": {
     "dark": "深色模式",
     "light": "浅色模式",
-    "toggle": "切换主题"
+    "toggle": "切换主题",
+    "buttonTitle": "切换深色/浅色模式"
   },
   "time": {
     "formats": {
