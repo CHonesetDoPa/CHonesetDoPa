@@ -1,11 +1,15 @@
 /**
- * 链接和社交媒体配置管理模块
+ * 链接和社交媒体配置管理模块 (优化版)
  * 用于统一管理网站中的所有链接和社交媒体信息
+ * 优化了性能，减少了重复代码，提高了缓存效率
  */
 class LinkManager {
     constructor() {
         this.config = null;
         this.configPath = 'assets/config/links.json';
+        this.cache = new Map(); // 添加缓存机制
+        this.isInitialized = false;
+        this.renderQueue = new Set(); // 渲染队列，避免重复渲染
     }
 
     /**
@@ -13,17 +17,76 @@ class LinkManager {
      * @returns {Promise<void>}
      */
     async init() {
+        if (this.isInitialized && this.config) {
+            return; // 避免重复初始化
+        }
+
         try {
+            // 检查缓存
+            const cachedConfig = this.getCachedConfig();
+            if (cachedConfig) {
+                this.config = cachedConfig;
+                this.isInitialized = true;
+                console.log('链接配置从缓存加载成功');
+                return;
+            }
+
+            // 从网络加载
             const response = await fetch(this.configPath);
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
+            
             this.config = await response.json();
+            this.cacheConfig(this.config); // 缓存配置
+            this.isInitialized = true;
             console.log('链接配置加载成功');
         } catch (error) {
             console.error('链接配置加载失败:', error);
             // 使用默认配置作为后备
             this.config = this.getDefaultConfig();
+            this.isInitialized = true;
+        }
+    }
+
+    /**
+     * 缓存配置到本地存储
+     * @param {Object} config - 配置对象
+     */
+    cacheConfig(config) {
+        try {
+            const cacheData = {
+                data: config,
+                timestamp: Date.now(),
+                version: '1.0'
+            };
+            localStorage.setItem('linkManager_config', JSON.stringify(cacheData));
+        } catch (error) {
+            console.warn('Failed to cache config:', error);
+        }
+    }
+
+    /**
+     * 从缓存获取配置
+     * @returns {Object|null} 缓存的配置或null
+     */
+    getCachedConfig() {
+        try {
+            const cached = localStorage.getItem('linkManager_config');
+            if (!cached) return null;
+
+            const cacheData = JSON.parse(cached);
+            const maxAge = 30 * 60 * 1000; // 30分钟缓存
+
+            if (Date.now() - cacheData.timestamp > maxAge) {
+                localStorage.removeItem('linkManager_config');
+                return null;
+            }
+
+            return cacheData.data;
+        } catch (error) {
+            console.warn('Failed to get cached config:', error);
+            return null;
         }
     }
 
@@ -43,45 +106,63 @@ class LinkManager {
     }
 
     /**
-     * 为元素添加无障碍属性
+     * 为元素添加无障碍属性 (优化版)
      * @param {HTMLElement} element - 要添加属性的元素
      * @param {string} i18nKey - i18n键名
      */
     addAccessibilityAttributes(element, i18nKey) {
-        // 设置 aria-label 和 title 属性，支持i18n
-        element.setAttribute('data-i18n-title', i18nKey);
-        element.setAttribute('data-i18n-aria-label', i18nKey);
-        
-        // 如果 i18n 系统已经加载，立即设置属性
-        if (window.t && typeof window.t === 'function') {
-            const text = window.t(i18nKey);
-            element.setAttribute('title', text);
-            element.setAttribute('aria-label', text);
+        // 使用防抖避免频繁操作
+        if (this.accessibilityDebounceTimer) {
+            clearTimeout(this.accessibilityDebounceTimer);
         }
+
+        this.accessibilityDebounceTimer = setTimeout(() => {
+            // 设置 aria-label 和 title 属性，支持i18n
+            element.setAttribute('data-i18n-title', i18nKey);
+            element.setAttribute('data-i18n-aria-label', i18nKey);
+            
+            // 如果 i18n 系统已经加载，立即设置属性
+            if (window.t && typeof window.t === 'function') {
+                const text = window.t(i18nKey);
+                element.setAttribute('title', text);
+                element.setAttribute('aria-label', text);
+            }
+        }, 10);
     }
 
     /**
-     * 更新所有无障碍属性（用于语言切换后）
+     * 批量更新所有无障碍属性（优化版）
      */
     updateAccessibilityAttributes() {
         if (!window.t || typeof window.t !== 'function') return;
         
-        // 更新所有有 data-i18n-title 属性的元素
-        document.querySelectorAll('[data-i18n-title]').forEach(element => {
-            const key = element.getAttribute('data-i18n-title');
-            if (key) {
-                const text = window.t(key);
-                element.setAttribute('title', text);
-            }
-        });
-        
-        // 更新所有有 data-i18n-aria-label 属性的元素
-        document.querySelectorAll('[data-i18n-aria-label]').forEach(element => {
-            const key = element.getAttribute('data-i18n-aria-label');
-            if (key) {
-                const text = window.t(key);
-                element.setAttribute('aria-label', text);
-            }
+        // 使用 requestAnimationFrame 优化性能
+        requestAnimationFrame(() => {
+            // 批量处理所有需要更新的元素
+            const elementsToUpdate = [
+                ...document.querySelectorAll('[data-i18n-title]'),
+                ...document.querySelectorAll('[data-i18n-aria-label]')
+            ];
+
+            // 使用 DocumentFragment 减少重排
+            elementsToUpdate.forEach(element => {
+                const titleKey = element.getAttribute('data-i18n-title');
+                const ariaKey = element.getAttribute('data-i18n-aria-label');
+                
+                if (titleKey) {
+                    const text = window.t(titleKey);
+                    if (element.getAttribute('title') !== text) {
+                        element.setAttribute('title', text);
+                    }
+                }
+                
+                if (ariaKey) {
+                    const text = window.t(ariaKey);
+                    if (element.getAttribute('aria-label') !== text) {
+                        element.setAttribute('aria-label', text);
+                    }
+                }
+            });
         });
     }
 
@@ -148,12 +229,98 @@ class LinkManager {
     }
 
     /**
-     * 渲染社交媒体图标
+     * 优化的渲染社交媒体图标方法
      * @param {string} containerId - 容器ID
      */
     renderSocialMediaIcons(containerId) {
-        const container = document.getElementById(containerId);
-        if (!container || !this.config?.socialMedia) return;
+        // 避免重复渲染
+        if (this.renderQueue.has(`icons_${containerId}`)) {
+            return;
+        }
+        this.renderQueue.add(`icons_${containerId}`);
+
+        requestAnimationFrame(() => {
+            try {
+                const container = document.getElementById(containerId);
+                if (!container || !this.config?.socialMedia) {
+                    this.renderQueue.delete(`icons_${containerId}`);
+                    return;
+                }
+
+                // 缓存社交媒体图标
+                const socialIcons = this.getSocialIcons();
+
+                // 使用 DocumentFragment 优化DOM操作
+                const fragment = document.createDocumentFragment();
+
+                // 生成社交媒体图标
+                Object.entries(this.config.socialMedia).forEach(([platform, url]) => {
+                    if (socialIcons[platform]) {
+                        const link = this.createSocialLink(platform, url, socialIcons[platform]);
+                        fragment.appendChild(link);
+                    }
+                });
+
+                // 添加邮箱图标（特殊处理）
+                if (this.config.personal?.email) {
+                    const emailLink = this.createEmailLink(socialIcons.email);
+                    fragment.appendChild(emailLink);
+                }
+
+                // 一次性更新DOM
+                container.innerHTML = '';
+                container.appendChild(fragment);
+            } finally {
+                this.renderQueue.delete(`icons_${containerId}`);
+            }
+        });
+    }
+
+    /**
+     * 创建社交媒体链接元素
+     * @param {string} platform - 平台名称
+     * @param {string} url - 链接URL
+     * @param {string} iconSvg - 图标SVG
+     * @returns {HTMLElement} 链接元素
+     */
+    createSocialLink(platform, url, iconSvg) {
+        const link = document.createElement('a');
+        link.className = 'social-icon';
+        link.href = url;
+        link.target = '_blank';
+        link.rel = 'noopener noreferrer'; // 安全优化
+        
+        this.addAccessibilityAttributes(link, 'socialMedia.links.' + platform);
+        link.innerHTML = iconSvg;
+        
+        return link;
+    }
+
+    /**
+     * 创建邮箱链接元素
+     * @param {string} iconSvg - 图标SVG
+     * @returns {HTMLElement} 链接元素
+     */
+    createEmailLink(iconSvg) {
+        const emailLink = document.createElement('a');
+        emailLink.className = 'social-icon';
+        emailLink.href = 'javascript:void(0);';
+        emailLink.onclick = () => window.email && window.email();
+        
+        this.addAccessibilityAttributes(emailLink, 'socialMedia.links.email');
+        emailLink.innerHTML = iconSvg;
+        
+        return emailLink;
+    }
+
+    /**
+     * 获取社交媒体图标 (缓存版本)
+     * @returns {Object} 图标对象
+     */
+    getSocialIcons() {
+        if (this.cache.has('socialIcons')) {
+            return this.cache.get('socialIcons');
+        }
 
         const socialIcons = {
             bilibili: `<svg t="1653121638226" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="10961" width="26" height="26">
@@ -169,38 +336,8 @@ class LinkManager {
             </svg>`
         };
 
-        // 清空容器
-        container.innerHTML = '';
-
-        // 生成社交媒体图标
-        Object.entries(this.config.socialMedia).forEach(([platform, url]) => {
-            if (socialIcons[platform]) {
-                const link = document.createElement('a');
-                link.className = 'social-icon';
-                link.href = url;
-                link.target = '_blank'; // 在新标签页打开
-                
-                // 添加无障碍属性
-                this.addAccessibilityAttributes(link, 'socialMedia.links.' + platform);
-                
-                link.innerHTML = socialIcons[platform];
-                container.appendChild(link);
-            }
-        });
-
-        // 添加邮箱图标（特殊处理）
-        if (this.config.personal?.email) {
-            const emailLink = document.createElement('a');
-            emailLink.className = 'social-icon';
-            emailLink.href = 'javascript:void(0);';
-            emailLink.onclick = () => window.email && window.email();
-            
-            // 添加无障碍属性
-            this.addAccessibilityAttributes(emailLink, 'socialMedia.links.email');
-            
-            emailLink.innerHTML = socialIcons.email;
-            container.appendChild(emailLink);
-        }
+        this.cache.set('socialIcons', socialIcons);
+        return socialIcons;
     }
 
     /**
@@ -443,35 +580,43 @@ class LinkManager {
     }
 
     /**
-     * 初始化所有组件
+     * 初始化所有组件 (优化版)
      */
     async initializeAll() {
+        if (this.isInitialized) {
+            return; // 避免重复初始化
+        }
+
         await this.init();
         this.updateGlobalFunctions();
-        this.addCustomStyles(); // 添加自定义样式
+        this.addCustomStyles();
         
-        // 延迟执行渲染，确保 DOM 已加载
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', () => {
-                this.renderComponents();
-            });
-        } else {
+        // 使用防抖延迟执行渲染，确保 DOM 已加载
+        const renderWithDelay = window.debounce ? window.debounce(() => {
             this.renderComponents();
+        }, 100) : () => setTimeout(() => this.renderComponents(), 100);
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', renderWithDelay);
+        } else {
+            renderWithDelay();
         }
     }
 
     /**
-     * 处理语言切换（公开方法，供语言控制器调用）
+     * 处理语言切换（优化版）
      */
     handleLanguageSwitch() {
-        // 重新渲染所有组件以更新文本
-        this.renderComponents();
-        // 更新状态信息
-        this.updateStatusInfo();
-        // 更新无障碍属性
-        setTimeout(() => {
+        // 使用防抖避免频繁调用
+        if (this.languageSwitchTimer) {
+            clearTimeout(this.languageSwitchTimer);
+        }
+
+        this.languageSwitchTimer = setTimeout(() => {
+            this.renderComponents();
+            this.updateStatusInfo();
             this.updateAccessibilityAttributes();
-        }, 100);
+        }, 50);
     }
 
     /**
@@ -542,68 +687,77 @@ class LinkManager {
     }
 
     /**
-     * 渲染所有组件
+     * 渲染所有组件 (优化版)
      */
     renderComponents() {
-        // 自动检测并渲染社交媒体图标
-        const socialIconsPlaceholder = document.getElementById('social-media-icons-placeholder');
-        if (socialIconsPlaceholder) {
-            this.renderSocialMediaIcons('social-media-icons-placeholder');
-        }
+        // 使用 requestAnimationFrame 优化渲染性能
+        requestAnimationFrame(() => {
+            // 批量检测需要渲染的组件
+            const componentsToRender = [
+                { id: 'social-media-icons-placeholder', method: 'renderSocialMediaIcons' },
+                { id: 'social-media-list', method: 'renderSocialMediaList' },
+                { id: 'related-sites-list', method: 'renderRelatedSites' }
+            ];
 
-        // 渲染社交媒体列表
-        const socialMediaList = document.getElementById('social-media-list');
-        if (socialMediaList) {
-            this.renderSocialMediaList('social-media-list');
-        }
-
-        // 渲染相关网站
-        const relatedSitesList = document.getElementById('related-sites-list');
-        if (relatedSitesList) {
-            this.renderRelatedSites('related-sites-list');
-        }
-
-        // 更新状态信息
-        this.updateStatusInfo();
-        
-        // 更新无障碍属性
-        setTimeout(() => {
-            this.updateAccessibilityAttributes();
-        }, 100);
-
-        // 更新打字机字符串
-        if (this.config?.meta?.typewriterStrings) {
-            // 等待 Typed.js 加载完成
-            const initTypewriter = () => {
-                if (window.Typed && document.querySelector('.blogtitle')) {
-                    // 如果已有实例，先销毁
-                    if (window.typed && typeof window.typed.destroy === 'function') {
-                        window.typed.destroy();
-                    }
-                    
-                    window.typed = new window.Typed(".blogtitle", {
-                        strings: this.config.meta.typewriterStrings,
-                        startDelay: 300,
-                        typeSpeed: 100,
-                        loop: true,
-                        backSpeed: 50,
-                        showCursor: true
-                    });
-                } else {
-                    // 如果 Typed.js 还没加载，等待一下
-                    setTimeout(initTypewriter, 100);
+            // 并行渲染所有组件
+            componentsToRender.forEach(({ id, method }) => {
+                const element = document.getElementById(id);
+                if (element) {
+                    this[method](id);
                 }
-            };
-            
-            initTypewriter();
-        }
+            });
 
-        // 更新版权信息
-        if (this.config?.meta?.copyright) {
-            const footerWrap = document.getElementById('footer-wrap');
-            if (footerWrap) {
-                footerWrap.textContent = this.config.meta.copyright;
+            // 其他更新操作
+            this.updateStatusInfo();
+            this.updateTypewriterStrings();
+            this.updateCopyright();
+            
+            // 延迟更新无障碍属性
+            setTimeout(() => {
+                this.updateAccessibilityAttributes();
+            }, 50);
+        });
+    }
+
+    /**
+     * 更新打字机字符串 (独立方法)
+     */
+    updateTypewriterStrings() {
+        if (!this.config?.meta?.typewriterStrings) return;
+
+        const initTypewriter = () => {
+            if (window.Typed && document.querySelector('.blogtitle')) {
+                // 如果已有实例，先销毁
+                if (window.typed && typeof window.typed.destroy === 'function') {
+                    window.typed.destroy();
+                }
+                
+                window.typed = new window.Typed(".blogtitle", {
+                    strings: this.config.meta.typewriterStrings,
+                    startDelay: 300,
+                    typeSpeed: 100,
+                    loop: true,
+                    backSpeed: 50,
+                    showCursor: true
+                });
+            } else {
+                // 如果 Typed.js 还没加载，等待一下
+                setTimeout(initTypewriter, 100);
             }
+        };
+        
+        initTypewriter();
+    }
+
+    /**
+     * 更新版权信息 (独立方法)
+     */
+    updateCopyright() {
+        if (!this.config?.meta?.copyright) return;
+
+        const footerWrap = document.getElementById('footer-wrap');
+        if (footerWrap && footerWrap.textContent !== this.config.meta.copyright) {
+            footerWrap.textContent = this.config.meta.copyright;
         }
     }
 

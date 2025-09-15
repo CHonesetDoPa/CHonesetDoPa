@@ -93,7 +93,7 @@
   "sponsor": {
     "title": "Sponsor List",
     "sponsorColumn": "Sponsor",
-    "amountColumn": "Price",
+    "amountColumn": "Amount",
     "chooseMethod": "Choose donation method",
     "wechatPay": "Sponsor via WechatPay",
     "patreon": "Sponsor via Patreon",

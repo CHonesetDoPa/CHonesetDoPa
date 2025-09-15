@@ -8,21 +8,6 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
 
     <script src="assets/js/jquery.min.js"></script>
-    <script src="assets/js/jquery.fancybox.js"></script>
-    <script src="assets/js/instantpage.js" type="module"></script>
-    <script src="assets/js/lazysizes.min.js" async></script>
-    <script src="assets/js/sweetalert.min.js"></script>
-    <script src="assets/js/sponsorlist.js"></script>
-    <!--语言控制器-->
-    <script src="assets/js/language-controller.js"></script>
-    <!--i18n国际化系统-->
-    <script src="assets/js/i18n-config.js"></script>
-    <script src="assets/js/i18n.js"></script>
-    <script src="assets/js/i18n-init.js"></script>
-    <!--链接管理器-->
-    <script src="assets/js/link-manager.js"></script>
-    <!--自动夜间模式管理器-->
-    <script src="assets/js/dark-mode-manager.js"></script>
 
     <link rel="icon" href="favicon.ico">
     <link rel="stylesheet" href="assets/css/index.css">
@@ -57,7 +42,7 @@
                                 <div class="author-info__name">
                                     <span color="pink"><b>CH</b></span>
                                 </div>
-                                <div class="author-info__description" data-en="Sekai ichi kawaii!" data-zh="世界第一可爱！">
+                                <div class="author-info__description" data-i18n="site.kawaii">
                                     世界第一可爱！</div>
                             </div>
                             <div class="card-info-social-icons is-center">
@@ -74,10 +59,10 @@
                         <div class="card-content">
                             <div class="item-headline">
                                 <i class="fa fa-calendar" aria-hidden="true"></i>
-                                <span data-en="Notice" data-zh="公告">公告</span>
+                                <span data-i18n="site.notice">公告</span>
                             </div>
                             <div id="">
-                                <p data-en="Today,study." data-zh="最近，学习中。">最近，学习中。</p>
+                                <p data-i18n="about.currentStatus">最近，学习中。</p>
                             </div>
                         </div>
                     </div>
@@ -88,26 +73,26 @@
                         <div class="card-content">
                             <div class="item-headline">
                                 <i class="fa fa-line-chart" aria-hidden="true"></i>
-                                <span data-en="Site Info" data-zh="站点信息">站点信息</span>
+                                <span data-i18n="site.siteInfo">站点信息</span>
                             </div>
                             <div class="webinfo">
                                 <div class="webinfo-item">
-                                    <div class="webinfo-site-name" data-en="Running Status:" data-zh="运行状态："> 运行状态：
+                                    <div class="webinfo-site-name" data-i18n="site.runningStatus"> 运行状态：
                                     </div>
-                                    <div class="webinfo-site-pv-count" data-en="🟢 Normal" data-zh="🟢 正常">🟢 正常</div>
+                                    <div class="webinfo-site-pv-count" data-i18n="site.normal">🟢 正常</div>
                                     <!-- <div class="webinfo-site-pv-count" id="">🟠 卡顿</div> -->
                                     <!-- <div class="webinfo-site-pv-count" id="">🔴 严重错误</div> -->
                                 </div>
                                 <div class="webinfo-item">
-                                    <div class="webinfo-site-name" data-en="My Status:" data-zh="站长状态："> 站长状态：</div>
-                                    <div class="webinfo-site-pv-count" data-en="🟢 Still Alive" data-zh="🟢 活着">🟢 活着
+                                    <div class="webinfo-site-name" data-i18n="site.myStatus"> 站长状态：</div>
+                                    <div class="webinfo-site-pv-count" data-i18n="site.alive">🟢 活着
                                     </div>
                                 </div>
                                 <div class="webinfo-item">
-                                    <div class="webinfo-site-name" data-en="Services Status:" data-zh="服务运行状态："> 服务运行状态：
+                                    <div class="webinfo-site-name" data-i18n="site.servicesStatus"> 服务运行状态：
                                     </div>
                                     <div class="webinfo-site-pv-count"> <a href="https://kuma.nekoc.cc/status/nya"
-                                            data-en="🟢 View" data-zh="🟢 查看">查看</a></div>
+                                            data-i18n="site.view">🟢 查看</a></div>
                                 </div>
                             </div>
                         </div>
@@ -117,41 +102,32 @@
                     <div class="article-container">
 
                         <hr>
-                        <h2 data-i18n="sponsor.title" style="font-weight: bold;font-size: larger;text-align: center;">Sponsor List</h2>
+                        <h2 data-i18n="sponsor.title" style="font-weight: bold;font-size: larger;text-align: center;">赞助者列表</h2>
                         <div class="tool">
                             <table id="sponsor" class="display" cellspacing="0" width="100%">
                                 <thead>
                                     <tr>
-                                        <th>Sponsor</th>
-                                        <th>Price</th>
+                                        <th data-i18n="sponsor.sponsorColumn">赞助者</th>
+                                        <th data-i18n="sponsor.amountColumn">金额</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>NyaWorks</td>
-                                        <td>6 CNY</td>
-                                    </tr>
-                                    <tr>
-                                        <td>CenterReduction</td>
-                                        <td>6 CNY</td>
-                                    </tr>
+                                    <!-- 赞助者数据将由 sponsorlist.js 动态填充 -->
                                 </tbody>
                             </table>
                         </div>
                         <hr>
 
                         <div class="content">
-                            <h2 data-i18n="sponsor.chooseMethod" data-en="Choose donation method" data-zh="选择捐赠方式">选择捐赠方式</h2>
-                            <blockquote><span class="spon" onclick="sponsor_wechat()" data-en="Sponsor via WechatPay"
-                                    data-zh="使用微信赞赏码捐赠">使用微信赞赏码捐赠</span><br></blockquote>
-                            <blockquote><span class="spon" onclick="sponsor_patreon()" data-en="Sponsor via Patreon"
-                                    data-zh="使用Patreon捐赠">使用Patreon捐赠</span><br></blockquote>
-                            <blockquote><span class="spon" onclick="sponsor_afdian()" data-en="Sponsor via Afdian"
-                                    data-zh="使用爱发电捐赠">使用爱发电捐赠</span><br></blockquote>
-                            <blockquote><span class="spon" onclick="sponsor_opencollective()" data-en="Sponsor via OpenCollective"
-                                    data-zh="使用OpenCollective捐赠">使用OpenCollective捐赠</span><br></blockquote>
+                            <h2 data-i18n="sponsor.chooseMethod">选择捐赠方式</h2>
+                            <blockquote><span class="spon" onclick="sponsor_wechat()" data-i18n="sponsor.wechatPay">使用微信赞赏码捐赠</span><br></blockquote>
+                            <blockquote><span class="spon" onclick="sponsor_patreon()" data-i18n="sponsor.patreon">使用Patreon捐赠</span><br></blockquote>
+                            <blockquote><span class="spon" onclick="sponsor_afdian()" data-i18n="sponsor.afdian">使用爱发电捐赠</span><br></blockquote>
+                            <blockquote><span class="spon" onclick="sponsor_opencollective()" data-i18n="sponsor.openCollective">使用OpenCollective捐赠</span><br></blockquote>
                         </div>
                     </div>
+                </article>
+            </div>
         </main>
         <footer id="footer">
             <div id="footer-wrap">
@@ -161,15 +137,23 @@
     </div>
 </body>
 
+<script src="assets/js/jquery.fancybox.js"></script>
+<script src="assets/js/instantpage.js" type="module"></script>
+<script src="assets/js/lazysizes.min.js" async></script>
+<script src="assets/js/sweetalert.min.js"></script>
+<script src="assets/js/sponsorlist.js"></script>
 
-<!--鼠标点击效果-->
+<!-- 合并后的工具函数和系统管理器 -->
+<script src="assets/js/utils.js"></script>
+<script src="assets/js/system-managers.js"></script>
+
+<!-- 合并后的国际化系统 -->
+<script src="assets/js/i18n-system.js"></script>
+
+<!-- 优化后的链接管理器 -->
+<script src="assets/js/link-manager.js"></script>
+
+<!-- 鼠标点击效果 (保持独立) -->
 <script src="assets/js/maodian.js"></script>
-<!-- 复制内容 -->
-<script src="assets/js/clipboard-utils.js"></script>
-<!--捐赠面板现在由 link-manager.js 处理-->    
-<!-- 显示邮箱等函数现在由 link-manager.js 处理 -->
-<!-- 问候 -->
-<script src="assets/js/greeting-system.js"></script>
-<script src="assets/js/page-effects.js"></script>
 
 </html>
