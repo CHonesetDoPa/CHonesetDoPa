@@ -68,6 +68,9 @@
     "html": "HTML",
     "css": "CSS", 
     "php": "PHP",
+    "python": "Python",
+    "cpp": "C++",
+    "java": "Java",
     "cute": "可爱"
   },
   "websites": {

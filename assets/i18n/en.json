@@ -67,7 +67,10 @@
     "title": "My Skills",
     "html": "HTML",
     "css": "CSS",
-    "php": "PHP", 
+    "php": "PHP",
+    "python": "Python",
+    "cpp": "C++",
+    "java": "Java",
     "cute": "Cute"
   },
   "websites": {

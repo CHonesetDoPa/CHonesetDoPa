@@ -189,11 +189,40 @@ h1 {
     padding: 1rem 1.2rem;
 }
 
+.skillbox {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+}
+
+@media (max-width: 768px) {
+    .skillbox {
+        flex-direction: column;
+        align-items: center;
+    }
+    .skillbar {
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 8px 0 !important;
+    }
+}
+
+@media (min-width: 769px) {
+    .skillbar {
+        width: calc(50% - 5px) !important;
+        max-width: calc(50% - 5px) !important;
+        flex: 0 0 calc(50% - 5px);
+        margin: 8px 0 !important;
+    }
+}
+
 .skillbar {
     position: relative;
     display: block;
-    max-width: 360px;
-    margin: 15px 10px;
+    width: 100%;
+    margin: 10px 0;
     background: #eee;
     height: 30px;
     -webkit-border-radius: 35px;
