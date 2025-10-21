@@ -689,7 +689,6 @@ class LinkManager {
 
             // 其他更新操作
             this.updateStatusInfo();
-            this.updateTypewriterStrings();
             this.updateCopyright();
             
             // 延迟更新无障碍属性
@@ -697,36 +696,6 @@ class LinkManager {
                 this.updateAccessibilityAttributes();
             }, 50);
         });
-    }
-
-    /**
-     * 更新打字机字符串 (独立方法)
-     */
-    updateTypewriterStrings() {
-        if (!this.config?.meta?.typewriterStrings) return;
-
-        const initTypewriter = () => {
-            if (window.Typed && document.querySelector('.blogtitle')) {
-                // 如果已有实例，先销毁
-                if (window.typed && typeof window.typed.destroy === 'function') {
-                    window.typed.destroy();
-                }
-                
-                window.typed = new window.Typed(".blogtitle", {
-                    strings: this.config.meta.typewriterStrings,
-                    startDelay: 300,
-                    typeSpeed: 100,
-                    loop: true,
-                    backSpeed: 50,
-                    showCursor: true
-                });
-            } else {
-                // 如果 Typed.js 还没加载，等待一下
-                setTimeout(initTypewriter, 100);
-            }
-        };
-        
-        initTypewriter();
     }
 
     /**
