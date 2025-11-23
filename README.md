@@ -1,6 +1,6 @@
 # About CH
 
-<img align='left' src='https://me.nekoc.cc/assets/img/V4/V4-Lite.png' width='300px' style='border-radius: 15px;'></img>
+<img align='left' src='src/assets/img/V4-Lite.png' width='250px' style='border-radius: 15px;'></img>
 
 ***
 
