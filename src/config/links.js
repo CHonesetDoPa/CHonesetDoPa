@@ -44,7 +44,7 @@ export default {
     }
   },
   "meta": {
-    "copyright": "Copyright 2025 CH 每一天都是新的一天",
+    "copyright": "Copyright 2026 CH 每一天都是新的一天",
     "typewriterStrings": [
       "每一天都是新的一天",
       "Everyday is a new day",
