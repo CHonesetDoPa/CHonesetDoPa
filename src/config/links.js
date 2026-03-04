@@ -12,7 +12,7 @@ export default {
     "github": "https://github.com/CHonesetDoPa",
     "twitter": "https://twitter.com/CH6306",
     "youtube": "https://www.youtube.com/channel/UCu_wgqS21zUI8JSA1pBuQDQ",
-    "telegram": "https://t.me/CyanC6306",
+    "telegram": "https://t.me/s/CyanC6306/4",
     "steam": "https://steamcommunity.com/id/SakuraCH/",
     "discord": "https://discord.gg/x4kV2tmjNF",
     "twitch": "https://www.twitch.tv/ch6306",
