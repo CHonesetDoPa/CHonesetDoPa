@@ -19,7 +19,6 @@
   "dependencies": {
     "@fortawesome/fontawesome-free": "^7.1.0",
     "instant.page": "^5.2.0",
-    "openpgp": "^6.3.0",
     "sweetalert": "^2.1.2",
     "typed.js": "^2.1.0"
   }
