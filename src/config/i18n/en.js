@@ -38,7 +38,7 @@ export default {
       "chFileShare": "Visit CH GAS Public File Share Service",
       "qtFileShare": "Visit QT GAS Public File Share Service",
       "sponsor": "Go to sponsor page",
-      "pgpKey": "Download CH's PGP public key file",
+      "pgpKey": "View PGP verification / Download public key",
       "servicesStatus": "View services status",
       "qtnull": "Visit QT's GitHub homepage",
       "nekocServer": "View NekoC server list"

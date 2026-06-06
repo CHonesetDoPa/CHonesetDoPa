@@ -38,7 +38,7 @@ export default {
       "chFileShare": "访问CH GAS公共文件共享服务",
       "qtFileShare": "访问QT GAS公共文件共享服务",
       "sponsor": "前往赞助页面",
-      "pgpKey": "下载CH的PGP公钥文件",
+      "pgpKey": "进行PGP验证 / 下载公钥",
       "servicesStatus": "查看服务运行状态",
       "qtnull": "访问QT的GitHub主页",
       "nekocServer": "查看NekoC服务器列表"

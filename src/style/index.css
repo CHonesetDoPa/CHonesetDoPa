@@ -456,6 +456,19 @@ aside_content .card-info .author-info__description {
     float: right;
 }
 
+#aside_content .card-webinfo .webinfo .webinfo-row span:last-child a {
+    color: #e91e63;
+    text-decoration: none;
+}
+
+#aside_content .card-webinfo .webinfo .webinfo-row span:last-child a:visited {
+    color: #e91e63;
+}
+
+#aside_content .card-webinfo .webinfo .webinfo-row span:last-child a:hover {
+    color: #c2185b;
+}
+
 #footer {
     position: relative;
     margin-top: 3rem;
@@ -578,6 +591,19 @@ aside_content .card-info .author-info__description {
 .dark-mode a {
     color: #00ff6a80;
     transition: color 0.3s ease;
+}
+
+/* 暗色模式服务状态链接 */
+.dark-mode #aside_content .card-webinfo .webinfo .webinfo-row span:last-child a {
+    color: #00cc55;
+}
+
+.dark-mode #aside_content .card-webinfo .webinfo .webinfo-row span:last-child a:visited {
+    color: #00cc55;
+}
+
+.dark-mode #aside_content .card-webinfo .webinfo .webinfo-row span:last-child a:hover {
+    color: #00ff6a;
 }
 
 .dark-mode #page {
@@ -773,6 +799,19 @@ aside_content .card-info .author-info__description {
 .vampire-mode a {
     color: var(--vampire-accent);
     transition: color 0.3s ease;
+}
+
+/* 血族模式服务状态链接 */
+.vampire-mode #aside_content .card-webinfo .webinfo .webinfo-row span:last-child a {
+    color: #dd8888;
+}
+
+.vampire-mode #aside_content .card-webinfo .webinfo .webinfo-row span:last-child a:visited {
+    color: #dd8888;
+}
+
+.vampire-mode #aside_content .card-webinfo .webinfo .webinfo-row span:last-child a:hover {
+    color: #ffaaaa;
 }
 
 .vampire-mode a:hover {

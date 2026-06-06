@@ -1,28 +1,28 @@
 export default {
   "site": {
-    "title": "血族CH的暗夜宫殿",
+    "title": "CH的暗夜宫殿",
     "kawaii": "优雅永夜的血族少女",
     "notice": "血族宫殿公告",
     "socialMedia": "血族社交圈",
     "siteInfo": "暗夜宫殿情报",
     "runningStatus": "血族封印状态：",
-    "myStatus": "吾之生命力：",
+    "myStatus": "CC之生命力：",
     "servicesStatus": "暗夜仆从工作状态：",
-    "normal": "血族力量充盈",
-    "alive": "永恒不死之身",
-    "view": "月夜视界开启"
+    "normal": "🌙 力量充盈",
+    "alive": "🌙 不死之身",
+    "view": "🌙 月夜视界"
   },
   "about": {
     "title": "关于血族CH",
-    "greeting": "吾乃CH，永夜中的血族，游走于暗影与现世之间。",
-    "disclaimer": "若见任何怪异血文，那绝非吾之杰作——定是隔壁那位神秘的QT所为。",
-    "hobby": "吾之所爱甚多，然最惬意的莫过在月夜下静享独处时光。",
+    "greeting": "这里是CH，永夜中的血族，游走于暗影与现世之间。",
+    "disclaimer": "若见任何怪异血文，那绝非CC之杰作——定是隔壁那位神秘的QT所为。",
+    "hobby": "CC之所爱甚多，然最惬意的莫过在月夜下静享独处时光。",
     "affiliation": "目前隶属于 GAS / GirlsAndScary 议会",
-    "business": "若要与吾缔结血之契约，请通过暗夜邮件联络（虽不确定吾是否能接到委托...）",
-    "currentStatus": "近日，吾正在人间研学，以窥世事百态。"
+    "business": "若要与CC缔结血之契约，请通过暗夜邮件联络（虽不确定CC是否能接到委托...）",
+    "currentStatus": "近日，CC正在人间研学，以窥世事百态。"
   },
   "skills": {
-    "title": "吾之血族能力"
+    "title": "CC之血族能力"
   },
   "websites": {
     "title": "血族领域网络",
@@ -38,7 +38,7 @@ export default {
       "chFileShare": "进入CH血族公共宝库",
       "qtFileShare": "进入QT血族公共宝库",
       "sponsor": "前往贡品献祭之地",
-      "pgpKey": "下载CH的血族秘钥文件",
+      "pgpKey": "查看PGP秘钥 / 下载公钥",
       "servicesStatus": "查看血族仆从工作状态",
       "qtnull": "造访QT的GitHub暗黑据点",
       "nekocServer": "查看NekoC血盟服务器"
@@ -73,16 +73,16 @@ export default {
     "osu": "OSU!血族音游挑战",
     "session": "血族会话暗号",
     "links": {
-      "bilibili": "前往吾的哔哩哔哩领地",
-      "github": "探访吾的GitHub暗黑代码库",
+      "bilibili": "前往CC的哔哩哔哩领地",
+      "github": "探访CC的GitHub暗黑代码库",
       "email": "查看血族专用邮箱",
-      "twitter": "前往吾的Twitter领地",
-      "youtube": "观看吾的Youtube血族影院",
-      "telegram": "加入吾的Telegram密令频道",
-      "steam": "探访吾的Steam游戏库",
-      "discord": "加入吾的Discord语音殿堂",
-      "twitch": "观看吾的Twitch血族直播",
-      "osu": "挑战吾的OSU!血族记录",
+      "twitter": "前往CC的Twitter领地",
+      "youtube": "观看CC的Youtube血族影院",
+      "telegram": "加入CC的Telegram密令频道",
+      "steam": "探访CC的Steam游戏库",
+      "discord": "加入CC的Discord语音殿堂",
+      "twitch": "观看CC的Twitch血族直播",
+      "osu": "挑战CC的OSU!血族记录",
       "session": "查看血族会话暗号"
     }
   },
@@ -120,7 +120,7 @@ export default {
       },
       "contact": {
         "title": "如何获得官方血族印记？",
-        "description": "若需要血族CH本尊提供血印用于身份验证，请通过\"血族社交圈\"中列出的任一暗夜渠道联系。本尊将提供包含时间魔印和验证请求者信息的血文印记。"
+        "description": "若需要CH本尊提供血印用于身份验证，请通过\"血族社交圈\"中列出的任一暗夜渠道联系。CC将提供包含时间魔印和验证请求者信息的血文印记。"
       }
     },
     "pgpKey": {
@@ -169,7 +169,7 @@ export default {
     "security": {
       "title": "血族安全宣告",
       "status": {
-        "revoked": "已封印/停止血脉",
+        "revoked": "已封印",
         "warning": "疑似伪血族警告"
       },
       "messages": {
