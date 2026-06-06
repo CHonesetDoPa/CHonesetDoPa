@@ -65,15 +65,13 @@ export default defineConfig(({ mode }) => {
 
         server: {
             host: true,
-            port: 5173,
+            port: 0,
             open: true,
-            strictPort: true,
         },
 
         preview: {
-            port: 4173,
+            port: 0,
             open: true,
-            strictPort: true,
         },
         resolve: {
             alias: {
