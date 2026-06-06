@@ -70,76 +70,70 @@ button, .btn, input[type="button"], input[type="submit"] {
 }
 
 .btn {
-    padding: 12px 24px;
-    border: none;
+    padding: 10px 22px;
+    border: 1px solid #e0e0e0;
     border-radius: 3px;
     cursor: pointer;
     font-size: 14px;
-    font-weight: 600;
+    font-weight: 400;
     text-decoration: none;
     display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 8px;
     text-align: center;
-    min-height: 44px;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    min-height: 40px;
+    transition: all 0.3s ease;
 }
 
 .btn-primary {
-    background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #fecfef 100%);
-    color: #5a3472;
-    border: none;
+    background: #fafafa;
+    color: #777;
+    border-color: #e0e0e0;
 }
 
 .btn-primary:hover {
-    background: linear-gradient(135deg, #ff8a95 0%, #fdb5e8 50%, #fdb5e8 100%);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(255, 154, 158, 0.4);
+    background: #f0f0f0;
+    color: #555;
 }
 
 .btn-secondary {
-    background: linear-gradient(135deg, #a8e6cf 0%, #dcedc8 100%);
-    color: #2e7d32;
-    border: none;
+    background: #fafafa;
+    color: #777;
+    border-color: #e0e0e0;
 }
 
 .btn-secondary:hover {
-    background: linear-gradient(135deg, #81c784 0%, #c8e6c9 100%);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(168, 230, 207, 0.4);
+    background: #f0f0f0;
+    color: #555;
 }
 
 .btn-outline {
     background: transparent;
-    color: #c471ed;
-    border: 2px solid #e1bee7;
+    color: #888;
+    border: 1px solid #d0d0d0;
 }
 
 .btn-outline:hover {
-    background: linear-gradient(135deg, #e1bee7 0%, #f3e5f5 100%);
-    color: #7b1fa2;
-    border-color: #c471ed;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(196, 113, 237, 0.3);
+    background: #f5f5f5;
+    color: #666;
+    border-color: #bbb;
 }
 
 /* Import Button Styles */
 .btn-import {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
-    border: none;
+    background: #fafafa;
+    color: #777;
+    border-color: #e0e0e0;
 }
 
 .btn-import:hover {
-    background: linear-gradient(135deg, #5a67d8 0%, #6b46c1 100%);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+    background: #f0f0f0;
+    color: #555;
 }
 
 .btn-import:active {
-    transform: translateY(-1px);
+    background: #e8e8e8;
 }
 
 /* PGP Key Info */
@@ -481,46 +475,30 @@ button, .btn, input[type="button"], input[type="submit"] {
 }
 
 /* Dark mode button adjustments */
-.dark-mode .btn-primary {
-    background: linear-gradient(135deg, #ff6b9d 0%, #c44569 100%);
-    color: #ffffff;
-    box-shadow: 0 2px 8px rgba(255, 107, 157, 0.3);
+.dark-mode .btn-primary,
+.dark-mode .btn-secondary,
+.dark-mode .btn-import {
+    background: #333;
+    border-color: #555;
+    color: #aaa;
 }
 
-.dark-mode .btn-primary:hover {
-    background: linear-gradient(135deg, #ff8fab 0%, #d63384 100%);
-    box-shadow: 0 4px 16px rgba(255, 107, 157, 0.4);
-}
-
-.dark-mode .btn-secondary {
-    background: linear-gradient(135deg, #6c5ce7 0%, #a29bfe 100%);
-    color: #ffffff;
-}
-
-.dark-mode .btn-secondary:hover {
-    background: linear-gradient(135deg, #5f3dc4 0%, #6c5ce7 100%);
-    box-shadow: 0 4px 12px rgba(108, 92, 231, 0.3);
+.dark-mode .btn-primary:hover,
+.dark-mode .btn-secondary:hover,
+.dark-mode .btn-import:hover {
+    background: #3a3a3a;
+    color: #ccc;
 }
 
 .dark-mode .btn-outline {
-    color: #f8bbd9;
-    border-color: #f8bbd9;
+    color: #999;
+    border-color: #555;
 }
 
 .dark-mode .btn-outline:hover {
-    background: linear-gradient(135deg, #f8bbd9 0%, #fce4ec 100%);
-    color: #ad1457;
-}
-
-.dark-mode .btn-import {
-    background: linear-gradient(135deg, #7e57c2 0%, #5e35b1 100%);
-    color: #ffffff;
-    box-shadow: 0 4px 8px rgba(126, 87, 194, 0.3);
-}
-
-.dark-mode .btn-import:hover {
-    background: linear-gradient(135deg, #9575cd 0%, #7e57c2 100%);
-    box-shadow: 0 6px 16px rgba(126, 87, 194, 0.4);
+    background: #333;
+    color: #ccc;
+    border-color: #777;
 }
 
 /* ========== Vampire Mode Support ========== */
@@ -628,52 +606,29 @@ button, .btn, input[type="button"], input[type="submit"] {
 }
 
 /* Vampire mode buttons */
-.vampire-mode .btn-primary {
-    background: linear-gradient(45deg, var(--vampire-primary, #8B0000), var(--vampire-secondary, #CC0000));
-    color: white;
-    border: 1px solid var(--vampire-accent, #FF69B4);
-    box-shadow: 0 0 10px var(--vampire-shadow, rgba(139, 0, 0, 0.3));
+.vampire-mode .btn-primary,
+.vampire-mode .btn-secondary,
+.vampire-mode .btn-import {
+    background: #2a0a0a;
+    border: 1px solid #5a2020;
+    color: #cc9999;
 }
 
-.vampire-mode .btn-primary:hover {
-    background: linear-gradient(45deg, var(--vampire-secondary, #CC0000), var(--vampire-accent, #FF69B4));
-    box-shadow: 0 0 15px var(--vampire-glow, rgba(139, 0, 0, 0.8));
-}
-
-.vampire-mode .btn-secondary {
-    background: linear-gradient(45deg, #3a0000, var(--vampire-primary, #8B0000));
-    color: var(--vampire-text, #ffffffbe);
-    border: 1px solid var(--vampire-primary, #8B0000);
-}
-
-.vampire-mode .btn-secondary:hover {
-    background: linear-gradient(45deg, var(--vampire-primary, #8B0000), var(--vampire-secondary, #CC0000));
-    color: white;
-    box-shadow: 0 0 10px var(--vampire-shadow, rgba(139, 0, 0, 0.3));
+.vampire-mode .btn-primary:hover,
+.vampire-mode .btn-secondary:hover,
+.vampire-mode .btn-import:hover {
+    background: #3a1010;
+    color: #ddbbbb;
 }
 
 .vampire-mode .btn-outline {
-    color: var(--vampire-accent, #FF69B4);
-    border-color: var(--vampire-accent, #FF69B4);
+    color: #cc9999;
+    border-color: #5a2020;
     background: transparent;
 }
 
 .vampire-mode .btn-outline:hover {
-    background: linear-gradient(45deg, var(--vampire-accent, #FF69B4), rgba(255, 105, 180, 0.2));
-    color: white;
-    border-color: var(--vampire-accent, #FF69B4);
-    box-shadow: 0 0 10px rgba(255, 105, 180, 0.5);
-}
-
-.vampire-mode .btn-import {
-    background: linear-gradient(45deg, var(--vampire-primary, #8B0000), #4a0080);
-    color: var(--vampire-text, #ffffffbe);
-    border: 1px solid var(--vampire-accent, #FF69B4);
-    box-shadow: 0 0 8px rgba(139, 0, 0, 0.4);
-}
-
-.vampire-mode .btn-import:hover {
-    background: linear-gradient(45deg, #4a0080, var(--vampire-accent, #FF69B4));
-    color: white;
-    box-shadow: 0 0 15px rgba(255, 105, 180, 0.6);
+    background: #2a0a0a;
+    color: #ddbbbb;
+    border-color: #8a3030;
 }

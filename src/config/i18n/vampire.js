@@ -1,7 +1,7 @@
 export default {
   "site": {
-    "title": "血族萝莉CH的暗夜宫殿",
-    "kawaii": "世界第一可爱的吸血鬼萝莉！",
+    "title": "血族CH的暗夜宫殿",
+    "kawaii": "优雅永夜的血族少女",
     "notice": "血族宫殿公告",
     "socialMedia": "血族社交圈",
     "siteInfo": "暗夜宫殿情报",
@@ -13,13 +13,13 @@ export default {
     "view": "月夜视界开启"
   },
   "about": {
-    "title": "关于血族萝莉CH",
-    "greeting": "吾名CH！永恒十七岁的高贵血族萝莉魅魔！现在还在人类学校潜伏中！",
-    "disclaimer": "由于吾之血族思维过于深奥，如果看到任何奇怪的repo，那绝对不是本大人的杰作！都是隔壁那个可疑的QT干的！",
-    "hobby": "吾喜欢的事物数不胜数，但目前最爱的还是在棺材里的安眠时光呢",
-    "affiliation": "目前隶属于 GAS / GirlsAndScary 血族议会",
-    "business": "若要与本大人进行血之契约，请通过魔法邮件联系（虽然本大人真的能接到委托吗...）",
-    "currentStatus": "最近，吾正在人类世界努力学习中。"
+    "title": "关于血族CH",
+    "greeting": "吾乃CH，永夜中的血族，游走于暗影与现世之间。",
+    "disclaimer": "若见任何怪异血文，那绝非吾之杰作——定是隔壁那位神秘的QT所为。",
+    "hobby": "吾之所爱甚多，然最惬意的莫过在月夜下静享独处时光。",
+    "affiliation": "目前隶属于 GAS / GirlsAndScary 议会",
+    "business": "若要与吾缔结血之契约，请通过暗夜邮件联络（虽不确定吾是否能接到委托...）",
+    "currentStatus": "近日，吾正在人间研学，以窥世事百态。"
   },
   "skills": {
     "title": "吾之血族能力"
@@ -45,19 +45,19 @@ export default {
     }
   },
   "sponsor": {
-    "title": "血之契约献祭名单",
+    "title": "血之契约贡品名录",
     "sponsorColumn": "忠诚的信徒",
     "amountColumn": "献祭数量",
     "chooseMethod": "选择献祭方式",
-    "wechatPay": "使用微信血色印记献祭",
-    "patreon": "使用Patreon异界献祭",
-    "afdian": "使用爱发电雷电献祭",
-    "openCollective": "使用OpenCollective集体献祭",
+    "wechatPay": "微信血色印记献祭",
+    "patreon": "Patreon异界献祭",
+    "afdian": "爱发电雷电献祭",
+    "openCollective": "OpenCollective集体献祭",
     "buttonTitles": {
-      "wechatPay": "点击使用微信血色印记进行献祭",
-      "patreon": "点击使用Patreon异界平台进行献祭",
-      "afdian": "点击使用爱发电雷电平台进行献祭",
-      "openCollective": "点击使用OpenCollective集体平台进行献祭"
+      "wechatPay": "通过微信血色印记献上贡品",
+      "patreon": "通过Patreon异界平台献上贡品",
+      "afdian": "通过爱发电雷电平台献上贡品",
+      "openCollective": "通过OpenCollective集体平台献上贡品"
     }
   },
   "socialMedia": {
@@ -73,16 +73,16 @@ export default {
     "osu": "OSU!血族音游挑战",
     "session": "血族会话暗号",
     "links": {
-      "bilibili": "造访吾的哔哩哔哩血族领地",
-      "github": "进入吾的GitHub暗黑代码库",
-      "email": "点击查看血族专用邮箱地址",
-      "twitter": "造访吾的Twitter血族推特",
-      "youtube": "观赏吾的Youtube血族影院",
-      "telegram": "加入吾的Telegram血族密令频道",
-      "steam": "进入吾的Steam血族游戏库",
-      "discord": "加入吾的Discord血族语音殿堂",
+      "bilibili": "前往吾的哔哩哔哩领地",
+      "github": "探访吾的GitHub暗黑代码库",
+      "email": "查看血族专用邮箱",
+      "twitter": "前往吾的Twitter领地",
+      "youtube": "观看吾的Youtube血族影院",
+      "telegram": "加入吾的Telegram密令频道",
+      "steam": "探访吾的Steam游戏库",
+      "discord": "加入吾的Discord语音殿堂",
       "twitch": "观看吾的Twitch血族直播",
-      "osu": "挑战吾的OSU!血族音游记录",
+      "osu": "挑战吾的OSU!血族记录",
       "session": "查看血族会话暗号"
     }
   },
@@ -95,12 +95,12 @@ export default {
     "vampire": "血族古语"
   },
   "theme": {
-    "buttonTitle": "在血族暗夜与讨厌的阳光之间切换"
+    "buttonTitle": "于血族暗夜与白昼之间切换"
   },
   "verify": {
     "site": {
       "title": "CH血族身份验证圣殿 - 血之印记验证",
-      "kawaii": "世界第一可爱的吸血鬼萝莉！"
+      "kawaii": "优雅永夜的血族少女"
     },
     "notice": {
       "title": "血族身份验证圣谕",
@@ -135,7 +135,7 @@ export default {
     "pgp": {
       "title": "血族印记验证法阵",
       "input": {
-        "title": "输入要验证的血文内容"
+        "title": "录入待验证的血文"
       },
       "labels": {
         "message": "原始血文:",
@@ -154,7 +154,7 @@ export default {
     },
     "github": {
       "title": "代码血库状态",
-      "subtitle": "查看血库最新祭献",
+      "subtitle": "查看血库最新变更",
       "labels": {
         "repo": "代码血库:"
       },
@@ -162,7 +162,7 @@ export default {
         "repo": "例如: 血族名/血库名"
       },
       "buttons": {
-        "fetch": "获取最新血献",
+        "fetch": "获取最新变更",
         "clear": "清除祭坛"
       }
     },
