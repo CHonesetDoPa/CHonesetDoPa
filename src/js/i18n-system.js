@@ -318,6 +318,22 @@ class I18n {
           if (t && t !== k) el.setAttribute('aria-label', t);
         }
       });
+      const altEls = document.querySelectorAll("[data-i18n-alt]");
+      altEls.forEach((el) => {
+        const k = el.getAttribute("data-i18n-alt");
+        if (k) {
+          const t = this.t(k);
+          if (t && t !== k) el.setAttribute('alt', t);
+        }
+      });
+      const metaEls = document.querySelectorAll("[data-i18n-meta-content]");
+      metaEls.forEach((el) => {
+        const k = el.getAttribute("data-i18n-meta-content");
+        if (k) {
+          const t = this.t(k);
+          if (t && t !== k) el.setAttribute('content', t);
+        }
+      });
     } catch (e) {
       console.error("[I18n] applyLanguage error", e);
     }

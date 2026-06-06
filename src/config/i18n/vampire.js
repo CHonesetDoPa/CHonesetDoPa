@@ -97,10 +97,23 @@ export default {
   "theme": {
     "buttonTitle": "于血族暗夜与白昼之间切换"
   },
+  "meta": {
+    "description": "CH血族身份验证圣殿 - 血之印记验证与血脉安全宣告",
+    "keywords": "CH, PGP, 血族印记, 身份验证, 血脉安全, CHonesetDoPa"
+  },
   "verify": {
     "site": {
       "title": "CH血族身份验证圣殿 - 血之印记验证",
-      "kawaii": "优雅永夜的血族少女"
+      "kawaii": "优雅永夜的血族少女",
+      "profile": "血族档案",
+      "sidebar": "暗夜侧廊",
+      "socialNav": "血族社交与暗夜法阵",
+      "socialLinks": "血族社交链接",
+      "pageControl": "暗夜控制枢",
+      "switchLang": "切换血族古语",
+      "mainTitle": "CH的血族领域",
+      "avatarAlt": "血族CH的暗夜肖像",
+      "darkModeAriaLabel": "切换血族暗夜与白昼形态"
     },
     "notice": {
       "title": "血族身份验证圣谕",
@@ -123,17 +136,35 @@ export default {
         "description": "若需要CH本尊提供血印用于身份验证，请通过\"血族社交圈\"中列出的任一暗夜渠道联系。CC将提供包含时间魔印和验证请求者信息的血文印记。"
       }
     },
+    "timeline": {
+      "title": "暗夜时间线",
+      "events": {
+        "event1": "血族秘钥首次现世",
+        "event2": "发现疑似伪装血族",
+        "event3": "封印Telegram旧身份"
+      },
+      "footer": "最后更新: 2024-12-10"
+    },
     "pgpKey": {
       "title": "血族秘钥获取",
       "description": "下载血族CH的暗夜秘钥以验证血族印记的真实性。",
       "buttons": {
         "local": "本地下载",
-        "remote": "OpenPGP"
+        "remote": "OpenPGP",
+        "show": "显示血族秘钥",
+        "hide": "隐藏血族秘钥"
       },
+      "labels": {
+        "userId": "血族ID:",
+        "fingerprint": "血族印记:",
+        "algorithm": "暗夜算法:"
+      },
+      "copyBtn": "复制血族秘钥",
       "info": "血族印记: E802A6BF8C2B8ED71B9D08FFC6881736D7BC83D8"
     },
     "pgp": {
       "title": "血族印记验证法阵",
+      "description": "血族CH的暗夜秘钥可用于验证血文消息的真实性。您可以使用任意血族兼容法器（如 GnuPG、OpenKeychain）录入此暗夜秘钥。",
       "input": {
         "title": "录入待验证的血文"
       },
@@ -175,7 +206,13 @@ export default {
       "messages": {
         "revoked": "以下血族身份已被永久封印或停止血脉传承，请勿信任：",
         "warning": "发现以下疑似伪装血族身份，请注意辨别真伪："
-      }
-    }
+      },
+      "items": {
+        "revokedStatus": "(已封印)",
+        "warningStatus": "(已封印，不受控)"
+      },
+      "listLabel": "血族安全宣告"
+    },
+    "footer": "Copyright 2026 CH 每一个暗夜都是崭新的一天"
   }
 };

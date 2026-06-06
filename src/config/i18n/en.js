@@ -97,10 +97,23 @@ export default {
   "theme": {
     "buttonTitle": "Toggle dark/light mode"
   },
+  "meta": {
+    "description": "CH Security Verification Center - PGP Signature Verification & Identity Security Announcements",
+    "keywords": "CH, PGP, digital signature, identity verification, security announcement, CHonesetDoPa"
+  },
   "verify": {
     "site": {
       "title": "CH Security Verification Center - PGP Signature Verification",
-      "kawaii": "Sekai ichi kawaii!"
+      "kawaii": "Sekai ichi kawaii!",
+      "profile": "Profile",
+      "sidebar": "Sidebar Information",
+      "socialNav": "Social Media & Functions",
+      "socialLinks": "Social Media Links",
+      "pageControl": "Page Control",
+      "switchLang": "Switch Language",
+      "mainTitle": "CH's Personal Page",
+      "avatarAlt": "CH's avatar",
+      "darkModeAriaLabel": "Toggle dark mode"
     },
     "notice": {
       "title": "Security Verification Instructions",
@@ -123,17 +136,35 @@ export default {
         "description": "If you need CH to provide signed messages for identity verification, please contact through any of the channels listed in \"Social Media\". Official will provide signed messages containing timestamps and verifier information."
       }
     },
+    "timeline": {
+      "title": "Verification Timeline",
+      "events": {
+        "event1": "PGP key first published",
+        "event2": "Suspected impersonation found",
+        "event3": "Revoked Telegram old identity"
+      },
+      "footer": "Last updated: 2024-12-10"
+    },
     "pgpKey": {
       "title": "PGP Public Key Download",
       "description": "Download CH's PGP public key to verify the authenticity of digital signatures.",
       "buttons": {
         "local": "Local Download",
-        "remote": "OpenPGP.org"
+        "remote": "OpenPGP.org",
+        "show": "Show Public Key",
+        "hide": "Hide Public Key"
       },
+      "labels": {
+        "userId": "User ID:",
+        "fingerprint": "Fingerprint:",
+        "algorithm": "Algorithm:"
+      },
+      "copyBtn": "Copy Public Key",
       "info": "Fingerprint: E802A6BF8C2B8ED71B9D08FFC6881736D7BC83D8"
     },
     "pgp": {
       "title": "PGP Signature Verification",
+      "description": "CH's PGP public key can be used to verify the authenticity of messages. You can import this key using any PGP-compatible software (such as GnuPG, OpenKeychain).",
       "input": {
         "title": "Enter content to verify"
       },
@@ -161,7 +192,13 @@ export default {
       "messages": {
         "revoked": "The following identities have been revoked or disabled, please do not trust:",
         "warning": "The following suspected impersonation identities have been found, please be careful to identify:"
-      }
-    }
+      },
+      "items": {
+        "revokedStatus": "(Disabled)",
+        "warningStatus": "(Disabled, Uncontrolled)"
+      },
+      "listLabel": "Security Announcements"
+    },
+    "footer": "Copyright 2026 CH Every day is a new day"
   }
 };
