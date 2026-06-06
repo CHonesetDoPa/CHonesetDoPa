@@ -1,6 +1,7 @@
 // vite.config.js
 import { defineConfig, loadEnv } from 'vite';
 import viteCompression from 'vite-plugin-compression'
+import htmlMinifier from 'vite-plugin-html-minifier'
 import path from 'path';
 import fs from 'fs';
 
@@ -13,6 +14,22 @@ export default defineConfig(({ mode }) => {
         root: 'src',
         publicDir: '../public',
         plugins: [
+            htmlMinifier({
+                minify: {
+                    removeComments: true,
+                    collapseWhitespace: true,
+                    removeAttributeQuotes: true,
+                    removeEmptyAttributes: true,
+                    removeRedundantAttributes: true,
+                    removeScriptTypeAttributes: true,
+                    removeStyleLinkTypeAttributes: true,
+                    useShortDoctype: true,
+                    minifyCSS: true,
+                    minifyJS: true,
+                    decodeEntities: true,
+                },
+                filter: /\.html$/,
+            }),
             viteCompression({
                 algorithm: 'gzip',
                 ext: '.gz',
@@ -80,6 +97,16 @@ export default defineConfig(({ mode }) => {
                     entryFileNames: `assets/${ASSET_PREFIX}-[name]-[hash].js`,
                     chunkFileNames: `assets/${ASSET_PREFIX}-[name]-[hash].js`,
                     assetFileNames: `assets/${ASSET_PREFIX}-[name]-[hash].[ext]`,
+                    manualChunks(id) {
+                        if (id.includes('node_modules')) {
+                            if (id.includes('openpgp')) return 'vendor-openpgp';
+                            if (id.includes('sweetalert')) return 'vendor-swal';
+                            if (id.includes('typed.js')) return 'vendor-typed';
+                            if (id.includes('fortawesome')) return 'vendor-fa';
+                            if (id.includes('instant.page')) return 'vendor-instant';
+                            return 'vendor-other';
+                        }
+                    },
                 }
             },
         },
