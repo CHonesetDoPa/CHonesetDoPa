@@ -150,7 +150,7 @@ export default {
         "event2": "发现疑似冒充身份",
         "event3": "吊销Telegram旧身份"
       },
-      "footer": "最后更新: 2024-12-10"
+      "footerLabel": "最后更新: "
     },
     "pgpKey": {
       "title": "PGP公钥下载",
@@ -206,6 +206,7 @@ export default {
       },
       "listLabel": "安全公告列表"
     },
-    "footer": "Copyright 2026 CH 每一天都是新的一天"
+    "footerPrefix": "Copyright ",
+    "footerSuffix": "CH 每一天都是新的一天"
   }
 };

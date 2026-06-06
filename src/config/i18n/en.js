@@ -143,7 +143,7 @@ export default {
         "event2": "Suspected impersonation found",
         "event3": "Revoked Telegram old identity"
       },
-      "footer": "Last updated: 2024-12-10"
+      "footerLabel": "Last updated: "
     },
     "pgpKey": {
       "title": "PGP Public Key Download",
@@ -199,6 +199,7 @@ export default {
       },
       "listLabel": "Security Announcements"
     },
-    "footer": "Copyright 2026 CH Every day is a new day"
+    "footerPrefix": "Copyright ",
+    "footerSuffix": "CH Every day is a new day"
   }
 };

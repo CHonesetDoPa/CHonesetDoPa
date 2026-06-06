@@ -143,7 +143,7 @@ export default {
         "event2": "发现疑似伪装血族",
         "event3": "封印Telegram旧身份"
       },
-      "footer": "最后更新: 2024-12-10"
+      "footerLabel": "最后更新: "
     },
     "pgpKey": {
       "title": "血族秘钥获取",
@@ -213,6 +213,7 @@ export default {
       },
       "listLabel": "血族安全宣告"
     },
-    "footer": "Copyright 2026 CH 每一个暗夜都是崭新的一天"
+    "footerPrefix": "Copyright ",
+    "footerSuffix": "CH 每一天都是崭新的一天"
   }
 };
