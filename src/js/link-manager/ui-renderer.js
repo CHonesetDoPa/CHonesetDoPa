@@ -12,9 +12,8 @@ export class UIRenderer {
      * 优化的渲染社交媒体图标方法
      * @param {string} containerId - 容器ID
      * @param {Object} config - 配置对象
-     * @param {AccessibilityManager} accessibilityManager - 无障碍管理器
      */
-    renderSocialMediaIcons(containerId, config, accessibilityManager) {
+    renderSocialMediaIcons(containerId, config) {
         // 避免重复渲染
         if (this.renderQueue.has(`icons_${containerId}`)) {
             return;
@@ -38,14 +37,14 @@ export class UIRenderer {
                 // 生成社交媒体图标
                 Object.entries(config.socialMedia).forEach(([platform, url]) => {
                     if (socialIcons[platform]) {
-                        const link = this.createSocialLink(platform, url, socialIcons[platform], accessibilityManager);
+                        const link = this.createSocialLink(platform, url, socialIcons[platform]);
                         fragment.appendChild(link);
                     }
                 });
 
                 // 添加邮箱图标（特殊处理）
                 if (config.personal?.email) {
-                    const emailLink = this.createEmailLink(socialIcons.email, accessibilityManager);
+                    const emailLink = this.createEmailLink(socialIcons.email);
                     fragment.appendChild(emailLink);
                 }
 
@@ -63,17 +62,17 @@ export class UIRenderer {
      * @param {string} platform - 平台名称
      * @param {string} url - 链接URL
      * @param {string} iconSvg - 图标SVG
-     * @param {AccessibilityManager} accessibilityManager - 无障碍管理器
      * @returns {HTMLElement} 链接元素
      */
-    createSocialLink(platform, url, iconSvg, accessibilityManager) {
+    createSocialLink(platform, url, iconSvg) {
         const link = document.createElement('a');
         link.className = 'social-icon';
         link.href = url;
         link.target = '_blank';
         link.rel = 'noopener noreferrer'; // 安全优化
-        
-        accessibilityManager.addAccessibilityAttributes(link, 'socialMedia.links.' + platform);
+        // 标记 i18n 键，由 i18n 控制器负责翻译和 aria 更新
+        link.setAttribute('data-i18n-title', 'socialMedia.links.' + platform);
+        link.setAttribute('data-i18n-aria-label', 'socialMedia.links.' + platform);
         link.innerHTML = iconSvg;
         
         return link;
@@ -82,10 +81,9 @@ export class UIRenderer {
     /**
      * 创建邮箱链接元素
      * @param {string} iconSvg - 图标SVG
-     * @param {AccessibilityManager} accessibilityManager - 无障碍管理器
      * @returns {HTMLElement} 链接元素
      */
-    createEmailLink(iconSvg, accessibilityManager) {
+    createEmailLink(iconSvg) {
         const emailLink = document.createElement('a');
         emailLink.className = 'social-icon';
         emailLink.href = '#';
@@ -93,8 +91,8 @@ export class UIRenderer {
             e.preventDefault();
             if (window.email) window.email();
         };
-        
-        accessibilityManager.addAccessibilityAttributes(emailLink, 'socialMedia.links.email');
+        emailLink.setAttribute('data-i18n-title', 'socialMedia.links.email');
+        emailLink.setAttribute('data-i18n-aria-label', 'socialMedia.links.email');
         emailLink.innerHTML = iconSvg;
         
         return emailLink;
@@ -128,12 +126,11 @@ export class UIRenderer {
     }
 
     /**
-     * 渲染社交媒体列表
-     * @param {string} containerId - 容器ID
-     * @param {Object} config - 配置对象
-     * @param {AccessibilityManager} accessibilityManager - 无障碍管理器
+    * 渲染社交媒体列表
+    * @param {string} containerId - 容器ID
+    * @param {Object} config - 配置对象
      */
-    renderSocialMediaList(containerId, config, accessibilityManager) {
+    renderSocialMediaList(containerId, config) {
         const container = document.getElementById(containerId);
         if (!container || !config?.socialMedia) return;
 
@@ -163,9 +160,9 @@ export class UIRenderer {
                 link.style.textDecoration = 'none';
                 link.target = '_blank'; // 在新标签页打开
                 link.textContent = platformNames[platform];
-                
-                // 添加无障碍属性
-                accessibilityManager.addAccessibilityAttributes(link, 'socialMedia.links.' + platform);
+                // 添加 data-i18n 标记，交给 i18n 系统处理可访问文本
+                link.setAttribute('data-i18n-title', 'socialMedia.links.' + platform);
+                link.setAttribute('data-i18n-aria-label', 'socialMedia.links.' + platform);
                 
                 li.appendChild(link);
                 ul.appendChild(li);
@@ -184,9 +181,9 @@ export class UIRenderer {
         link.style.textDecoration = 'none';
         link.style.cursor = 'pointer';
         link.textContent = 'Session';
-        
-        // 添加无障碍属性
-        accessibilityManager.addAccessibilityAttributes(link, 'socialMedia.links.session');
+        // 添加 data-i18n 标记
+        link.setAttribute('data-i18n-title', 'socialMedia.links.session');
+        link.setAttribute('data-i18n-aria-label', 'socialMedia.links.session');
         
         li.appendChild(link);
         ul.appendChild(li);
@@ -199,11 +196,20 @@ export class UIRenderer {
      * 渲染相关网站列表
      * @param {string} containerId - 容器ID
      * @param {Object} config - 配置对象
-     * @param {AccessibilityManager} accessibilityManager - 无障碍管理器
      */
-    renderRelatedSites(containerId, config, accessibilityManager) {
+    renderRelatedSites(containerId, config) {
         const container = document.getElementById(containerId);
         if (!container || !config?.relatedSites) return;
+
+        // 映射 config key → i18n key (websites.*)
+        const siteI18nKeyMap = {
+            qtnull: 'neighborQt',
+            nekocServer: 'gameServerList',
+            chFileShare: 'chFileShare',
+            qtFileShare: 'qtFileShare',
+            sponsor: 'sponsor',
+            messageVerify: 'pgpKey'
+        };
 
         const siteNames = {
             qtnull: { zh: '隔壁QT', en: 'The Next Door QT' },
@@ -213,6 +219,14 @@ export class UIRenderer {
             sponsor: { zh: '赞助CC', en: 'Sponsor CC' },
             messageVerify: { zh: '进行消息验证 / 下载CH的PGP公钥', en: 'Message Verification / Download CH\'s PGP Public Key' }
         };
+
+        // 获取当前语言
+        const currentLang = (() => {
+            const lang = document.documentElement.lang;
+            if (lang === 'zh-CN' || lang === 'zh') return 'zh';
+            if (lang === 'en-US' || lang === 'en') return 'en';
+            return 'zh';
+        })();
 
         // 清空容器
         container.innerHTML = '';
@@ -228,10 +242,13 @@ export class UIRenderer {
                 link.href = url;
                 link.setAttribute('data-en', siteNames[siteKey].en);
                 link.setAttribute('data-zh', siteNames[siteKey].zh);
-                link.textContent = siteNames[siteKey].zh;
-                
-                // 添加无障碍属性
-                accessibilityManager.addAccessibilityAttributes(link, 'websites.links.' + siteKey);
+                // 根据当前语言设置初始文本，避免 i18n MutationObserver 触发闪动
+                const textKey = 'websites.' + (siteI18nKeyMap[siteKey] || siteKey);
+                link.setAttribute('data-i18n', textKey);
+                link.textContent = siteNames[siteKey][currentLang] || siteNames[siteKey].zh;
+                // 添加 data-i18n 标记
+                link.setAttribute('data-i18n-title', 'websites.links.' + siteKey);
+                link.setAttribute('data-i18n-aria-label', 'websites.links.' + siteKey);
                 
                 // 如果不是sponsor.html和verify.html，在新标签页打开
                 if (url !== 'sponsor.html' && url !== 'verify.html') {
@@ -261,10 +278,9 @@ export class UIRenderer {
 
     /**
      * 更新状态信息
-     * @param {Object} config - 配置对象
-     * @param {AccessibilityManager} accessibilityManager - 无障碍管理器
+    * @param {Object} config - 配置对象
      */
-    updateStatusInfo(config, accessibilityManager) {
+    updateStatusInfo(config) {
         if (!config?.status) return;
 
         // 获取当前语言，vampire语言使用中文显示
@@ -291,8 +307,9 @@ export class UIRenderer {
         const servicesStatus = document.querySelector('.webinfo-item:last-child .webinfo-site-pv-count a');
         if (servicesStatus && config.relatedSites?.servicesStatus) {
             servicesStatus.href = config.relatedSites.servicesStatus;
-            // 添加无障碍属性
-            accessibilityManager.addAccessibilityAttributes(servicesStatus, 'websites.links.servicesStatus');
+            // 标记 i18n 键
+            servicesStatus.setAttribute('data-i18n-title', 'websites.links.servicesStatus');
+            servicesStatus.setAttribute('data-i18n-aria-label', 'websites.links.servicesStatus');
         }
     }
 }
