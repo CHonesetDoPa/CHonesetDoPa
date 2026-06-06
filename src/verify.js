@@ -32,7 +32,6 @@ import './js/link-manager.js';
 // Import npm libraries
 // ----------------------
 import 'instant.page';
-import 'sweetalert';
 // ----------------------
 // Import images or other assets
 // ----------------------
@@ -67,6 +66,69 @@ if (window.linkManager) {
 // ----------------------
 // Global functions for verify page
 // ----------------------
+window.togglePGPKey = function() {
+    const keyBlock = document.getElementById('pgp-key-block');
+    const toggleBtn = document.querySelector('.btn-toggle-key');
+    const toggleIcon = toggleBtn?.querySelector('.fa-eye, .fa-eye-slash');
+    const toggleText = toggleBtn?.querySelector('[data-i18n]');
+    
+    if (!keyBlock) return;
+    
+    const wrapper = keyBlock.closest('.key-block-wrapper');
+    const isHidden = wrapper ? wrapper.style.display === 'none' : false;
+    
+    if (isHidden) {
+        wrapper.style.display = 'block';
+        toggleBtn?.classList.add('active');
+        toggleBtn?.setAttribute('aria-expanded', 'true');
+        if (toggleIcon) {
+            toggleIcon.className = 'fas fa-eye-slash';
+        }
+        if (toggleText) {
+            toggleText.textContent = '隐藏公钥';
+            toggleText.dataset.i18n = 'verify.pgpKey.buttons.hide';
+        }
+    } else {
+        wrapper.style.display = 'none';
+        toggleBtn?.classList.remove('active');
+        toggleBtn?.setAttribute('aria-expanded', 'false');
+        if (toggleIcon) {
+            toggleIcon.className = 'fas fa-eye';
+        }
+        if (toggleText) {
+            toggleText.textContent = '显示公钥';
+            toggleText.dataset.i18n = 'verify.pgpKey.buttons.show';
+        }
+    }
+};
+
+window.copyPGPKey = function() {
+    const keyBlock = document.getElementById('pgp-key-block');
+    const btn = document.querySelector('.btn-copy-key');
+    if (!keyBlock || !keyBlock.textContent) return;
+    
+    navigator.clipboard.writeText(keyBlock.textContent).then(() => {
+        const icon = btn?.querySelector('.fa-copy, .fa-check');
+        if (icon) {
+            icon.className = 'fas fa-check';
+        }
+        btn?.classList.add('copied');
+        setTimeout(() => {
+            if (icon) {
+                icon.className = 'fas fa-copy';
+            }
+            btn?.classList.remove('copied');
+        }, 2000);
+    }).catch(() => {
+        // Fallback: select text manually
+        const range = document.createRange();
+        range.selectNodeContents(keyBlock);
+        const selection = window.getSelection();
+        selection?.removeAllRanges();
+        selection?.addRange(range);
+    });
+};
+
 window.downloadPGPKey = function(type) {
     const pgpKeyConfig = linksConfig.personal?.pgpKey;
     if (!pgpKeyConfig) {

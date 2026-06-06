@@ -2,6 +2,15 @@
  * Greeting System
  */
 
+let _swal = null;
+async function ensureSwal() {
+    if (!_swal) {
+        await import('sweetalert');
+        _swal = window.swal;
+    }
+    return _swal;
+}
+
 class GreetingSystem {
     constructor() {
         this.greetings = {
@@ -112,11 +121,8 @@ class GreetingSystem {
         }
     }
 
-    showGreeting() {
-        if (typeof swal === 'undefined') {
-            console.log('Greeting System: SweetAlert not loaded, skipping greeting display');
-            return;
-        }
+    async showGreeting() {
+        const swal = await ensureSwal();
 
         const now = new Date();
         const hour = now.getHours();
@@ -135,7 +141,7 @@ class GreetingSystem {
         // Check if greeting should be shown
         if (greetingType && this.shouldShowGreeting(greetingType)) {
             if (greetingType === 'evening') {
-                this.showEveningGreeting();
+                this.showEveningGreeting(swal);
             } else {
                 swal(this.greetings[greetingType]);
             }
@@ -148,7 +154,7 @@ class GreetingSystem {
         }
     }
 
-    showEveningGreeting() {
+    showEveningGreeting(swal) {
         // Check if dark mode manager exists
         let currentMode = "light mode";
         if (window.autoDarkModeManager && typeof window.autoDarkModeManager.getCurrentMode === 'function') {
@@ -166,10 +172,11 @@ class GreetingSystem {
     }
 
     // Manually trigger greeting
-    triggerGreeting(type = 'auto') {
+    async triggerGreeting(type = 'auto') {
         if (type === 'auto') {
-            this.showGreeting();
+            await this.showGreeting();
         } else if (this.greetings[type]) {
+            const swal = await ensureSwal();
             swal(this.greetings[type]);
         }
     }
