@@ -1,14 +1,16 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="zh-CN">
   <head>
     <meta charset="UTF-8" />
     <meta
       name="description"
       content="CH安全验证中心 - PGP签名验证与身份安全公告"
+      data-i18n-meta-content="verify.meta.description"
     />
     <meta
       name="keywords"
       content="CH, PGP, 数字签名, 身份验证, 安全公告, CHonesetDoPa"
+      data-i18n-meta-content="verify.meta.keywords"
     />
     <meta name="author" content="CH" />
     <meta name="format-detection" content="telephone=no" />
@@ -18,6 +20,9 @@
     <link rel="icon" href="/favicon.ico" />
 
     <title data-i18n="verify.site.title">CH安全验证中心 - PGP签名验证</title>
+
+    <link rel="stylesheet" href="./style/index.css">
+    <link rel="stylesheet" href="./style/verify.css">
   </head>
 
   <body>
@@ -40,13 +45,14 @@
             id="aside_content"
             role="complementary"
             aria-label="侧边栏信息"
+            data-i18n-aria-label="verify.site.sidebar"
           >
             <!-- Profile Card -->
             <section
               class="card-widget card-info"
               aria-labelledby="profile-heading"
             >
-              <h2 id="profile-heading" class="sr-only">个人资料</h2>
+              <h2 id="profile-heading" class="sr-only" data-i18n="verify.site.profile">个人资料</h2>
               <div class="card-content">
                 <div class="card-info-avatar is-center">
                   <img
@@ -56,6 +62,7 @@
                     width="120"
                     height="120"
                     loading="eager"
+                    data-i18n-alt="verify.site.avatarAlt"
                   />
                   <div class="author-info__name">
                     <span><strong>CH</strong></span>
@@ -70,10 +77,12 @@
                 <nav
                   class="card-info-social-icons is-center"
                   aria-label="社交媒体和功能"
+                  data-i18n-aria-label="verify.site.socialNav"
                 >
                   <div
                     id="social-media-icons-placeholder"
                     aria-label="社交媒体链接"
+                    data-i18n-aria-label="verify.site.socialLinks"
                   ></div>
                   <br />
 
@@ -81,6 +90,7 @@
                     class="control-buttons"
                     role="group"
                     aria-label="页面控制"
+                    data-i18n-aria-label="verify.site.pageControl"
                   >
                     <button
                       type="button"
@@ -88,6 +98,7 @@
                       onclick="dark()"
                       style="vertical-align: middle"
                       data-i18n-title="theme.buttonTitle"
+                      data-i18n-aria-label="verify.site.darkModeAriaLabel"
                       aria-label="切换深色模式"
                     >
                       <span
@@ -101,6 +112,7 @@
                       id="language-switch-btn"
                       onclick="switchLanguage()"
                       aria-label="切换语言"
+                      data-i18n-aria-label="verify.site.switchLang"
                     >
                       English
                     </button>
@@ -135,90 +147,57 @@
               </div>
             </section>
 
-            <!-- Verification Guide Card -->
+            <!-- Verification Timeline Card -->
             <section
-              class="card-widget card-guide"
-              aria-labelledby="guide-heading"
+              class="card-widget card-timeline"
+              aria-labelledby="timeline-heading"
             >
               <div class="card-content">
                 <div class="item-headline">
-                  <i class="fas fa-book" aria-hidden="true"></i>
-                  <h3 id="guide-heading" data-i18n="verify.guide.title">
-                    验证指南
+                  <i class="fas fa-history" aria-hidden="true"></i>
+                  <h3 id="timeline-heading" data-i18n="verify.timeline.title">
+                    验证时间线
                   </h3>
                 </div>
-                <h4 data-i18n="verify.guide.howToVerify.title">
-                  如何验证身份？
-                </h4>
-                <ol class="guide-steps">
-                  <li data-i18n="verify.guide.steps.step1">
-                    获取声称来自CH的消息及其PGP签名
-                  </li>
-                  <li data-i18n="verify.guide.steps.step2">
-                    将原始消息粘贴到右侧的“原始消息”框中
-                  </li>
-                  <li data-i18n="verify.guide.steps.step3">
-                    将PGP签名粘贴到“PGP签名”框中
-                  </li>
-                  <li data-i18n="verify.guide.steps.step4">
-                    点击“验证签名”按钮查看验证结果
-                  </li>
-                  <li data-i18n="verify.guide.steps.step5">
-                    只有显示“签名有效”才能确认消息来源真实性
-                  </li>
-                </ol>
-
-                <h4 data-i18n="verify.guide.contact.title">
-                  如何获得官方签名消息？
-                </h4>
-                <p data-i18n="verify.guide.contact.description">
-                  如需要CH本人提供签名消息用于身份验证，请通过"社交媒体链接"中列出的任一渠道联系。
-                  官方会提供包含时间戳和验证请求者信息的签名消息。
-                </p>
-              </div>
-            </section>
-
-            <!-- PGP Key Download Card -->
-            <section
-              class="card-widget card-announcement"
-              aria-labelledby="pgp-download-heading"
-            >
-              <div class="card-content">
-                <div class="item-headline">
-                  <i class="fas fa-key" aria-hidden="true"></i>
-                  <h3 id="pgp-download-heading" data-i18n="verify.pgpKey.title">
-                    PGP公钥下载
-                  </h3>
+                <div class="timeline">
+                  <div class="timeline-item status-ok">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                      <span class="timeline-date">2024-03-15</span>
+                      <span
+                        class="timeline-text"
+                        data-i18n="verify.timeline.events.event1"
+                        >PGP密钥首次发布</span
+                      >
+                    </div>
+                  </div>
+                  <div class="timeline-item status-warn">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                      <span class="timeline-date">2024-12-08</span>
+                      <span
+                        class="timeline-text"
+                        data-i18n="verify.timeline.events.event2"
+                        >发现疑似冒充身份</span
+                      >
+                    </div>
+                  </div>
+                  <div class="timeline-item status-bad">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                      <span class="timeline-date">2024-12-10</span>
+                      <span
+                        class="timeline-text"
+                        data-i18n="verify.timeline.events.event3"
+                        >吊销Telegram旧身份</span
+                      >
+                    </div>
+                  </div>
                 </div>
-                <div>
-                  <p data-i18n="verify.pgpKey.description">
-                    下载CH的PGP公钥用于验证数字签名的真实性。
-                  </p>
-                  <div class="pgp-download-buttons">
-                    <button
-                      type="button"
-                      class="btn btn-primary"
-                      onclick="downloadPGPKey('local')"
-                      data-i18n="verify.pgpKey.buttons.local"
-                    >
-                      <i class="fas fa-download" aria-hidden="true"></i>
-                      本地下载
-                    </button>
-                    <button
-                      type="button"
-                      class="btn btn-outline"
-                      onclick="downloadPGPKey('remote')"
-                      data-i18n="verify.pgpKey.buttons.remote"
-                    >
-                      <i class="fas fa-cloud" aria-hidden="true"></i>
-                      OpenPGP.org
-                    </button>
-                  </div>
-                  <div class="pgp-key-info">
-                    <small data-i18n="verify.pgpKey.info">
-                      指纹: E802A6BF8C2B8ED71B9D08FFC6881736D7BC83D8
-                    </small>
-                  </div>
+                <div class="timeline-footer">
+                  <small data-i18n="verify.timeline.footer"
+                    >最后更新: 2024-12-10</small
+                  >
                 </div>
               </div>
             </section>
@@ -227,99 +206,80 @@
           <!-- Main Article -->
           <article id="page" role="main" aria-labelledby="main-heading">
             <div class="article-container">
-              <h1 id="main-heading" class="sr-only">CH的个人主页</h1>
+              <h1 id="main-heading" class="sr-only" data-i18n="verify.site.mainTitle">CH的个人主页</h1>
 
               <hr role="separator" />
 
-              <!-- PGP Signature Verification Section -->
-              <section aria-labelledby="pgp-verify-heading">
+              <!-- PGP Public Key Display Section -->
+              <section aria-labelledby="pgp-key-heading">
                 <div class="item-headline">
                   <i class="fas fa-key" aria-hidden="true"></i>
-                  <h2 id="pgp-verify-heading" data-i18n="verify.pgp.title">
-                    PGP签名验证
+                  <h2 id="pgp-key-heading" data-i18n="verify.pgp.title">
+                    PGP公钥
                   </h2>
                 </div>
                 <div class="tool">
                   <div class="verification-form">
-                    <h3 data-i18n="verify.pgp.input.title">输入要验证的内容</h3>
+                    <div class="key-display">
+                      <p data-i18n="verify.pgp.description">
+                        CH的PGP公钥可用于验证消息的真实性。您可以使用任何PGP兼容软件（如
+                        GnuPG、OpenKeychain）导入此密钥。
+                      </p>
 
-                    <div class="form-row">
-                      <div class="form-group">
-                        <label
-                          for="message-input"
-                          data-i18n="verify.pgp.labels.message"
-                          >原始消息:</label
-                        >
-                        <textarea
-                          id="message-input"
-                          placeholder="请在此输入原始消息内容..."
-                          rows="8"
-                          class="form-control"
-                          data-i18n-placeholder="verify.pgp.placeholders.message"
-                        ></textarea>
+                      <div class="key-meta">
+                        <div class="meta-row">
+                          <span class="meta-label"
+                            ><strong><span data-i18n="verify.pgpKey.labels.userId">用户ID:</span></strong></span
+                          >
+                          <span class="meta-value"
+                            >CHonesetDoPa &lt;ch@nekoc.cc&gt;</span
+                          >
+                        </div>
+                        <div class="meta-row">
+                          <span class="meta-label"><strong><span data-i18n="verify.pgpKey.labels.fingerprint">指纹:</span></strong></span>
+                          <span class="meta-value fingerprint"
+                            >E802 A6BF 8C2B 8ED7 1B9D 08FF C688 1736 D7BC
+                            83D8</span
+                          >
+                        </div>
+                        <div class="meta-row">
+                          <span class="meta-label"><strong><span data-i18n="verify.pgpKey.labels.algorithm">算法:</span></strong></span>
+                          <span class="meta-value">ECDSA (NIST P-384)</span>
+                        </div>
                       </div>
 
-                      <div class="form-group">
-                        <label
-                          for="signature-input"
-                          data-i18n="verify.pgp.labels.signature"
-                          >PGP签名:</label
-                        >
-                        <textarea
-                          id="signature-input"
-                          placeholder="请在此粘贴PGP签名（以-----BEGIN PGP SIGNATURE-----开头）..."
-                          rows="8"
-                          class="form-control"
-                          data-i18n-placeholder="verify.pgp.placeholders.signature"
-                        ></textarea>
+                      <button type="button" class="btn btn-outline btn-toggle-key" onclick="togglePGPKey()" aria-expanded="false">
+                        <i class="fas fa-eye" aria-hidden="true"></i>
+                        <span data-i18n="verify.pgpKey.buttons.show">显示公钥</span>
+                      </button>
+
+                      <div class="key-block-wrapper" style="display: none;">
+                        <pre class="key-block" id="pgp-key-block"></pre>
+                        <button type="button" class="btn-copy-key" onclick="copyPGPKey()" aria-label="复制公钥" title="复制公钥" data-i18n-aria-label="verify.pgpKey.copyBtn" data-i18n-title="verify.pgpKey.copyBtn">
+                          <i class="fas fa-copy" aria-hidden="true"></i>
+                        </button>
                       </div>
-                    </div>
 
-                    <div class="verification-buttons">
-                      <button
-                        type="button"
-                        class="btn btn-primary verify-btn"
-                        onclick="verifyPGPSignature()"
-                        data-i18n="verify.pgp.buttons.verify"
-                      >
-                        <i class="fas fa-key" aria-hidden="true"></i> 验证签名
-                      </button>
-                      <button
-                        type="button"
-                        class="btn btn-secondary clear-btn"
-                        onclick="clearForm()"
-                        data-i18n="verify.pgp.buttons.clear"
-                      >
-                        <i class="fas fa-broom" aria-hidden="true"></i> 清空
-                      </button>
-                      <button
-                        type="button"
-                        class="btn btn-import"
-                        onclick="importSigFile()"
-                        data-i18n-title="verify.pgp.buttons.import"
-                        title="导入文件：签名文件(.sig/.asc)或源文件(任意格式)"
-                        aria-label="导入文件"
-                      >
-                        <i class="fas fa-file-import" aria-hidden="true"></i>
-                        导入文件
-                      </button>
-                      <button
-                        type="button"
-                        class="btn btn-outline"
-                        onclick="showPublicKeyInfo()"
-                        data-i18n="verify.pgp.buttons.keyInfo"
-                      >
-                        <i class="fas fa-info-circle" aria-hidden="true"></i>
-                        查看公钥信息
-                      </button>
-
-                      <input
-                        type="file"
-                        id="sig-file-input"
-                        accept=".sig,.asc,.pgp,.txt,.md,.json,.xml,.log,*"
-                        style="display: none"
-                        onchange="handleSigFileImport(event)"
-                      />
+                      <div class="verification-buttons">
+                        <button
+                          type="button"
+                          class="btn btn-primary"
+                          onclick="downloadPublicKey()"
+                          data-i18n="verify.pgpKey.buttons.local"
+                        >
+                          <i class="fas fa-download" aria-hidden="true"></i>
+                          下载公钥
+                        </button>
+                        <button
+                          type="button"
+                          class="btn btn-outline"
+                          onclick="downloadPGPKey('remote')"
+                          data-i18n="verify.pgpKey.buttons.remote"
+                        >
+                          <i class="fas fa-cloud" aria-hidden="true"></i>
+                          OpenPGP.org
+                        </button>
+                      </div>
                     </div>
 
                     <div
@@ -327,7 +287,7 @@
                       class="verification-result"
                       style="display: none"
                     >
-                      <!-- 验证结果将在这里显示 -->
+                      <!-- 结果将在这里显示 -->
                     </div>
                   </div>
                 </div>
@@ -347,6 +307,7 @@
                   class="security-announcements"
                   role="group"
                   aria-label="安全公告列表"
+                  data-i18n-aria-label="verify.security.listLabel"
                 >
                   <!-- Revoked/Compromised -->
                   <div class="announcement-item status-revoked">
@@ -363,9 +324,9 @@
                       </p>
                       <ul class="security-list revoked-list">
                         <li>
-                          <strong>Telegram:</strong> @CHonesetDoPa (已停用)
+                          <strong>Telegram:</strong> @CHonesetDoPa <span data-i18n="verify.security.items.revokedStatus">(已停用)</span>
                         </li>
-                        <li><strong>Telegram:</strong> @CH6306 (已停用)</li>
+                        <li><strong>Telegram:</strong> @CH6306 <span data-i18n="verify.security.items.revokedStatus">(已停用)</span></li>
                       </ul>
                     </div>
                   </div>
@@ -386,7 +347,7 @@
                       <ul class="security-list warning-list">
                         <li>
                           <strong>Telegram:</strong> @CHonesetDoPa
-                          (已停用，不受控)
+                          <span data-i18n="verify.security.items.warningStatus">(已停用，不受控)</span>
                         </li>
                       </ul>
                     </div>
@@ -400,7 +361,7 @@
 
       <!-- Footer -->
       <footer id="footer" role="contentinfo">
-        <div id="footer-wrap">Copyright 2026 CH 每一天都是新的一天</div>
+        <div id="footer-wrap" data-i18n="verify.footer">Copyright 2026 CH 每一天都是新的一天</div>
       </footer>
     </div>
     <script type="module" src="./verify.js"></script>
