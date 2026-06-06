@@ -4,14 +4,13 @@
     * version: 2.0.0 (Modularized)
  */
 import { ConfigManager } from './link-manager/config-manager.js';
-import { AccessibilityManager } from './link-manager/accessibility-manager.js';
 import { InteractionHandler } from './link-manager/interaction-handler.js';
 import { UIRenderer } from './link-manager/ui-renderer.js';
 
 class LinkManager {
     constructor() {
         this.configManager = new ConfigManager();
-        this.accessibilityManager = new AccessibilityManager();
+        // Accessibility is now handled by the i18n controller
         this.interactionHandler = new InteractionHandler();
         this.uiRenderer = new UIRenderer();
         
@@ -57,8 +56,14 @@ class LinkManager {
         }
 
         this.languageSwitchTimer = setTimeout(() => {
-            this.renderComponents();
-            this.accessibilityManager.updateAccessibilityAttributes();
+            // 语言切换时不需要重建 DOM（data-i18n 系统自动更新文本），
+            // 避免 container.innerHTML = '' 导致的闪动。
+            // 仅更新需要手动处理的状态信息。
+            const config = this.configManager.getConfig();
+            if (config) {
+                this.uiRenderer.updateStatusInfo(config);
+                this.uiRenderer.updateCopyright(config);
+            }
         }, 50);
     }
 
@@ -83,22 +88,19 @@ class LinkManager {
         // 使用 requestAnimationFrame 优化渲染性能
         requestAnimationFrame(() => {
             // 渲染社交媒体图标
-            this.uiRenderer.renderSocialMediaIcons('social-media-icons-placeholder', config, this.accessibilityManager);
-            
+            this.uiRenderer.renderSocialMediaIcons('social-media-icons-placeholder', config);
+
             // 渲染社交媒体列表
-            this.uiRenderer.renderSocialMediaList('social-media-list', config, this.accessibilityManager);
-            
+            this.uiRenderer.renderSocialMediaList('social-media-list', config);
+
             // 渲染相关网站列表
-            this.uiRenderer.renderRelatedSites('related-sites-list', config, this.accessibilityManager);
+            this.uiRenderer.renderRelatedSites('related-sites-list', config);
 
             // 其他更新操作
-            this.uiRenderer.updateStatusInfo(config, this.accessibilityManager);
+            this.uiRenderer.updateStatusInfo(config);
             this.uiRenderer.updateCopyright(config);
             
-            // 延迟更新无障碍属性
-            setTimeout(() => {
-                this.accessibilityManager.updateAccessibilityAttributes();
-            }, 50);
+            // i18n 系统会处理可访问性文本的更新（title / aria-label）
         });
     }
 }
@@ -108,11 +110,11 @@ window.linkManager = new LinkManager();
 
 // 监听 i18n 系统就绪事件
 document.addEventListener('i18nSystemReady', () => {
-    console.log('[LinkManager] I18n system ready, updating accessibility attributes');
-    window.linkManager.accessibilityManager.updateAccessibilityAttributes();
+    console.log('[LinkManager] I18n system ready, rendering components');
+    window.linkManager.renderComponents();
 });
 
 document.addEventListener('i18n:languageChanged', () => {
-    console.log('[LinkManager] Language changed, updating accessibility attributes');
+    console.log('[LinkManager] Language changed, re-rendering link components');
     window.linkManager.handleLanguageSwitch();
 });

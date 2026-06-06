@@ -31,7 +31,6 @@ import './js/link-manager.js';
 // Import npm libraries
 // ----------------------
 import 'instant.page';
-import 'sweetalert';
 // ----------------------
 // Import images or other assets
 // ----------------------

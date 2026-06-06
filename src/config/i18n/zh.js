@@ -10,7 +10,14 @@ export default {
     "servicesStatus": "服务运行状态：",
     "normal": "🟢 正常",
     "alive": "🟢 活着",
-    "view": "🟢 查看"
+    "view": "🟢 查看",
+    "profile": "个人资料",
+    "sidebar": "侧边栏信息",
+    "socialNav": "社交媒体和功能",
+    "socialLinks": "社交媒体链接",
+    "pageControl": "页面控制",
+    "switchLang": "切换语言",
+    "mainTitle": "CH的个人主页"
   },
   "about": {
     "title": "关于 CH",
@@ -38,7 +45,7 @@ export default {
       "chFileShare": "访问CH GAS公共文件共享服务",
       "qtFileShare": "访问QT GAS公共文件共享服务",
       "sponsor": "前往赞助页面",
-      "pgpKey": "下载CH的PGP公钥文件",
+      "pgpKey": "进行PGP验证 / 下载公钥",
       "servicesStatus": "查看服务运行状态",
       "qtnull": "访问QT的GitHub主页",
       "nekocServer": "查看NekoC服务器列表"
@@ -97,10 +104,23 @@ export default {
   "theme": {
     "buttonTitle": "切换深色/浅色模式"
   },
+  "meta": {
+    "description": "CH安全验证中心 - PGP签名验证与身份安全公告",
+    "keywords": "CH, PGP, 数字签名, 身份验证, 安全公告, CHonesetDoPa"
+  },
   "verify": {
     "site": {
       "title": "CH安全验证中心 - PGP签名验证",
-      "kawaii": "世界第一可爱！"
+      "kawaii": "世界第一可爱！",
+      "profile": "个人资料",
+      "sidebar": "侧边栏信息",
+      "socialNav": "社交媒体和功能",
+      "socialLinks": "社交媒体链接",
+      "pageControl": "页面控制",
+      "switchLang": "切换语言",
+      "mainTitle": "CH的个人主页",
+      "avatarAlt": "CH的头像",
+      "darkModeAriaLabel": "切换深色模式"
     },
     "notice": {
       "title": "安全验证说明",
@@ -123,17 +143,35 @@ export default {
         "description": "如需要CH本人提供签名消息用于身份验证，请通过\"社交媒体链接\"中列出的任一渠道联系。官方会提供包含时间戳和验证请求者信息的签名消息。"
       }
     },
+    "timeline": {
+      "title": "验证时间线",
+      "events": {
+        "event1": "PGP密钥首次发布",
+        "event2": "发现疑似冒充身份",
+        "event3": "吊销Telegram旧身份"
+      },
+      "footerLabel": "最后更新: "
+    },
     "pgpKey": {
       "title": "PGP公钥下载",
       "description": "下载CH的PGP公钥用于验证数字签名的真实性。",
       "buttons": {
         "local": "本地下载",
-        "remote": "OpenPGP.org"
+        "remote": "OpenPGP.org",
+        "show": "显示公钥",
+        "hide": "隐藏公钥"
       },
+      "labels": {
+        "userId": "用户ID:",
+        "fingerprint": "指纹:",
+        "algorithm": "算法:"
+      },
+      "copyBtn": "复制公钥",
       "info": "指纹: E802A6BF8C2B8ED71B9D08FFC6881736D7BC83D8"
     },
     "pgp": {
       "title": "PGP签名验证",
+      "description": "CH的PGP公钥可用于验证消息的真实性。您可以使用任何PGP兼容软件（如 GnuPG、OpenKeychain）导入此密钥。",
       "input": {
         "title": "输入要验证的内容"
       },
@@ -161,7 +199,14 @@ export default {
       "messages": {
         "revoked": "以下身份已被吊销或停用，请勿信任：",
         "warning": "发现以下疑似冒充身份，请注意识别："
-      }
-    }
+      },
+      "items": {
+        "revokedStatus": "(已停用)",
+        "warningStatus": "(已停用，不受控)"
+      },
+      "listLabel": "安全公告列表"
+    },
+    "footerPrefix": "Copyright ",
+    "footerSuffix": "CH 每一天都是新的一天"
   }
 };

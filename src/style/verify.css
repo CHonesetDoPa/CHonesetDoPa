@@ -70,76 +70,70 @@ button, .btn, input[type="button"], input[type="submit"] {
 }
 
 .btn {
-    padding: 12px 24px;
-    border: none;
+    padding: 10px 22px;
+    border: 1px solid #e0e0e0;
     border-radius: 3px;
     cursor: pointer;
     font-size: 14px;
-    font-weight: 600;
+    font-weight: 400;
     text-decoration: none;
     display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 8px;
     text-align: center;
-    min-height: 44px;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    min-height: 40px;
+    transition: all 0.3s ease;
 }
 
 .btn-primary {
-    background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #fecfef 100%);
-    color: #5a3472;
-    border: none;
+    background: #fafafa;
+    color: #777;
+    border-color: #e0e0e0;
 }
 
 .btn-primary:hover {
-    background: linear-gradient(135deg, #ff8a95 0%, #fdb5e8 50%, #fdb5e8 100%);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(255, 154, 158, 0.4);
+    background: #f0f0f0;
+    color: #555;
 }
 
 .btn-secondary {
-    background: linear-gradient(135deg, #a8e6cf 0%, #dcedc8 100%);
-    color: #2e7d32;
-    border: none;
+    background: #fafafa;
+    color: #777;
+    border-color: #e0e0e0;
 }
 
 .btn-secondary:hover {
-    background: linear-gradient(135deg, #81c784 0%, #c8e6c9 100%);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(168, 230, 207, 0.4);
+    background: #f0f0f0;
+    color: #555;
 }
 
 .btn-outline {
     background: transparent;
-    color: #c471ed;
-    border: 2px solid #e1bee7;
+    color: #888;
+    border: 1px solid #d0d0d0;
 }
 
 .btn-outline:hover {
-    background: linear-gradient(135deg, #e1bee7 0%, #f3e5f5 100%);
-    color: #7b1fa2;
-    border-color: #c471ed;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(196, 113, 237, 0.3);
+    background: #f5f5f5;
+    color: #666;
+    border-color: #bbb;
 }
 
 /* Import Button Styles */
 .btn-import {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
-    border: none;
+    background: #fafafa;
+    color: #777;
+    border-color: #e0e0e0;
 }
 
 .btn-import:hover {
-    background: linear-gradient(135deg, #5a67d8 0%, #6b46c1 100%);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+    background: #f0f0f0;
+    color: #555;
 }
 
 .btn-import:active {
-    transform: translateY(-1px);
+    background: #e8e8e8;
 }
 
 /* PGP Key Info */
@@ -359,36 +353,7 @@ button, .btn, input[type="button"], input[type="submit"] {
     }
 }
 
-/* PGP Key Download Card Styles */
-.pgp-download-buttons {
-    display: flex;
-    gap: 10px;
-    margin: 15px 0;
-    flex-wrap: wrap;
-}
 
-.pgp-download-buttons .btn {
-    flex: 1;
-    min-width: 140px;
-    justify-content: center;
-    text-align: center;
-}
-
-.pgp-key-info {
-    margin-top: 10px;
-    padding: 8px;
-    background: var(--code-bg, #f8f9fa);
-    border-radius: 4px;
-    border-left: 3px solid #ff9a9e;
-}
-
-.pgp-key-info small {
-    font-family: monospace;
-    font-size: 11px;
-    color: var(--text-secondary, #666);
-    line-height: 1.4;
-    word-break: break-all;
-}
 
 /* Dark mode support */
 .dark-mode .verification-form,
@@ -412,15 +377,6 @@ button, .btn, input[type="button"], input[type="submit"] {
 .dark-mode .fingerprint {
     background: var(--code-bg-dark, #3d3d3d);
     color: var(--text-color-dark, #fff);
-}
-
-.dark-mode .pgp-key-info {
-    background: var(--code-bg-dark, #3d3d3d);
-    border-left-color: #667eea;
-}
-
-.dark-mode .pgp-key-info small {
-    color: var(--text-secondary-dark, #aaa);
 }
 
 /* Security announcements dark mode */
@@ -454,6 +410,156 @@ button, .btn, input[type="button"], input[type="submit"] {
     color: #4caf50;
 }
 
+/* ============================
+   PGP Key Display (post-verification-removal)
+   ============================ */
+
+.key-display p {
+    margin-bottom: 16px;
+    line-height: 1.7;
+}
+
+.key-meta {
+    background: var(--bg-color, #f8f9fa);
+    border: 1px solid var(--border-color, #e0e0e0);
+    border-radius: 6px;
+    padding: 12px 16px;
+    margin-bottom: 16px;
+    color: var(--text-color, #333);
+}
+
+.key-meta .meta-label {
+    color: var(--text-secondary, #888);
+}
+
+.key-meta .meta-value {
+    color: var(--text-color, #333);
+}
+
+.meta-row {
+    display: flex;
+    gap: 8px;
+    padding: 4px 0;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.meta-row .meta-label {
+    flex-shrink: 0;
+    min-width: 70px;
+}
+
+.meta-row .meta-value {
+    word-break: break-all;
+}
+
+.meta-row .fingerprint {
+    font-family: 'Courier New', monospace;
+    letter-spacing: 0.5px;
+}
+
+.btn-toggle-key {
+    margin-bottom: 10px;
+    width: 100%;
+    justify-content: center;
+    background: transparent;
+    color: #888;
+    border: 1px solid #d0d0d0;
+}
+
+.btn-toggle-key:hover {
+    background: #f5f5f5;
+    color: #666;
+    border-color: #bbb;
+}
+
+.btn-toggle-key.active {
+    background: #f0f0f0;
+    color: #555;
+    border-color: #ccc;
+}
+
+.btn-toggle-key.active:hover {
+    background: #e8e8e8;
+    color: #444;
+    border-color: #bbb;
+}
+
+.key-block-wrapper {
+    position: relative;
+}
+
+.btn-copy-key {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+    color: #aaa;
+    padding: 4px 8px;
+    cursor: pointer;
+    font-size: 13px;
+    line-height: 1;
+    transition: all 0.2s ease;
+    z-index: 2;
+    opacity: 0;
+}
+
+.key-block-wrapper:hover .btn-copy-key,
+.btn-copy-key:focus-visible {
+    opacity: 1;
+}
+
+.btn-copy-key:hover {
+    background: rgba(255, 255, 255, 0.2);
+    color: #fff;
+    border-color: rgba(255, 255, 255, 0.4);
+}
+
+.btn-copy-key.copied {
+    background: rgba(40, 167, 69, 0.3);
+    color: #4caf50;
+    border-color: rgba(40, 167, 69, 0.5);
+}
+
+.key-block {
+    background: var(--code-bg, #1a1a2e);
+    color: #e0e0e0;
+    border: 1px solid var(--border-color, #333);
+    border-radius: 6px;
+    padding: 16px;
+    font-family: 'Courier New', monospace;
+    font-size: 12px;
+    line-height: 1.5;
+    white-space: pre-wrap;
+    word-break: break-all;
+    overflow-x: auto;
+    user-select: all;
+    margin-bottom: 0;
+}
+
+/* Dark mode key display */
+.dark-mode .key-meta {
+    background: var(--bg-color-dark, #2d2d2d);
+    border-color: var(--border-color-dark, #404040);
+    color: var(--text-color-dark, #eee);
+}
+
+.dark-mode .key-meta .meta-label {
+    color: var(--text-secondary-dark, #aaa);
+}
+
+.dark-mode .key-meta .meta-value {
+    color: var(--text-color-dark, #eee);
+}
+
+.dark-mode .key-block {
+    background: #0d0d1a;
+    border-color: #333;
+    color: #ccc;
+}
+
 .dark-mode .result-error {
     background-color: #3a1e1e;
     color: #f44336;
@@ -481,46 +587,187 @@ button, .btn, input[type="button"], input[type="submit"] {
 }
 
 /* Dark mode button adjustments */
-.dark-mode .btn-primary {
-    background: linear-gradient(135deg, #ff6b9d 0%, #c44569 100%);
-    color: #ffffff;
-    box-shadow: 0 2px 8px rgba(255, 107, 157, 0.3);
+.dark-mode .btn-primary,
+.dark-mode .btn-secondary,
+.dark-mode .btn-import {
+    background: #333;
+    border-color: #555;
+    color: #aaa;
 }
 
-.dark-mode .btn-primary:hover {
-    background: linear-gradient(135deg, #ff8fab 0%, #d63384 100%);
-    box-shadow: 0 4px 16px rgba(255, 107, 157, 0.4);
+.dark-mode .btn-primary:hover,
+.dark-mode .btn-secondary:hover,
+.dark-mode .btn-import:hover {
+    background: #3a3a3a;
+    color: #ccc;
 }
 
-.dark-mode .btn-secondary {
-    background: linear-gradient(135deg, #6c5ce7 0%, #a29bfe 100%);
-    color: #ffffff;
+/* ============================
+   Verification Timeline (Sidebar)
+   ============================ */
+
+.timeline {
+    position: relative;
+    padding: 4px 0;
 }
 
-.dark-mode .btn-secondary:hover {
-    background: linear-gradient(135deg, #5f3dc4 0%, #6c5ce7 100%);
-    box-shadow: 0 4px 12px rgba(108, 92, 231, 0.3);
+/* Vertical line */
+.timeline::before {
+    content: '';
+    position: absolute;
+    left: 4px;
+    top: 8px;
+    bottom: 8px;
+    width: 2px;
+    background: var(--border-color, #e0e0e0);
+}
+
+.timeline-item {
+    position: relative;
+    display: flex;
+    gap: 10px;
+    padding: 6px 0;
+    align-items: flex-start;
+}
+
+.timeline-marker {
+    flex-shrink: 0;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    border: 2px solid var(--border-color, #e0e0e0);
+    background: var(--card-bg, #fff);
+    z-index: 1;
+    margin-top: 4px;
+}
+
+/* Status colors */
+.timeline-item.status-ok .timeline-marker {
+    border-color: #28a745;
+    background: #28a745;
+    box-shadow: 0 0 0 3px rgba(40, 167, 69, 0.15);
+}
+
+.timeline-item.status-warn .timeline-marker {
+    border-color: #ffc107;
+    background: #ffc107;
+    box-shadow: 0 0 0 3px rgba(255, 193, 7, 0.15);
+}
+
+.timeline-item.status-bad .timeline-marker {
+    border-color: #dc3545;
+    background: #dc3545;
+    box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.15);
+}
+
+.timeline-content {
+    flex: 1;
+    min-width: 0;
+    padding-top: 1px;
+}
+
+.timeline-date {
+    display: block;
+    font-size: 11px;
+    color: var(--text-secondary, #999);
+    line-height: 1.3;
+}
+
+.timeline-text {
+    display: block;
+    font-size: 13px;
+    color: var(--text-color, #333);
+    line-height: 1.4;
+    margin-top: 1px;
+}
+
+.timeline-footer {
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px solid var(--border-color, #e0e0e0);
+    text-align: right;
+}
+
+.timeline-footer small {
+    font-size: 11px;
+    color: var(--text-secondary, #999);
+}
+
+/* Dark mode */
+.dark-mode .timeline::before {
+    background: var(--border-color-dark, #404040);
+}
+
+.dark-mode .timeline-marker {
+    border-color: var(--border-color-dark, #404040);
+    background: var(--card-bg-dark, #1e1e1e);
+}
+
+.dark-mode .timeline-date {
+    color: var(--text-secondary-dark, #aaa);
+}
+
+.dark-mode .timeline-text {
+    color: var(--text-color-dark, #eee);
+}
+
+.dark-mode .timeline-footer {
+    border-top-color: var(--border-color-dark, #404040);
+}
+
+.dark-mode .timeline-footer small {
+    color: var(--text-secondary-dark, #aaa);
 }
 
 .dark-mode .btn-outline {
-    color: #f8bbd9;
-    border-color: #f8bbd9;
+    color: #999;
+    border-color: #555;
 }
 
 .dark-mode .btn-outline:hover {
-    background: linear-gradient(135deg, #f8bbd9 0%, #fce4ec 100%);
-    color: #ad1457;
+    background: #333;
+    color: #ccc;
+    border-color: #777;
 }
 
-.dark-mode .btn-import {
-    background: linear-gradient(135deg, #7e57c2 0%, #5e35b1 100%);
-    color: #ffffff;
-    box-shadow: 0 4px 8px rgba(126, 87, 194, 0.3);
+.dark-mode .btn-toggle-key {
+    color: #999;
+    border-color: #555;
+    background: transparent;
 }
 
-.dark-mode .btn-import:hover {
-    background: linear-gradient(135deg, #9575cd 0%, #7e57c2 100%);
-    box-shadow: 0 6px 16px rgba(126, 87, 194, 0.4);
+.dark-mode .btn-toggle-key:hover {
+    background: #333;
+    color: #ccc;
+    border-color: #777;
+}
+
+.dark-mode .btn-toggle-key.active {
+    background: #444;
+    color: #fff;
+    border-color: #666;
+}
+
+.dark-mode .btn-toggle-key.active:hover {
+    background: #555;
+}
+
+.dark-mode .btn-copy-key {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.1);
+    color: #888;
+}
+
+.dark-mode .btn-copy-key:hover {
+    background: rgba(255, 255, 255, 0.12);
+    color: #ddd;
+    border-color: rgba(255, 255, 255, 0.25);
+}
+
+.dark-mode .btn-copy-key.copied {
+    background: rgba(40, 167, 69, 0.25);
+    color: #4caf50;
+    border-color: rgba(40, 167, 69, 0.4);
 }
 
 /* ========== Vampire Mode Support ========== */
@@ -556,11 +803,6 @@ button, .btn, input[type="button"], input[type="submit"] {
     border: 1px solid var(--vampire-primary, #8B0000);
 }
 
-.vampire-mode .pgp-key-info {
-    background-color: #3a0000;
-    border-left-color: var(--vampire-accent, #FF69B4);
-    color: var(--vampire-text, #ffffffbe);
-}
 
 /* Vampire mode security announcements */
 .vampire-mode .announcement-item {
@@ -628,52 +870,83 @@ button, .btn, input[type="button"], input[type="submit"] {
 }
 
 /* Vampire mode buttons */
-.vampire-mode .btn-primary {
-    background: linear-gradient(45deg, var(--vampire-primary, #8B0000), var(--vampire-secondary, #CC0000));
-    color: white;
-    border: 1px solid var(--vampire-accent, #FF69B4);
-    box-shadow: 0 0 10px var(--vampire-shadow, rgba(139, 0, 0, 0.3));
+.vampire-mode .btn-primary,
+.vampire-mode .btn-secondary,
+.vampire-mode .btn-import {
+    background: #2a0a0a;
+    border: 1px solid #5a2020;
+    color: #cc9999;
 }
 
-.vampire-mode .btn-primary:hover {
-    background: linear-gradient(45deg, var(--vampire-secondary, #CC0000), var(--vampire-accent, #FF69B4));
-    box-shadow: 0 0 15px var(--vampire-glow, rgba(139, 0, 0, 0.8));
+.vampire-mode .btn-primary:hover,
+.vampire-mode .btn-secondary:hover,
+.vampire-mode .btn-import:hover {
+    background: #3a1010;
+    color: #ddbbbb;
 }
 
-.vampire-mode .btn-secondary {
-    background: linear-gradient(45deg, #3a0000, var(--vampire-primary, #8B0000));
+.vampire-mode .key-meta {
+    background: #1a0000;
+    border-color: var(--vampire-primary, #8B0000);
     color: var(--vampire-text, #ffffffbe);
-    border: 1px solid var(--vampire-primary, #8B0000);
 }
 
-.vampire-mode .btn-secondary:hover {
-    background: linear-gradient(45deg, var(--vampire-primary, #8B0000), var(--vampire-secondary, #CC0000));
-    color: white;
-    box-shadow: 0 0 10px var(--vampire-shadow, rgba(139, 0, 0, 0.3));
+.vampire-mode .key-meta .meta-label {
+    color: #aa6666;
+}
+
+.vampire-mode .key-meta .meta-value {
+    color: var(--vampire-text, #ffffffbe);
 }
 
 .vampire-mode .btn-outline {
-    color: var(--vampire-accent, #FF69B4);
-    border-color: var(--vampire-accent, #FF69B4);
+    color: #cc9999;
+    border-color: #5a2020;
     background: transparent;
 }
 
 .vampire-mode .btn-outline:hover {
-    background: linear-gradient(45deg, var(--vampire-accent, #FF69B4), rgba(255, 105, 180, 0.2));
-    color: white;
-    border-color: var(--vampire-accent, #FF69B4);
-    box-shadow: 0 0 10px rgba(255, 105, 180, 0.5);
+    background: #2a0a0a;
+    color: #ddbbbb;
+    border-color: #8a3030;
 }
 
-.vampire-mode .btn-import {
-    background: linear-gradient(45deg, var(--vampire-primary, #8B0000), #4a0080);
-    color: var(--vampire-text, #ffffffbe);
-    border: 1px solid var(--vampire-accent, #FF69B4);
-    box-shadow: 0 0 8px rgba(139, 0, 0, 0.4);
+.vampire-mode .btn-toggle-key {
+    color: #cc9999;
+    border-color: #5a2020;
+    background: transparent;
 }
 
-.vampire-mode .btn-import:hover {
-    background: linear-gradient(45deg, #4a0080, var(--vampire-accent, #FF69B4));
-    color: white;
-    box-shadow: 0 0 15px rgba(255, 105, 180, 0.6);
+.vampire-mode .btn-toggle-key:hover {
+    background: #2a0a0a;
+    color: #ddbbbb;
+    border-color: #8a3030;
+}
+
+.vampire-mode .btn-toggle-key.active {
+    background: #5a2020;
+    color: #ffcccc;
+    border-color: #8a3030;
+}
+
+.vampire-mode .btn-toggle-key.active:hover {
+    background: #6a2828;
+}
+
+.vampire-mode .btn-copy-key {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(90, 32, 32, 0.6);
+    color: #aa7777;
+}
+
+.vampire-mode .btn-copy-key:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: #ddbbbb;
+    border-color: #8a3030;
+}
+
+.vampire-mode .btn-copy-key.copied {
+    background: rgba(40, 167, 69, 0.2);
+    color: #66bb6a;
+    border-color: rgba(40, 167, 69, 0.35);
 }

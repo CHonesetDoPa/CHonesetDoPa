@@ -456,6 +456,19 @@ aside_content .card-info .author-info__description {
     float: right;
 }
 
+#aside_content .card-webinfo .webinfo .webinfo-row span:last-child a {
+    color: #e91e63;
+    text-decoration: none;
+}
+
+#aside_content .card-webinfo .webinfo .webinfo-row span:last-child a:visited {
+    color: #e91e63;
+}
+
+#aside_content .card-webinfo .webinfo .webinfo-row span:last-child a:hover {
+    color: #c2185b;
+}
+
 #footer {
     position: relative;
     margin-top: 3rem;
@@ -552,26 +565,23 @@ aside_content .card-info .author-info__description {
     align-items: center;
     justify-content: center;
     border-radius: 3px;
-    background: linear-gradient(135deg, #d1c4e9 0%, #e8eaf6 100%);
-    border: none;
-    color: #5e35b1;
+    background: #f5f5f5;
+    border: 1px solid #e0e0e0;
+    color: #666;
     text-align: center;
     padding: 4px 8px;
     min-width: 40px;
     min-height: 18px;
-    font-weight: 500;
+    font-weight: 400;
     font-size: 12px;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 0.3s ease;
     cursor: pointer;
     margin: 2.5px;
-    box-shadow: 0 1px 2px rgba(129, 95, 190, 0.15);
 }
 
 .dark-button:hover {
-    background: linear-gradient(135deg, #b39ddb 0%, #d1c4e9 100%);
-    color: #4527a0;
-    transform: translateY(-1px);
-    box-shadow: 0 4px 8px rgba(129, 95, 190, 0.25);
+    background: #eeeeee;
+    color: #444;
 }
 
 .dark-mode {
@@ -581,6 +591,19 @@ aside_content .card-info .author-info__description {
 .dark-mode a {
     color: #00ff6a80;
     transition: color 0.3s ease;
+}
+
+/* 暗色模式服务状态链接 */
+.dark-mode #aside_content .card-webinfo .webinfo .webinfo-row span:last-child a {
+    color: #00cc55;
+}
+
+.dark-mode #aside_content .card-webinfo .webinfo .webinfo-row span:last-child a:visited {
+    color: #00cc55;
+}
+
+.dark-mode #aside_content .card-webinfo .webinfo .webinfo-row span:last-child a:hover {
+    color: #00ff6a;
 }
 
 .dark-mode #page {
@@ -632,51 +655,49 @@ aside_content .card-info .author-info__description {
 
 /* Dark mode sponsor button styles */
 .dark-mode .spon {
-    background: linear-gradient(135deg, #ff6b9d 0%, #c44569 100%);
-    color: #ffffff;
-    box-shadow: 0 2px 8px rgba(255, 107, 157, 0.3);
+    background: #333;
+    border: 1px solid #555;
+    color: #aaa;
 }
 
 .dark-mode .spon:hover {
-    background: linear-gradient(135deg, #ff8fab 0%, #d63384 100%);
-    box-shadow: 0 4px 16px rgba(255, 107, 157, 0.4);
+    background: #3a3a3a;
+    color: #ccc;
 }
 
 /* Dark mode dark-button styles */
 .dark-mode .dark-button {
-    background: linear-gradient(135deg, #6c5ce7 0%, #a29bfe 100%);
-    color: #ffffff;
-    box-shadow: 0 2px 8px rgba(108, 92, 231, 0.3);
+    background: #333;
+    border: 1px solid #555;
+    color: #aaa;
 }
 
 .dark-mode .dark-button:hover {
-    background: linear-gradient(135deg, #5f3dc4 0%, #6c5ce7 100%);
-    box-shadow: 0 4px 12px rgba(108, 92, 231, 0.4);
+    background: #3a3a3a;
+    color: #ccc;
 }
 
 .spon {
-    background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #fecfef 100%);
-    color: #5a3472;
-    border: none;
-    box-shadow: 0 2px 4px rgba(255, 154, 158, 0.2);
+    background: #fafafa;
+    color: #777;
+    border: 1px solid #e0e0e0;
     border-radius: 3px;
-    font-weight: 600;
+    font-weight: 400;
     font-size: 14px;
-    padding: 12px 24px;
+    padding: 10px 22px;
     margin: 0;
     cursor: pointer;
     display: inline-flex;
     align-items: center;
     justify-content: center;
     text-align: center;
-    min-height: 44px;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    min-height: 40px;
+    transition: all 0.3s ease;
 }
 
 .spon:hover {
-    background: linear-gradient(135deg, #ff8a95 0%, #fdb5e8 50%, #fdb5e8 100%);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(255, 154, 158, 0.4);
+    background: #f0f0f0;
+    color: #555;
 }
 
 /* ========== 血族萝莉模式样式 ========== */
@@ -735,16 +756,33 @@ aside_content .card-info .author-info__description {
 
 .vampire-mode #language-switch-btn,
 .vampire-mode .vampire-mode-btn {
-    background: linear-gradient(45deg, var(--vampire-primary), var(--vampire-secondary)) !important;
-    color: white !important;
-    border: 1px solid var(--vampire-accent) !important;
+    background: #2a0a0a !important;
+    color: #cc9999 !important;
+    border: 1px solid #5a2020 !important;
     transition: all 0.3s ease;
 }
 
 .vampire-mode .dark-button {
-    background: linear-gradient(45deg, var(--vampire-primary), var(--vampire-secondary));
-    color: white;
-    border: 1px solid var(--vampire-accent);
+    background: #2a0a0a;
+    color: #cc9999;
+    border: 1px solid #5a2020;
+}
+
+.vampire-mode .dark-button:hover {
+    background: #3a1010;
+    color: #ddbbbb;
+}
+
+/* Vampire mode sponsor button styles */
+.vampire-mode .spon {
+    background: #2a0a0a;
+    border: 1px solid #5a2020;
+    color: #cc9999;
+}
+
+.vampire-mode .spon:hover {
+    background: #3a1010;
+    color: #ddbbbb;
 }
 
 .vampire-mode .skillbar {
@@ -761,6 +799,19 @@ aside_content .card-info .author-info__description {
 .vampire-mode a {
     color: var(--vampire-accent);
     transition: color 0.3s ease;
+}
+
+/* 血族模式服务状态链接 */
+.vampire-mode #aside_content .card-webinfo .webinfo .webinfo-row span:last-child a {
+    color: #dd8888;
+}
+
+.vampire-mode #aside_content .card-webinfo .webinfo .webinfo-row span:last-child a:visited {
+    color: #dd8888;
+}
+
+.vampire-mode #aside_content .card-webinfo .webinfo .webinfo-row span:last-child a:hover {
+    color: #ffaaaa;
 }
 
 .vampire-mode a:hover {
@@ -820,9 +871,9 @@ aside_content .card-info .author-info__description {
 
 /* SweetAlert 血族样式 */
 .vampire-button {
-    background: linear-gradient(45deg, #8B0000, #CC0000) !important;
-    color: white !important;
-    border: 1px solid #FF69B4 !important;
+    background: #2a0a0a !important;
+    color: #cc9999 !important;
+    border: 1px solid #5a2020 !important;
 }
 
 .sr-only {
@@ -896,15 +947,14 @@ aside_content .card-info .author-info__description {
 }
 
 .vampire-mode .swal-button {
-    background: linear-gradient(45deg, var(--vampire-primary), var(--vampire-secondary));
-    color: white;
-    border: 1px solid var(--vampire-accent);
-    box-shadow: 0 0 10px var(--vampire-shadow) !important;
+    background: #2a0a0a;
+    color: #cc9999;
+    border: 1px solid #5a2020;
 }
 
 .vampire-mode .swal-button:hover {
-    background: linear-gradient(45deg, var(--vampire-secondary), var(--vampire-primary));
-    box-shadow: 0 0 15px var(--vampire-glow) !important;
+    background: #3a1010;
+    color: #ddbbbb;
 }
 
 .vampire-mode .swal-icon--success:before,
