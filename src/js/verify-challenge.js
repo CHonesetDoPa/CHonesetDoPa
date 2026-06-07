@@ -24,56 +24,61 @@ rTIhezzgMAozAQCP8sakQCk8vXVKVyFBA1aTIe/Z0IzEACxx2HB3KpeXXA==
 -----END PGP PUBLIC KEY BLOCK-----`;
 
 // Known key metadata (extracted from PGP comment headers)
-const CH_KEY_FINGERPRINT = 'E802A6BF8C2B8ED71B9D08FFC6881736D7BC83D8';
-const CH_KEY_USER = 'CHonesetDoPa <ch@nekoc.cc>';
+const CH_KEY_FINGERPRINT = "E802A6BF8C2B8ED71B9D08FFC6881736D7BC83D8";
+const CH_KEY_USER = "CHonesetDoPa <ch@nekoc.cc>";
 
 /**
  * Show result/info in the result area
  */
 function showResult(type, title, message) {
-    const resultDiv = document.getElementById('verification-result');
-    resultDiv.className = `verification-result result-${type}`;
-    resultDiv.innerHTML = `
+  const resultDiv = document.getElementById("verification-result");
+  resultDiv.className = `verification-result result-${type}`;
+  resultDiv.innerHTML = `
         <h3>${title}</h3>
         <p>${message}</p>
     `;
-    resultDiv.style.display = 'block';
-    resultDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  resultDiv.style.display = "block";
+  resultDiv.scrollIntoView({ behavior: "smooth", block: "nearest" });
 }
 
 /**
  * Download public key directly from the embedded CH_PUBLIC_KEY
  */
 function downloadPublicKey() {
-    try {
-        const keyBlob = new Blob([CH_PUBLIC_KEY], { type: 'text/plain' });
-        const url = URL.createObjectURL(keyBlob);
+  try {
+    const keyBlob = new Blob([CH_PUBLIC_KEY], { type: "text/plain" });
+    const url = URL.createObjectURL(keyBlob);
 
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = 'ch-public-key.asc';
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-        URL.revokeObjectURL(url);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "ch-public-key.asc";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
 
-        showResult('success', '下载完成',
-            `CH的PGP公钥已下载成功！<br>
+    showResult(
+      "success",
+      "下载完成",
+      `CH的PGP公钥已下载成功！<br>
              <strong>密钥信息:</strong><br>
              用户ID: ${CH_KEY_USER}<br>
              指纹: ${CH_KEY_FINGERPRINT}<br>
-             <strong>使用方法:</strong> 请将下载的密钥文件导入到您的PGP软件中进行验证。`);
-    } catch (error) {
-        showResult('error', '下载失败', `无法下载公钥: ${error.message}`);
-    }
+             <strong>使用方法:</strong> 请将下载的密钥文件导入到您的PGP软件中进行验证。`,
+    );
+  } catch (error) {
+    showResult("error", "下载失败", `无法下载公钥: ${error.message}`);
+  }
 }
 
 /**
  * Show public key information
  */
 function showPublicKeyInfo() {
-    showResult('success', 'CH的PGP公钥信息',
-        `<strong>用户ID:</strong> ${CH_KEY_USER}<br>
+  showResult(
+    "success",
+    "CH的PGP公钥信息",
+    `<strong>用户ID:</strong> ${CH_KEY_USER}<br>
          <strong>指纹:</strong> ${CH_KEY_FINGERPRINT}<br>
          <strong>算法:</strong> ECDSA (NIST P-256)<br>
          <strong>密钥长度:</strong> 256 bits<br>
@@ -81,24 +86,27 @@ function showPublicKeyInfo() {
          <br>
          <details>
            <summary style="cursor:pointer;color:var(--primary-color);">点击查看完整公钥内容</summary>
-           <pre style="font-size:12px;margin-top:8px;white-space:pre-wrap;word-break:break-all;">${CH_PUBLIC_KEY.replace(/</g, '&lt;').replace(/>/g, '&gt;')}</pre>
-         </details>`);
+           <pre style="font-size:12px;margin-top:8px;white-space:pre-wrap;word-break:break-all;">${CH_PUBLIC_KEY.replace(/</g, "&lt;").replace(/>/g, "&gt;")}</pre>
+         </details>`,
+  );
 }
 
 /**
  * Initialize page
  */
 function initializePage() {
-    // Populate the key block in the HTML
-    const keyBlock = document.getElementById('pgp-key-block');
-    if (keyBlock) {
-        keyBlock.textContent = CH_PUBLIC_KEY;
-    }
-    console.log(`✓ CH PGP public key loaded - User: ${CH_KEY_USER}, Fingerprint: ${CH_KEY_FINGERPRINT}`);
+  // Populate the key block in the HTML
+  const keyBlock = document.getElementById("pgp-key-block");
+  if (keyBlock) {
+    keyBlock.textContent = CH_PUBLIC_KEY;
+  }
+  console.log(
+    `✓ CH PGP public key loaded - User: ${CH_KEY_USER}, Fingerprint: ${CH_KEY_FINGERPRINT}`,
+  );
 }
 
 // Initialize when DOM is loaded
-document.addEventListener('DOMContentLoaded', initializePage);
+document.addEventListener("DOMContentLoaded", initializePage);
 
 // Expose functions to global scope for HTML onclick handlers
 window.downloadPublicKey = downloadPublicKey;

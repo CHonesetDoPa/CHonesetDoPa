@@ -315,7 +315,7 @@ class I18n {
         const k = el.getAttribute("data-i18n-aria-label");
         if (k) {
           const t = this.t(k);
-          if (t && t !== k) el.setAttribute('aria-label', t);
+          if (t && t !== k) el.setAttribute("aria-label", t);
         }
       });
       const altEls = document.querySelectorAll("[data-i18n-alt]");
@@ -323,7 +323,7 @@ class I18n {
         const k = el.getAttribute("data-i18n-alt");
         if (k) {
           const t = this.t(k);
-          if (t && t !== k) el.setAttribute('alt', t);
+          if (t && t !== k) el.setAttribute("alt", t);
         }
       });
       const metaEls = document.querySelectorAll("[data-i18n-meta-content]");
@@ -331,7 +331,7 @@ class I18n {
         const k = el.getAttribute("data-i18n-meta-content");
         if (k) {
           const t = this.t(k);
-          if (t && t !== k) el.setAttribute('content', t);
+          if (t && t !== k) el.setAttribute("content", t);
         }
       });
     } catch (e) {
@@ -604,7 +604,7 @@ function setupAutoTranslation() {
       const k = el.getAttribute("data-i18n-aria-label");
       if (k) {
         const t = window.t(k);
-        if (t && t !== k) el.setAttribute('aria-label', t);
+        if (t && t !== k) el.setAttribute("aria-label", t);
       }
     });
   };

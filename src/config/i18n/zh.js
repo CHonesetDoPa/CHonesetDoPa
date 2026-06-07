@@ -1,212 +1,217 @@
 export default {
-  "site": {
-    "title": "CH的主页",
-    "kawaii": "世界第一可爱！",
-    "notice": "公告",
-    "socialMedia": "社交媒体",
-    "siteInfo": "站点信息",
-    "runningStatus": "运行状态：",
-    "myStatus": "站长状态：",
-    "servicesStatus": "服务运行状态：",
-    "normal": "🟢 正常",
-    "alive": "🟢 活着",
-    "view": "🟢 查看",
-    "profile": "个人资料",
-    "sidebar": "侧边栏信息",
-    "socialNav": "社交媒体和功能",
-    "socialLinks": "社交媒体链接",
-    "pageControl": "页面控制",
-    "switchLang": "切换语言",
-    "mainTitle": "CH的个人主页"
+  site: {
+    title: "CH的主页",
+    kawaii: "世界第一可爱！",
+    notice: "公告",
+    socialMedia: "社交媒体",
+    siteInfo: "站点信息",
+    runningStatus: "运行状态：",
+    myStatus: "站长状态：",
+    servicesStatus: "服务运行状态：",
+    normal: "🟢 正常",
+    alive: "🟢 活着",
+    view: "🟢 查看",
+    profile: "个人资料",
+    sidebar: "侧边栏信息",
+    socialNav: "社交媒体和功能",
+    socialLinks: "社交媒体链接",
+    pageControl: "页面控制",
+    switchLang: "切换语言",
+    mainTitle: "CH的个人主页",
   },
-  "about": {
-    "title": "关于 CH",
-    "greeting": "你好!这里是CH!目前还是在上学的吸血鬼萝莉魅魔!",
-    "disclaimer": "由于咱的想法有点奇奇怪怪，所以如果说看到任何沙雕repo，那都不是咱干的！一切都是隔壁QT!",
-    "hobby": "喜欢的事物有很多,但是目前最喜欢的是睡觉.",
-    "affiliation": "目前所属 GAS / GirlsAndScary",
-    "business": "商业合作请发邮件(不过咱真能接到商单吗qaq).",
-    "currentStatus": "最近，学习中。"
+  about: {
+    title: "关于 CH",
+    greeting: "你好!这里是CH!目前还是在上学的吸血鬼萝莉魅魔!",
+    disclaimer:
+      "由于咱的想法有点奇奇怪怪，所以如果说看到任何沙雕repo，那都不是咱干的！一切都是隔壁QT!",
+    hobby: "喜欢的事物有很多,但是目前最喜欢的是睡觉.",
+    affiliation: "目前所属 GAS / GirlsAndScary",
+    business: "商业合作请发邮件(不过咱真能接到商单吗qaq).",
+    currentStatus: "最近，学习中。",
   },
-  "skills": {
-    "title": "我的技能"
+  skills: {
+    title: "我的技能",
   },
-  "websites": {
-    "title": "相关网站",
-    "neighborQt": "隔壁QT",
-    "gameServerList": "NekoC 游戏服务器列表",
-    "chFileShare": "CH GAS 公共文件共享",
-    "qtFileShare": "QT GAS 公共文件共享",
-    "sponsor": "赞助CC",
-    "pgpKey": "下载CH的PGP公钥",
-    "links": {
-      "neighborQt": "访问隔壁QT的主页",
-      "gameServerList": "查看NekoC游戏服务器列表",
-      "chFileShare": "访问CH GAS公共文件共享服务",
-      "qtFileShare": "访问QT GAS公共文件共享服务",
-      "sponsor": "前往赞助页面",
-      "pgpKey": "进行PGP验证 / 下载公钥",
-      "servicesStatus": "查看服务运行状态",
-      "qtnull": "访问QT的GitHub主页",
-      "nekocServer": "查看NekoC服务器列表"
-    }
-  },
-  "sponsor": {
-    "title": "赞助列表",
-    "sponsorColumn": "赞助者",
-    "amountColumn": "金额",
-    "chooseMethod": "选择捐赠方式",
-    "wechatPay": "使用微信赞赏码捐赠",
-    "patreon": "使用Patreon捐赠",
-    "afdian": "使用爱发电捐赠",
-    "openCollective": "使用OpenCollective捐赠",
-    "buttonTitles": {
-      "wechatPay": "点击使用微信赞赏码进行捐赠",
-      "patreon": "点击使用Patreon平台进行捐赠",
-      "afdian": "点击使用爱发电平台进行捐赠",
-      "openCollective": "点击使用OpenCollective平台进行捐赠"
-    }
-  },
-  "socialMedia": {
-    "bilibili": "哔哩哔哩",
-    "github": "GitHub",
-    "email": "邮箱",
-    "twitter": "Twitter",
-    "youtube": "Youtube 频道",
-    "telegram": "Telegram",
-    "steam": "Steam",
-    "discord": "Discord 频道",
-    "twitch": "Twitch",
-    "osu": "OSU!",
-    "session": "Session",
-    "links": {
-      "bilibili": "访问我的哔哩哔哩主页",
-      "github": "访问我的GitHub主页",
-      "email": "点击查看邮箱地址",
-      "twitter": "访问我的Twitter主页",
-      "youtube": "访问我的Youtube频道",
-      "telegram": "访问我的Telegram频道",
-      "steam": "访问我的Steam主页",
-      "discord": "访问我的Discord频道",
-      "twitch": "访问我的Twitch频道",
-      "osu": "访问我的OSU!主页",
-      "session": "查看Session ID"
-    }
-  },
-  "common": {
-    "switchLanguage": "切换语言"
-  },
-  "language": {
-    "zh": "Chinese",
-    "en": "English",
-    "vampire": "血族古语"
-  },
-  "theme": {
-    "buttonTitle": "切换深色/浅色模式"
-  },
-  "meta": {
-    "description": "CH安全验证中心 - PGP签名验证与身份安全公告",
-    "keywords": "CH, PGP, 数字签名, 身份验证, 安全公告, CHonesetDoPa"
-  },
-  "verify": {
-    "site": {
-      "title": "CH安全验证中心 - PGP签名验证",
-      "kawaii": "世界第一可爱！",
-      "profile": "个人资料",
-      "sidebar": "侧边栏信息",
-      "socialNav": "社交媒体和功能",
-      "socialLinks": "社交媒体链接",
-      "pageControl": "页面控制",
-      "switchLang": "切换语言",
-      "mainTitle": "CH的个人主页",
-      "avatarAlt": "CH的头像",
-      "darkModeAriaLabel": "切换深色模式"
+  websites: {
+    title: "相关网站",
+    neighborQt: "隔壁QT",
+    gameServerList: "NekoC 游戏服务器列表",
+    chFileShare: "CH GAS 公共文件共享",
+    qtFileShare: "QT GAS 公共文件共享",
+    sponsor: "赞助CC",
+    pgpKey: "下载CH的PGP公钥",
+    links: {
+      neighborQt: "访问隔壁QT的主页",
+      gameServerList: "查看NekoC游戏服务器列表",
+      chFileShare: "访问CH GAS公共文件共享服务",
+      qtFileShare: "访问QT GAS公共文件共享服务",
+      sponsor: "前往赞助页面",
+      pgpKey: "进行PGP验证 / 下载公钥",
+      servicesStatus: "查看服务运行状态",
+      qtnull: "访问QT的GitHub主页",
+      nekocServer: "查看NekoC服务器列表",
     },
-    "notice": {
-      "title": "安全验证说明",
-      "content": "欢迎使用CH安全验证中心。\n本页面用于验证PGP数字签名和发布身份安全公告。\n请使用下方工具验证数字签名的真实性，或查看最新的身份安全状态。\n注意：请务必通过官方渠道访问本页面。"
+  },
+  sponsor: {
+    title: "赞助列表",
+    sponsorColumn: "赞助者",
+    amountColumn: "金额",
+    chooseMethod: "选择捐赠方式",
+    wechatPay: "使用微信赞赏码捐赠",
+    patreon: "使用Patreon捐赠",
+    afdian: "使用爱发电捐赠",
+    openCollective: "使用OpenCollective捐赠",
+    buttonTitles: {
+      wechatPay: "点击使用微信赞赏码进行捐赠",
+      patreon: "点击使用Patreon平台进行捐赠",
+      afdian: "点击使用爱发电平台进行捐赠",
+      openCollective: "点击使用OpenCollective平台进行捐赠",
     },
-    "guide": {
-      "title": "验证指南",
-      "howToVerify": {
-        "title": "如何验证身份？"
-      },
-      "steps": {
-        "step1": "获取声称来自CH的消息及其PGP签名",
-        "step2": "将原始消息粘贴到右侧的\"原始消息\"框中",
-        "step3": "将PGP签名粘贴到\"PGP签名\"框中",
-        "step4": "点击\"验证签名\"按钮查看验证结果",
-        "step5": "只有显示\"签名有效\"才能确认消息来源真实性"
-      },
-      "contact": {
-        "title": "如何获得官方签名消息？",
-        "description": "如需要CH本人提供签名消息用于身份验证，请通过\"社交媒体链接\"中列出的任一渠道联系。官方会提供包含时间戳和验证请求者信息的签名消息。"
-      }
+  },
+  socialMedia: {
+    bilibili: "哔哩哔哩",
+    github: "GitHub",
+    email: "邮箱",
+    twitter: "Twitter",
+    youtube: "Youtube 频道",
+    telegram: "Telegram",
+    steam: "Steam",
+    discord: "Discord 频道",
+    twitch: "Twitch",
+    osu: "OSU!",
+    session: "Session",
+    links: {
+      bilibili: "访问我的哔哩哔哩主页",
+      github: "访问我的GitHub主页",
+      email: "点击查看邮箱地址",
+      twitter: "访问我的Twitter主页",
+      youtube: "访问我的Youtube频道",
+      telegram: "访问我的Telegram频道",
+      steam: "访问我的Steam主页",
+      discord: "访问我的Discord频道",
+      twitch: "访问我的Twitch频道",
+      osu: "访问我的OSU!主页",
+      session: "查看Session ID",
     },
-    "timeline": {
-      "title": "验证时间线",
-      "events": {
-        "event1": "PGP密钥首次发布",
-        "event2": "发现疑似冒充身份",
-        "event3": "吊销Telegram旧身份"
-      },
-      "footerLabel": "最后更新: "
+  },
+  common: {
+    switchLanguage: "切换语言",
+  },
+  language: {
+    zh: "Chinese",
+    en: "English",
+    vampire: "血族古语",
+  },
+  theme: {
+    buttonTitle: "切换深色/浅色模式",
+  },
+  meta: {
+    description: "CH安全验证中心 - PGP签名验证与身份安全公告",
+    keywords: "CH, PGP, 数字签名, 身份验证, 安全公告, CHonesetDoPa",
+  },
+  verify: {
+    site: {
+      title: "CH安全验证中心 - PGP签名验证",
+      kawaii: "世界第一可爱！",
+      profile: "个人资料",
+      sidebar: "侧边栏信息",
+      socialNav: "社交媒体和功能",
+      socialLinks: "社交媒体链接",
+      pageControl: "页面控制",
+      switchLang: "切换语言",
+      mainTitle: "CH的个人主页",
+      avatarAlt: "CH的头像",
+      darkModeAriaLabel: "切换深色模式",
     },
-    "pgpKey": {
-      "title": "PGP公钥下载",
-      "description": "下载CH的PGP公钥用于验证数字签名的真实性。",
-      "buttons": {
-        "local": "本地下载",
-        "remote": "OpenPGP.org",
-        "show": "显示公钥",
-        "hide": "隐藏公钥"
-      },
-      "labels": {
-        "userId": "用户ID:",
-        "fingerprint": "指纹:",
-        "algorithm": "算法:"
-      },
-      "copyBtn": "复制公钥",
-      "info": "指纹: E802A6BF8C2B8ED71B9D08FFC6881736D7BC83D8"
+    notice: {
+      title: "安全验证说明",
+      content:
+        "欢迎使用CH安全验证中心。\n本页面用于验证PGP数字签名和发布身份安全公告。\n请使用下方工具验证数字签名的真实性，或查看最新的身份安全状态。\n注意：请务必通过官方渠道访问本页面。",
     },
-    "pgp": {
-      "title": "PGP签名验证",
-      "description": "CH的PGP公钥可用于验证消息的真实性。您可以使用任何PGP兼容软件（如 GnuPG、OpenKeychain）导入此密钥。",
-      "input": {
-        "title": "输入要验证的内容"
+    guide: {
+      title: "验证指南",
+      howToVerify: {
+        title: "如何验证身份？",
       },
-      "labels": {
-        "message": "原始消息:",
-        "signature": "PGP签名:"
+      steps: {
+        step1: "获取声称来自CH的消息及其PGP签名",
+        step2: '将原始消息粘贴到右侧的"原始消息"框中',
+        step3: '将PGP签名粘贴到"PGP签名"框中',
+        step4: '点击"验证签名"按钮查看验证结果',
+        step5: '只有显示"签名有效"才能确认消息来源真实性',
       },
-      "placeholders": {
-        "message": "请在此输入原始消息内容...",
-        "signature": "请在此粘贴PGP签名（以-----BEGIN PGP SIGNATURE-----开头）..."
+      contact: {
+        title: "如何获得官方签名消息？",
+        description:
+          '如需要CH本人提供签名消息用于身份验证，请通过"社交媒体链接"中列出的任一渠道联系。官方会提供包含时间戳和验证请求者信息的签名消息。',
       },
-      "buttons": {
-        "verify": "验证签名",
-        "clear": "清空",
-        "keyInfo": "查看公钥信息",
-        "import": "导入文件"
-      }
     },
-    "security": {
-      "title": "安全身份公告",
-      "status": {
-        "revoked": "已吊销/停用",
-        "warning": "疑似伪造警告"
+    timeline: {
+      title: "验证时间线",
+      events: {
+        event1: "PGP密钥首次发布",
+        event2: "发现疑似冒充身份",
+        event3: "吊销Telegram旧身份",
       },
-      "messages": {
-        "revoked": "以下身份已被吊销或停用，请勿信任：",
-        "warning": "发现以下疑似冒充身份，请注意识别："
-      },
-      "items": {
-        "revokedStatus": "(已停用)",
-        "warningStatus": "(已停用，不受控)"
-      },
-      "listLabel": "安全公告列表"
+      footerLabel: "最后更新: ",
     },
-    "footerPrefix": "Copyright ",
-    "footerSuffix": "CH 每一天都是新的一天"
-  }
+    pgpKey: {
+      title: "PGP公钥下载",
+      description: "下载CH的PGP公钥用于验证数字签名的真实性。",
+      buttons: {
+        local: "本地下载",
+        remote: "OpenPGP.org",
+        show: "显示公钥",
+        hide: "隐藏公钥",
+      },
+      labels: {
+        userId: "用户ID:",
+        fingerprint: "指纹:",
+        algorithm: "算法:",
+      },
+      copyBtn: "复制公钥",
+      info: "指纹: E802A6BF8C2B8ED71B9D08FFC6881736D7BC83D8",
+    },
+    pgp: {
+      title: "PGP签名验证",
+      description:
+        "CH的PGP公钥可用于验证消息的真实性。您可以使用任何PGP兼容软件（如 GnuPG、OpenKeychain）导入此密钥。",
+      input: {
+        title: "输入要验证的内容",
+      },
+      labels: {
+        message: "原始消息:",
+        signature: "PGP签名:",
+      },
+      placeholders: {
+        message: "请在此输入原始消息内容...",
+        signature:
+          "请在此粘贴PGP签名（以-----BEGIN PGP SIGNATURE-----开头）...",
+      },
+      buttons: {
+        verify: "验证签名",
+        clear: "清空",
+        keyInfo: "查看公钥信息",
+        import: "导入文件",
+      },
+    },
+    security: {
+      title: "安全身份公告",
+      status: {
+        revoked: "已吊销/停用",
+        warning: "疑似伪造警告",
+      },
+      messages: {
+        revoked: "以下身份已被吊销或停用，请勿信任：",
+        warning: "发现以下疑似冒充身份，请注意识别：",
+      },
+      items: {
+        revokedStatus: "(已停用)",
+        warningStatus: "(已停用，不受控)",
+      },
+      listLabel: "安全公告列表",
+    },
+    footerPrefix: "Copyright ",
+    footerSuffix: "CH 每一天都是新的一天",
+  },
 };
