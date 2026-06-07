@@ -21,8 +21,8 @@
 
     <title data-i18n="verify.site.title">CH安全验证中心 - PGP签名验证</title>
 
-    <link rel="stylesheet" href="./style/index.css">
-    <link rel="stylesheet" href="./style/verify.css">
+    <link rel="stylesheet" href="./style/index.css" />
+    <link rel="stylesheet" href="./style/verify.css" />
   </head>
 
   <body>
@@ -52,7 +52,13 @@
               class="card-widget card-info"
               aria-labelledby="profile-heading"
             >
-              <h2 id="profile-heading" class="sr-only" data-i18n="verify.site.profile">个人资料</h2>
+              <h2
+                id="profile-heading"
+                class="sr-only"
+                data-i18n="verify.site.profile"
+              >
+                个人资料
+              </h2>
               <div class="card-content">
                 <div class="card-info-avatar is-center">
                   <img
@@ -160,17 +166,6 @@
                   </h3>
                 </div>
                 <div class="timeline">
-                  <div class="timeline-item status-ok">
-                    <div class="timeline-marker"></div>
-                    <div class="timeline-content">
-                      <span class="timeline-date">2025-12-18</span>
-                      <span
-                        class="timeline-text"
-                        data-i18n="verify.timeline.events.event1"
-                        >PGP密钥首次发布</span
-                      >
-                    </div>
-                  </div>
                   <div class="timeline-item status-warn">
                     <div class="timeline-marker"></div>
                     <div class="timeline-content">
@@ -193,9 +188,24 @@
                       >
                     </div>
                   </div>
+                  <div class="timeline-item status-ok">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                      <span class="timeline-date">2024-07-31</span>
+                      <span
+                        class="timeline-text"
+                        data-i18n="verify.timeline.events.event1"
+                        >PGP密钥首次发布</span
+                      >
+                    </div>
+                  </div>
                 </div>
                 <div class="timeline-footer">
-                  <small><span data-i18n="verify.timeline.footerLabel">最后更新: </span>2025-12-18</small>
+                  <small
+                    ><span data-i18n="verify.timeline.footerLabel"
+                      >最后更新: </span
+                    >2025-12-18</small
+                  >
                 </div>
               </div>
             </section>
@@ -204,7 +214,13 @@
           <!-- Main Article -->
           <article id="page" role="main" aria-labelledby="main-heading">
             <div class="article-container">
-              <h1 id="main-heading" class="sr-only" data-i18n="verify.site.mainTitle">CH的个人主页</h1>
+              <h1
+                id="main-heading"
+                class="sr-only"
+                data-i18n="verify.site.mainTitle"
+              >
+                CH的个人主页
+              </h1>
 
               <hr role="separator" />
 
@@ -227,33 +243,65 @@
                       <div class="key-meta">
                         <div class="meta-row">
                           <span class="meta-label"
-                            ><strong><span data-i18n="verify.pgpKey.labels.userId">用户ID:</span></strong></span
+                            ><strong
+                              ><span data-i18n="verify.pgpKey.labels.userId"
+                                >用户ID:</span
+                              ></strong
+                            ></span
                           >
                           <span class="meta-value"
                             >CHonesetDoPa &lt;ch@nekoc.cc&gt;</span
                           >
                         </div>
                         <div class="meta-row">
-                          <span class="meta-label"><strong><span data-i18n="verify.pgpKey.labels.fingerprint">指纹:</span></strong></span>
+                          <span class="meta-label"
+                            ><strong
+                              ><span
+                                data-i18n="verify.pgpKey.labels.fingerprint"
+                                >指纹:</span
+                              ></strong
+                            ></span
+                          >
                           <span class="meta-value fingerprint"
                             >E802 A6BF 8C2B 8ED7 1B9D 08FF C688 1736 D7BC
                             83D8</span
                           >
                         </div>
                         <div class="meta-row">
-                          <span class="meta-label"><strong><span data-i18n="verify.pgpKey.labels.algorithm">算法:</span></strong></span>
+                          <span class="meta-label"
+                            ><strong
+                              ><span data-i18n="verify.pgpKey.labels.algorithm"
+                                >算法:</span
+                              ></strong
+                            ></span
+                          >
                           <span class="meta-value">ECDSA (NIST P-384)</span>
                         </div>
                       </div>
 
-                      <button type="button" class="btn btn-outline btn-toggle-key" onclick="togglePGPKey()" aria-expanded="false">
+                      <button
+                        type="button"
+                        class="btn btn-outline btn-toggle-key"
+                        onclick="togglePGPKey()"
+                        aria-expanded="false"
+                      >
                         <i class="fas fa-eye" aria-hidden="true"></i>
-                        <span data-i18n="verify.pgpKey.buttons.show">显示公钥</span>
+                        <span data-i18n="verify.pgpKey.buttons.show"
+                          >显示公钥</span
+                        >
                       </button>
 
-                      <div class="key-block-wrapper" style="display: none;">
+                      <div class="key-block-wrapper" style="display: none">
                         <pre class="key-block" id="pgp-key-block"></pre>
-                        <button type="button" class="btn-copy-key" onclick="copyPGPKey()" aria-label="复制公钥" title="复制公钥" data-i18n-aria-label="verify.pgpKey.copyBtn" data-i18n-title="verify.pgpKey.copyBtn">
+                        <button
+                          type="button"
+                          class="btn-copy-key"
+                          onclick="copyPGPKey()"
+                          aria-label="复制公钥"
+                          title="复制公钥"
+                          data-i18n-aria-label="verify.pgpKey.copyBtn"
+                          data-i18n-title="verify.pgpKey.copyBtn"
+                        >
                           <i class="fas fa-copy" aria-hidden="true"></i>
                         </button>
                       </div>
@@ -307,28 +355,6 @@
                   aria-label="安全公告列表"
                   data-i18n-aria-label="verify.security.listLabel"
                 >
-                  <!-- Revoked/Compromised -->
-                  <div class="announcement-item status-revoked">
-                    <div class="announcement-header">
-                      <i class="fas fa-times-circle" aria-hidden="true"></i>
-                      <h3 data-i18n="verify.security.status.revoked">
-                        已吊销/停用
-                      </h3>
-                      <span class="announcement-date">2025-12-18</span>
-                    </div>
-                    <div class="announcement-content">
-                      <p data-i18n="verify.security.messages.revoked">
-                        以下身份已被吊销或停用，请勿信任：
-                      </p>
-                      <ul class="security-list revoked-list">
-                        <li>
-                          <strong>Telegram:</strong> @CHonesetDoPa <span data-i18n="verify.security.items.revokedStatus">(已停用)</span>
-                        </li>
-                        <li><strong>Telegram:</strong> @CH6306 <span data-i18n="verify.security.items.revokedStatus">(已停用)</span></li>
-                      </ul>
-                    </div>
-                  </div>
-
                   <!-- Suspected Impersonation -->
                   <div class="announcement-item status-warning">
                     <div class="announcement-header">
@@ -336,7 +362,7 @@
                       <h3 data-i18n="verify.security.status.warning">
                         疑似伪造警告
                       </h3>
-                      <span class="announcement-date">2025-06-06</span>
+                      <span class="announcement-date">2025-11-08</span>
                     </div>
                     <div class="announcement-content">
                       <p data-i18n="verify.security.messages.warning">
@@ -345,7 +371,38 @@
                       <ul class="security-list warning-list">
                         <li>
                           <strong>Telegram:</strong> @CHonesetDoPa
-                          <span data-i18n="verify.security.items.warningStatus">(已停用，不受控)</span>
+                          <span data-i18n="verify.security.items.warningStatus"
+                            >(已停用，不受控)</span
+                          >
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                  <!-- Revoked/Compromised -->
+                  <div class="announcement-item status-revoked">
+                    <div class="announcement-header">
+                      <i class="fas fa-times-circle" aria-hidden="true"></i>
+                      <h3 data-i18n="verify.security.status.revoked">
+                        已吊销/停用
+                      </h3>
+                      <span class="announcement-date">2025-06-06</span>
+                    </div>
+                    <div class="announcement-content">
+                      <p data-i18n="verify.security.messages.revoked">
+                        以下身份已被吊销或停用，请勿信任：
+                      </p>
+                      <ul class="security-list revoked-list">
+                        <li>
+                          <strong>Telegram:</strong> @CHonesetDoPa
+                          <span data-i18n="verify.security.items.revokedStatus"
+                            >(已停用)</span
+                          >
+                        </li>
+                        <li>
+                          <strong>Telegram:</strong> @CH6306
+                          <span data-i18n="verify.security.items.revokedStatus"
+                            >(已停用)</span
+                          >
                         </li>
                       </ul>
                     </div>

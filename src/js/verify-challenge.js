@@ -75,8 +75,8 @@ function showPublicKeyInfo() {
     showResult('success', 'CH的PGP公钥信息',
         `<strong>用户ID:</strong> ${CH_KEY_USER}<br>
          <strong>指纹:</strong> ${CH_KEY_FINGERPRINT}<br>
-         <strong>算法:</strong> ECDSA (NIST P-384)<br>
-         <strong>密钥长度:</strong> 384 bits<br>
+         <strong>算法:</strong> ECDSA (NIST P-256)<br>
+         <strong>密钥长度:</strong> 256 bits<br>
          <strong>文件:</strong> ch-public-key.asc<br>
          <br>
          <details>
