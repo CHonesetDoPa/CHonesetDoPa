@@ -46,84 +46,44 @@ export class InteractionHandler {
       };
     }
 
-    // 更新 PGP 函数
-    if (config.personal?.pgpKey) {
-      window.pgp_id = () => {
-        window
-          .swal("Choose a download link", {
-            buttons: {
-              cancel: "Cancel",
-              cloud: {
-                text: "Via OpenPGP.org",
-                value: "cloud",
-              },
-              local: {
-                text: "Via NekoCloud",
-                value: "local",
-              },
-            },
-          })
-          .then((value) => {
-            switch (value) {
-              case "local":
-                window.location.href = config.personal.pgpKey.local;
-                break;
-              case "cloud":
-                window.location.href = config.personal.pgpKey.remote;
-                break;
-            }
-          });
-      };
-    }
-
     // 更新赞助函数
     if (config.sponsor) {
-      window.sponsor_patreon = () => {
+      // 动态获取 t 函数，而非在定义时捕获（i18n 初始化是异步的）
+      const _t = (key) => (window.t ? window.t(key) : key);
+
+      const showConfirmDialog = (url) => {
         window
           .swal({
-            title: "真的要请cc喝奶茶吗",
-            text: "你果然是大好人！",
-            buttons: ["No,thanks", "OK"],
+            title: _t("sponsor.confirmDialog.title"),
+            text: _t("sponsor.confirmDialog.text"),
+            buttons: [
+              _t("sponsor.confirmDialog.cancel"),
+              _t("sponsor.confirmDialog.confirm"),
+            ],
           })
           .then((OK) => {
             if (OK) {
-              window.location.href = config.sponsor.patreon;
+              window.location.href = url;
             }
           });
+      };
+
+      window.sponsor_patreon = () => {
+        showConfirmDialog(config.sponsor.patreon);
       };
 
       window.sponsor_afdian = () => {
-        window
-          .swal({
-            title: "真的要请cc喝奶茶吗",
-            text: "你果然是大好人！",
-            buttons: ["No,thanks", "OK"],
-          })
-          .then((OK) => {
-            if (OK) {
-              window.location.href = config.sponsor.afdian;
-            }
-          });
+        showConfirmDialog(config.sponsor.afdian);
       };
 
       window.sponsor_opencollective = () => {
-        window
-          .swal({
-            title: "真的要请cc喝奶茶吗",
-            text: "你果然是大好人！",
-            buttons: ["No,thanks", "OK"],
-          })
-          .then((OK) => {
-            if (OK) {
-              window.location.href = config.sponsor.opencollective;
-            }
-          });
+        showConfirmDialog(config.sponsor.opencollective);
       };
 
       window.sponsor_wechat = () => {
         window.swal({
-          title: "真的要请cc喝奶茶吗",
-          text: "你果然是大好人！",
+          title: _t("sponsor.confirmDialog.title"),
+          text: _t("sponsor.confirmDialog.text"),
           content: {
             element: "img",
             attributes: {
@@ -132,7 +92,7 @@ export class InteractionHandler {
               height: 200,
             },
           },
-          buttons: ["No,thanks", true],
+          buttons: [_t("sponsor.confirmDialog.cancel"), true],
         });
       };
     }

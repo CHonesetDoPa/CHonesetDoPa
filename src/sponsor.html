@@ -11,7 +11,7 @@
     <!-- Icon -->
     <link rel="icon" href="/favicon.ico" />
 
-    <title data-i18n="site.sponsor.title">CH's HomePage - Sponsor</title>
+    <title data-i18n="site.sponsorTitle">CH's HomePage - Sponsor</title>
 
     <link rel="stylesheet" href="./style/index.css" />
   </head>
@@ -35,20 +35,20 @@
             class="aside_content"
             id="aside_content"
             role="complementary"
-            aria-label="侧边栏信息"
+            data-i18n-aria-label="verify.site.sidebar"
           >
             <!-- Profile Card -->
             <section
               class="card-widget card-info"
               aria-labelledby="profile-heading"
             >
-              <h2 id="profile-heading" class="sr-only">个人资料</h2>
+              <h2 id="profile-heading" class="sr-only" data-i18n="verify.site.profile">个人资料</h2>
               <div class="card-content">
                 <div class="card-info-avatar is-center">
                   <img
                     class="avatar-img"
                     id="avatar"
-                    alt="CH的头像"
+                    data-i18n-alt="verify.site.avatarAlt"
                     width="120"
                     height="120"
                     loading="eager"
@@ -62,18 +62,18 @@
                 </div>
                 <nav
                   class="card-info-social-icons is-center"
-                  aria-label="社交媒体和功能"
+                  data-i18n-aria-label="verify.site.socialNav"
                 >
                   <div
                     id="social-media-icons-placeholder"
-                    aria-label="社交媒体链接"
+                    data-i18n-aria-label="verify.site.socialLinks"
                   ></div>
                   <br />
 
                   <div
                     class="control-buttons"
                     role="group"
-                    aria-label="页面控制"
+                    data-i18n-aria-label="verify.site.pageControl"
                   >
                     <button
                       type="button"
@@ -81,6 +81,7 @@
                       onclick="dark()"
                       style="vertical-align: middle"
                       data-i18n-title="theme.buttonTitle"
+                      data-i18n-aria-label="verify.site.darkModeAriaLabel"
                       aria-label="切换深色模式"
                     >
                       <span
@@ -94,6 +95,7 @@
                       id="language-switch-btn"
                       onclick="switchLanguage()"
                       aria-label="切换语言"
+                      data-i18n-aria-label="verify.site.switchLang"
                     >
                       English
                     </button>
@@ -176,7 +178,7 @@
           <!-- Main Article -->
           <article id="page" role="main" aria-labelledby="main-heading">
             <div class="article-container">
-              <h1 id="main-heading" class="sr-only">CH的赞助页面</h1>
+              <h1 id="main-heading" class="sr-only" data-i18n="site.sponsorTitle">CH的赞助页面</h1>
 
               <hr role="separator" />
 
@@ -236,7 +238,7 @@
                       选择捐赠方式
                     </h2>
                   </div>
-                  <ul aria-label="捐赠方式选择">
+                  <ul aria-label="捐赠方式选择" data-i18n-aria-label="sponsor.chooseMethod">
                     <li>
                       <blockquote>
                         <button
@@ -245,6 +247,7 @@
                           onclick="sponsor_wechat()"
                           data-i18n="sponsor.wechatPay"
                           data-i18n-title="sponsor.buttonTitles.wechatPay"
+                          data-i18n-aria-label="sponsor.buttonTitles.wechatPay"
                           aria-label="使用微信赞赏码进行捐赠"
                         >
                           使用微信赞赏码捐赠
@@ -259,6 +262,7 @@
                           onclick="sponsor_patreon()"
                           data-i18n="sponsor.patreon"
                           data-i18n-title="sponsor.buttonTitles.patreon"
+                          data-i18n-aria-label="sponsor.buttonTitles.patreon"
                           aria-label="使用Patreon进行捐赠"
                         >
                           使用Patreon捐赠
@@ -273,6 +277,7 @@
                           onclick="sponsor_afdian()"
                           data-i18n="sponsor.afdian"
                           data-i18n-title="sponsor.buttonTitles.afdian"
+                          data-i18n-aria-label="sponsor.buttonTitles.afdian"
                           aria-label="使用爱发电进行捐赠"
                         >
                           使用爱发电捐赠
@@ -287,6 +292,7 @@
                           onclick="sponsor_opencollective()"
                           data-i18n="sponsor.openCollective"
                           data-i18n-title="sponsor.buttonTitles.openCollective"
+                          data-i18n-aria-label="sponsor.buttonTitles.openCollective"
                           aria-label="使用OpenCollective进行捐赠"
                         >
                           使用OpenCollective捐赠
@@ -304,7 +310,9 @@
       <!-- Footer -->
       <footer id="footer" role="contentinfo">
         <div id="footer-wrap">
-          Copyright <span class="footer-year">2026</span> CH 每一天都是新的一天
+          <span data-i18n="verify.footerPrefix">Copyright </span>
+          <span class="footer-year">2026</span>
+          <span data-i18n="verify.footerSuffix">CH 每一天都是新的一天</span>
         </div>
       </footer>
     </div>

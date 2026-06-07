@@ -59,20 +59,20 @@
             class="aside_content"
             id="aside_content"
             role="complementary"
-            aria-label="侧边栏信息"
+            data-i18n-aria-label="site.sidebar"
           >
             <!-- Profile Card -->
             <section
               class="card-widget card-info"
               aria-labelledby="profile-heading"
             >
-              <h2 id="profile-heading" class="sr-only">个人资料</h2>
+              <h2 id="profile-heading" class="sr-only" data-i18n="site.profile">个人资料</h2>
               <div class="card-content">
                 <div class="card-info-avatar is-center">
                   <img
                     class="avatar-img"
                     id="avatar"
-                    alt="CH的头像"
+                    data-i18n-alt="site.avatarAlt"
                     width="120"
                     height="120"
                     loading="eager"
@@ -86,18 +86,18 @@
                 </div>
                 <nav
                   class="card-info-social-icons is-center"
-                  aria-label="社交媒体和功能"
+                  data-i18n-aria-label="site.socialNav"
                 >
                   <div
                     id="social-media-icons-placeholder"
-                    aria-label="社交媒体链接"
+                    data-i18n-aria-label="site.socialLinks"
                   ></div>
                   <br />
 
                   <div
                     class="control-buttons"
                     role="group"
-                    aria-label="页面控制"
+                    data-i18n-aria-label="site.pageControl"
                   >
                     <button
                       type="button"
@@ -105,6 +105,7 @@
                       onclick="dark()"
                       style="vertical-align: middle"
                       data-i18n-title="theme.buttonTitle"
+                      data-i18n-aria-label="verify.site.darkModeAriaLabel"
                       aria-label="切换深色模式"
                     >
                       <span
@@ -118,6 +119,7 @@
                       id="language-switch-btn"
                       onclick="switchLanguage()"
                       aria-label="切换语言"
+                      data-i18n-aria-label="site.switchLang"
                     >
                       English
                     </button>
@@ -156,7 +158,7 @@
                     社交媒体
                   </h3>
                 </div>
-                <nav id="social-media-list" aria-label="社交媒体平台列表">
+                <nav id="social-media-list" data-i18n-aria-label="site.socialLinks" aria-label="社交媒体平台列表">
                   <!-- Generate By link-manager.js -->
                 </nav>
               </div>
@@ -218,7 +220,7 @@
           <!-- Main Article -->
           <article id="page" role="main" aria-labelledby="main-heading">
             <div class="article-container">
-              <h1 id="main-heading" class="sr-only">CH的个人主页</h1>
+              <h1 id="main-heading" class="sr-only" data-i18n="site.mainTitle">CH的个人主页</h1>
 
               <hr role="separator" />
 
@@ -257,13 +259,14 @@
                   <i class="fas fa-code" aria-hidden="true"></i>
                   <h2 id="skills-heading" data-i18n="skills.title">我的技能</h2>
                 </div>
-                <div class="skillbox" role="group" aria-label="技能展示">
+                <div class="skillbox" role="group" data-i18n-aria-label="skills.title">
                   <div
                     class="skillbar"
                     role="progressbar"
                     aria-valuenow="65"
                     aria-valuemin="0"
                     aria-valuemax="100"
+                    data-i18n-aria-label="skills.barAriaLabel"
                     aria-label="HTML技能 65%"
                   >
                     <div
@@ -287,6 +290,7 @@
                     aria-valuenow="35"
                     aria-valuemin="0"
                     aria-valuemax="100"
+                    data-i18n-aria-label="skills.barAriaLabel"
                     aria-label="CSS技能 35%"
                   >
                     <div
@@ -310,6 +314,7 @@
                     aria-valuenow="45"
                     aria-valuemin="0"
                     aria-valuemax="100"
+                    data-i18n-aria-label="skills.barAriaLabel"
                     aria-label="PHP技能 45%"
                   >
                     <div
@@ -333,6 +338,7 @@
                     aria-valuenow="75"
                     aria-valuemin="0"
                     aria-valuemax="100"
+                    data-i18n-aria-label="skills.barAriaLabel"
                     aria-label="Python技能 75%"
                   >
                     <div
@@ -356,6 +362,7 @@
                     aria-valuenow="60"
                     aria-valuemin="0"
                     aria-valuemax="100"
+                    data-i18n-aria-label="skills.barAriaLabel"
                     aria-label="C++技能 60%"
                   >
                     <div
@@ -379,6 +386,7 @@
                     aria-valuenow="70"
                     aria-valuemin="0"
                     aria-valuemax="100"
+                    data-i18n-aria-label="skills.barAriaLabel"
                     aria-label="Java技能 70%"
                   >
                     <div
@@ -402,6 +410,7 @@
                     aria-valuenow="100"
                     aria-valuemin="0"
                     aria-valuemax="100"
+                    data-i18n-aria-label="skills.barAriaLabel"
                     aria-label="可爱技能 100%"
                   >
                     <div
@@ -435,7 +444,7 @@
                 <nav
                   class="tool"
                   id="related-sites-list"
-                  aria-label="相关网站链接"
+                  data-i18n-aria-label="websites.title"
                 >
                   <!-- Generate By link-manager.js -->
                 </nav>
@@ -448,7 +457,9 @@
       <!-- Footer -->
       <footer id="footer" role="contentinfo">
         <div id="footer-wrap">
-          Copyright <span class="footer-year">2026</span> CH 每一天都是新的一天
+          <span data-i18n="verify.footerPrefix">Copyright </span>
+          <span class="footer-year">2026</span>
+          <span data-i18n="verify.footerSuffix">CH 每一天都是新的一天</span>
         </div>
       </footer>
     </div>

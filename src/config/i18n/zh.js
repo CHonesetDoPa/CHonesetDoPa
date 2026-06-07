@@ -16,8 +16,10 @@ export default {
     socialNav: "社交媒体和功能",
     socialLinks: "社交媒体链接",
     pageControl: "页面控制",
+    avatarAlt: "CH的头像",
     switchLang: "切换语言",
     mainTitle: "CH的个人主页",
+    sponsorTitle: "CH的赞助页面",
   },
   about: {
     title: "关于 CH",
@@ -31,6 +33,7 @@ export default {
   },
   skills: {
     title: "我的技能",
+    barAriaLabel: "{{skill}}技能 {{percent}}%",
   },
   websites: {
     title: "相关网站",
@@ -40,6 +43,7 @@ export default {
     qtFileShare: "QT GAS 公共文件共享",
     sponsor: "赞助CC",
     pgpKey: "下载CH的PGP公钥",
+    sponsorTitle: "CH的赞助页面",
     links: {
       neighborQt: "访问隔壁QT的主页",
       gameServerList: "查看NekoC游戏服务器列表",
@@ -66,6 +70,12 @@ export default {
       patreon: "点击使用Patreon平台进行捐赠",
       afdian: "点击使用爱发电平台进行捐赠",
       openCollective: "点击使用OpenCollective平台进行捐赠",
+    },
+    confirmDialog: {
+      title: "真的要请cc喝奶茶吗",
+      text: "你果然是大好人！",
+      cancel: "下次一定",
+      confirm: "好的",
     },
   },
   socialMedia: {
@@ -96,6 +106,32 @@ export default {
   },
   common: {
     switchLanguage: "切换语言",
+  },
+  greeting: {
+    dawn: {
+      title: "夜深了！",
+      text: "请好好休息~",
+    },
+    morning: {
+      title: "早上好！",
+      text: "祝你有美好的一天",
+    },
+    evening: {
+      title: "晚上好！",
+      text: "当前为{mode}，系统将根据您的设备偏好自动调整~",
+    },
+    autoModeSwitch: {
+      dark: "检测到系统切换为深色模式，已自动开启深色模式",
+      light: "检测到系统切换为浅色模式，已自动关闭深色模式",
+      title: "自动模式切换",
+    },
+    darkMode: "深色模式",
+    lightMode: "浅色模式",
+    vampireMode: {
+      label: "血族模式",
+      activated: "🦇 血族模式激活！",
+      welcome: "欢迎来到暗夜宫殿，吾的信徒～",
+    },
   },
   language: {
     zh: "Chinese",
@@ -168,9 +204,19 @@ export default {
         userId: "用户ID:",
         fingerprint: "指纹:",
         algorithm: "算法:",
+        usage: "使用方法:",
+        keyLength: "密钥长度:",
+        fileName: "文件:",
       },
       copyBtn: "复制公钥",
       info: "指纹: E802A6BF8C2B8ED71B9D08FFC6881736D7BC83D8",
+      downloadSuccess: "下载完成",
+      downloadMsg: "CH的PGP公钥已下载成功！",
+      downloadUsage: "请将下载的密钥文件导入到您的PGP软件中进行验证。",
+      downloadFailed: "下载失败",
+      downloadFailedMsg: "无法下载公钥",
+      keyInfoTitle: "CH的PGP公钥信息",
+      showFullKey: "点击查看完整公钥内容",
     },
     pgp: {
       title: "PGP签名验证",

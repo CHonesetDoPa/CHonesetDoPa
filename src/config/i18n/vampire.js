@@ -11,6 +11,15 @@ export default {
     normal: "🌙 力量充盈",
     alive: "🌙 不死之身",
     view: "🌙 月夜视界",
+    profile: "血族档案",
+    sidebar: "暗夜侧边栏",
+    socialNav: "血族社交与功能",
+    socialLinks: "血族社交链接",
+    pageControl: "暗夜页面控制",
+    avatarAlt: "CC的头像",
+    switchLang: "切换血族古语",
+    mainTitle: "CH的血族领域",
+    sponsorTitle: "CC的贡品圣殿",
   },
   about: {
     title: "关于血族CH",
@@ -24,6 +33,7 @@ export default {
   },
   skills: {
     title: "CC之血族能力",
+    barAriaLabel: "{{skill}}血族能力 {{percent}}%",
   },
   websites: {
     title: "血族领域网络",
@@ -33,6 +43,7 @@ export default {
     qtFileShare: "QT血族公共宝库",
     sponsor: "向CC献上贡品",
     pgpKey: "获取CH的血族秘钥",
+    sponsorTitle: "CC的贡品圣殿",
     links: {
       neighborQt: "造访隔壁QT的神秘领域",
       gameServerList: "查看NekoC游戏血盟列表",
@@ -60,165 +71,209 @@ export default {
       afdian: "通过爱发电雷电平台献上贡品",
       openCollective: "通过OpenCollective集体平台献上贡品",
     },
+    confirmDialog: {
+      title: "真的要向CC献上贡品吗",
+      text: "汝果然是吾的信徒！",
+      cancel: "容吾三思",
+      confirm: "献上贡品",
+    },
   },
   socialMedia: {
-    bilibili: "哔哩哔哩血族频道",
-    github: "GitHub暗黑代码库",
-    email: "血族专用邮箱",
-    twitter: "Twitter血族推特",
-    youtube: "Youtube血族影院",
-    telegram: "Telegram血族密令",
-    steam: "Steam血族游戏库",
-    discord: "Discord血族语音殿堂",
-    twitch: "Twitch血族直播",
-    osu: "OSU!血族音游挑战",
-    session: "血族会话暗号",
-    links: {
-      bilibili: "前往CC的哔哩哔哩领地",
-      github: "探访CC的GitHub暗黑代码库",
-      email: "查看血族专用邮箱",
-      twitter: "前往CC的Twitter领地",
-      youtube: "观看CC的Youtube血族影院",
-      telegram: "加入CC的Telegram密令频道",
-      steam: "探访CC的Steam游戏库",
-      discord: "加入CC的Discord语音殿堂",
-      twitch: "观看CC的Twitch血族直播",
-      osu: "挑战CC的OSU!血族记录",
-      session: "查看血族会话暗号",
-    },
-  },
-  common: {
-    switchLanguage: "切换血族古语模式",
-  },
-  language: {
-    zh: "东方血族语",
-    en: "西方血族语",
-    vampire: "血族古语",
-  },
-  theme: {
-    buttonTitle: "于血族暗夜与白昼之间切换",
-  },
-  meta: {
-    description: "CH血族身份验证圣殿 - 血之印记验证与血脉安全宣告",
-    keywords: "CH, PGP, 血族印记, 身份验证, 血脉安全, CHonesetDoPa",
-  },
-  verify: {
-    site: {
-      title: "CH血族身份验证圣殿 - 血之印记验证",
-      kawaii: "优雅永夜的血族少女",
-      profile: "血族档案",
-      sidebar: "暗夜侧廊",
-      socialNav: "血族社交与暗夜法阵",
-      socialLinks: "血族社交链接",
-      pageControl: "暗夜控制枢",
-      switchLang: "切换血族古语",
-      mainTitle: "CH的血族领域",
-      avatarAlt: "血族CH的暗夜肖像",
-      darkModeAriaLabel: "切换血族暗夜与白昼形态",
-    },
-    notice: {
-      title: "血族身份验证圣谕",
-      content:
-        "欢迎来到CH血族身份验证圣殿。\n此圣殿用于验证血族数字印记和发布血脉安全宣告。\n请使用下方暗夜法阵验证血之印记的真实性，或查看最新的血脉安全状态。\n警告：请务必通过血族官方渠道访问此圣殿。",
-    },
-    guide: {
-      title: "血族验证圣典",
-      howToVerify: {
-        title: "如何验证血族身份？",
+    socialMedia: {
+      bilibili: "哔哩哔哩血族频道",
+      github: "GitHub暗黑代码库",
+      email: "血族专用邮箱",
+      twitter: "Twitter血族推特",
+      youtube: "Youtube血族影院",
+      telegram: "Telegram血族密令",
+      steam: "Steam血族游戏库",
+      discord: "Discord血族语音殿堂",
+      twitch: "Twitch血族直播",
+      osu: "OSU!血族音游挑战",
+      session: "血族会话暗号",
+      links: {
+        bilibili: "前往CC的哔哩哔哩领地",
+        github: "探访CC的GitHub暗黑代码库",
+        email: "查看血族专用邮箱",
+        twitter: "前往CC的Twitter领地",
+        youtube: "观看CC的Youtube血族影院",
+        telegram: "加入CC的Telegram密令频道",
+        steam: "探访CC的Steam游戏库",
+        discord: "加入CC的Discord语音殿堂",
+        twitch: "观看CC的Twitch血族直播",
+        osu: "挑战CC的OSU!血族记录",
+        session: "查看血族会话暗号",
       },
-      steps: {
-        step1: "获取声称来自血族CH的血文及其血印",
-        step2: '将原始血文录入右侧的"原始血文"圣匣',
-        step3: '将血之印记录入"血印"圣匣',
-        step4: '启动"验证血印"法阵查看验证结果',
-        step5: '只有显示"血印有效"方可确认血文来源之真实性',
+    },
+    common: {
+      switchLanguage: "切换血族古语模式",
+    },
+    greeting: {
+      dawn: {
+        title: "永夜已深！",
+        text: "请安歇吧~",
       },
-      contact: {
-        title: "如何获得官方血族印记？",
+      morning: {
+        title: "血族之晨安好！",
+        text: "愿暗夜眷顾你",
+      },
+      evening: {
+        title: "血族之夜安好！",
+        text: "当前为{mode}，暗夜系统将根据你的灵魂偏好自动调整~",
+      },
+      autoModeSwitch: {
+        dark: "检测到暗夜降临，已自动开启血族暗夜模式",
+        light: "检测到白昼降临，已自动关闭血族暗夜模式",
+        title: "暗夜模式自动转换",
+      },
+      darkMode: "暗夜形态",
+      lightMode: "白昼形态",
+      vampireMode: {
+        label: "血族真身形态",
+        activated: "🦇 血族真身降临！",
+        welcome: "欢迎来到暗夜宫殿，吾的忠诚信徒～",
+      },
+    },
+    language: {
+      zh: "东方血族语",
+      en: "西方血族语",
+      vampire: "血族古语",
+    },
+    theme: {
+      buttonTitle: "于血族暗夜与白昼之间切换",
+    },
+    meta: {
+      description: "CH血族身份验证圣殿 - 血之印记验证与血脉安全宣告",
+      keywords: "CH, PGP, 血族印记, 身份验证, 血脉安全, CHonesetDoPa",
+    },
+    verify: {
+      site: {
+        title: "CH血族身份验证圣殿 - 血之印记验证",
+        kawaii: "优雅永夜的血族少女",
+        profile: "血族档案",
+        sidebar: "暗夜侧廊",
+        socialNav: "血族社交与暗夜法阵",
+        socialLinks: "血族社交链接",
+        pageControl: "暗夜控制枢",
+        switchLang: "切换血族古语",
+        mainTitle: "CH的血族领域",
+        avatarAlt: "血族CH的暗夜肖像",
+        darkModeAriaLabel: "切换血族暗夜与白昼形态",
+      },
+      notice: {
+        title: "血族身份验证圣谕",
+        content:
+          "欢迎来到CH血族身份验证圣殿。\n此圣殿用于验证血族数字印记和发布血脉安全宣告。\n请使用下方暗夜法阵验证血之印记的真实性，或查看最新的血脉安全状态。\n警告：请务必通过血族官方渠道访问此圣殿。",
+      },
+      guide: {
+        title: "血族验证圣典",
+        howToVerify: {
+          title: "如何验证血族身份？",
+        },
+        steps: {
+          step1: "获取声称来自血族CH的血文及其血印",
+          step2: '将原始血文录入右侧的"原始血文"圣匣',
+          step3: '将血之印记录入"血印"圣匣',
+          step4: '启动"验证血印"法阵查看验证结果',
+          step5: '只有显示"血印有效"方可确认血文来源之真实性',
+        },
+        contact: {
+          title: "如何获得官方血族印记？",
+          description:
+            '若需要CH本尊提供血印用于身份验证，请通过"血族社交圈"中列出的任一暗夜渠道联系。CC将提供包含时间魔印和验证请求者信息的血文印记。',
+        },
+      },
+      timeline: {
+        title: "暗夜时间线",
+        events: {
+          event1: "血族秘钥首次现世",
+          event2: "发现疑似伪装血族",
+          event3: "封印Telegram旧身份",
+        },
+        footerLabel: "最后更新: ",
+      },
+      pgpKey: {
+        title: "血族秘钥获取",
+        description: "下载血族CH的暗夜秘钥以验证血族印记的真实性。",
+        buttons: {
+          local: "本地下载",
+          remote: "OpenPGP",
+          show: "显示血族秘钥",
+          hide: "隐藏血族秘钥",
+        },
+        labels: {
+          userId: "血族ID:",
+          fingerprint: "血族印记:",
+          algorithm: "暗夜算法:",
+          usage: "使用方法:",
+          keyLength: "暗夜秘钥长度:",
+          fileName: "血族秘文卷:",
+        },
+        copyBtn: "复制血族秘钥",
+        info: "血族印记: E802A6BF8C2B8ED71B9D08FFC6881736D7BC83D8",
+        downloadSuccess: "血族秘钥下载完毕",
+        downloadMsg: "CC的血族秘钥已成功降临！",
+        downloadUsage: "请将下载的血族秘文卷导入您的血族法器中进行身份验证。",
+        downloadFailed: "血族秘钥下载失败",
+        downloadFailedMsg: "无法获取血族秘钥",
+        keyInfoTitle: "CC的血族秘钥信息",
+        showFullKey: "点击展开完整血族秘文",
+      },
+      pgp: {
+        title: "血族印记验证法阵",
         description:
-          '若需要CH本尊提供血印用于身份验证，请通过"血族社交圈"中列出的任一暗夜渠道联系。CC将提供包含时间魔印和验证请求者信息的血文印记。',
+          "血族CH的暗夜秘钥可用于验证血文消息的真实性。您可以使用任意血族兼容法器（如 GnuPG、OpenKeychain）录入此暗夜秘钥。",
+        input: {
+          title: "录入待验证的血文",
+        },
+        labels: {
+          message: "原始血文:",
+          signature: "血族印记:",
+        },
+        placeholders: {
+          message: "请在此录入原始血文内容...",
+          signature:
+            "请在此录入血族印记（以-----BEGIN PGP SIGNATURE-----开始的血印符文）...",
+        },
+        buttons: {
+          verify: "验证血印",
+          clear: "清除法阵",
+          keyInfo: "查看血族密钥",
+          import: "导入血文",
+        },
       },
+      github: {
+        title: "代码血库状态",
+        subtitle: "查看血库最新变更",
+        labels: {
+          repo: "代码血库:",
+        },
+        placeholders: {
+          repo: "例如: 血族名/血库名",
+        },
+        buttons: {
+          fetch: "获取最新变更",
+          clear: "清除祭坛",
+        },
+      },
+      security: {
+        title: "血族安全宣告",
+        status: {
+          revoked: "已封印",
+          warning: "疑似伪血族警告",
+        },
+        messages: {
+          revoked: "以下血族身份已被永久封印或停止血脉传承，请勿信任：",
+          warning: "发现以下疑似伪装血族身份，请注意辨别真伪：",
+        },
+        items: {
+          revokedStatus: "(已封印)",
+          warningStatus: "(已封印，不受控)",
+        },
+        listLabel: "血族安全宣告",
+      },
+      footerPrefix: "Copyright ",
+      footerSuffix: "CH 每一天都是崭新的一天",
     },
-    timeline: {
-      title: "暗夜时间线",
-      events: {
-        event1: "血族秘钥首次现世",
-        event2: "发现疑似伪装血族",
-        event3: "封印Telegram旧身份",
-      },
-      footerLabel: "最后更新: ",
-    },
-    pgpKey: {
-      title: "血族秘钥获取",
-      description: "下载血族CH的暗夜秘钥以验证血族印记的真实性。",
-      buttons: {
-        local: "本地下载",
-        remote: "OpenPGP",
-        show: "显示血族秘钥",
-        hide: "隐藏血族秘钥",
-      },
-      labels: {
-        userId: "血族ID:",
-        fingerprint: "血族印记:",
-        algorithm: "暗夜算法:",
-      },
-      copyBtn: "复制血族秘钥",
-      info: "血族印记: E802A6BF8C2B8ED71B9D08FFC6881736D7BC83D8",
-    },
-    pgp: {
-      title: "血族印记验证法阵",
-      description:
-        "血族CH的暗夜秘钥可用于验证血文消息的真实性。您可以使用任意血族兼容法器（如 GnuPG、OpenKeychain）录入此暗夜秘钥。",
-      input: {
-        title: "录入待验证的血文",
-      },
-      labels: {
-        message: "原始血文:",
-        signature: "血族印记:",
-      },
-      placeholders: {
-        message: "请在此录入原始血文内容...",
-        signature:
-          "请在此录入血族印记（以-----BEGIN PGP SIGNATURE-----开始的血印符文）...",
-      },
-      buttons: {
-        verify: "验证血印",
-        clear: "清除法阵",
-        keyInfo: "查看血族密钥",
-        import: "导入血文",
-      },
-    },
-    github: {
-      title: "代码血库状态",
-      subtitle: "查看血库最新变更",
-      labels: {
-        repo: "代码血库:",
-      },
-      placeholders: {
-        repo: "例如: 血族名/血库名",
-      },
-      buttons: {
-        fetch: "获取最新变更",
-        clear: "清除祭坛",
-      },
-    },
-    security: {
-      title: "血族安全宣告",
-      status: {
-        revoked: "已封印",
-        warning: "疑似伪血族警告",
-      },
-      messages: {
-        revoked: "以下血族身份已被永久封印或停止血脉传承，请勿信任：",
-        warning: "发现以下疑似伪装血族身份，请注意辨别真伪：",
-      },
-      items: {
-        revokedStatus: "(已封印)",
-        warningStatus: "(已封印，不受控)",
-      },
-      listLabel: "血族安全宣告",
-    },
-    footerPrefix: "Copyright ",
-    footerSuffix: "CH 每一天都是崭新的一天",
   },
 };

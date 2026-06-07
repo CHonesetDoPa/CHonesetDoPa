@@ -70,7 +70,7 @@ class I18n {
     this.isLoading = false;
     this.isInitialized = false;
     this.clickCount = 0;
-    this.vampireActivationThreshold = 20;
+    this.vampireActivationThreshold = 10;
   }
 
   async init() {
@@ -393,14 +393,15 @@ class I18n {
   async showVampireActivationAlert() {
     return new Promise((resolve) => {
       if (typeof swal !== "undefined") {
+        const t = window.t || ((k) => k);
         swal({
-          title: "血族觉醒！",
+          title: t("greeting.vampireMode.activated") || "血族觉醒！",
           text: "",
           icon: "success",
           buttons: true,
         }).then(() => resolve());
       } else {
-        alert("血族觉醒！");
+        alert(t("greeting.vampireMode.activated") || "血族觉醒！");
         resolve();
       }
     });

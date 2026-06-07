@@ -287,10 +287,8 @@ export class UIRenderer {
   updateCopyright(config) {
     if (!config?.meta?.copyright) return;
 
-    const footerWrap = document.getElementById("footer-wrap");
-    if (footerWrap && footerWrap.textContent !== config.meta.copyright) {
-      footerWrap.textContent = config.meta.copyright;
-    }
+    // Footer now uses data-i18n attributes, no need to override
+    // The i18n system handles translation automatically
   }
 
   /**
@@ -310,10 +308,10 @@ export class UIRenderer {
 
     // 更新运行状态
     const runningStatus = document.querySelector(
-      ".webinfo-item:first-child .webinfo-site-pv-count",
+      ".webinfo-site-pv-count",
     );
     if (runningStatus && config.status.siteRunning) {
-      runningStatus.textContent = config.status.siteRunning[currentLang];
+      // Status text is now handled by data-i18n attributes
     }
 
     // 更新站长状态
@@ -321,7 +319,7 @@ export class UIRenderer {
       ".webinfo-item:nth-child(2) .webinfo-site-pv-count",
     );
     if (adminStatus && config.status.adminStatus) {
-      adminStatus.textContent = config.status.adminStatus[currentLang];
+      // Status text is now handled by data-i18n attributes
     }
 
     // 更新服务状态链接
@@ -330,15 +328,6 @@ export class UIRenderer {
     );
     if (servicesStatus && config.relatedSites?.servicesStatus) {
       servicesStatus.href = config.relatedSites.servicesStatus;
-      // 标记 i18n 键
-      servicesStatus.setAttribute(
-        "data-i18n-title",
-        "websites.links.servicesStatus",
-      );
-      servicesStatus.setAttribute(
-        "data-i18n-aria-label",
-        "websites.links.servicesStatus",
-      );
     }
   }
 }

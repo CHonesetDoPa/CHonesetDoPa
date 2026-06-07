@@ -146,11 +146,12 @@ class AutoDarkModeManager {
 
     // Display notification
     if (typeof swal !== "undefined") {
+      const t = window.t || ((k) => k);
       const message = isSystemDark
-        ? "Detected system switch to dark mode, dark mode automatically enabled"
-        : "Detected system switch to light mode, dark mode automatically disabled";
+        ? t("greeting.autoModeSwitch.dark") || "Detected system switch to dark mode, dark mode automatically enabled"
+        : t("greeting.autoModeSwitch.light") || "Detected system switch to light mode, dark mode automatically disabled";
       swal({
-        title: "Auto Mode Switch",
+        title: t("greeting.autoModeSwitch.title") || "Auto Mode Switch",
         text: message,
         icon: "info",
         timer: 3000,
@@ -190,16 +191,8 @@ class AutoDarkModeManager {
   updateButtonState() {
     const darkButton = document.querySelector(".dark-button");
     if (darkButton) {
-      if (this.isVampireMode) {
-        darkButton.title =
-          "Currently in vampire mode, click to switch to light mode";
-      } else if (this.isDarkMode) {
-        darkButton.title =
-          "Currently in dark mode, click to switch to light mode";
-      } else {
-        darkButton.title =
-          "Currently in light mode, click to switch to dark mode";
-      }
+      // Button title is handled by data-i18n-title="theme.buttonTitle"
+      // in the HTML, which the i18n system applies automatically
     }
   }
 
@@ -211,9 +204,10 @@ class AutoDarkModeManager {
     console.log("[Theme] 🦇 Vampire mode activated!");
 
     if (showNotification && typeof swal !== "undefined") {
+      const t = window.t || ((k) => k);
       swal({
-        title: "🦇 血族模式激活！",
-        text: "欢迎来到暗夜宫殿，吾的信徒～",
+        title: t("greeting.vampireMode.activated") || "🦇 血族模式激活！",
+        text: t("greeting.vampireMode.welcome") || "欢迎来到暗夜宫殿，吾的信徒～",
         icon: "success",
         timer: 3000,
         buttons: false,

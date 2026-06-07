@@ -18,16 +18,19 @@ class GreetingSystem {
         title: "It's late at night!",
         text: "Please take a rest~",
         icon: "info",
+        i18nKey: "greeting.dawn",
       },
       morning: {
         title: "Good morning!",
         text: "Have a great day",
         icon: "info",
+        i18nKey: "greeting.morning",
       },
       evening: {
         title: "Good evening!",
         text: "Currently set to {mode}, the system will automatically adjust according to your device preferences~",
         icon: "info",
+        i18nKey: "greeting.evening",
       },
     };
 
@@ -155,7 +158,14 @@ class GreetingSystem {
       if (greetingType === "evening") {
         this.showEveningGreeting(swal);
       } else {
-        swal(this.greetings[greetingType]);
+        const greeting = this.greetings[greetingType];
+        const t = window.t || ((k) => k);
+        const i18nPrefix = greeting.i18nKey;
+        swal({
+          title: t(`${i18nPrefix}.title`) || greeting.title,
+          text: t(`${i18nPrefix}.text`) || greeting.text,
+          icon: greeting.icon,
+        });
       }
       // Record display timestamp and mark as shown in session
       this.setLastShownTime(greetingType);
@@ -171,18 +181,21 @@ class GreetingSystem {
   }
 
   showEveningGreeting(swal) {
+    const t = window.t || ((k) => k);
     // Check if dark mode manager exists
-    let currentMode = "light mode";
+    let currentMode = t("greeting.lightMode") || "light mode";
     if (
       window.autoDarkModeManager &&
       typeof window.autoDarkModeManager.getCurrentMode === "function"
     ) {
-      currentMode =
-        window.autoDarkModeManager.getCurrentMode() === "dark"
-          ? "dark mode"
-          : "light mode";
+      const mode = window.autoDarkModeManager.getCurrentMode();
+      if (mode === "dark") currentMode = t("greeting.darkMode") || "dark mode";
+      else if (mode === "vampire") currentMode = t("greeting.vampireMode.label") || "vampire mode";
+      else currentMode = t("greeting.lightMode") || "light mode";
     } else if (typeof isDarkModeActive === "function") {
-      currentMode = isDarkModeActive() ? "dark mode" : "light mode";
+      currentMode = isDarkModeActive()
+        ? (t("greeting.darkMode") || "dark mode")
+        : (t("greeting.lightMode") || "light mode");
     }
 
     const greeting = { ...this.greetings.evening };
@@ -190,7 +203,13 @@ class GreetingSystem {
     greeting.timer = 4000;
     greeting.buttons = false;
 
-    swal(greeting);
+    swal({
+      title: t("greeting.evening.title") || greeting.title,
+      text: greeting.text,
+      icon: greeting.icon,
+      timer: 4000,
+      buttons: false,
+    });
   }
 
   // Manually trigger greeting
