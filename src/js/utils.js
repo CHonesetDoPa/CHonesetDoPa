@@ -36,16 +36,21 @@
      */
     function copyFallback(data, callback) {
         try {
-            let input = document.createElement("input");
-            input.setAttribute("readonly", "readonly");
-            input.value = data;
-            document.body.appendChild(input);
-            input.select();
+            let textarea = document.createElement("textarea");
+            textarea.setAttribute("readonly", "readonly");
+            textarea.value = data;
+            // 隐藏元素，避免页面抖动
+            textarea.style.position = 'absolute';
+            textarea.style.left = '-9999px';
+            textarea.style.top = '0';
+            document.body.appendChild(textarea);
+            textarea.select();
+            textarea.setSelectionRange(0, 99999); // 兼容 iOS
             
             // NOTE: document.execCommand('Copy') is deprecated and only used here for legacy browser support.
             // Remove this fallback when support for old browsers is no longer required.
             let success = document.execCommand("Copy");
-            document.body.removeChild(input);
+            document.body.removeChild(textarea);
             
             if (success) {
                 if (typeof swal !== 'undefined') {
@@ -98,6 +103,10 @@
     
     window.addEventListener('blur', function() { 
         isTabActive = false;
+        // 在修改标题前，如果当前标题不是萌标题，说明它被其他脚本（如 i18n）修改了，我们应该更新 originalTitle
+        if (document.title !== '(ฅ>ω<*ฅ) 诶嘿嘿，你回来啦！' && document.title !== '╭(°A°`)╮ 你要去哪里？') {
+            originalTitle = document.title;
+        }
         document.title = '╭(°A°`)╮ 你要去哪里？';
     });
 
@@ -133,6 +142,10 @@ window.debounce = function(func, wait, immediate) {
         if (callNow) func.apply(this, args);
     };
 };
+
+// ES Modules 导出
+export const copy = window.copy;
+export const debounce = window.debounce;
 
 // 导出信息到控制台（开发模式）
 if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {

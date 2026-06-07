@@ -1,3 +1,5 @@
+import { copy } from '../utils.js';
+
 /**
  * InteractionHandler
  * 负责注册全局函数和处理点击事件
@@ -18,8 +20,8 @@ export class InteractionHandler {
                     text: config.personal.email,
                     buttons: ["Copy", true],
                 }).then((OK) => {
-                    if (!OK && window.copy) {
-                        window.copy(config.personal.email);
+                    if (!OK && copy) {
+                        copy(config.personal.email);
                     }
                 });
             };
@@ -33,8 +35,8 @@ export class InteractionHandler {
                     text: config.personal.sessionId,
                     buttons: ["Copy", true],
                 }).then((OK) => {
-                    if (!OK && window.copy) {
-                        window.copy(config.personal.sessionId);
+                    if (!OK && copy) {
+                        copy(config.personal.sessionId);
                     }
                 });
             };

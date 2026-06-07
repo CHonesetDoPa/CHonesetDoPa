@@ -6,6 +6,7 @@
 import { ConfigManager } from './link-manager/config-manager.js';
 import { InteractionHandler } from './link-manager/interaction-handler.js';
 import { UIRenderer } from './link-manager/ui-renderer.js';
+import { debounce } from './utils.js';
 
 class LinkManager {
     constructor() {
@@ -35,7 +36,7 @@ class LinkManager {
         this.addCustomStyles();
         
         // 使用防抖延迟执行渲染，确保 DOM 已加载
-        const renderWithDelay = window.debounce ? window.debounce(() => {
+        const renderWithDelay = debounce ? debounce(() => {
             this.renderComponents();
         }, 100) : () => setTimeout(() => this.renderComponents(), 100);
 
