@@ -73,17 +73,20 @@ h6 {
   font-weight: 700;
 }
 
-hr:before {
-  position: absolute;
-  top: -10px;
-  left: 5%;
-  z-index: 1;
-  color: #49b1f5;
-  content: "\f0c4";
-  font: normal normal normal 14px/1 "Font Awesome 7 Free";
-  font-weight: 900;
-  font-size: 20px;
-  transition: all 1s ease-in-out;
+.hr-wrap {
+    position: relative;
+}
+
+.hr-icon {
+    position: absolute;
+    top: -10px;
+    left: 5%;
+    z-index: 1;
+
+    color: #49b1f5;
+    font-size: 20px;
+
+    transition: all 1s ease-in-out;
 }
 
 hr {
@@ -443,7 +446,7 @@ aside_content .card-info .author-info__description {
   margin-bottom: 1rem;
 }
 
-.article-container .item-headline i {
+.article-container .item-headline svg {
   flex-shrink: 0;
   font-size: 1.2rem;
   color: #ff6b6b;

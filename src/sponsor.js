@@ -5,7 +5,7 @@
 // Import global styles
 // ----------------------
 import "./style/index.css";
-import "@fortawesome/fontawesome-free/css/all.css";
+import "./icon.js";
 // ----------------------
 // Import local JS modules
 // ----------------------

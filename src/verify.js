@@ -5,7 +5,7 @@
 // Import global styles
 // ----------------------
 import "./style/index.css";
-import "@fortawesome/fontawesome-free/css/all.css";
+import "./icon.js";
 import "./style/verify.css";
 // ----------------------
 // Import local JS modules
@@ -67,10 +67,26 @@ if (window.linkManager) {
 // ----------------------
 // Global functions for verify page
 // ----------------------
+/**
+ * Replace a Font Awesome icon element (<i> or <svg>) with a new <i> tag,
+ * letting Font Awesome's dom.watch() re-render the SVG automatically.
+ * @param {Element} oldIcon - The current icon element to replace
+ * @param {string} newClass - The new Font Awesome class (e.g. "fas fa-eye-slash")
+ */
+function replaceFaIcon(oldIcon, newClass) {
+  if (!oldIcon) return;
+  const newIcon = document.createElement("i");
+  newIcon.setAttribute("class", newClass);
+  newIcon.setAttribute("aria-hidden", "true");
+  oldIcon.replaceWith(newIcon);
+}
+
 window.togglePGPKey = function () {
   const keyBlock = document.getElementById("pgp-key-block");
   const toggleBtn = document.querySelector(".btn-toggle-key");
-  const toggleIcon = toggleBtn?.querySelector(".fa-eye, .fa-eye-slash");
+  const toggleIcon = toggleBtn?.querySelector(
+    ".fa-eye, .fa-eye-slash, [data-icon='eye'], [data-icon='eye-slash']"
+  );
   const toggleText = toggleBtn?.querySelector("[data-i18n]");
 
   if (!keyBlock) return;
@@ -82,9 +98,7 @@ window.togglePGPKey = function () {
     wrapper.style.display = "block";
     toggleBtn?.classList.add("active");
     toggleBtn?.setAttribute("aria-expanded", "true");
-    if (toggleIcon) {
-      toggleIcon.className = "fas fa-eye-slash";
-    }
+    replaceFaIcon(toggleIcon, "fas fa-eye-slash");
     if (toggleText) {
       toggleText.textContent = "隐藏公钥";
       toggleText.dataset.i18n = "verify.pgpKey.buttons.hide";
@@ -93,9 +107,7 @@ window.togglePGPKey = function () {
     wrapper.style.display = "none";
     toggleBtn?.classList.remove("active");
     toggleBtn?.setAttribute("aria-expanded", "false");
-    if (toggleIcon) {
-      toggleIcon.className = "fas fa-eye";
-    }
+    replaceFaIcon(toggleIcon, "fas fa-eye");
     if (toggleText) {
       toggleText.textContent = "显示公钥";
       toggleText.dataset.i18n = "verify.pgpKey.buttons.show";
@@ -111,15 +123,16 @@ window.copyPGPKey = function () {
   navigator.clipboard
     .writeText(keyBlock.textContent)
     .then(() => {
-      const icon = btn?.querySelector(".fa-copy, .fa-check");
-      if (icon) {
-        icon.className = "fas fa-check";
-      }
+      const icon = btn?.querySelector(
+        ".fa-copy, .fa-check, [data-icon='copy'], [data-icon='check']"
+      );
+      replaceFaIcon(icon, "fas fa-check");
       btn?.classList.add("copied");
       setTimeout(() => {
-        if (icon) {
-          icon.className = "fas fa-copy";
-        }
+        const currentIcon = btn?.querySelector(
+          ".fa-check, [data-icon='check']"
+        );
+        replaceFaIcon(currentIcon, "fas fa-copy");
         btn?.classList.remove("copied");
       }, 2000);
     })
