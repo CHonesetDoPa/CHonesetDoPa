@@ -33,7 +33,6 @@ class LinkManager {
     const currentConfig = this.configManager.getConfig();
 
     this.interactionHandler.updateGlobalFunctions(currentConfig);
-    this.addCustomStyles();
 
     // 使用防抖延迟执行渲染，确保 DOM 已加载
     const renderWithDelay = debounce
@@ -65,20 +64,8 @@ class LinkManager {
       const config = this.configManager.getConfig();
       if (config) {
         this.uiRenderer.updateStatusInfo(config);
-        this.uiRenderer.updateCopyright(config);
       }
     }, 50);
-  }
-
-  /**
-   * 添加自定义样式（精简版）
-   */
-  addCustomStyles() {
-    // 检查是否已经添加过样式
-    if (document.getElementById("link-manager-styles")) return;
-
-    // 由于主要样式已经移到 index.css 中，这里只保留必要的动态样式
-    console.log("Link manager styles are now managed in index.css");
   }
 
   /**
@@ -104,7 +91,6 @@ class LinkManager {
 
       // 其他更新操作
       this.uiRenderer.updateStatusInfo(config);
-      this.uiRenderer.updateCopyright(config);
 
       // i18n 系统会处理可访问性文本的更新（title / aria-label）
     });

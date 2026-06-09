@@ -60,11 +60,6 @@
     }
   }
 
-  // 导出函数到全局作用域（供其他脚本使用）
-  window.SponsorList = {
-    init: initSponsorList,
-  };
-
   // 自动初始化
   initSponsorList();
 })();

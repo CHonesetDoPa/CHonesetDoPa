@@ -138,62 +138,53 @@ export class UIRenderer {
     const container = document.getElementById(containerId);
     if (!container || !config?.socialMedia) return;
 
-    const platformNames = {
-      twitter: "Twitter",
-      youtube: "Youtube Channel",
-      telegram: "Telegram",
-      steam: "Steam",
-      discord: "Discord Channel",
-      twitch: "Twitch",
-      osu: "OSU!",
-    };
-
     // 清空容器
     container.innerHTML = "";
 
     // 创建ul元素作为列表容器
     const ul = document.createElement("ul");
 
-    // 生成社交媒体列表
+    // 生成社交媒体列表 — 可见文本由 data-i18n 控制，i18n 系统自动翻译
     Object.entries(config.socialMedia).forEach(([platform, url]) => {
-      if (platformNames[platform]) {
-        const li = document.createElement("li");
-        const link = document.createElement("a");
-        link.href = url;
-        link.style.color = "orange";
-        link.style.textDecoration = "none";
-        link.target = "_blank"; // 在新标签页打开
-        link.textContent = platformNames[platform];
-        // 添加 data-i18n 标记，交给 i18n 系统处理可访问文本
-        link.setAttribute("data-i18n-title", "socialMedia.links." + platform);
-        link.setAttribute(
-          "data-i18n-aria-label",
-          "socialMedia.links." + platform,
-        );
+      const li = document.createElement("li");
+      const link = document.createElement("a");
+      link.href = url;
+      link.style.color = "orange";
+      link.style.textDecoration = "none";
+      link.target = "_blank";
+      // 可见文本由 i18n 系统管理
+      link.setAttribute("data-i18n", "socialMedia." + platform);
+      link.setAttribute("data-i18n-title", "socialMedia.links." + platform);
+      link.setAttribute(
+        "data-i18n-aria-label",
+        "socialMedia.links." + platform,
+      );
+      // 设置回退文本（i18n 系统就绪前可见）
+      link.textContent = platform.charAt(0).toUpperCase() + platform.slice(1);
 
-        li.appendChild(link);
-        ul.appendChild(li);
-      }
+      li.appendChild(link);
+      ul.appendChild(li);
     });
 
     // 添加 Session ID （特殊处理）
-    const li = document.createElement("li");
-    const link = document.createElement("a");
-    link.href = "javascript:void(0);";
-    link.onclick = (event) => {
+    const sessionLi = document.createElement("li");
+    const sessionLink = document.createElement("a");
+    sessionLink.href = "javascript:void(0);";
+    sessionLink.onclick = (event) => {
       event.preventDefault();
       window.session_id && window.session_id();
     };
-    link.style.color = "orange";
-    link.style.textDecoration = "none";
-    link.style.cursor = "pointer";
-    link.textContent = "Session";
-    // 添加 data-i18n 标记
-    link.setAttribute("data-i18n-title", "socialMedia.links.session");
-    link.setAttribute("data-i18n-aria-label", "socialMedia.links.session");
+    sessionLink.style.color = "orange";
+    sessionLink.style.textDecoration = "none";
+    sessionLink.style.cursor = "pointer";
+    // 可见文本由 i18n 系统管理
+    sessionLink.setAttribute("data-i18n", "socialMedia.session");
+    sessionLink.setAttribute("data-i18n-title", "socialMedia.links.session");
+    sessionLink.setAttribute("data-i18n-aria-label", "socialMedia.links.session");
+    sessionLink.textContent = "Session";
 
-    li.appendChild(link);
-    ul.appendChild(li);
+    sessionLi.appendChild(sessionLink);
+    ul.appendChild(sessionLi);
 
     // 将ul添加到容器中
     container.appendChild(ul);
@@ -236,11 +227,12 @@ export class UIRenderer {
       },
     };
 
-    // 获取当前语言
+    // 获取当前语言（vampire 时回退到 zh）
     const currentLang = (() => {
       const lang = document.documentElement.lang;
       if (lang === "zh-CN" || lang === "zh") return "zh";
       if (lang === "en-US" || lang === "en") return "en";
+      // vampire 及其他语言使用中文作为回退
       return "zh";
     })();
 
@@ -281,53 +273,19 @@ export class UIRenderer {
   }
 
   /**
-   * 更新版权信息
-   * @param {Object} config - 配置对象
-   */
-  updateCopyright(config) {
-    if (!config?.meta?.copyright) return;
-
-    // Footer now uses data-i18n attributes, no need to override
-    // The i18n system handles translation automatically
-  }
-
-  /**
    * 更新状态信息
+   * 状态文本已由 data-i18n 属性处理，仅更新服务状态链接的 href
    * @param {Object} config - 配置对象
    */
   updateStatusInfo(config) {
-    if (!config?.status) return;
-
-    // 获取当前语言，vampire语言使用中文显示
-    const currentLang = (() => {
-      const lang = document.documentElement.lang;
-      if (lang === "zh-CN" || lang === "zh") return "zh";
-      if (lang === "en-US" || lang === "en") return "en";
-      return "zh"; // 默认使用中文
-    })();
-
-    // 更新运行状态
-    const runningStatus = document.querySelector(
-      ".webinfo-site-pv-count",
-    );
-    if (runningStatus && config.status.siteRunning) {
-      // Status text is now handled by data-i18n attributes
-    }
-
-    // 更新站长状态
-    const adminStatus = document.querySelector(
-      ".webinfo-item:nth-child(2) .webinfo-site-pv-count",
-    );
-    if (adminStatus && config.status.adminStatus) {
-      // Status text is now handled by data-i18n attributes
-    }
+    if (!config?.relatedSites?.servicesStatus) return;
 
     // 更新服务状态链接
-    const servicesStatus = document.querySelector(
-      ".webinfo-item:last-child .webinfo-site-pv-count a",
+    const servicesStatusLink = document.querySelector(
+      ".webinfo-row:last-child .webinfo-site-pv-count a",
     );
-    if (servicesStatus && config.relatedSites?.servicesStatus) {
-      servicesStatus.href = config.relatedSites.servicesStatus;
+    if (servicesStatusLink) {
+      servicesStatusLink.href = config.relatedSites.servicesStatus;
     }
   }
 }

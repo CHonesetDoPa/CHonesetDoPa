@@ -173,9 +173,6 @@ class AutoDarkModeManager {
       body.classList.add("dark-mode");
     }
 
-    // Update button state (if exists)
-    this.updateButtonState();
-
     // 触发模式变化事件
     window.dispatchEvent(
       new CustomEvent("themeChanged", {
@@ -186,14 +183,6 @@ class AutoDarkModeManager {
         },
       }),
     );
-  }
-
-  updateButtonState() {
-    const darkButton = document.querySelector(".dark-button");
-    if (darkButton) {
-      // Button title is handled by data-i18n-title="theme.buttonTitle"
-      // in the HTML, which the i18n system applies automatically
-    }
   }
 
   activateVampireMode(showNotification = true) {
