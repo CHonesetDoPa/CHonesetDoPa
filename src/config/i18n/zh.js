@@ -117,7 +117,7 @@ export default {
     lightMode: "浅色模式",
     vampireMode: {
       label: "血族模式",
-      activated: "🦇 血族模式激活！",
+      activated: "血族模式激活！",
       welcome: "欢迎来到暗夜宫殿，吾的信徒～",
     },
   },

@@ -121,7 +121,7 @@ export default {
       lightMode: "light mode",
       vampireMode: {
         label: "vampire mode",
-        activated: "🦇 Vampire mode activated!",
+        activated: "Vampire mode activated!",
         welcome: "Welcome to the dark palace, my follower~",
     },
   },

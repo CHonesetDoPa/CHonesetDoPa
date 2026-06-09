@@ -118,7 +118,7 @@ export default {
       lightMode: "白昼形态",
       vampireMode: {
         label: "血族真身形态",
-        activated: "🦇 血族真身降临！",
+        activated: "血族真身降临！",
         welcome: "欢迎来到暗夜宫殿，吾的忠诚信徒～",
       },
     },
