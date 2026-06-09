@@ -70,7 +70,7 @@ class I18n {
     this.isLoading = false;
     this.isInitialized = false;
     this.clickCount = 0;
-    this.vampireActivationThreshold = 20;
+    this.vampireActivationThreshold = 10;
   }
 
   async init() {
@@ -243,6 +243,7 @@ class I18n {
       if (language === "vampire") this.addVampireEffects();
       else if (wasVampire) this.removeVampireEffects();
       this.saveLanguagePreference(language);
+      this.updateUrl(language);
       this.updateLanguageButton();
       this.updateDocumentLanguage();
       this.clearCache();
@@ -315,7 +316,7 @@ class I18n {
         const k = el.getAttribute("data-i18n-aria-label");
         if (k) {
           const t = this.t(k);
-          if (t && t !== k) el.setAttribute('aria-label', t);
+          if (t && t !== k) el.setAttribute("aria-label", t);
         }
       });
       const altEls = document.querySelectorAll("[data-i18n-alt]");
@@ -323,7 +324,7 @@ class I18n {
         const k = el.getAttribute("data-i18n-alt");
         if (k) {
           const t = this.t(k);
-          if (t && t !== k) el.setAttribute('alt', t);
+          if (t && t !== k) el.setAttribute("alt", t);
         }
       });
       const metaEls = document.querySelectorAll("[data-i18n-meta-content]");
@@ -331,7 +332,7 @@ class I18n {
         const k = el.getAttribute("data-i18n-meta-content");
         if (k) {
           const t = this.t(k);
-          if (t && t !== k) el.setAttribute('content', t);
+          if (t && t !== k) el.setAttribute("content", t);
         }
       });
     } catch (e) {
@@ -393,14 +394,15 @@ class I18n {
   async showVampireActivationAlert() {
     return new Promise((resolve) => {
       if (typeof swal !== "undefined") {
+        const t = window.t || ((k) => k);
         swal({
-          title: "血族觉醒！",
+          title: t("greeting.vampireMode.activated") || "血族觉醒！",
           text: "",
           icon: "success",
           buttons: true,
         }).then(() => resolve());
       } else {
-        alert("血族觉醒！");
+        alert(t("greeting.vampireMode.activated") || "血族觉醒！");
         resolve();
       }
     });
@@ -490,7 +492,6 @@ async function initializeI18nSystem() {
       languageController = i18nInstance;
       setupGlobalFunctions();
       setupAutoTranslation();
-      setupEventListeners();
       window.dispatchEvent(
         new CustomEvent("i18nSystemReady", {
           detail: {
@@ -598,13 +599,30 @@ function setupAutoTranslation() {
         if (t && t !== k) el.title = t;
       }
     });
-    // aria-label support
     const ar = document.querySelectorAll("[data-i18n-aria-label]");
     ar.forEach((el) => {
       const k = el.getAttribute("data-i18n-aria-label");
       if (k) {
         const t = window.t(k);
-        if (t && t !== k) el.setAttribute('aria-label', t);
+        if (t && t !== k) el.setAttribute("aria-label", t);
+      }
+    });
+    // data-i18n-alt support
+    const altEls = document.querySelectorAll("[data-i18n-alt]");
+    altEls.forEach((el) => {
+      const k = el.getAttribute("data-i18n-alt");
+      if (k) {
+        const t = window.t(k);
+        if (t && t !== k) el.setAttribute("alt", t);
+      }
+    });
+    // data-i18n-meta-content support
+    const metaEls = document.querySelectorAll("[data-i18n-meta-content]");
+    metaEls.forEach((el) => {
+      const k = el.getAttribute("data-i18n-meta-content");
+      if (k) {
+        const t = window.t(k);
+        if (t && t !== k) el.setAttribute("content", t);
       }
     });
   };
@@ -624,8 +642,10 @@ function setupAutoTranslation() {
                   n.hasAttribute("data-i18n-placeholder") ||
                   n.hasAttribute("data-i18n-title") ||
                   n.hasAttribute("data-i18n-aria-label") ||
+                  n.hasAttribute("data-i18n-alt") ||
+                  n.hasAttribute("data-i18n-meta-content") ||
                   n.querySelector(
-                    "[data-i18n], [data-i18n-placeholder], [data-i18n-title], [data-i18n-aria-label]",
+                    "[data-i18n], [data-i18n-placeholder], [data-i18n-title], [data-i18n-aria-label], [data-i18n-alt], [data-i18n-meta-content]",
                   ))
               )
                 s = true;
@@ -637,28 +657,6 @@ function setupAutoTranslation() {
     obs.observe(document.body, { childList: true, subtree: true });
   }
   document.addEventListener("i18n:languageChanged", translate);
-}
-
-function setupEventListeners() {
-  document.addEventListener("i18n:languageChanged", (e) => {
-    const { language, previousLanguage } = e.detail || {};
-    const docLang = language === "vampire" ? "zh-CN" : language;
-    document.documentElement.lang = docLang;
-    const titleKey =
-      document.title && document.title.getAttribute
-        ? document.title.getAttribute("data-i18n")
-        : null;
-    if (titleKey) document.title = window.t(titleKey);
-  });
-  document.addEventListener("i18n:error", (e) =>
-    console.error("[I18n] Error:", e.detail),
-  );
-  document.addEventListener("keydown", (ev) => {
-    if (ev.ctrlKey && ev.altKey && ev.code === "KeyL") {
-      ev.preventDefault();
-      window.switchLanguage();
-    }
-  });
 }
 
 function waitForTranslationData(maxWait = 5000) {
