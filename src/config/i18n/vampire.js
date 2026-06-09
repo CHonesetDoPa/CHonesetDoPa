@@ -109,18 +109,6 @@ export default {
       switchLanguage: "切换血族古语模式",
     },
     greeting: {
-      dawn: {
-        title: "永夜已深！",
-        text: "请安歇吧~",
-      },
-      morning: {
-        title: "血族之晨安好！",
-        text: "愿暗夜眷顾你",
-      },
-      evening: {
-        title: "血族之夜安好！",
-        text: "当前为{mode}，暗夜系统将根据你的灵魂偏好自动调整~",
-      },
       autoModeSwitch: {
         dark: "检测到暗夜降临，已自动开启血族暗夜模式",
         light: "检测到白昼降临，已自动关闭血族暗夜模式",

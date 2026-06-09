@@ -108,18 +108,6 @@ export default {
     switchLanguage: "切换语言",
   },
   greeting: {
-    dawn: {
-      title: "夜深了！",
-      text: "请好好休息~",
-    },
-    morning: {
-      title: "早上好！",
-      text: "祝你有美好的一天",
-    },
-    evening: {
-      title: "晚上好！",
-      text: "当前为{mode}，系统将根据您的设备偏好自动调整~",
-    },
     autoModeSwitch: {
       dark: "检测到系统切换为深色模式，已自动开启深色模式",
       light: "检测到系统切换为浅色模式，已自动关闭深色模式",

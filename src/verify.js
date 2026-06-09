@@ -14,7 +14,6 @@ import "./js/utils.js";
 import "./js/typed-init.js";
 import "./js/cur-effect.js";
 import "./js/dark-mode-manager.js";
-import "./js/greeting-system.js";
 import "./js/verify-challenge.js";
 // ----------------------
 // Load translation data before i18n system

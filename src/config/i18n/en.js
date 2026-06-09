@@ -111,18 +111,6 @@ export default {
     switchLanguage: "Switch Language",
   },
   greeting: {
-      dawn: {
-        title: "It's late at night!",
-        text: "Please take a rest~",
-      },
-      morning: {
-        title: "Good morning!",
-        text: "Have a great day",
-      },
-      evening: {
-        title: "Good evening!",
-        text: "Currently set to {mode}, the system will automatically adjust according to your device preferences~",
-      },
       autoModeSwitch: {
         dark: "Detected system switch to dark mode, dark mode automatically enabled",
         light:
