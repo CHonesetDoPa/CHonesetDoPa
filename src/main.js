@@ -40,6 +40,12 @@ const header = document.getElementById("nav");
 if (header) {
   header.style.backgroundImage = `url(${bgUrl})`;
 }
+const lcpPreload = document.createElement("link");
+lcpPreload.rel = "preload";
+lcpPreload.as = "image";
+lcpPreload.href = bgUrl;
+lcpPreload.fetchPriority = "high";
+document.head.appendChild(lcpPreload);
 
 import avatarUrl from "./assets/img/Avatar.webp";
 const avatarImg = document.getElementById("avatar");

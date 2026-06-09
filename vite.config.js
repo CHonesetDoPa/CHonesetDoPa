@@ -61,6 +61,27 @@ export default defineConfig(({ mode }) => {
           });
         },
       },
+      {
+        name: "inject-font-display-swap",
+        enforce: "post",
+        transform(code, id) {
+          if (
+            id.includes("fortawesome") &&
+            (id.endsWith(".css") || id.endsWith(".scss"))
+          ) {
+            return {
+              code: code.replace(
+                /(@font-face\s*\{)([\s\S]*?)(\})/g,
+                (match, open, body, close) => {
+                  if (body.includes("font-display")) return match;
+                  return `${open}\n  font-display: swap;${body}${close}`;
+                }
+              ),
+              map: null,
+            };
+          }
+        },
+      },
     ],
 
     server: {
