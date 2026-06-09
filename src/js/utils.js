@@ -2,6 +2,8 @@
  * Utils
  */
 
+import swal from "sweetalert";
+
 // ===== 剪贴板工具函数 =====
 (function () {
   /**
@@ -15,9 +17,7 @@
       navigator.clipboard
         .writeText(data)
         .then(function () {
-          if (typeof swal !== "undefined") {
-            swal("Completed！");
-          }
+          swal("Completed！");
           if (callback && typeof callback === "function") {
             callback(true);
           }
@@ -59,25 +59,19 @@
       document.body.removeChild(textarea);
 
       if (success) {
-        if (typeof swal !== "undefined") {
-          swal("Completed！");
-        }
+        swal("Completed！");
         if (callback && typeof callback === "function") {
           callback(true);
         }
       } else {
-        if (typeof swal !== "undefined") {
-          swal("Copy failed!");
-        }
+        swal("Copy failed!");
         if (callback && typeof callback === "function") {
           callback(false);
         }
       }
     } catch (err) {
       console.error("Fallback copy method failed:", err);
-      if (typeof swal !== "undefined") {
-        swal("Copy failed!");
-      }
+      swal("Copy failed!");
       if (callback && typeof callback === "function") {
         callback(false);
       }

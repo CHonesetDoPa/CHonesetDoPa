@@ -1,3 +1,4 @@
+import swal from "sweetalert";
 import { copy } from "../utils.js";
 
 /**
@@ -15,13 +16,11 @@ export class InteractionHandler {
     // 更新邮箱函数
     if (config.personal?.email) {
       window.email = () => {
-        window
-          .swal({
-            title: "E-mail",
-            text: config.personal.email,
-            buttons: ["Copy", true],
-          })
-          .then((OK) => {
+        swal({
+          title: "E-mail",
+          text: config.personal.email,
+          buttons: ["Copy", true],
+        }).then((OK) => {
             if (!OK && copy) {
               copy(config.personal.email);
             }
@@ -32,13 +31,11 @@ export class InteractionHandler {
     // 更新 Session ID 函数
     if (config.personal?.sessionId) {
       window.session_id = () => {
-        window
-          .swal({
-            title: "Session ID",
-            text: config.personal.sessionId,
-            buttons: ["Copy", true],
-          })
-          .then((OK) => {
+        swal({
+          title: "Session ID",
+          text: config.personal.sessionId,
+          buttons: ["Copy", true],
+        }).then((OK) => {
             if (!OK && copy) {
               copy(config.personal.sessionId);
             }
@@ -52,16 +49,14 @@ export class InteractionHandler {
       const _t = (key) => (window.t ? window.t(key) : key);
 
       const showConfirmDialog = (url) => {
-        window
-          .swal({
-            title: _t("sponsor.confirmDialog.title"),
-            text: _t("sponsor.confirmDialog.text"),
-            buttons: [
-              _t("sponsor.confirmDialog.cancel"),
-              _t("sponsor.confirmDialog.confirm"),
-            ],
-          })
-          .then((OK) => {
+        swal({
+          title: _t("sponsor.confirmDialog.title"),
+          text: _t("sponsor.confirmDialog.text"),
+          buttons: [
+            _t("sponsor.confirmDialog.cancel"),
+            _t("sponsor.confirmDialog.confirm"),
+          ],
+        }).then((OK) => {
             if (OK) {
               window.location.href = url;
             }
@@ -81,7 +76,7 @@ export class InteractionHandler {
       };
 
       window.sponsor_wechat = () => {
-        window.swal({
+        swal({
           title: _t("sponsor.confirmDialog.title"),
           text: _t("sponsor.confirmDialog.text"),
           content: {
