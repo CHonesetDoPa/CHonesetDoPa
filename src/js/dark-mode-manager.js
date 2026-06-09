@@ -148,8 +148,10 @@ class AutoDarkModeManager {
     if (typeof swal !== "undefined") {
       const t = window.t || ((k) => k);
       const message = isSystemDark
-        ? t("greeting.autoModeSwitch.dark") || "Detected system switch to dark mode, dark mode automatically enabled"
-        : t("greeting.autoModeSwitch.light") || "Detected system switch to light mode, dark mode automatically disabled";
+        ? t("greeting.autoModeSwitch.dark") ||
+          "Detected system switch to dark mode, dark mode automatically enabled"
+        : t("greeting.autoModeSwitch.light") ||
+          "Detected system switch to light mode, dark mode automatically disabled";
       swal({
         title: t("greeting.autoModeSwitch.title") || "Auto Mode Switch",
         text: message,
@@ -163,14 +165,14 @@ class AutoDarkModeManager {
   applyCurrentMode() {
     const body = document.body;
 
-    // 先移除所有模式类
-    body.classList.remove("dark-mode", "vampire-mode");
-
-    // 应用当前模式
     if (this.isVampireMode) {
+      body.classList.remove("dark-mode");
       body.classList.add("vampire-mode");
     } else if (this.isDarkMode) {
+      body.classList.remove("vampire-mode");
       body.classList.add("dark-mode");
+    } else {
+      body.classList.remove("dark-mode", "vampire-mode");
     }
 
     // 触发模式变化事件
@@ -190,13 +192,14 @@ class AutoDarkModeManager {
     this.applyCurrentMode();
     this.saveState();
 
-    console.log("[Theme] 🦇 Vampire mode activated!");
+    console.log("[Theme] Vampire mode activated!");
 
     if (showNotification && typeof swal !== "undefined") {
       const t = window.t || ((k) => k);
       swal({
-        title: t("greeting.vampireMode.activated") || "🦇 血族模式激活！",
-        text: t("greeting.vampireMode.welcome") || "欢迎来到暗夜宫殿，吾的信徒～",
+        title: t("greeting.vampireMode.activated") || "血族模式激活！",
+        text:
+          t("greeting.vampireMode.welcome") || "欢迎来到暗夜宫殿，吾的信徒～",
         icon: "success",
         timer: 3000,
         buttons: false,
@@ -209,7 +212,7 @@ class AutoDarkModeManager {
     this.applyCurrentMode();
     this.saveState();
 
-    console.log("[Theme] 🦇 Vampire mode deactivated!");
+    console.log("[Theme] Vampire mode deactivated!");
   }
 
   toggle() {
