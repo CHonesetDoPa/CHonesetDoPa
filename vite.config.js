@@ -119,7 +119,7 @@ export default defineConfig(({ mode }) => {
           manualChunks(id) {
             if (id.includes("node_modules")) {
               if (id.includes("openpgp")) return "vendor-openpgp";
-              if (id.includes("sweetalert")) return "vendor-swal";
+              if (id.includes("sweetalert2")) return "vendor-swal";
               if (id.includes("typed.js")) return "vendor-typed";
               if (id.includes("fortawesome")) return "vendor-fa";
               if (id.includes("instant.page")) return "vendor-instant";
