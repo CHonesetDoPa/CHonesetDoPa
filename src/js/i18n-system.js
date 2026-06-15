@@ -3,6 +3,9 @@
  * author: CHonesetDoPa
  * version: 2.0.0 (Modularized)
  */
+
+import Swal from "sweetalert2";
+
 // ===== I18n 配置 =====
 const DEFAULT_I18N_CONFIG = {
   supportedLanguages: ["zh", "en", "vampire"],
@@ -393,18 +396,12 @@ class I18n {
 
   async showVampireActivationAlert() {
     return new Promise((resolve) => {
-      if (typeof swal !== "undefined") {
-        const t = window.t || ((k) => k);
-        swal({
-          title: t("greeting.vampireMode.activated") || "血族觉醒！",
-          text: "",
-          icon: "success",
-          buttons: true,
-        }).then(() => resolve());
-      } else {
-        alert(t("greeting.vampireMode.activated") || "血族觉醒！");
-        resolve();
-      }
+      const t = window.t || ((k) => k);
+      Swal.fire({
+        title: t("greeting.vampireMode.activated") || "血族觉醒！",
+        text: "",
+        icon: "success",
+      }).then(() => resolve());
     });
   }
 

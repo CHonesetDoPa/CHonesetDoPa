@@ -177,6 +177,8 @@ export class UIRenderer {
     sessionLink.style.color = "orange";
     sessionLink.style.textDecoration = "none";
     sessionLink.style.cursor = "pointer";
+
+    sessionLink.setAttribute("role", "button");
     // 可见文本由 i18n 系统管理
     sessionLink.setAttribute("data-i18n", "socialMedia.session");
     sessionLink.setAttribute("data-i18n-title", "socialMedia.links.session");

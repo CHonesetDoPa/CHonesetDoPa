@@ -3,7 +3,7 @@
 }
 
 /* Global button improvements */
-button,
+button:not([class^="swal2-"]),
 .btn,
 input[type="button"],
 input[type="submit"],
@@ -74,19 +74,19 @@ h6 {
 }
 
 .hr-wrap {
-    position: relative;
+  position: relative;
 }
 
 .hr-icon {
-    position: absolute;
-    top: -10px;
-    left: 5%;
-    z-index: 1;
+  position: absolute;
+  top: -10px;
+  left: 5%;
+  z-index: 1;
 
-    color: #49b1f5;
-    font-size: 20px;
+  color: #49b1f5;
+  font-size: 20px;
 
-    transition: all 1s ease-in-out;
+  transition: all 1s ease-in-out;
 }
 
 hr {
@@ -949,97 +949,100 @@ aside_content .card-info .author-info__description {
   border: 0;
 }
 
-/* SweetAlert Dark Mode Support */
-.dark-mode .swal-modal {
+/* SweetAlert2 Dark Mode Support */
+.dark-mode .swal2-popup {
   background-color: #252525;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
 }
 
-.dark-mode .swal-title {
+.dark-mode .swal2-title {
   color: #e0e0e0;
 }
 
-.dark-mode .swal-text {
+.dark-mode .swal2-html-container {
   color: #b0b0b0;
 }
 
-.dark-mode .swal-button {
+.dark-mode .swal2-confirm,
+.dark-mode .swal2-cancel {
   background-color: #444;
   color: #fff;
   box-shadow: none !important;
 }
 
-.dark-mode .swal-button:hover {
+.dark-mode .swal2-confirm:hover,
+.dark-mode .swal2-cancel:hover {
   background-color: #555;
 }
 
-.dark-mode .swal-icon--success:before,
-.dark-mode .swal-icon--success:after,
-.dark-mode .swal-icon--success .swal-icon--success__hide-corners {
-  background: transparent !important;
-}
-
-.dark-mode .swal-icon--success {
+.dark-mode .swal2-icon.swal2-success {
   border-color: #00ff6a;
 }
 
-.dark-mode .swal-icon--success__line {
+.dark-mode .swal2-icon.swal2-success .swal2-success-line-tip,
+.dark-mode .swal2-icon.swal2-success .swal2-success-line-long {
   background-color: #00ff6a;
 }
 
-/* SweetAlert Vampire Mode Support */
-.vampire-mode .swal-modal {
+.dark-mode .swal2-close {
+  color: #e0e0e0;
+}
+
+.dark-mode .swal2-close:hover {
+  color: #fff;
+}
+
+/* SweetAlert2 Vampire Mode Support */
+.vampire-mode .swal2-popup {
   background-color: var(--vampire-card-bg);
   border: 1px solid var(--vampire-primary);
   box-shadow: 0 0 20px var(--vampire-shadow);
 }
 
-.vampire-mode .swal-overlay {
+.vampire-mode .swal2-container {
   background-color: rgba(40, 0, 0, 0.6); /* 血色模式遮罩层 */
 }
 
-.vampire-mode .swal-title {
+.vampire-mode .swal2-title {
   color: var(--vampire-primary);
   text-shadow: 0 0 5px var(--vampire-shadow);
 }
 
-.vampire-mode .swal-text {
+.vampire-mode .swal2-html-container {
   color: var(--vampire-text);
 }
 
-.vampire-mode .swal-button {
+.vampire-mode .swal2-confirm,
+.vampire-mode .swal2-cancel {
   background: #2a0a0a;
   color: #cc9999;
   border: 1px solid #5a2020;
 }
 
-.vampire-mode .swal-button:hover {
+.vampire-mode .swal2-confirm:hover,
+.vampire-mode .swal2-cancel:hover {
   background: #3a1010;
   color: #ddbbbb;
 }
 
-.vampire-mode .swal-icon--success:before,
-.vampire-mode .swal-icon--success:after,
-.vampire-mode .swal-icon--success .swal-icon--success__hide-corners {
-  background: transparent !important;
-}
-
-.vampire-mode .swal-icon--success {
+.vampire-mode .swal2-icon.swal2-success {
   border-color: var(--vampire-primary);
 }
 
-.vampire-mode .swal-icon--success__line {
+.vampire-mode .swal2-icon.swal2-success .swal2-success-line-tip,
+.vampire-mode .swal2-icon.swal2-success .swal2-success-line-long {
   background-color: var(--vampire-primary);
 }
 
-.vampire-mode .swal-icon--info {
+.vampire-mode .swal2-icon.swal2-info {
   border-color: var(--vampire-accent);
 }
 
-.vampire-mode .swal-icon--info:before {
-  background-color: var(--vampire-accent);
+.vampire-mode .swal2-close {
+  color: var(--vampire-primary);
+  text-shadow: 0 0 5px var(--vampire-shadow);
 }
 
-.vampire-mode .swal-icon--info:after {
-  background-color: var(--vampire-accent);
+.vampire-mode .swal2-close:hover {
+  color: #ddbbbb;
 }

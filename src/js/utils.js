@@ -2,7 +2,7 @@
  * Utils
  */
 
-import swal from "sweetalert";
+import Swal from "sweetalert2";
 
 // ===== 剪贴板工具函数 =====
 (function () {
@@ -17,7 +17,7 @@ import swal from "sweetalert";
       navigator.clipboard
         .writeText(data)
         .then(function () {
-          swal("Completed！");
+          Swal.fire({ title: "Completed！"});
           if (callback && typeof callback === "function") {
             callback(true);
           }
@@ -53,25 +53,23 @@ import swal from "sweetalert";
       textarea.select();
       textarea.setSelectionRange(0, 99999); // 兼容 iOS
 
-      // NOTE: document.execCommand('Copy') is deprecated and only used here for legacy browser support.
-      // Remove this fallback when support for old browsers is no longer required.
       let success = document.execCommand("Copy");
       document.body.removeChild(textarea);
 
       if (success) {
-        swal("Completed！");
+        Swal.fire({ title: "Completed！"});
         if (callback && typeof callback === "function") {
           callback(true);
         }
       } else {
-        swal("Copy failed!");
+        Swal.fire({ title: "Copy failed!" });
         if (callback && typeof callback === "function") {
           callback(false);
         }
       }
     } catch (err) {
       console.error("Fallback copy method failed:", err);
-      swal("Copy failed!");
+      Swal.fire({ title: "Copy failed!" });
       if (callback && typeof callback === "function") {
         callback(false);
       }
@@ -103,7 +101,6 @@ import swal from "sweetalert";
 
   window.addEventListener("blur", function () {
     isTabActive = false;
-    // 在修改标题前，如果当前标题不是萌标题，说明它被其他脚本（如 i18n）修改了，我们应该更新 originalTitle
     if (
       document.title !== "(ฅ>ω<*ฅ) 诶嘿嘿，你回来啦！" &&
       document.title !== "╭(°A°`)╮ 你要去哪里？"

@@ -1,7 +1,7 @@
 /* PGP Verification Page Specific Styles */
 
 /* Global button improvements */
-button,
+button:not([class^="swal2-"]),
 .btn,
 input[type="button"],
 input[type="submit"] {

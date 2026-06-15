@@ -2,6 +2,9 @@
  * Auto Dark Mode Manager with Vampire Mode Support
  */
 
+import "./utils.js";
+import Swal from "sweetalert2";
+
 class AutoDarkModeManager {
   constructor() {
     this.mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
@@ -145,19 +148,19 @@ class AutoDarkModeManager {
     this.saveState();
 
     // Display notification
-    if (typeof swal !== "undefined") {
+    {
       const t = window.t || ((k) => k);
       const message = isSystemDark
         ? t("greeting.autoModeSwitch.dark") ||
           "Detected system switch to dark mode, dark mode automatically enabled"
         : t("greeting.autoModeSwitch.light") ||
           "Detected system switch to light mode, dark mode automatically disabled";
-      swal({
+      Swal.fire({
         title: t("greeting.autoModeSwitch.title") || "Auto Mode Switch",
         text: message,
         icon: "info",
         timer: 3000,
-        buttons: false,
+        showConfirmButton: false,
       });
     }
   }
@@ -194,15 +197,15 @@ class AutoDarkModeManager {
 
     console.log("[Theme] Vampire mode activated!");
 
-    if (showNotification && typeof swal !== "undefined") {
+    if (showNotification) {
       const t = window.t || ((k) => k);
-      swal({
+      Swal.fire({
         title: t("greeting.vampireMode.activated") || "血族模式激活！",
         text:
           t("greeting.vampireMode.welcome") || "欢迎来到暗夜宫殿，吾的信徒～",
         icon: "success",
         timer: 3000,
-        buttons: false,
+        showConfirmButton: false,
       });
     }
   }
@@ -227,18 +230,18 @@ class AutoDarkModeManager {
     }
 
     // Show toggle notification
-    if (typeof swal !== "undefined") {
+    {
       const message = this.isVampireMode
         ? "Exited vampire mode"
         : this.isDarkMode
           ? "Switched to dark mode"
           : "Switched to light mode";
-      swal({
+      Swal.fire({
         title: "Mode Switched",
         text: message,
         icon: "success",
         timer: 2000,
-        buttons: false,
+        showConfirmButton: false,
       });
     }
   }
