@@ -1,6 +1,7 @@
 // vite.config.js
 import { defineConfig, loadEnv } from "vite";
 import viteCompression from "vite-plugin-compression2";
+import removeConsole from "vite-plugin-remove-console";
 import htmlMinifier from "vite-plugin-html-minifier";
 import path from "path";
 
@@ -34,6 +35,9 @@ export default defineConfig(({ mode }) => {
         deleteOriginalAssets: false,
         algorithms: ["gzip", "brotliCompress", "zstd"],
       }),
+      removeConsole({
+        external: ["src/js/utils.js"],
+      }),
     ],
 
     server: {
@@ -51,11 +55,6 @@ export default defineConfig(({ mode }) => {
         "@": path.resolve(__dirname, "./src"),
       },
     },
-
-    oxc: {
-      drop: ["console", "debugger"],
-    },
-
     build: {
       outDir: path.resolve(__dirname, "dist"),
       target: "esnext",

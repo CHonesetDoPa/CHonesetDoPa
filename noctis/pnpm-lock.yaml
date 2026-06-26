@@ -36,6 +36,9 @@ importers:
       vite-plugin-html-minifier:
         specifier: ^1.0.5
         version: 1.0.5(vite@8.1.0(esbuild@0.27.7)(terser@5.48.0))
+      vite-plugin-remove-console:
+        specifier: ^2.2.0
+        version: 2.2.0
 
 packages:
 
@@ -569,6 +572,9 @@ packages:
     peerDependencies:
       vite: '>=3.0.0'
 
+  vite-plugin-remove-console@2.2.0:
+    resolution: {integrity: sha512-qgjh5pz75MdE9Kzs8J0kBwaCfifHV0ezRbB9rpGsIOxam+ilcGV7WOk91vFJXquzRmiKrFh3Hxlh0JJWAmXTbQ==}
+
   vite@8.1.0:
     resolution: {integrity: sha512-BuJcQK/56NQTWDGn4ABea3q4SSBdNPWwNZKTkkUpcMPnLoquSYH8llRtSUIgoL1KSCpHt5eghLShn50mH36y7Q==}
     engines: {node: ^20.19.0 || >=22.12.0}
@@ -1030,6 +1036,8 @@ snapshots:
     dependencies:
       html-minifier-terser: 7.2.0
       vite: 8.1.0(esbuild@0.27.7)(terser@5.48.0)
+
+  vite-plugin-remove-console@2.2.0: {}
 
   vite@8.1.0(esbuild@0.27.7)(terser@5.48.0):
     dependencies:
