@@ -1,6 +1,6 @@
 # About CH
 ***
-<img align='left' src='src/assets/img/V4-Lite.png' width='250px' style='border-radius: 15px;'></img>
+<img align='left' src='noctis/src/assets/img/V4-Lite.png' width='250px' style='border-radius: 15px;'></img>
 
 
 
