@@ -40,11 +40,12 @@ export class InteractionHandler {
         Swal.fire({
           title: "Session ID",
           text: config.personal.sessionId,
-          showCancelButton: true,
-          confirmButtonText: "OK",
-          cancelButtonText: "Copy",
+          confirmButtonText: "Copy",
+          cancelButtonText: "Cancel",
+          showDenyButton: false,
+          showCloseButton: true,
         }).then((result) => {
-            if (!result.isConfirmed && copy) {
+            if (result.isConfirmed) {
               copy(config.personal.sessionId);
             }
           });
