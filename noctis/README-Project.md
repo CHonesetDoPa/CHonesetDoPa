@@ -2,23 +2,21 @@
 
 # 更改说明
 
-本项目模板已迁移至 [CyanHomePage](https://github.com/CHonesetDoPa/CyanHomePage)。
+本仓库继续以开源形式保留源代码，但**不再提供维护与功能支持**。
 
-本仓库继续以开源形式保留源代码，但**不再提供维护与支持**。
-
-如需模板相关支持与更新，请前往新项目 [CyanHomePage](https://github.com/CHonesetDoPa/CyanHomePage)。
+质量和Bug报告请使用[Issues](https://github.com/CHonesetDoPa/CHonesetDoPa/issues)
 
 基于原生 JavaScript 和 Vite 构建的轻量交互式个人主页，重构自原项目。
 
 ## 技术栈
 
 - 核心: HTML5, CSS3, Vanilla JavaScript (ES Modules)
-- 构建工具: Vite 7 + LightningCSS
+- 构建工具: Vite 8 + LightningCSS
 - 页面: 首页 (`index.html`)、赞助页 (`sponsor.html`)、验证页 (`verify.html`)
 - 主要依赖:
   - `typed.js` - 打字动画
-  - `sweetalert` - 弹窗美化
-  - `@fortawesome/fontawesome-free` - 图标
+  - `sweetalert2` - 弹窗美化
+  - `fontawesome-svg-core & free-solid-svg-icons` - 图标
   - `instant.page` - 链接预加载
 
 （详见 `package.json` 的 `dependencies`）
@@ -37,7 +35,7 @@
 git clone https://github.com/CHonesetDoPa/CHonesetDoPa.git
 cd CHonesetDoPa
 
-# 使用 pnpm 安装依赖（或 npm/yarn）
+# 使用 pnpm 安装依赖
 pnpm install
 ```
 
@@ -65,7 +63,7 @@ pnpm preview
 - **HTML 压缩** — 移除注释、空白、冗余属性等
 - **Gzip + Brotli 压缩** — 对大于 1KB 的资源生成 `.gz` 和 `.br` 文件
 - **LightningCSS** — 高速 CSS 压缩与兼容性处理
-- **代码分割** — `openpgp` 等大型依赖单独打包为 vendor chunk
+- **代码分割** — 大型依赖单独打包为 vendor chunk
 - **资源哈希** — 静态资源文件名包含哈希值，便于缓存刷新
 
 ## 项目结构
@@ -97,7 +95,6 @@ src/                            # 源代码根目录（Vite root）
 │   │   ├── config-manager.js
 │   │   ├── interaction-handler.js
 │   │   └── ui-renderer.js
-│   ├── sponsorlist.js         # 赞助列表渲染
 │   ├── typed-init.js          # Typed.js 初始化
 │   ├── utils.js               # 通用工具函数
 │   └── verify-challenge.js    # PGP 验证挑战逻辑

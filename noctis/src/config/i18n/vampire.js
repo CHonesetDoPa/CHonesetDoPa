@@ -57,9 +57,6 @@ export default {
     },
   },
   sponsor: {
-    title: "血之契约贡品名录",
-    sponsorColumn: "忠诚的信徒",
-    amountColumn: "献祭数量",
     chooseMethod: "选择献祭方式",
     wechatPay: "微信血色印记献祭",
     patreon: "Patreon异界献祭",

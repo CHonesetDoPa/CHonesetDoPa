@@ -52,20 +52,20 @@ export default defineConfig(({ mode }) => {
     },
     resolve: {
       alias: {
-        "@": path.resolve(__dirname, "./src"),
+        "@": path.resolve(import.meta.dirname, "./src"),
       },
     },
     build: {
-      outDir: path.resolve(__dirname, "dist"),
+      outDir: path.resolve(import.meta.dirname, "dist"),
       target: "esnext",
       sourcemap: false,
       cssMinify: "lightningcss",
       emptyOutDir: true,
       rolldownOptions: {
         input: {
-          main: path.resolve(__dirname, "src/index.html"),
-          sponsor: path.resolve(__dirname, "src/sponsor.html"),
-          verify: path.resolve(__dirname, "src/verify.html"),
+          main: path.resolve(import.meta.dirname, "src/index.html"),
+          sponsor: path.resolve(import.meta.dirname, "src/sponsor.html"),
+          verify: path.resolve(import.meta.dirname, "src/verify.html"),
         },
         output: {
           entryFileNames: `assets/${ASSET_PREFIX}-[name]-[hash].js`,

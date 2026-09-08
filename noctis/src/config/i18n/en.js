@@ -60,9 +60,6 @@ export default {
     },
   },
   sponsor: {
-    title: "Sponsor List",
-    sponsorColumn: "Sponsor",
-    amountColumn: "Amount",
     chooseMethod: "Choose donation method",
     wechatPay: "Sponsor via WechatPay",
     patreon: "Sponsor via Patreon",

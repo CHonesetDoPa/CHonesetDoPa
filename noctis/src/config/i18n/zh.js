@@ -57,9 +57,6 @@ export default {
     },
   },
   sponsor: {
-    title: "赞助列表",
-    sponsorColumn: "赞助者",
-    amountColumn: "金额",
     chooseMethod: "选择捐赠方式",
     wechatPay: "使用微信赞赏码捐赠",
     patreon: "使用Patreon捐赠",
