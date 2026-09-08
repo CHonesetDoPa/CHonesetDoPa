@@ -1,0 +1,10 @@
+{
+  "name": "chonesetdopa-workspace",
+  "private": true,
+  "scripts": {
+    "noctis:dev": "pnpm --filter noctis dev",
+    "noctis:build": "pnpm --filter noctis build",
+    "noctis:preview": "pnpm --filter noctis preview",
+    "noctis:clear": "pnpm --filter noctis clear"
+  }
+}
