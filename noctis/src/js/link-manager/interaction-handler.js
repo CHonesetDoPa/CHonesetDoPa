@@ -87,8 +87,7 @@ export class InteractionHandler {
         Swal.fire({
           title: _t("sponsor.confirmDialog.title"),
           html: `<img src="${config.sponsor.wechatQR}" width="200" height="200" />`,
-          showCancelButton: true,
-          confirmButtonText: "OK",
+          confirmButtonText: _t("sponsor.confirmDialog.confirm"),
           cancelButtonText: _t("sponsor.confirmDialog.cancel"),
         });
       };
