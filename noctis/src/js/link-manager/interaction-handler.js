@@ -25,7 +25,7 @@ export class InteractionHandler {
           confirmButtonText: _t("common.copy"),
           cancelButtonText: _t("common.cancel"),
           showDenyButton: false,
-          showCloseButton: true,
+          showCancelButton: true,
         }).then((result) => {
           if (result.isConfirmed) {
             copy(config.personal.email);
@@ -43,7 +43,7 @@ export class InteractionHandler {
           confirmButtonText: _t("common.copy"),
           cancelButtonText: _t("common.cancel"),
           showDenyButton: false,
-          showCloseButton: true,
+          showCancelButton: true,
         }).then((result) => {
           if (result.isConfirmed) {
             copy(config.personal.sessionId);
