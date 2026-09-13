@@ -1,5 +1,6 @@
 /**
- * Auto Dark Mode Manager with Vampire Mode Support
+ * dark-mode-manager.js
+ * Auto dark mode with vampire mode support.
  */
 
 import "./utils.js";
@@ -85,14 +86,8 @@ class AutoDarkModeManager {
         JSON.stringify(this.isVampireMode),
       );
 
-      // 广播状态变化到其他标签页
-      window.dispatchEvent(
-        new StorageEvent("storage", {
-          key: this.storageKey,
-          newValue: JSON.stringify(this.isDarkMode),
-          url: window.location.href,
-        }),
-      );
+      // 跨标签页同步依赖浏览器原生的 storage 事件（真实事件只在其他标签页触发），
+      // 同标签页状态已在本地更新，无需手动合成 StorageEvent 自广播。
     } catch (e) {
       console.warn("Failed to save mode states:", e);
     }
@@ -150,14 +145,11 @@ class AutoDarkModeManager {
     // Display notification
     {
       const t = window.t || ((k) => k);
-      const message = isSystemDark
-        ? t("greeting.autoModeSwitch.dark") ||
-          "Detected system switch to dark mode, dark mode automatically enabled"
-        : t("greeting.autoModeSwitch.light") ||
-          "Detected system switch to light mode, dark mode automatically disabled";
       Swal.fire({
-        title: t("greeting.autoModeSwitch.title") || "Auto Mode Switch",
-        text: message,
+        title: t("greeting.autoModeSwitch.title"),
+        text: isSystemDark
+          ? t("greeting.autoModeSwitch.dark")
+          : t("greeting.autoModeSwitch.light"),
         icon: "info",
         timer: 3000,
         showConfirmButton: false,
@@ -200,9 +192,8 @@ class AutoDarkModeManager {
     if (showNotification) {
       const t = window.t || ((k) => k);
       Swal.fire({
-        title: t("greeting.vampireMode.activated") || "血族模式激活！",
-        text:
-          t("greeting.vampireMode.welcome") || "欢迎来到暗夜宫殿，吾的信徒～",
+        title: t("greeting.vampireMode.activated"),
+        text: t("greeting.vampireMode.welcome"),
         icon: "success",
         timer: 3000,
         showConfirmButton: false,
@@ -231,13 +222,14 @@ class AutoDarkModeManager {
 
     // Show toggle notification
     {
+      const t = window.t || ((k) => k);
       const message = this.isVampireMode
-        ? "Exited vampire mode"
+        ? t("greeting.modeSwitch.vampireExit")
         : this.isDarkMode
-          ? "Switched to dark mode"
-          : "Switched to light mode";
+          ? t("greeting.modeSwitch.dark")
+          : t("greeting.modeSwitch.light");
       Swal.fire({
-        title: "Mode Switched",
+        title: t("greeting.modeSwitch.title"),
         text: message,
         icon: "success",
         timer: 2000,
@@ -249,21 +241,6 @@ class AutoDarkModeManager {
   getCurrentMode() {
     if (this.isVampireMode) return "vampire";
     return this.isDarkMode ? "dark" : "light";
-  }
-
-  isSystemDarkMode() {
-    return this.mediaQuery.matches;
-  }
-
-  // Get mode info for debugging
-  getModeInfo() {
-    return {
-      current: this.getCurrentMode(),
-      system: this.isSystemDarkMode() ? "dark" : "light",
-      isDark: this.isDarkMode,
-      isVampire: this.isVampireMode,
-      autoFollowSystem: !this.isVampireMode,
-    };
   }
 }
 
@@ -280,30 +257,17 @@ function initAutoDarkMode() {
 
 // Compatible with original dark() function
 function dark() {
-  if (autoDarkModeManager) {
-    autoDarkModeManager.toggle();
-  } else {
-    // Fallback to original implementation
-    document.body.classList.toggle("dark-mode");
-  }
+  autoDarkModeManager.toggle();
 }
 
 // Activate vampire mode
 function activateVampireMode(showNotification = true) {
-  if (autoDarkModeManager) {
-    autoDarkModeManager.activateVampireMode(showNotification);
-  } else {
-    document.body.classList.add("vampire-mode");
-  }
+  autoDarkModeManager.activateVampireMode(showNotification);
 }
 
 // Deactivate vampire mode
 function deactivateVampireMode() {
-  if (autoDarkModeManager) {
-    autoDarkModeManager.deactivateVampireMode();
-  } else {
-    document.body.classList.remove("vampire-mode");
-  }
+  autoDarkModeManager.deactivateVampireMode();
 }
 
 // Auto-initialize after page load

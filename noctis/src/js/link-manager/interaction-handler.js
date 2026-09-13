@@ -1,12 +1,10 @@
-
 /**
- * InteractionHandler
- * 负责注册全局函数和处理点击事件
+ * interaction-handler.js
+ * Registers global functions and handles clicks.
  */
 
 import Swal from "sweetalert2";
 import { copy } from "../utils.js";
-
 
 export class InteractionHandler {
   /**
@@ -16,21 +14,23 @@ export class InteractionHandler {
   updateGlobalFunctions(config) {
     if (!config) return;
 
+    const _t = (key) => (window.t ? window.t(key) : key);
+
     // 更新邮箱函数
     if (config.personal?.email) {
       window.email = () => {
         Swal.fire({
           title: "E-mail",
           text: config.personal.email,
-          confirmButtonText: "Copy",
-          cancelButtonText: "Cancel",
+          confirmButtonText: _t("common.copy"),
+          cancelButtonText: _t("common.cancel"),
           showDenyButton: false,
           showCloseButton: true,
         }).then((result) => {
-            if (result.isConfirmed) {
-              copy(config.personal.email);
-            }
-          });
+          if (result.isConfirmed) {
+            copy(config.personal.email);
+          }
+        });
       };
     }
 
@@ -40,23 +40,21 @@ export class InteractionHandler {
         Swal.fire({
           title: "Session ID",
           text: config.personal.sessionId,
-          confirmButtonText: "Copy",
-          cancelButtonText: "Cancel",
+          confirmButtonText: _t("common.copy"),
+          cancelButtonText: _t("common.cancel"),
           showDenyButton: false,
           showCloseButton: true,
         }).then((result) => {
-            if (result.isConfirmed) {
-              copy(config.personal.sessionId);
-            }
-          });
+          if (result.isConfirmed) {
+            copy(config.personal.sessionId);
+          }
+        });
       };
     }
 
     // 更新赞助函数
     if (config.sponsor) {
       // 动态获取 t 函数，而非在定义时捕获（i18n 初始化是异步的）
-      const _t = (key) => (window.t ? window.t(key) : key);
-
       const showConfirmDialog = (url) => {
         Swal.fire({
           title: _t("sponsor.confirmDialog.title"),
@@ -65,10 +63,10 @@ export class InteractionHandler {
           confirmButtonText: _t("sponsor.confirmDialog.confirm"),
           cancelButtonText: _t("sponsor.confirmDialog.cancel"),
         }).then((result) => {
-            if (result.isConfirmed) {
-              window.location.href = url;
-            }
-          });
+          if (result.isConfirmed) {
+            window.location.href = url;
+          }
+        });
       };
 
       window.sponsor_patreon = () => {
@@ -87,7 +85,8 @@ export class InteractionHandler {
         Swal.fire({
           title: _t("sponsor.confirmDialog.title"),
           html: `<img src="${config.sponsor.wechatQR}" width="200" height="200" />`,
-          confirmButtonText: _t("sponsor.confirmDialog.confirm"),
+          showCancelButton: true,
+          showConfirmButton: false,
           cancelButtonText: _t("sponsor.confirmDialog.cancel"),
         });
       };
