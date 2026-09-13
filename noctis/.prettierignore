@@ -1,0 +1,15 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+
+# Static assets
+public/
+
+# Lockfiles
+pnpm-lock.yaml
+
+# Generated / minified
+*.min.js
+*.min.css
