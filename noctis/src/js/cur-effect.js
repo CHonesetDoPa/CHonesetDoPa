@@ -1,7 +1,6 @@
-/*
- * cursor-special-effects-upgraded.js
- * author: CHonesetDoPa (upgraded by ChatGPT)
- * version: 1.1.0
+/**
+ * cur-effect.js
+ * Mouse cursor particle effects on click/move.
  */
 
 class Circle {

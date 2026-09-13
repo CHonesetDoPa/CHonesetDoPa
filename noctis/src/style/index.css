@@ -1,4 +1,9 @@
-﻿* {
+﻿/*
+ * index.css
+ * Main site styles.
+ */
+
+* {
   box-sizing: border-box;
 }
 

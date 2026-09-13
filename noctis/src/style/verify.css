@@ -1,4 +1,7 @@
-/* PGP Verification Page Specific Styles */
+/*
+ * verify.css
+ * PGP verification page styles.
+ */
 
 /* Global button improvements */
 button:not([class^="swal2-"]),
