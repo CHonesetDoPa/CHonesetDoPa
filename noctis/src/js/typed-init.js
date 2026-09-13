@@ -1,12 +1,20 @@
 /**
- * Typed Init
+ * typed-init.js
+ * Typed.js typewriter effect for the blog title.
  */
 import Typed from "typed.js";
+import linksConfig from "../config/links.js";
 
 let typedInstance = null;
 let initAttempts = 0;
 const maxAttempts = 5;
 let isInitialized = false;
+
+function getTypewriterStrings() {
+  // 唯一数据源：links.js 的 meta.typewriterStrings
+  const configured = linksConfig?.meta?.typewriterStrings;
+  return Array.isArray(configured) ? configured : [];
+}
 
 function cleanupTypedCursors() {
   const cursors = document.querySelectorAll(".typed-cursor");
@@ -46,11 +54,7 @@ function initTyped() {
 
   try {
     typedInstance = new Typed(".blogtitle", {
-      strings: [
-        "每一天都是新的一天",
-        "Everyday is a new day",
-        "毎日が新しい日です",
-      ],
+      strings: getTypewriterStrings(),
       startDelay: 300,
       typeSpeed: 100,
       loop: true,
