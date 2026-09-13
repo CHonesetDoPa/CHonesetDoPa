@@ -1,12 +1,10 @@
-/*
+/**
  * link-manager.js
- * author: CHonesetDoPa
- * version: 2.0.0 (Modularized)
+ * Link manager integrating config, interactions and UI rendering.
  */
 import { ConfigManager } from "./link-manager/config-manager.js";
 import { InteractionHandler } from "./link-manager/interaction-handler.js";
 import { UIRenderer } from "./link-manager/ui-renderer.js";
-import { debounce } from "./utils.js";
 
 class LinkManager {
   constructor() {
@@ -34,18 +32,8 @@ class LinkManager {
 
     this.interactionHandler.updateGlobalFunctions(currentConfig);
 
-    // 使用防抖延迟执行渲染，确保 DOM 已加载
-    const renderWithDelay = debounce
-      ? debounce(() => {
-          this.renderComponents();
-        }, 100)
-      : () => setTimeout(() => this.renderComponents(), 100);
-
-    if (document.readyState === "loading") {
-      document.addEventListener("DOMContentLoaded", renderWithDelay);
-    } else {
-      renderWithDelay();
-    }
+    // 渲染由 i18nSystemReady 事件统一触发（见文件底部监听），
+    // 避免与事件回调产生双重渲染导致 DOM 重建闪动。
   }
 
   /**
@@ -107,6 +95,6 @@ document.addEventListener("i18nSystemReady", () => {
 });
 
 document.addEventListener("i18n:languageChanged", () => {
-  console.log("[LinkManager] Language changed, re-rendering link components");
+  console.log("[LinkManager] Language changed, updating status info");
   window.linkManager.handleLanguageSwitch();
 });
