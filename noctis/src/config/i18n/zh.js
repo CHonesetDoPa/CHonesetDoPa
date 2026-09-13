@@ -1,3 +1,7 @@
+/**
+ * i18n/zh.js
+ * Simplified Chinese language pack.
+ */
 export default {
   site: {
     title: "CH的主页",
@@ -42,15 +46,11 @@ export default {
     chFileShare: "CH GAS 公共文件共享",
     qtFileShare: "QT GAS 公共文件共享",
     sponsor: "赞助CC",
-    pgpKey: "下载CH的PGP公钥",
-    sponsorTitle: "CH的赞助页面",
     links: {
-      neighborQt: "访问隔壁QT的主页",
-      gameServerList: "查看NekoC游戏服务器列表",
       chFileShare: "访问CH GAS公共文件共享服务",
       qtFileShare: "访问QT GAS公共文件共享服务",
       sponsor: "前往赞助页面",
-      pgpKey: "进行PGP验证 / 下载公钥",
+      messageVerify: "进行消息验证 / 下载CH的PGP公钥",
       servicesStatus: "查看服务运行状态",
       qtnull: "访问QT的GitHub主页",
       nekocServer: "查看NekoC服务器列表",
@@ -103,6 +103,10 @@ export default {
   },
   common: {
     switchLanguage: "切换语言",
+    copy: "复制",
+    cancel: "取消",
+    copySuccess: "复制成功！",
+    copyFailed: "复制失败，请手动复制",
   },
   greeting: {
     autoModeSwitch: {
@@ -110,8 +114,12 @@ export default {
       light: "检测到系统切换为浅色模式，已自动关闭深色模式",
       title: "自动模式切换",
     },
-    darkMode: "深色模式",
-    lightMode: "浅色模式",
+    modeSwitch: {
+      title: "模式已切换",
+      dark: "已切换到深色模式",
+      light: "已切换到浅色模式",
+      vampireExit: "已退出血族模式",
+    },
     vampireMode: {
       label: "血族模式",
       activated: "血族模式激活！",
@@ -121,16 +129,15 @@ export default {
   language: {
     zh: "Chinese",
     en: "English",
-    vampire: "血族古语",
   },
   theme: {
     buttonTitle: "切换深色/浅色模式",
   },
-  meta: {
-    description: "CH安全验证中心 - PGP签名验证与身份安全公告",
-    keywords: "CH, PGP, 数字签名, 身份验证, 安全公告, CHonesetDoPa",
-  },
   verify: {
+    meta: {
+      description: "CH安全验证中心 - PGP签名验证与身份安全公告",
+      keywords: "CH, PGP, 数字签名, 身份验证, 安全公告, CHonesetDoPa",
+    },
     site: {
       title: "CH安全验证中心 - PGP签名验证",
       kawaii: "世界第一可爱！",
@@ -149,24 +156,6 @@ export default {
       content:
         "欢迎使用CH安全验证中心。\n本页面用于验证PGP数字签名和发布身份安全公告。\n请使用下方工具验证数字签名的真实性，或查看最新的身份安全状态。\n注意：请务必通过官方渠道访问本页面。",
     },
-    guide: {
-      title: "验证指南",
-      howToVerify: {
-        title: "如何验证身份？",
-      },
-      steps: {
-        step1: "获取声称来自CH的消息及其PGP签名",
-        step2: '将原始消息粘贴到右侧的"原始消息"框中',
-        step3: '将PGP签名粘贴到"PGP签名"框中',
-        step4: '点击"验证签名"按钮查看验证结果',
-        step5: '只有显示"签名有效"才能确认消息来源真实性',
-      },
-      contact: {
-        title: "如何获得官方签名消息？",
-        description:
-          '如需要CH本人提供签名消息用于身份验证，请通过"社交媒体链接"中列出的任一渠道联系。官方会提供包含时间戳和验证请求者信息的签名消息。',
-      },
-    },
     timeline: {
       title: "验证时间线",
       events: {
@@ -176,9 +165,12 @@ export default {
       },
       footerLabel: "最后更新: ",
     },
+    pgp: {
+      title: "PGP公钥",
+      description:
+        "CH的PGP公钥可用于验证消息的真实性。您可以使用任何PGP兼容软件（如 GnuPG、OpenKeychain）导入此密钥。",
+    },
     pgpKey: {
-      title: "PGP公钥下载",
-      description: "下载CH的PGP公钥用于验证数字签名的真实性。",
       buttons: {
         local: "本地下载",
         remote: "OpenPGP.org",
@@ -190,41 +182,14 @@ export default {
         fingerprint: "指纹:",
         algorithm: "算法:",
         usage: "使用方法:",
-        keyLength: "密钥长度:",
-        fileName: "文件:",
       },
       copyBtn: "复制公钥",
-      info: "指纹: E802A6BF8C2B8ED71B9D08FFC6881736D7BC83D8",
       downloadSuccess: "下载完成",
       downloadMsg: "CH的PGP公钥已下载成功！",
       downloadUsage: "请将下载的密钥文件导入到您的PGP软件中进行验证。",
       downloadFailed: "下载失败",
       downloadFailedMsg: "无法下载公钥",
-      keyInfoTitle: "CH的PGP公钥信息",
-      showFullKey: "点击查看完整公钥内容",
-    },
-    pgp: {
-      title: "PGP签名验证",
-      description:
-        "CH的PGP公钥可用于验证消息的真实性。您可以使用任何PGP兼容软件（如 GnuPG、OpenKeychain）导入此密钥。",
-      input: {
-        title: "输入要验证的内容",
-      },
-      labels: {
-        message: "原始消息:",
-        signature: "PGP签名:",
-      },
-      placeholders: {
-        message: "请在此输入原始消息内容...",
-        signature:
-          "请在此粘贴PGP签名（以-----BEGIN PGP SIGNATURE-----开头）...",
-      },
-      buttons: {
-        verify: "验证签名",
-        clear: "清空",
-        keyInfo: "查看公钥信息",
-        import: "导入文件",
-      },
+      loadFailed: "（无法加载公钥）",
     },
     security: {
       title: "安全身份公告",
