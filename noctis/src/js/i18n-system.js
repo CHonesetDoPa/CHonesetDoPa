@@ -1,7 +1,6 @@
-/*
+/**
  * i18n-system.js
- * author: CHonesetDoPa
- * version: 2.0.0 (Modularized)
+ * Language detection, switching, caching and rendering.
  */
 
 import Swal from "sweetalert2";
@@ -12,12 +11,13 @@ const DEFAULT_I18N_CONFIG = {
   defaultLanguage: "zh",
   fallbackLanguage: "en",
   storageKey: "site-language-preference",
-  autoDetect: { enabled: true, urlParam: "lang" },
+  autoDetect: { enabled: true },
   inlineTranslations: {
     enabled: true,
     mapping: { zh: "Lang_ZH", en: "Lang_EN", vampire: "Lang_Vampire" },
   },
-  languageNames: { zh: "中文", en: "English", vampire: "血族古语" },
+  cache: { enabled: true, maxSize: 1000 },
+  errorHandling: { missingKeyBehavior: "key" },
 };
 
 const DEFAULT_INLINE_TRANSLATION_MAPPING = {
@@ -82,6 +82,8 @@ class I18n {
       await this.detectLanguage();
       await this.loadLanguage(this.currentLanguage);
       await this.applyLanguage(this.currentLanguage).catch(() => {});
+      this.updateLanguageButton();
+      this.updateDocumentLanguage();
       this.isInitialized = true;
       this.isLoading = false;
       this.emit("initialized", { language: this.currentLanguage });
@@ -94,42 +96,35 @@ class I18n {
   }
 
   async detectLanguage() {
-    let detected = this.config.defaultLanguage;
+    let detected = null;
     try {
-      if (this.config.autoDetect && this.config.autoDetect.urlFirst) {
-        const p = new URLSearchParams(window.location.search);
-        const urlLang = p.get(this.config.autoDetect.urlParam || "lang");
-        if (urlLang && this.config.supportedLanguages.includes(urlLang))
-          detected = urlLang;
-      }
-      if (detected === this.config.defaultLanguage) {
-        const saved = localStorage.getItem(this.config.storageKey);
-        if (saved && this.config.supportedLanguages.includes(saved))
-          detected = saved;
-      }
-      if (
-        detected === this.config.defaultLanguage &&
-        this.config.autoDetect &&
-        this.config.autoDetect.enabled
-      ) {
+      const autoDetect = this.config.autoDetect || {};
+      // 优先读取本地存储的偏好
+      const saved = localStorage.getItem(this.config.storageKey);
+      if (saved && this.config.supportedLanguages.includes(saved))
+        detected = saved;
+      // 其次回退到浏览器语言检测
+      if (!detected && autoDetect.enabled) {
         const b = this.detectBrowserLanguage();
         if (b) detected = b;
       }
-    } catch (e) {
+    } catch {
       /* ignore */
     }
+    if (!detected) detected = this.config.defaultLanguage;
     this.currentLanguage = detected;
-    this.saveLanguagePreference(detected);
+    // 仅当本地存储已有偏好时才持久化，
+    // 避免把浏览器自动检测结果写死，用户无法回到自动检测。
+    if (localStorage.getItem(this.config.storageKey)) {
+      this.saveLanguagePreference(detected);
+    }
     return detected;
   }
 
   detectBrowserLanguage() {
-    const langs = [
-      navigator.language,
-      ...(navigator.languages || []),
-      navigator.userLanguage,
-      navigator.browserLanguage,
-    ].filter(Boolean);
+    const langs = [navigator.language, ...(navigator.languages || [])].filter(
+      Boolean,
+    );
     for (const l of langs) {
       const s = l.substring(0, 2).toLowerCase();
       if (this.config.supportedLanguages.includes(s)) return s;
@@ -219,11 +214,13 @@ class I18n {
     );
   }
 
-  handleMissingTranslation(key, error) {
+  handleMissingTranslation(key, _error) {
     if (this.currentLanguage !== this.config.fallbackLanguage) {
       try {
         return this.getTranslation(key, this.config.fallbackLanguage);
-      } catch (e) {}
+      } catch {
+        /* fall through to default behavior */
+      }
     }
     return this.config.errorHandling &&
       this.config.errorHandling.missingKeyBehavior === "empty"
@@ -246,7 +243,6 @@ class I18n {
       if (language === "vampire") this.addVampireEffects();
       else if (wasVampire) this.removeVampireEffects();
       this.saveLanguagePreference(language);
-      this.updateUrl(language);
       this.updateLanguageButton();
       this.updateDocumentLanguage();
       this.clearCache();
@@ -278,68 +274,57 @@ class I18n {
   saveLanguagePreference(language) {
     try {
       localStorage.setItem(this.config.storageKey, language);
-    } catch (e) {}
-  }
-  updateUrl(language) {
-    const url = new URL(window.location);
-    url.searchParams.set(this.config.autoDetect.urlParam || "lang", language);
-    window.history.replaceState({}, "", url);
+    } catch {}
   }
 
   // apply translations to DOM
-  async applyLanguage(language) {
+  async applyLanguage(_language) {
     try {
-      const i18nEls = document.querySelectorAll("[data-i18n]");
-      i18nEls.forEach((el) => {
-        const k = el.getAttribute("data-i18n");
-        if (k) {
-          const t = this.t(k);
-          if (t && t !== k) el.textContent = t;
-        }
-      });
-      const phEls = document.querySelectorAll("[data-i18n-placeholder]");
-      phEls.forEach((el) => {
-        const k = el.getAttribute("data-i18n-placeholder");
-        if (k) {
-          const t = this.t(k);
-          if (t && t !== k) el.placeholder = t;
-        }
-      });
-      const titleEls = document.querySelectorAll("[data-i18n-title]");
-      titleEls.forEach((el) => {
-        const k = el.getAttribute("data-i18n-title");
-        if (k) {
-          const t = this.t(k);
-          if (t && t !== k) el.title = t;
-        }
-      });
-      // 更新 aria-label（由 i18n 负责可访问性文本）
-      const ariaEls = document.querySelectorAll("[data-i18n-aria-label]");
-      ariaEls.forEach((el) => {
-        const k = el.getAttribute("data-i18n-aria-label");
-        if (k) {
-          const t = this.t(k);
-          if (t && t !== k) el.setAttribute("aria-label", t);
-        }
-      });
-      const altEls = document.querySelectorAll("[data-i18n-alt]");
-      altEls.forEach((el) => {
-        const k = el.getAttribute("data-i18n-alt");
-        if (k) {
-          const t = this.t(k);
-          if (t && t !== k) el.setAttribute("alt", t);
-        }
-      });
-      const metaEls = document.querySelectorAll("[data-i18n-meta-content]");
-      metaEls.forEach((el) => {
-        const k = el.getAttribute("data-i18n-meta-content");
-        if (k) {
-          const t = this.t(k);
-          if (t && t !== k) el.setAttribute("content", t);
-        }
+      // 通用属性翻译：data-i18n-<attr>="key"，可选 data-i18n-<attr>-vars='{"k":"v"}'
+      const attrTargets = [
+        { attr: "data-i18n", apply: (el, v) => (el.textContent = v) },
+        {
+          attr: "data-i18n-placeholder",
+          apply: (el, v) => (el.placeholder = v),
+        },
+        { attr: "data-i18n-title", apply: (el, v) => (el.title = v) },
+        {
+          attr: "data-i18n-aria-label",
+          apply: (el, v) => el.setAttribute("aria-label", v),
+        },
+        { attr: "data-i18n-alt", apply: (el, v) => el.setAttribute("alt", v) },
+        {
+          attr: "data-i18n-meta-content",
+          apply: (el, v) => el.setAttribute("content", v),
+        },
+      ];
+
+      attrTargets.forEach(({ attr, apply }) => {
+        document.querySelectorAll(`[${attr}]`).forEach((el) => {
+          const k = el.getAttribute(attr);
+          if (!k) return;
+          const vars = this.parseVars(el.getAttribute(`${attr}-vars`));
+          const t = this.t(k, vars);
+          if (t && t !== k) apply(el, t);
+        });
       });
     } catch (e) {
       console.error("[I18n] applyLanguage error", e);
+    }
+  }
+
+  /**
+   * 解析 data-i18n-*-vars 属性中的插值变量
+   * @param {string|null} raw - JSON 字符串
+   * @returns {Object} 变量对象
+   */
+  parseVars(raw) {
+    if (!raw) return {};
+    try {
+      const parsed = JSON.parse(raw);
+      return parsed && typeof parsed === "object" ? parsed : {};
+    } catch {
+      return {};
     }
   }
 
@@ -349,15 +334,9 @@ class I18n {
     const normal = ["zh", "en"];
     const idx = normal.indexOf(this.currentLanguage);
     const next = idx === -1 ? "zh" : normal[(idx + 1) % normal.length];
-    const name =
-      this.t(`language.${next}`) ||
-      this.config.languageNames[next] ||
-      (next === "zh" ? "中文" : "English");
+    const name = this.t(`language.${next}`);
     btn.textContent = name;
-    btn.setAttribute(
-      "title",
-      this.t("common.switchLanguage") || "Switch Language",
-    );
+    btn.setAttribute("title", this.t("common.switchLanguage"));
     if (this.currentLanguage === "vampire")
       btn.classList.add("vampire-mode-btn");
     else btn.classList.remove("vampire-mode-btn");
@@ -398,7 +377,7 @@ class I18n {
     return new Promise((resolve) => {
       const t = window.t || ((k) => k);
       Swal.fire({
-        title: t("greeting.vampireMode.activated") || "血族觉醒！",
+        title: t("greeting.vampireMode.activated"),
         text: "",
         icon: "success",
       }).then(() => resolve());
@@ -432,7 +411,7 @@ class I18n {
       this.events.get(evt).forEach((fn) => {
         try {
           fn(data);
-        } catch (e) {}
+        } catch {}
       });
     if (typeof document !== "undefined")
       document.dispatchEvent(
@@ -472,70 +451,30 @@ async function initializeI18nSystem() {
   if (initPromise) return initPromise;
   initPromise = (async () => {
     try {
-      if (!window.i18n || typeof window.i18n !== "object") {
-        createFallbackController();
-        setupGlobalFunctions();
-        return false;
-      }
-      const hasValid =
-        window.i18n.Lang_ZH || window.i18n.Lang_EN || window.i18n.Lang_Vampire;
-      if (!hasValid) {
-        createFallbackController();
-        setupGlobalFunctions();
-        return false;
-      }
+      // 翻译数据由 bootstrap.js 在本模块加载前同步导入，必然可用
       i18nInstance = new I18n(window.I18nConfig);
       await i18nInstance.init();
       languageController = i18nInstance;
       setupGlobalFunctions();
       setupAutoTranslation();
-      window.dispatchEvent(
+      // 与 i18n:* 事件保持一致：派发到 document 并允许冒泡，
+      // 确保监听 document 的模块（如 link-manager）能收到
+      document.dispatchEvent(
         new CustomEvent("i18nSystemReady", {
           detail: {
-            language: getCurrentLanguage(),
+            language: window.getCurrentLanguage(),
             hasAdvancedController: !!languageController,
             hasI18nCore: !!i18nInstance,
           },
+          bubbles: true,
         }),
       );
       return true;
-    } catch (e) {
-      createFallbackController();
-      setupGlobalFunctions();
+    } catch {
       return false;
     }
   })();
   return initPromise;
-}
-
-function createFallbackController() {
-  languageController = {
-    currentLanguage: "zh",
-    supportedLanguages: ["zh", "en"],
-    isInitialized: false,
-    getCurrentLanguage() {
-      return this.currentLanguage;
-    },
-    async setLanguage(lang) {
-      if (this.supportedLanguages.includes(lang)) {
-        this.currentLanguage = lang;
-        try {
-          localStorage.setItem("site-language-preference", lang);
-        } catch (e) {}
-      }
-    },
-    async switchLanguage() {
-      const i = this.supportedLanguages.indexOf(this.currentLanguage);
-      const n = (i + 1) % this.supportedLanguages.length;
-      await this.setLanguage(this.supportedLanguages[n]);
-    },
-    t(key) {
-      return key;
-    },
-    isReady() {
-      return true;
-    },
-  };
 }
 
 function setupGlobalFunctions() {
@@ -571,57 +510,11 @@ function setupGlobalFunctions() {
 }
 
 function setupAutoTranslation() {
+  // 复用 I18n 实例的 applyLanguage，避免两套重复的 DOM 翻译逻辑。
   const translate = () => {
-    const els = document.querySelectorAll("[data-i18n]");
-    els.forEach((el) => {
-      const k = el.getAttribute("data-i18n");
-      if (k) {
-        const t = window.t(k);
-        if (t && t !== k) el.textContent = t;
-      }
-    });
-    const ph = document.querySelectorAll("[data-i18n-placeholder]");
-    ph.forEach((el) => {
-      const k = el.getAttribute("data-i18n-placeholder");
-      if (k) {
-        const t = window.t(k);
-        if (t && t !== k) el.placeholder = t;
-      }
-    });
-    const tt = document.querySelectorAll("[data-i18n-title]");
-    tt.forEach((el) => {
-      const k = el.getAttribute("data-i18n-title");
-      if (k) {
-        const t = window.t(k);
-        if (t && t !== k) el.title = t;
-      }
-    });
-    const ar = document.querySelectorAll("[data-i18n-aria-label]");
-    ar.forEach((el) => {
-      const k = el.getAttribute("data-i18n-aria-label");
-      if (k) {
-        const t = window.t(k);
-        if (t && t !== k) el.setAttribute("aria-label", t);
-      }
-    });
-    // data-i18n-alt support
-    const altEls = document.querySelectorAll("[data-i18n-alt]");
-    altEls.forEach((el) => {
-      const k = el.getAttribute("data-i18n-alt");
-      if (k) {
-        const t = window.t(k);
-        if (t && t !== k) el.setAttribute("alt", t);
-      }
-    });
-    // data-i18n-meta-content support
-    const metaEls = document.querySelectorAll("[data-i18n-meta-content]");
-    metaEls.forEach((el) => {
-      const k = el.getAttribute("data-i18n-meta-content");
-      if (k) {
-        const t = window.t(k);
-        if (t && t !== k) el.setAttribute("content", t);
-      }
-    });
+    if (i18nInstance && typeof i18nInstance.applyLanguage === "function") {
+      i18nInstance.applyLanguage(i18nInstance.currentLanguage);
+    }
   };
   if (document.readyState === "loading")
     document.addEventListener("DOMContentLoaded", translate);
@@ -656,51 +549,6 @@ function setupAutoTranslation() {
   document.addEventListener("i18n:languageChanged", translate);
 }
 
-function waitForTranslationData(maxWait = 5000) {
-  return new Promise((resolve) => {
-    const start = Date.now();
-    (function check() {
-      if (
-        window.i18n &&
-        typeof window.i18n === "object" &&
-        (window.i18n.Lang_ZH || window.i18n.Lang_EN || window.i18n.Lang_Vampire)
-      ) {
-        resolve(true);
-        return;
-      }
-      if (Date.now() - start > maxWait) {
-        resolve(false);
-        return;
-      }
-      setTimeout(check, 50);
-    })();
-  });
-}
-
-async function safeInitializeI18nSystem() {
-  try {
-    const has = await waitForTranslationData();
-    if (has) return await initializeI18nSystem();
-    createFallbackController();
-    setupGlobalFunctions();
-    return false;
-  } catch (e) {
-    createFallbackController();
-    setupGlobalFunctions();
-    return false;
-  }
-}
-
 if (document.readyState === "loading")
-  document.addEventListener("DOMContentLoaded", safeInitializeI18nSystem);
-else safeInitializeI18nSystem();
-
-window.initI18nSystem = initializeI18nSystem;
-window.safeInitI18nSystem = safeInitializeI18nSystem;
-
-const I18nConfig =
-  typeof window !== "undefined" && window.I18nConfig
-    ? window.I18nConfig
-    : DEFAULT_I18N_CONFIG;
-if (typeof window !== "undefined") window.I18n = I18n;
-export { I18n, I18nConfig };
+  document.addEventListener("DOMContentLoaded", initializeI18nSystem);
+else initializeI18nSystem();

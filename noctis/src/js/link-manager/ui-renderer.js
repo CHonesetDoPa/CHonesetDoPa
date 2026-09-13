@@ -1,6 +1,6 @@
 /**
- * UIRenderer
- * 负责 DOM 元素的创建和渲染
+ * ui-renderer.js
+ * Creates and renders DOM elements.
  */
 export class UIRenderer {
   constructor() {
@@ -169,7 +169,7 @@ export class UIRenderer {
     // 添加 Session ID （特殊处理）
     const sessionLi = document.createElement("li");
     const sessionLink = document.createElement("a");
-    sessionLink.href = "javascript:void(0);";
+    sessionLink.href = "#";
     sessionLink.onclick = (event) => {
       event.preventDefault();
       window.session_id && window.session_id();
@@ -182,7 +182,10 @@ export class UIRenderer {
     // 可见文本由 i18n 系统管理
     sessionLink.setAttribute("data-i18n", "socialMedia.session");
     sessionLink.setAttribute("data-i18n-title", "socialMedia.links.session");
-    sessionLink.setAttribute("data-i18n-aria-label", "socialMedia.links.session");
+    sessionLink.setAttribute(
+      "data-i18n-aria-label",
+      "socialMedia.links.session",
+    );
     sessionLink.textContent = "Session";
 
     sessionLi.appendChild(sessionLink);
@@ -250,8 +253,6 @@ export class UIRenderer {
         const li = document.createElement("li");
         const link = document.createElement("a");
         link.href = url;
-        link.setAttribute("data-en", siteNames[siteKey].en);
-        link.setAttribute("data-zh", siteNames[siteKey].zh);
         // 根据当前语言设置初始文本，避免 i18n MutationObserver 触发闪动
         const textKey = "websites." + (siteI18nKeyMap[siteKey] || siteKey);
         link.setAttribute("data-i18n", textKey);

@@ -1,4 +1,7 @@
-// src/icon.js
+/**
+ * icon.js
+ * Centralized FontAwesome icon registration.
+ */
 
 import { library, dom } from "@fortawesome/fontawesome-svg-core";
 
@@ -50,6 +53,6 @@ library.add(
   faCloud,
   faExclamationTriangle,
   faTimesCircle,
-  faScissors
+  faScissors,
 );
 dom.watch();

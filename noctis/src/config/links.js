@@ -1,10 +1,17 @@
+/**
+ * links.js
+ * Page data configuration (personal, social, sponsor, sites, status).
+ */
+
+const wechatQRUrl = new URL("../assets/img/app1.webp", import.meta.url).href;
+
 export default {
   personal: {
     email: "CH@nekoc.cc",
     sessionId:
       "05173af7d9a4d731c22b5279fd10a46ef57782894e8b45991ace2bac686cb45876",
     pgpKey: {
-      local: "./ch.asc",
+      local: "/ch.asc",
       remote: "https://keys.openpgp.org/search?q=ch%40nekoc.cc",
     },
   },
@@ -24,7 +31,7 @@ export default {
       "https://patreon.com/CHonesetDoPa?utm_medium=unknown&utm_source=join_link&utm_campaign=creatorshare_creator&utm_content=copyLink",
     afdian: "https://afdian.com/a/ch6306",
     opencollective: "https://opencollective.com/ch6306",
-    wechatQR: "assets/img/app1.webp",
+    wechatQR: wechatQRUrl,
   },
   relatedSites: {
     qtnull: "https://github.com/qtnull",
@@ -35,18 +42,7 @@ export default {
     sponsor: "sponsor.html",
     messageVerify: "verify.html",
   },
-  status: {
-    siteRunning: {
-      zh: "🟢 正常",
-      en: "🟢 Normal",
-    },
-    adminStatus: {
-      zh: "🟢 活着",
-      en: "🟢 Still Alive",
-    },
-  },
   meta: {
-    copyright: "Copyright 2026 CH 每一天都是新的一天",
     typewriterStrings: [
       "每一天都是新的一天",
       "Everyday is a new day",

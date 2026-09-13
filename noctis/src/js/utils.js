@@ -1,5 +1,6 @@
 /**
- * Utils
+ * utils.js
+ * Clipboard, page interaction and misc utilities.
  */
 
 import Swal from "sweetalert2";
@@ -7,74 +8,23 @@ import Swal from "sweetalert2";
 // ===== 剪贴板工具函数 =====
 (function () {
   /**
-   * 复制文本到剪贴板
+   * 复制文本到剪贴板（使用 Clipboard API）
    * @param {string} data - 要复制的文本内容
-   * @param {function} callback - 回调函数，参数为成功/失败状态
    */
-  window.copy = function (data, callback) {
-    // 优先使用现代的 Clipboard API
-    if (navigator.clipboard && navigator.clipboard.writeText) {
-      navigator.clipboard
-        .writeText(data)
-        .then(function () {
-          Swal.fire({ title: "Completed！"});
-          if (callback && typeof callback === "function") {
-            callback(true);
-          }
-        })
-        .catch(function (err) {
-          console.error(
-            "Clipboard API failed, falling back to legacy method:",
-            err,
-          );
-          copyFallback(data, callback);
+  window.copy = function (data) {
+    navigator.clipboard
+      .writeText(data)
+      .then(function () {
+        Swal.fire({ title: window.t("common.copySuccess") });
+      })
+      .catch(function (err) {
+        console.error("Clipboard API failed:", err);
+        Swal.fire({
+          title: window.t("common.copyFailed"),
+          icon: "error",
         });
-    } else {
-      // 回退到旧方法作为兼容性支持
-      copyFallback(data, callback);
-    }
+      });
   };
-
-  /**
-   * 兼容性复制方法
-   * @param {string} data - 要复制的文本内容
-   * @param {function} callback - 回调函数，参数为成功/失败状态
-   */
-  function copyFallback(data, callback) {
-    try {
-      let textarea = document.createElement("textarea");
-      textarea.setAttribute("readonly", "readonly");
-      textarea.value = data;
-      // 隐藏元素，避免页面抖动
-      textarea.style.position = "absolute";
-      textarea.style.left = "-9999px";
-      textarea.style.top = "0";
-      document.body.appendChild(textarea);
-      textarea.select();
-      textarea.setSelectionRange(0, 99999); // 兼容 iOS
-
-      let success = document.execCommand("Copy");
-      document.body.removeChild(textarea);
-
-      if (success) {
-        Swal.fire({ title: "Completed！"});
-        if (callback && typeof callback === "function") {
-          callback(true);
-        }
-      } else {
-        Swal.fire({ title: "Copy failed!" });
-        if (callback && typeof callback === "function") {
-          callback(false);
-        }
-      }
-    } catch (err) {
-      console.error("Fallback copy method failed:", err);
-      Swal.fire({ title: "Copy failed!" });
-      if (callback && typeof callback === "function") {
-        callback(false);
-      }
-    }
-  }
 })();
 
 // ===== 页面交互效果 =====

@@ -1,13 +1,14 @@
-// vite.config.js
-import { defineConfig, loadEnv } from "vite";
+/**
+ * vite.config.js
+ * Vite build configuration.
+ */
+import { defineConfig } from "vite";
 import viteCompression from "vite-plugin-compression2";
 import removeConsole from "vite-plugin-remove-console";
 import htmlMinifier from "vite-plugin-html-minifier";
 import path from "path";
 
-export default defineConfig(({ mode }) => {
-  const env = loadEnv(mode, process.cwd(), "");
-
+export default defineConfig(() => {
   const ASSET_PREFIX = `VampireC`;
 
   return {
@@ -102,11 +103,6 @@ export default defineConfig(({ mode }) => {
           },
         },
       },
-    },
-
-    define: {
-      __APP_MODE__: JSON.stringify(env.MODE),
-      __API_BASE__: JSON.stringify(env.VITE_API_BASE || ""),
     },
   };
 });
