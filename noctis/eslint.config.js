@@ -61,6 +61,18 @@ export default [
     },
   },
 
+  // Build/utility scripts run in Node
+  {
+    files: ["scripts/**/*.{js,mjs,cjs}"],
+    languageOptions: {
+      ecmaVersion: "latest",
+      sourceType: "module",
+      globals: {
+        ...globals.node,
+      },
+    },
+  },
+
   // Disable ESLint rules that conflict with Prettier (must be last)
   prettier,
 ];

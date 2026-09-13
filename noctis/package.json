@@ -9,6 +9,7 @@
     "build": "vite build",
     "preview": "vite preview",
     "clear": "rm -rf dist",
+    "check-i18n": "node scripts/check-i18n.js",
     "lint": "eslint .",
     "format": "prettier --write ."
   },

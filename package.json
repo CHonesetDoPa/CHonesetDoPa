@@ -5,6 +5,9 @@
     "noctis:dev": "pnpm --filter noctis dev",
     "noctis:build": "pnpm --filter noctis build",
     "noctis:preview": "pnpm --filter noctis preview",
-    "noctis:clear": "pnpm --filter noctis clear"
+    "noctis:clear": "pnpm --filter noctis clear",
+    "noctis:lint": "pnpm --filter noctis lint",
+    "noctis:format": "pnpm --filter noctis format",
+    "noctis:check-i18n": "pnpm --filter noctis check-i18n"
   }
 }
