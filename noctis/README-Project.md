@@ -45,18 +45,18 @@ pnpm install
 
 在仓库根目录执行
 
-| 命令                  | 说明                                                 |
-| --------------------- | ---------------------------------------------------- |
-| `pnpm noctis:dev`     | 启动 Vite 开发服务器（端口自动分配并自动打开浏览器） |
-| `pnpm noctis:build`   | 构建生产包，输出到 `noctis/dist/`                    |
-| `pnpm noctis:build:skip-assets` | 跳过头像与背景资源生成，直接执行其余构建步骤 |
-| `pnpm noctis:preview` | 本地预览构建产物                                     |
-| `pnpm noctis:clear`   | 删除 `noctis/dist/`                                  |
-| `pnpm noctis:lint`    | 执行 ESLint 检查                                      |
-| `pnpm noctis:format`  | 使用 Prettier 格式化项目文件                         |
-| `pnpm noctis:check-i18n` | 检查三种语言包的键是否保持一致                    |
-| `pnpm noctis:gen-hero` | 重新生成头像和背景的响应式资源                       |
-| `pnpm docs:tips`      | 根据 `docs/tips.md` 生成 GitHub Pages 入口页         |
+| 命令                            | 说明                                                 |
+| ------------------------------- | ---------------------------------------------------- |
+| `pnpm noctis:dev`               | 启动 Vite 开发服务器（端口自动分配并自动打开浏览器） |
+| `pnpm noctis:build`             | 构建生产包，输出到 `noctis/dist/`                    |
+| `pnpm noctis:build:skip-assets` | 跳过头像与背景资源生成，直接执行其余构建步骤         |
+| `pnpm noctis:preview`           | 本地预览构建产物                                     |
+| `pnpm noctis:clear`             | 删除 `noctis/dist/`                                  |
+| `pnpm noctis:lint`              | 执行 ESLint 检查                                     |
+| `pnpm noctis:format`            | 使用 Prettier 格式化项目文件                         |
+| `pnpm noctis:check-i18n`        | 检查三种语言包的键是否保持一致                       |
+| `pnpm noctis:gen-hero`          | 重新生成头像和背景的响应式资源                       |
+| `pnpm docs:tips`                | 根据 `docs/tips.md` 生成 GitHub Pages 入口页         |
 
 也可以先 `cd noctis`，再使用不带前缀的等价命令 `pnpm dev` / `pnpm build` / `pnpm preview` / `pnpm clear`。
 
@@ -139,13 +139,13 @@ noctis/
         └── verify.css          # 验证页样式
 ```
 
-  仓库根目录的 `docs/` 是独立的 GitHub Pages 提示页：`index.html` 由
-  `docs/tips.md` 生成，`tips.js` 和 `style.css` 提供页面行为与样式，`robots.txt`
-  禁止搜索引擎索引。它不参与 `noctis` 的 Vite 构建。
+仓库根目录的 `docs/` 是独立的 GitHub Pages 提示页：`index.html` 由
+`docs/tips.md` 生成，`tips.js` 和 `style.css` 提供页面行为与样式，`robots.txt`
+禁止搜索引擎索引。它不参与 `noctis` 的 Vite 构建。
 
-  三个入口脚本（`main.js` / `sponsor.js` / `verify.js`）均为薄入口，统一调用
-  `src/js/bootstrap.js` 的 `bootstrapPage()`。bootstrap 依次引入样式与基础模块，
-  再加载 `i18n-system.js`，最后用 `links.js` 配置调用 `window.linkManager.initializeAll()`。
+三个入口脚本（`main.js` / `sponsor.js` / `verify.js`）均为薄入口，统一调用
+`src/js/bootstrap.js` 的 `bootstrapPage()`。bootstrap 依次引入样式与基础模块，
+再加载 `i18n-system.js`，最后用 `links.js` 配置调用 `window.linkManager.initializeAll()`。
 
 ## 配置指南
 
@@ -202,4 +202,4 @@ supportedLanguages: ["zh", "en", "vampire", "fr"],
 
 ---
 
-*Built By CH*
+_Built By CH_

@@ -36,7 +36,9 @@ async function main() {
     const exportName = `${lang}Translations`;
     const data = mod[exportName];
     if (!data || typeof data !== "object" || Array.isArray(data)) {
-      console.error(`✗ ${file}: expected named export "${exportName}" not found`);
+      console.error(
+        `✗ ${file}: expected named export "${exportName}" not found`,
+      );
       process.exitCode = 1;
       return;
     }

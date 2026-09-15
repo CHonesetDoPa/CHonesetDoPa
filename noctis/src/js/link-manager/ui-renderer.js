@@ -233,10 +233,7 @@ export class UIRenderer {
       link.setAttribute("data-i18n-aria-label", "websites.links." + siteKey);
 
       // 如果不是站内独立页面，在新标签页打开
-      if (
-        url !== "sponsor.html" &&
-        url !== "verify.html"
-      ) {
+      if (url !== "sponsor.html" && url !== "verify.html") {
         link.target = "_blank";
       }
       li.appendChild(link);
