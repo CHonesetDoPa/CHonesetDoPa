@@ -204,42 +204,9 @@ export class UIRenderer {
     const container = document.getElementById(containerId);
     if (!container || !config?.relatedSites) return;
 
-    // 映射 config key → i18n key (websites.*)
-    const siteI18nKeyMap = {
-      qtnull: "neighborQt",
-      nekocServer: "gameServerList",
-      chFileShare: "chFileShare",
-      qtFileShare: "qtFileShare",
-      sponsor: "sponsor",
-      messageVerify: "pgpKey",
-    };
-
-    const siteNames = {
-      qtnull: { zh: "隔壁QT", en: "The Next Door QT" },
-      nekocServer: { zh: "NekoC 游戏服务器列表", en: "NekoC Game Server List" },
-      chFileShare: {
-        zh: "CH GAS 公共文件共享",
-        en: "CH GAS Public File Share Service",
-      },
-      qtFileShare: {
-        zh: "QT GAS 公共文件共享",
-        en: "QT GAS Public File Share Service",
-      },
-      sponsor: { zh: "赞助CC", en: "Sponsor CC" },
-      messageVerify: {
-        zh: "进行消息验证 / 下载CH的PGP公钥",
-        en: "Message Verification / Download CH's PGP Public Key",
-      },
-    };
-
-    // 获取当前语言（vampire 时回退到 zh）
-    const currentLang = (() => {
-      const lang = document.documentElement.lang;
-      if (lang === "zh-CN" || lang === "zh") return "zh";
-      if (lang === "en-US" || lang === "en") return "en";
-      // vampire 及其他语言使用中文作为回退
-      return "zh";
-    })();
+    // 键名约定：config.relatedSites 的 key 直接对应 i18n 键
+    //   可见文本 → websites.<key>
+    //   标题/aria → websites.links.<key>
 
     // 清空容器
     container.innerHTML = "";
@@ -249,26 +216,31 @@ export class UIRenderer {
 
     // 生成相关网站列表
     Object.entries(config.relatedSites).forEach(([siteKey, url]) => {
-      if (siteNames[siteKey]) {
-        const li = document.createElement("li");
-        const link = document.createElement("a");
-        link.href = url;
-        // 根据当前语言设置初始文本，避免 i18n MutationObserver 触发闪动
-        const textKey = "websites." + (siteI18nKeyMap[siteKey] || siteKey);
-        link.setAttribute("data-i18n", textKey);
-        link.textContent =
-          siteNames[siteKey][currentLang] || siteNames[siteKey].zh;
-        // 添加 data-i18n 标记
-        link.setAttribute("data-i18n-title", "websites.links." + siteKey);
-        link.setAttribute("data-i18n-aria-label", "websites.links." + siteKey);
-
-        // 如果不是sponsor.html和verify.html，在新标签页打开
-        if (url !== "sponsor.html" && url !== "verify.html") {
-          link.target = "_blank";
-        }
-        li.appendChild(link);
-        ul.appendChild(li);
+      // 文案单一来源为 i18n 表；渲染发生在 i18n 系统就绪之后，window.t 可用。
+      // 初始文本直接取当前语言译文，避免 i18n MutationObserver 触发闪动。
+      const textKey = "websites." + siteKey;
+      let displayText = window.t(textKey);
+      // 降级处理：若翻译缺失（返回 key 本身），使用 siteKey 作为兜底文本，避免项目完全不渲染
+      if (displayText === textKey) {
+        displayText = siteKey;
       }
+      const li = document.createElement("li");
+      const link = document.createElement("a");
+      link.href = url;
+      link.setAttribute("data-i18n", textKey);
+      link.textContent = displayText;
+      link.setAttribute("data-i18n-title", "websites.links." + siteKey);
+      link.setAttribute("data-i18n-aria-label", "websites.links." + siteKey);
+
+      // 如果不是站内独立页面，在新标签页打开
+      if (
+        url !== "sponsor.html" &&
+        url !== "verify.html"
+      ) {
+        link.target = "_blank";
+      }
+      li.appendChild(link);
+      ul.appendChild(li);
     });
 
     // 将ul添加到容器中

@@ -263,11 +263,12 @@ class CursorSpecialEffects {
   handlePageHide() {
     this.stop();
     this.booms = [];
-    this.detachListeners();
+    this.clearDirty();
   }
 
   handlePageShow() {
     if (!this.initialized) return;
+    this.resizeCanvas();
     this.attachListeners();
   }
 

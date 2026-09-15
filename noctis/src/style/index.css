@@ -143,16 +143,25 @@ strong {
   position: relative;
   margin-top: -2rem;
   width: 100%;
+  overflow: hidden;
   background-color: #49b1f5;
-  background-attachment: local;
-  background-position: center;
-  background-size: cover;
+}
+
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+  pointer-events: none;
 }
 
 #page_site-info {
   position: absolute;
   top: 10rem;
   width: 100%;
+  z-index: 1;
 }
 
 #site-title {
@@ -416,6 +425,84 @@ img {
 #related-sites-list a:hover {
   text-decoration: underline !important;
   color: #0066cc !important;
+}
+
+.friend-links-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 12px;
+}
+
+.friend-link-card {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 3px;
+  background: #fff;
+  box-shadow: 0 4px 8px 6px rgba(7, 17, 27, 0.06);
+  text-decoration: none;
+  color: #4c4948;
+  transition: all 0.3s;
+}
+
+.friend-link-card:hover {
+  box-shadow: 0 6px 12px rgba(7, 17, 27, 0.12);
+  text-decoration: none;
+}
+
+.friend-link-card:hover .friend-link-name {
+  color: #ff0066;
+}
+
+.friend-link-avatar {
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(to right, #ff0066 0%, #ff00cc 100%);
+}
+
+.friend-link-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.friend-link-initial {
+  color: #fff;
+  font-size: 1.4rem;
+  font-weight: bold;
+  line-height: 1;
+  user-select: none;
+}
+
+.friend-link-info {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.friend-link-name {
+  font-weight: 500;
+  font-size: 0.95rem;
+  color: #4c4948;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: color 0.3s;
+}
+
+.friend-link-desc {
+  font-size: 0.78rem;
+  color: #8a8a8a;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 /* 确保占位符容器不影响布局 */
@@ -695,6 +782,31 @@ img {
   color: #00ff6a !important;
 }
 
+.dark-mode .friend-link-card {
+  background-color: #252525;
+  color: #ffffffbe;
+}
+
+.dark-mode .friend-link-card:hover {
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+}
+
+.dark-mode .friend-link-card:hover .friend-link-name {
+  color: #00ff6a;
+}
+
+.dark-mode .friend-link-avatar {
+  background: linear-gradient(to right, #00c853 0%, #00ff6a 100%);
+}
+
+.dark-mode .friend-link-name {
+  color: #ffffffbe;
+}
+
+.dark-mode .friend-link-desc {
+  color: #ffffff80;
+}
+
 /* Dark mode sponsor button styles */
 .dark-mode .spon {
   background: #333;
@@ -897,6 +1009,42 @@ img {
 .vampire-mode #related-sites-list a:hover {
   color: var(--vampire-secondary) !important;
   text-shadow: 0 0 5px var(--vampire-shadow);
+}
+
+.vampire-mode .friend-link-card {
+  background-color: var(--vampire-card-bg);
+  border: 1px solid var(--vampire-primary);
+  color: var(--vampire-text);
+  box-shadow:
+    0 0 10px var(--vampire-shadow),
+    0 0 20px rgba(139, 0, 0, 0.1);
+}
+
+.vampire-mode .friend-link-card:hover {
+  box-shadow:
+    0 0 15px var(--vampire-shadow),
+    0 0 30px rgba(139, 0, 0, 0.2);
+}
+
+.vampire-mode .friend-link-card:hover .friend-link-name {
+  color: var(--vampire-secondary);
+  text-shadow: 0 0 5px var(--vampire-shadow);
+}
+
+.vampire-mode .friend-link-avatar {
+  background: linear-gradient(
+    to right,
+    var(--vampire-primary) 0%,
+    var(--vampire-secondary) 100%
+  );
+}
+
+.vampire-mode .friend-link-name {
+  color: var(--vampire-text);
+}
+
+.vampire-mode .friend-link-desc {
+  color: #cc9999;
 }
 
 .vampire-mode h1,

@@ -46,11 +46,9 @@ class LinkManager {
     }
 
     this.languageSwitchTimer = setTimeout(() => {
-      // 语言切换时不需要重建 DOM（data-i18n 系统自动更新文本），
-      // 避免 container.innerHTML = '' 导致的闪动。
-      // 仅更新需要手动处理的状态信息。
       const config = this.configManager.getConfig();
       if (config) {
+        this.uiRenderer.renderRelatedSites("related-sites-list", config);
         this.uiRenderer.updateStatusInfo(config);
       }
     }, 50);

@@ -5,13 +5,16 @@
 
 const wechatQRUrl = new URL("../assets/img/app1.webp", import.meta.url).href;
 
+const publicUrl = (file) =>
+  `${import.meta.env.BASE_URL}${file}`.replace(/\/{2,}/g, "/");
+
 export default {
   personal: {
     email: "CH@nekoc.cc",
     sessionId:
       "05173af7d9a4d731c22b5279fd10a46ef57782894e8b45991ace2bac686cb45876",
     pgpKey: {
-      local: "/ch.asc",
+      local: publicUrl("ch.asc"),
       remote: "https://keys.openpgp.org/search?q=ch%40nekoc.cc",
     },
   },
@@ -37,8 +40,6 @@ export default {
     qtnull: "https://github.com/qtnull",
     nekocServer: "https://server.nekoc.cc",
     chFileShare: "https://file.nekoc.cc/CH6306",
-    qtFileShare: "https://file.nekoc.cc/QT%C3%98",
-    servicesStatus: "https://kuma.nekoc.cc/status/nya",
     sponsor: "sponsor.html",
     messageVerify: "verify.html",
   },

@@ -26,10 +26,38 @@
     <div id="body-wrap">
       <!-- Hero Section -->
       <header class="hero-section not_index_bg" id="nav" role="banner">
+        <picture>
+          <source
+            type="image/avif"
+            sizes="100vw"
+            srcset="
+              ./assets/img/hero/BG-988.avif   988w,
+              ./assets/img/hero/BG-1280.avif 1280w,
+              ./assets/img/hero/BG-2000.avif 2000w
+            "
+          />
+          <source
+            type="image/webp"
+            sizes="100vw"
+            srcset="
+              ./assets/img/hero/BG-988.webp   988w,
+              ./assets/img/hero/BG-1280.webp 1280w,
+              ./assets/img/hero/BG-2000.webp 2000w
+            "
+          />
+          <img
+            class="hero-bg"
+            src="./assets/img/hero/BG-2000.webp"
+            alt=""
+            fetchpriority="high"
+            decoding="async"
+          />
+        </picture>
         <div id="page_site-info">
-          <section id="site-title" role="heading" aria-level="1">
+          <h1 id="site-title">
+            <span class="sr-only" data-i18n="site.title">CH's HomePage</span>
             <span class="blogtitle" aria-hidden="true"></span>
-          </section>
+          </h1>
         </div>
       </header>
 
@@ -58,15 +86,31 @@
               </h2>
               <div class="card-content">
                 <div class="card-info-avatar is-center">
-                  <img
-                    class="avatar-img"
-                    id="avatar"
-                    alt="CH的头像"
-                    width="120"
-                    height="120"
-                    loading="eager"
-                    data-i18n-alt="verify.site.avatarAlt"
-                  />
+                  <picture class="avatar-picture">
+                    <source
+                      type="image/avif"
+                      srcset="./assets/img/hero/Avatar-128.avif 128w, ./assets/img/hero/Avatar-256.avif 256w, ./assets/img/hero/Avatar-512.avif 512w"
+                      sizes="120px"
+                    />
+                    <source
+                      type="image/webp"
+                      srcset="./assets/img/hero/Avatar-128.webp 128w, ./assets/img/hero/Avatar-256.webp 256w, ./assets/img/hero/Avatar-512.webp 512w"
+                      sizes="120px"
+                    />
+                    <img
+                      class="avatar-img"
+                      id="avatar"
+                      src="./assets/img/hero/Avatar-128.webp"
+                      srcset="./assets/img/hero/Avatar-128.webp 128w, ./assets/img/hero/Avatar-256.webp 256w, ./assets/img/hero/Avatar-512.webp 512w"
+                      sizes="120px"
+                      alt="CH的头像"
+                      width="120"
+                      height="120"
+                      loading="eager"
+                      decoding="async"
+                      data-i18n-alt="verify.site.avatarAlt"
+                    />
+                  </picture>
                   <div class="author-info__name">
                     <span><strong>CH</strong></span>
                   </div>
