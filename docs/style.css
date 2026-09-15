@@ -1,0 +1,210 @@
+/*
+ * style.css - Styles for the GitHub Pages poem splash page (docs/index.html).
+ */
+
+:root {
+  --bg: #1a0000;
+  --bg-soft: #2a0a0a;
+  --primary: #8b0000;
+  --accent: #ff69b4;
+  --text: #f5eaea;
+  --text-dim: #b99;
+  --glow: rgba(139, 0, 0, 0.55);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  padding: 2rem 1.25rem;
+  background:
+    radial-gradient(ellipse 120% 70% at 50% -10%, var(--bg-soft) 0%, var(--bg) 60%),
+    var(--bg);
+  color: var(--text);
+  font-family:
+    "Palatino Linotype",
+    "Songti SC",
+    "Noto Serif CJK SC",
+    Georgia,
+    serif;
+  text-align: center;
+  overflow-x: hidden;
+  cursor: pointer; /* whole page is a "skip" target */
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+a:hover,
+a:focus-visible {
+  text-decoration: underline;
+}
+
+/* ---------- Night sky decorations ---------- */
+
+.sky {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.moon {
+  position: absolute;
+  top: 8%;
+  right: 12%;
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 38% 35%, #fff8f0 0%, #e8d8d8 55%, #c9a8a8 100%);
+  box-shadow:
+    0 0 40px 12px var(--glow),
+    0 0 120px 40px rgba(139, 0, 0, 0.25);
+}
+
+.moon::after {
+  /* crescent shadow */
+  content: "";
+  position: absolute;
+  top: -8%;
+  left: -14%;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: var(--bg);
+  opacity: 0.9;
+}
+
+.bat {
+  position: absolute;
+  width: 34px;
+  height: 18px;
+  fill: #120000;
+  opacity: 0.85;
+  animation: fly 14s linear infinite;
+}
+
+.bat:nth-child(3) {
+  animation-duration: 18s;
+  animation-delay: -6s;
+  transform: scale(0.7);
+}
+
+.bat:nth-child(4) {
+  animation-duration: 22s;
+  animation-delay: -12s;
+  transform: scale(0.5);
+}
+
+@keyframes fly {
+  0% {
+    left: -6%;
+    top: 22%;
+  }
+  25% {
+    top: 14%;
+  }
+  50% {
+    left: 55%;
+    top: 26%;
+  }
+  75% {
+    top: 16%;
+  }
+  100% {
+    left: 106%;
+    top: 24%;
+  }
+}
+
+/* ---------- Poem splash page (index.html, generated from tips.md) ---------- */
+
+.poem {
+  position: relative;
+  z-index: 1;
+  max-width: 34rem;
+}
+
+.poem h1 {
+  margin-bottom: 2rem;
+  font-size: clamp(1.3rem, 4vw, 1.8rem);
+  letter-spacing: 0.35em;
+  text-indent: 0.35em;
+  text-shadow: 0 0 18px var(--glow);
+}
+
+.poem .lines p {
+  margin: 0.55rem 0;
+  font-size: 1.02rem;
+  line-height: 1.9;
+  letter-spacing: 0.06em;
+  color: var(--text);
+  opacity: 0;
+  animation: rise 0.9s ease forwards;
+}
+
+.poem .lines p.blank {
+  margin: 0.9rem 0;
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.poem .author {
+  margin-top: 2rem;
+  font-size: 0.85rem;
+  color: var(--text-dim);
+  letter-spacing: 0.2em;
+}
+
+.back {
+  position: relative;
+  z-index: 1;
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+}
+
+/* ---------- Reduced motion ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .bat {
+    animation: none;
+  }
+
+  .poem .lines p {
+    animation: none;
+    opacity: 1;
+  }
+}
+
+@media (max-width: 480px) {
+  .moon {
+    width: 64px;
+    height: 64px;
+    top: 5%;
+    right: 8%;
+  }
+}
