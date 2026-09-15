@@ -2,7 +2,7 @@
  * i18n/en.js
  * English language pack.
  */
-export default {
+export const enTranslations = {
   site: {
     title: "CH's HomePage",
     kawaii: "Sekai ichi kawaii!",
@@ -44,17 +44,15 @@ export default {
   },
   websites: {
     title: "Websites About Me",
-    neighborQt: "The Next Door QT",
-    gameServerList: "NekoC Game Server List",
+    qtnull: "The Next Door QT",
+    nekocServer: "NekoC Game Server List",
     chFileShare: "CH GAS Public File Share Service",
-    qtFileShare: "QT GAS Public File Share Service",
     sponsor: "Sponsor CC",
+    messageVerify: "Message verification / Download CH's PGP public key",
     links: {
       chFileShare: "Visit CH GAS Public File Share Service",
-      qtFileShare: "Visit QT GAS Public File Share Service",
       sponsor: "Go to sponsor page",
       messageVerify: "Message verification / Download CH's PGP public key",
-      servicesStatus: "View services status",
       qtnull: "Visit QT's GitHub homepage",
       nekocServer: "View NekoC server list",
     },
@@ -110,6 +108,8 @@ export default {
     cancel: "Cancel",
     copySuccess: "Copied!",
     copyFailed: "Copy failed, please copy manually",
+    tabTitleGone: "╭(°A°`)╮ Where are you going?",
+    tabTitleBack: "(ฅ>ω<*ฅ) Welcome back!",
   },
   greeting: {
     autoModeSwitch: {

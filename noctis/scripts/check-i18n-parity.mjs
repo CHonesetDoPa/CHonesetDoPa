@@ -23,48 +23,63 @@ function collectKeys(obj, prefix = "") {
   return keys;
 }
 
-const files = readdirSync(I18N_DIR).filter(
-  (f) => f.endsWith(".js") && f !== "index.js",
-);
-const keySets = {};
+async function main() {
+  const files = readdirSync(I18N_DIR).filter(
+    (f) => f.endsWith(".js") && f !== "index.js",
+  );
+  const keySets = {};
 
-for (const file of files) {
-  const url = pathToFileURL(join(I18N_DIR, file)).href;
-  const mod = await import(url);
-  const data = mod.default;
-  if (!data || typeof data !== "object") {
-    console.error(`✗ ${file}: no default export found`);
-    process.exit(1);
+  for (const file of files) {
+    const url = pathToFileURL(join(I18N_DIR, file)).href;
+    const mod = await import(url);
+    const lang = file.replace(/\.js$/, "");
+    const exportName = `${lang}Translations`;
+    const data = mod[exportName];
+    if (!data || typeof data !== "object" || Array.isArray(data)) {
+      console.error(`✗ ${file}: expected named export "${exportName}" not found`);
+      process.exitCode = 1;
+      return;
+    }
+    keySets[file] = collectKeys(data);
   }
-  keySets[file] = collectKeys(data);
-}
 
-const baseFile = "en.js";
-if (!keySets[baseFile]) {
-  console.error(`✗ Base language file ${baseFile} not found`);
-  process.exit(1);
-}
-const baseKeys = keySets[baseFile];
-
-let hasError = false;
-for (const [file, keys] of Object.entries(keySets)) {
-  const missing = [...baseKeys].filter((k) => !keys.has(k));
-  const extra = [...keys].filter((k) => !baseKeys.has(k));
-  if (missing.length || extra.length) {
-    hasError = true;
-    console.error(`\n✗ ${file} (base: ${baseFile}):`);
-    if (missing.length)
-      console.error(`  missing (${missing.length}): ${missing.join(", ")}`);
-    if (extra.length)
-      console.error(`  extra   (${extra.length}): ${extra.join(", ")}`);
-  } else {
-    console.log(`✓ ${file}: ${keys.size} keys, matches ${baseFile}`);
+  const baseFile = "zh.js";
+  if (!keySets[baseFile]) {
+    console.error(`✗ Base language file ${baseFile} not found`);
+    process.exitCode = 1;
+    return;
   }
+  const baseKeys = keySets[baseFile];
+
+  let hasError = false;
+  for (const [file, keys] of Object.entries(keySets)) {
+    if (file === baseFile) continue;
+
+    const missing = [...baseKeys].filter((k) => !keys.has(k));
+    const extra = [...keys].filter((k) => !baseKeys.has(k));
+    if (missing.length || extra.length) {
+      hasError = true;
+      console.error(`\n✗ ${file} (base: ${baseFile}):`);
+      if (missing.length)
+        console.error(`  missing (${missing.length}): ${missing.join(", ")}`);
+      if (extra.length)
+        console.error(`  extra   (${extra.length}): ${extra.join(", ")}`);
+    } else {
+      console.log(`✓ ${file}: ${keys.size} keys, matches ${baseFile}`);
+    }
+  }
+
+  if (hasError) {
+    console.error("\n✗ i18n parity FAILED");
+    process.exitCode = 1;
+    return;
+  }
+
+  console.log(`\n✓ i18n parity OK (${baseKeys.size} keys each)`);
 }
 
-console.log(
-  hasError
-    ? "\n✗ i18n parity FAILED"
-    : `\n✓ i18n parity OK (${baseKeys.size} keys each)`,
-);
-process.exit(hasError ? 1 : 0);
+main().catch((error) => {
+  const message = error instanceof Error ? error.message : String(error);
+  console.error(`✗ Unable to check i18n parity: ${message}`);
+  process.exitCode = 1;
+});

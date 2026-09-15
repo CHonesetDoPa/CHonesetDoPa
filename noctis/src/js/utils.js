@@ -34,12 +34,20 @@ import Swal from "sweetalert2";
   console.log("每天都是新的一天");
 
   // 浏览器萌标题切换效果
+  const tOr = (key, fallback) => {
+    const v = typeof window.t === "function" ? window.t(key) : null;
+    return v && v !== key ? v : fallback;
+  };
+  const titleBack = () =>
+    tOr("common.tabTitleBack", "(ฅ>ω<*ฅ) 诶嘿嘿，你回来啦！");
+  const titleGone = () => tOr("common.tabTitleGone", "╭(°A°`)╮ 你要去哪里？");
+
   let originalTitle = document.title;
   let isTabActive = true;
 
   window.addEventListener("focus", function () {
     isTabActive = true;
-    document.title = "(ฅ>ω<*ฅ) 诶嘿嘿，你回来啦！";
+    document.title = titleBack();
 
     // 2秒后恢复原标题
     setTimeout(() => {
@@ -51,13 +59,16 @@ import Swal from "sweetalert2";
 
   window.addEventListener("blur", function () {
     isTabActive = false;
-    if (
-      document.title !== "(ฅ>ω<*ฅ) 诶嘿嘿，你回来啦！" &&
-      document.title !== "╭(°A°`)╮ 你要去哪里？"
-    ) {
+    const gone = titleGone();
+    if (document.title !== titleBack() && document.title !== gone) {
       originalTitle = document.title;
     }
-    document.title = "╭(°A°`)╮ 你要去哪里？";
+    document.title = gone;
+  });
+
+  // 语言切换时同步未激活标签页的标题
+  document.addEventListener("i18n:languageChanged", () => {
+    if (!isTabActive) document.title = titleGone();
   });
 
   // 页面加载时保存原始标题
@@ -72,30 +83,8 @@ import Swal from "sweetalert2";
 
 // ===== 其他工具函数 =====
 
-/**
- * 防抖函数
- * @param {Function} func - 要防抖的函数
- * @param {number} wait - 等待时间（毫秒）
- * @param {boolean} immediate - 是否立即执行
- * @returns {Function} 防抖后的函数
- */
-window.debounce = function (func, wait, immediate) {
-  let timeout;
-  return function executedFunction(...args) {
-    const later = () => {
-      timeout = null;
-      if (!immediate) func.apply(this, args);
-    };
-    const callNow = immediate && !timeout;
-    clearTimeout(timeout);
-    timeout = setTimeout(later, wait);
-    if (callNow) func.apply(this, args);
-  };
-};
-
 // ES Modules 导出
 export const copy = window.copy;
-export const debounce = window.debounce;
 
 // 导出信息到控制台（开发模式）
 if (
@@ -103,5 +92,5 @@ if (
   window.location.hostname === "127.0.0.1"
 ) {
   console.log(" Utils.js loaded successfully");
-  console.log(" Available functions: copy, debounce");
+  console.log(" Available functions: copy");
 }

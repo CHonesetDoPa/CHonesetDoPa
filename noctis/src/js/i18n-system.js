@@ -4,6 +4,7 @@
  */
 
 import Swal from "sweetalert2";
+import translations from "../config/i18n/index.js";
 
 // ===== I18n 配置 =====
 const DEFAULT_I18N_CONFIG = {
@@ -12,47 +13,21 @@ const DEFAULT_I18N_CONFIG = {
   fallbackLanguage: "en",
   storageKey: "site-language-preference",
   autoDetect: { enabled: true },
-  inlineTranslations: {
-    enabled: true,
-    mapping: { zh: "Lang_ZH", en: "Lang_EN", vampire: "Lang_Vampire" },
-  },
   cache: { enabled: true, maxSize: 1000 },
   errorHandling: { missingKeyBehavior: "key" },
 };
 
-const DEFAULT_INLINE_TRANSLATION_MAPPING = {
-  zh: "Lang_ZH",
-  en: "Lang_EN",
-  vampire: "Lang_Vampire",
-};
-
-function getBundledTranslation(language, config = {}) {
-  const source = typeof window !== "undefined" ? window.i18n : null;
-  if (!source || typeof source !== "object") return null;
-  const inlineConfig = config.inlineTranslations || {};
-  if (inlineConfig.enabled === false) return null;
-  const combined = Object.assign(
-    {},
-    DEFAULT_INLINE_TRANSLATION_MAPPING,
-    inlineConfig.mapping || {},
-  );
-  const lang = typeof language === "string" ? language.trim() : "";
-  if (!lang) return null;
-  const variants = [
-    combined[lang],
-    combined[lang.toLowerCase()],
-    combined[lang.toUpperCase()],
-    lang,
-    lang.toLowerCase(),
-    lang.toUpperCase(),
-    `Lang_${lang.charAt(0).toUpperCase()}${lang.slice(1).toLowerCase()}`,
-    `Lang_${lang.toUpperCase()}`,
-  ];
-  for (const k of variants) {
-    if (!k) continue;
-    if (Object.prototype.hasOwnProperty.call(source, k)) return source[k];
-  }
-  return null;
+/**
+ * 按语言码获取翻译数据
+ * @param {string} language - 语言码，如 zh / en / vampire
+ * @returns {Object|null} 该语言的翻译对象，未知语言返回 null
+ */
+function getTranslationData(language) {
+  const lang =
+    typeof language === "string" ? language.trim().toLowerCase() : "";
+  return lang && Object.prototype.hasOwnProperty.call(translations, lang)
+    ? translations[lang]
+    : null;
 }
 
 // ===== I18n 类（合并控制器） =====
@@ -60,7 +35,7 @@ class I18n {
   constructor(config = {}) {
     this.config = Object.assign(
       {},
-      window.I18nConfig || DEFAULT_I18N_CONFIG,
+      window.i18nConfig || DEFAULT_I18N_CONFIG,
       config,
     );
     this.translations = {};
@@ -81,7 +56,7 @@ class I18n {
       this.isLoading = true;
       await this.detectLanguage();
       await this.loadLanguage(this.currentLanguage);
-      await this.applyLanguage(this.currentLanguage).catch(() => {});
+      await this.applyLanguage(this.currentLanguage);
       this.updateLanguageButton();
       this.updateDocumentLanguage();
       this.isInitialized = true;
@@ -134,11 +109,11 @@ class I18n {
 
   async loadLanguage(language) {
     if (this.translations[language]) return this.translations[language];
-    const inline = getBundledTranslation(language, this.config);
-    if (inline) {
-      this.translations[language] = inline;
-      this.emit("languageLoaded", { language, source: "bundle" });
-      return inline;
+    const data = getTranslationData(language);
+    if (data) {
+      this.translations[language] = data;
+      this.emit("languageLoaded", { language, source: "static" });
+      return data;
     }
     throw new Error(`No translations available for language: ${language}`);
   }
@@ -310,6 +285,7 @@ class I18n {
       });
     } catch (e) {
       console.error("[I18n] applyLanguage error", e);
+      this.emit("error", { type: "applyLanguage", error: e });
     }
   }
 
@@ -444,17 +420,14 @@ class I18n {
 
 // ===== 初始化和全局函数 =====
 let initPromise = null;
-let i18nInstance = null;
-let languageController = null;
+let i18n = null;
 
 async function initializeI18nSystem() {
   if (initPromise) return initPromise;
   initPromise = (async () => {
     try {
-      // 翻译数据由 bootstrap.js 在本模块加载前同步导入，必然可用
-      i18nInstance = new I18n(window.I18nConfig);
-      await i18nInstance.init();
-      languageController = i18nInstance;
+      i18n = new I18n(window.i18nConfig);
+      await i18n.init();
       setupGlobalFunctions();
       setupAutoTranslation();
       // 与 i18n:* 事件保持一致：派发到 document 并允许冒泡，
@@ -463,14 +436,14 @@ async function initializeI18nSystem() {
         new CustomEvent("i18nSystemReady", {
           detail: {
             language: window.getCurrentLanguage(),
-            hasAdvancedController: !!languageController,
-            hasI18nCore: !!i18nInstance,
+            ready: true,
           },
           bubbles: true,
         }),
       );
       return true;
-    } catch {
+    } catch (err) {
+      console.error("[I18n] system init failed", err);
       return false;
     }
   })();
@@ -478,42 +451,28 @@ async function initializeI18nSystem() {
 }
 
 function setupGlobalFunctions() {
-  const original =
-    typeof window !== "undefined" && window.i18n ? window.i18n : null;
-  window.t = function (k, o = {}) {
-    if (i18nInstance) return i18nInstance.t(k, o);
-    else if (languageController && languageController.t)
-      return languageController.t(k, o);
-    return k;
+  // 对外 API：window.t / switchLanguage / setLanguage / getCurrentLanguage
+  window.t = function (key, options = {}) {
+    return i18n ? i18n.t(key, options) : key;
   };
   window.switchLanguage = async function () {
-    if (languageController && languageController.switchLanguage)
-      await languageController.switchLanguage();
+    if (i18n) await i18n.switchLanguage();
   };
-  window.setLanguage = async function (l) {
-    if (languageController && languageController.setLanguage)
-      await languageController.setLanguage(l);
+  window.setLanguage = async function (language) {
+    if (i18n) await i18n.setLanguage(language);
   };
   window.getCurrentLanguage = function () {
-    if (languageController && languageController.getCurrentLanguage)
-      return languageController.getCurrentLanguage();
-    return "zh";
+    return i18n ? i18n.getCurrentLanguage() : "zh";
   };
-  window.i18nInstance = i18nInstance;
-  window.languageController = languageController;
-  if (
-    original &&
-    (original.Lang_ZH || original.Lang_EN || original.Lang_Vampire)
-  )
-    window.i18n = original;
-  else window.i18n = i18nInstance;
+  // 单例实例的调试入口（翻译数据可经 window.i18n.translations 查看）
+  window.i18n = i18n;
 }
 
 function setupAutoTranslation() {
   // 复用 I18n 实例的 applyLanguage，避免两套重复的 DOM 翻译逻辑。
   const translate = () => {
-    if (i18nInstance && typeof i18nInstance.applyLanguage === "function") {
-      i18nInstance.applyLanguage(i18nInstance.currentLanguage);
+    if (i18n && typeof i18n.applyLanguage === "function") {
+      i18n.applyLanguage(i18n.currentLanguage);
     }
   };
   if (document.readyState === "loading")

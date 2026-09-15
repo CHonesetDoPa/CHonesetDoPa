@@ -2,7 +2,7 @@
  * i18n/zh.js
  * Simplified Chinese language pack.
  */
-export default {
+export const zhTranslations = {
   site: {
     title: "CH的主页",
     kawaii: "世界第一可爱！",
@@ -41,17 +41,15 @@ export default {
   },
   websites: {
     title: "相关网站",
-    neighborQt: "隔壁QT",
-    gameServerList: "NekoC 游戏服务器列表",
+    qtnull: "隔壁QT",
+    nekocServer: "NekoC 游戏服务器列表",
     chFileShare: "CH GAS 公共文件共享",
-    qtFileShare: "QT GAS 公共文件共享",
     sponsor: "赞助CC",
+    messageVerify: "进行消息验证 / 下载CH的PGP公钥",
     links: {
       chFileShare: "访问CH GAS公共文件共享服务",
-      qtFileShare: "访问QT GAS公共文件共享服务",
       sponsor: "前往赞助页面",
       messageVerify: "进行消息验证 / 下载CH的PGP公钥",
-      servicesStatus: "查看服务运行状态",
       qtnull: "访问QT的GitHub主页",
       nekocServer: "查看NekoC服务器列表",
     },
@@ -107,6 +105,8 @@ export default {
     cancel: "取消",
     copySuccess: "复制成功！",
     copyFailed: "复制失败，请手动复制",
+    tabTitleGone: "╭(°A°`)╮ 你要去哪里？",
+    tabTitleBack: "(ฅ>ω<*ฅ) 诶嘿嘿，你回来啦！",
   },
   greeting: {
     autoModeSwitch: {
