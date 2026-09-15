@@ -78,7 +78,7 @@ pnpm noctis:preview
 - `root` 为 `src/`，`publicDir` 为 `../public`，输出 `dist/`
 - 构建目标 `esnext`
 - 路径别名 `@` → `src/`
-- 全局常量 `__APP_MODE__`（来自 `MODE`）与 `__API_BASE__`（来自 `VITE_API_BASE`，未设置时为空字符串）
+- 生产构建通过 `vite-plugin-remove-console` 移除 `console`（`src/js/utils.js` 除外）
 
 ## 项目结构
 
@@ -127,8 +127,9 @@ noctis/
         └── verify.css          # 验证页样式
 ```
 
-三个入口脚本的加载顺序一致：先引入样式与基础模块，再挂载
-`window.i18n = { Lang_ZH, Lang_EN, Lang_Vampire }`，之后才加载
+三个入口脚本（`main.js` / `sponsor.js` / `verify.js`）均为薄入口，统一调用
+`src/js/bootstrap.js` 的 `bootstrapPage()`。bootstrap 的加载顺序为：先引入样式与基础模块，
+再挂载 `window.i18n = { Lang_ZH, Lang_EN, Lang_Vampire }`，之后才加载
 `i18n-system.js`，最后用 `links.js` 配置调用 `window.linkManager.initializeAll()`。
 新增模块时请保持该顺序，否则国际化会读不到语言包。
 
@@ -136,7 +137,7 @@ noctis/
 
 - **站点数据与链接**：编辑 `src/config/links.js`。它默认导出一个配置对象，包含
   `personal`（邮箱、会话 ID、PGP 公钥地址）、`socialMedia`、`sponsor`、`relatedSites`、
-  `status`、`meta`（版权、打字机文案）等分组，入口脚本会把它交给 `window.linkManager.initializeAll()` 渲染。
+  `meta`（打字机文案）等分组，入口脚本会把它交给 `window.linkManager.initializeAll()` 渲染。
 - **国际化**：语言包位于 `src/config/i18n/`，默认语言 `zh`，回退语言 `en`，另含 `vampire`。
   语言切换支持 `localStorage`（键名 `site-language-preference`）与浏览器语言自动检测。
 - **PGP 公钥**：替换 `public/ch.asc`，并在 `links.js` 的 `personal.pgpKey` 中同步本地与远端地址。
@@ -156,10 +157,10 @@ export default {
 };
 ```
 
-2. 在每个入口脚本（`main.js`、`sponsor.js`、`verify.js`）中 import 并挂载：
+2. 在 `src/js/bootstrap.js` 中 import 并挂载（三个入口脚本共用 bootstrap，无需逐个修改）：
 
 ```js
-import Lang_FR from "./config/i18n/fr.js";
+import Lang_FR from "../config/i18n/fr.js";
 window.i18n = { Lang_ZH, Lang_EN, Lang_Vampire, Lang_FR };
 ```
 
@@ -171,10 +172,9 @@ inlineTranslations: {
   enabled: true,
   mapping: { zh: "Lang_ZH", en: "Lang_EN", vampire: "Lang_Vampire", fr: "Lang_FR" },
 },
-languageNames: { zh: "中文", en: "English", vampire: "血族古语", fr: "Français" },
 ```
 
-语言按钮会按 `supportedLanguages` 顺序循环切换。
+语言按钮在 `zh` / `en` 之间循环切换；`vampire` 为隐藏彩蛋（连续点击语言按钮 10 次激活）。
 
 ## 许可证
 

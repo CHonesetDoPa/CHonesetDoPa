@@ -121,7 +121,6 @@ export default {
       vampireExit: "已脱离血族真身",
     },
     vampireMode: {
-      label: "血族真身形态",
       activated: "血族真身降临！",
       welcome: "欢迎来到暗夜宫殿，吾的忠诚信徒～",
     },

@@ -125,7 +125,6 @@ export default {
       vampireExit: "Exited vampire mode",
     },
     vampireMode: {
-      label: "vampire mode",
       activated: "Vampire mode activated!",
       welcome: "Welcome to the dark palace, my follower~",
     },

@@ -344,7 +344,7 @@ img {
   color: #ffc1ca;
 }
 
-aside_content .card-info .author-info__description {
+#aside_content .card-info .author-info__description {
   margin-top: -0.3rem;
 }
 
@@ -517,8 +517,7 @@ aside_content .card-info .author-info__description {
 }
 
 #footer,
-.layout_page,
-.layout_post {
+.layout_page {
   -webkit-animation: main 1s;
   -moz-animation: main 1s;
   -o-animation: main 1s;
@@ -914,10 +913,6 @@ aside_content .card-info .author-info__description {
   border-color: var(--vampire-primary);
 }
 
-.vampire-mode hr:before {
-  color: var(--vampire-accent);
-}
-
 .vampire-mode .card-widget:hover {
   box-shadow:
     0 0 15px var(--vampire-shadow),
@@ -935,13 +930,7 @@ aside_content .card-info .author-info__description {
   transform: scale(1.1);
 }
 
-/* SweetAlert 血族样式 */
-.vampire-button {
-  background: #2a0a0a !important;
-  color: #cc9999 !important;
-  border: 1px solid #5a2020 !important;
-}
-
+/* Screen-reader-only utility */
 .sr-only {
   position: absolute;
   width: 1px;

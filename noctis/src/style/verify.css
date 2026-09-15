@@ -27,46 +27,6 @@ input[type="submit"] {
   border: 1px solid var(--border-color, #e0e0e0);
 }
 
-.form-group {
-  margin-bottom: 15px;
-}
-
-.form-group label {
-  display: block;
-  font-weight: bold;
-  margin-bottom: 5px;
-  color: var(--text-color, #333);
-}
-
-/* Form layout - side by side inputs */
-.form-row {
-  display: flex;
-  gap: 20px;
-  align-items: flex-start;
-}
-
-.form-row .form-group {
-  flex: 1;
-  margin-bottom: 0;
-}
-
-.form-control {
-  width: 100%;
-  padding: 10px;
-  border: 2px solid var(--input-border, #ddd);
-  border-radius: 4px;
-  font-family: monospace;
-  font-size: 14px;
-  resize: vertical;
-  transition: border-color 0.3s ease;
-}
-
-.form-control:focus {
-  outline: none;
-  border-color: var(--primary-color, #007bff);
-  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
-}
-
 /* Verification Buttons */
 .verification-buttons {
   display: flex;
@@ -103,17 +63,6 @@ input[type="submit"] {
   color: #555;
 }
 
-.btn-secondary {
-  background: #fafafa;
-  color: #777;
-  border-color: #e0e0e0;
-}
-
-.btn-secondary:hover {
-  background: #f0f0f0;
-  color: #555;
-}
-
 .btn-outline {
   background: transparent;
   color: #888;
@@ -124,46 +73,6 @@ input[type="submit"] {
   background: #f5f5f5;
   color: #666;
   border-color: #bbb;
-}
-
-/* Import Button Styles */
-.btn-import {
-  background: #fafafa;
-  color: #777;
-  border-color: #e0e0e0;
-}
-
-.btn-import:hover {
-  background: #f0f0f0;
-  color: #555;
-}
-
-.btn-import:active {
-  background: #e8e8e8;
-}
-
-/* PGP Key Info */
-.pgp-info {
-  background: var(--card-bg, #f8f9fa);
-  border-radius: 8px;
-  padding: 20px;
-  margin-top: 20px;
-}
-
-.key-info-box {
-  background: var(--bg-color, #fff);
-  border: 1px solid var(--border-color, #e0e0e0);
-  border-radius: 6px;
-  padding: 15px;
-  margin-top: 10px;
-}
-
-.fingerprint {
-  word-break: break-all;
-  font-family: "Courier New", monospace;
-  background: var(--code-bg, #f4f4f4);
-  padding: 2px 4px;
-  border-radius: 3px;
 }
 
 /* Verification Result */
@@ -184,12 +93,6 @@ input[type="submit"] {
   background-color: #f8d7da;
   border-left-color: #dc3545;
   color: #721c24;
-}
-
-.result-warning {
-  background-color: #fff3cd;
-  border-left-color: #ffc107;
-  color: #856404;
 }
 
 /* Security Announcements */
@@ -232,22 +135,6 @@ input[type="submit"] {
 }
 
 /* Status-specific styling */
-.status-active {
-  border-left-color: #28a745;
-}
-
-.status-active .announcement-header i {
-  color: #28a745;
-}
-
-.status-new {
-  border-left-color: #007bff;
-}
-
-.status-new .announcement-header i {
-  color: #007bff;
-}
-
 .status-revoked {
   border-left-color: #dc3545;
 }
@@ -284,49 +171,6 @@ input[type="submit"] {
   color: #dc3545;
 }
 
-/* Notes */
-.verification-note,
-.warning-note,
-.protection-note {
-  margin-top: 15px;
-  padding: 10px;
-  border-radius: 4px;
-  display: flex;
-  align-items: flex-start;
-  gap: 8px;
-}
-
-.verification-note {
-  background: #e3f2fd;
-  color: #0d47a1;
-}
-
-.warning-note {
-  background: #ffebee;
-  color: #c62828;
-}
-
-.protection-note {
-  background: #e8f5e8;
-  color: #2e7d32;
-}
-
-/* Verification Guide */
-.verification-guide {
-  background: var(--card-bg, #f8f9fa);
-  border-radius: 8px;
-  padding: 20px;
-}
-
-.guide-steps {
-  padding-left: 20px;
-}
-
-.guide-steps li {
-  margin-bottom: 8px;
-  line-height: 1.5;
-}
-
 /* Responsive Design */
 @media (max-width: 768px) {
   .verification-buttons {
@@ -336,16 +180,6 @@ input[type="submit"] {
   .btn {
     width: 100%;
     justify-content: center;
-  }
-
-  /* Form layout responsive - stack vertically on small screens */
-  .form-row {
-    flex-direction: column;
-    gap: 15px;
-  }
-
-  .form-row .form-group {
-    margin-bottom: 15px;
   }
 
   .announcement-header {
@@ -360,22 +194,9 @@ input[type="submit"] {
 }
 
 /* Dark mode support */
-.dark-mode .verification-form,
-.dark-mode .pgp-info,
-.dark-mode .verification-guide {
+.dark-mode .verification-form {
   background: var(--card-bg-dark, #1e1e1e);
   border-color: var(--border-color-dark, #404040);
-}
-
-.dark-mode .key-info-box {
-  background: var(--bg-color-dark, #2d2d2d);
-  border-color: var(--border-color-dark, #404040);
-}
-
-.dark-mode .form-control {
-  background: var(--input-bg-dark, #2d2d2d);
-  color: var(--text-color-dark, #fff);
-  border-color: var(--input-border-dark, #404040);
 }
 
 .dark-mode .fingerprint {
@@ -413,10 +234,6 @@ input[type="submit"] {
   background-color: #1e3a2e;
   color: #4caf50;
 }
-
-/* ============================
-   PGP Key Display (post-verification-removal)
-   ============================ */
 
 .key-display p {
   margin-bottom: 16px;
@@ -569,39 +386,14 @@ input[type="submit"] {
   color: #f44336;
 }
 
-.dark-mode .result-warning {
-  background-color: #3a3a1e;
-  color: #ff9800;
-}
-
-/* Notes dark mode */
-.dark-mode .verification-note {
-  background: #1e2a3a;
-  color: #64b5f6;
-}
-
-.dark-mode .warning-note {
-  background: #3a1e1e;
-  color: #ef5350;
-}
-
-.dark-mode .protection-note {
-  background: #1e3a2e;
-  color: #66bb6a;
-}
-
 /* Dark mode button adjustments */
-.dark-mode .btn-primary,
-.dark-mode .btn-secondary,
-.dark-mode .btn-import {
+.dark-mode .btn-primary {
   background: #333;
   border-color: #555;
   color: #aaa;
 }
 
-.dark-mode .btn-primary:hover,
-.dark-mode .btn-secondary:hover,
-.dark-mode .btn-import:hover {
+.dark-mode .btn-primary:hover {
   background: #3a3a3a;
   color: #ccc;
 }
@@ -775,30 +567,11 @@ input[type="submit"] {
 }
 
 /* ========== Vampire Mode Support ========== */
-.vampire-mode .verification-form,
-.vampire-mode .pgp-info,
-.vampire-mode .verification-guide {
+.vampire-mode .verification-form {
   background-color: var(--vampire-card-bg, #2d0000);
   border: 1px solid var(--vampire-primary, #8b0000);
   box-shadow: 0 0 10px var(--vampire-shadow, rgba(139, 0, 0, 0.3));
   color: var(--vampire-text, #ffffffbe);
-}
-
-.vampire-mode .key-info-box {
-  background-color: var(--vampire-card-bg, #2d0000);
-  border-color: var(--vampire-primary, #8b0000);
-  color: var(--vampire-text, #ffffffbe);
-}
-
-.vampire-mode .form-control {
-  background-color: #3a0000;
-  color: var(--vampire-text, #ffffffbe);
-  border: 1px solid var(--vampire-primary, #8b0000);
-}
-
-.vampire-mode .form-control:focus {
-  border-color: var(--vampire-accent, #ff69b4);
-  box-shadow: 0 0 5px var(--vampire-shadow, rgba(139, 0, 0, 0.3));
 }
 
 .vampire-mode .fingerprint {
@@ -847,43 +620,14 @@ input[type="submit"] {
   border-left-color: var(--vampire-secondary, #cc0000);
 }
 
-.vampire-mode .result-warning {
-  background-color: rgba(255, 105, 180, 0.1);
-  color: var(--vampire-accent, #ff69b4);
-  border-left-color: var(--vampire-accent, #ff69b4);
-}
-
-/* Vampire mode notes */
-.vampire-mode .verification-note {
-  background: rgba(255, 105, 180, 0.1);
-  color: var(--vampire-accent, #ff69b4);
-  border-left-color: var(--vampire-accent, #ff69b4);
-}
-
-.vampire-mode .warning-note {
-  background: rgba(139, 0, 0, 0.2);
-  color: var(--vampire-secondary, #cc0000);
-  border-left-color: var(--vampire-secondary, #cc0000);
-}
-
-.vampire-mode .protection-note {
-  background: rgba(0, 139, 0, 0.1);
-  color: #00ff00;
-  border-left-color: #00ff00;
-}
-
 /* Vampire mode buttons */
-.vampire-mode .btn-primary,
-.vampire-mode .btn-secondary,
-.vampire-mode .btn-import {
+.vampire-mode .btn-primary {
   background: #2a0a0a;
   border: 1px solid #5a2020;
   color: #cc9999;
 }
 
-.vampire-mode .btn-primary:hover,
-.vampire-mode .btn-secondary:hover,
-.vampire-mode .btn-import:hover {
+.vampire-mode .btn-primary:hover {
   background: #3a1010;
   color: #ddbbbb;
 }
