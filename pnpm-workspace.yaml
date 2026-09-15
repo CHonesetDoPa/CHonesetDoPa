@@ -3,7 +3,9 @@ packages:
 
 allowBuilds:
   esbuild: true
+  ffmpeg-static: true
   puppeteer: true
 
 onlyBuiltDependencies:
   - esbuild
+  - ffmpeg-static

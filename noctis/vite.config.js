@@ -8,6 +8,29 @@ import removeConsole from "vite-plugin-remove-console";
 import htmlMinifier from "vite-plugin-html-minifier";
 import path from "path";
 
+/**
+ * Injects a <link rel="preload" as="image"> for the hero <picture>.
+ * Runs after Vite rewrites srcset URLs to hashed paths so the preload
+ * imagesrcset exactly matches the first (avif) source of the picture.
+ */
+function heroPreload() {
+  return {
+    name: "hero-preload",
+    enforce: "post",
+    transformIndexHtml(html) {
+      // Attribute quotes may already be stripped by html-minifier, so the
+      // quote characters in this pattern are optional.
+      const match = html.match(
+        /<source[^>]*type=["']?image\/avif["']?[^>]*srcset=["']([^"']*)["']/,
+      );
+      if (!match) return html;
+      const srcset = match[1].replace(/\s+/g, " ").trim();
+      const preload = `<link rel="preload" as="image" imagesrcset="${srcset}" imagesizes="100vw" fetchpriority="high" />`;
+      return html.replace(/<\/title>/, `</title>${preload}`);
+    },
+  };
+}
+
 export default defineConfig(() => {
   const ASSET_PREFIX = `VampireC`;
 
@@ -39,6 +62,7 @@ export default defineConfig(() => {
       removeConsole({
         external: ["src/js/utils.js"],
       }),
+      heroPreload(),
     ],
 
     server: {
@@ -62,6 +86,12 @@ export default defineConfig(() => {
       sourcemap: false,
       cssMinify: "lightningcss",
       emptyOutDir: true,
+      // Keep hero/avatar images as hashed files: inlining them as data URIs
+      // would bloat the HTML and break the preload imagesrcset matching.
+      assetsInlineLimit: (filePath) =>
+        /assets\/img\/(hero|Avatar|BG)/.test(filePath.replace(/\\/g, "/"))
+          ? false
+          : undefined,
       rolldownOptions: {
         input: {
           main: path.resolve(import.meta.dirname, "src/index.html"),

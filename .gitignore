@@ -155,3 +155,6 @@ vite.config.ts.timestamp-*
 
 # Build output
 docs/index.html
+
+# Generated hero/avatar image variants
+noctis/src/assets/img/hero/
