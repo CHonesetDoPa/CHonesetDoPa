@@ -161,6 +161,7 @@ export const vampireTranslations = {
         event1: "秘钥首次现世",
         event2: "发现疑似伪装身份",
         event3: "封印Telegram旧身份",
+        event4: "秘钥轮换完成",
       },
       footerLabel: "最后更新：",
     },

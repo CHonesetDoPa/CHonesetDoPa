@@ -161,6 +161,7 @@ export const zhTranslations = {
         event1: "PGP密钥首次发布",
         event2: "发现疑似冒充身份",
         event3: "吊销Telegram旧身份",
+        event4: "PGP密钥轮换完成",
       },
       footerLabel: "最后更新: ",
     },

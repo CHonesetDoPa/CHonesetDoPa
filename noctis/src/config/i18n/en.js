@@ -167,6 +167,7 @@ export const enTranslations = {
         event1: "PGP key first published",
         event2: "Suspected impersonation found",
         event3: "Revoked Telegram old identity",
+        event4: "PGP key rotation completed",
       },
       footerLabel: "Last updated: ",
     },
