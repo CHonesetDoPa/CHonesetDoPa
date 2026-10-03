@@ -86,9 +86,11 @@ pnpm noctis:preview
 其他构建相关配置：
 
 - `root` 为 `src/`，`publicDir` 为 `../public`，输出 `dist/`
+- `appType` 为 `mpa`
 - 构建目标 `esnext`
 - 路径别名 `@` → `src/`
 - 生产构建通过 `vite-plugin-remove-console` 移除 `console`（`src/js/utils.js` 除外）
+- 开发服务器内置 `dev-404` 中间件：对未匹配的页面请求返回 `public/404.html` 并附带真实 404 状态码，模拟静态托管（如 Vercel）行为；仅 `serve` 模式生效，不影响生产构建
 
 ## 项目结构
 
@@ -100,7 +102,11 @@ noctis/
 ├── LICENSE-Personal.md         # 非源代码资源许可
 ├── public/                     # 直接拷贝到构建输出的静态资源
 │   ├── 404.html
-│   ├── ch.asc                  # PGP 公钥
+│   ├── keys/                   # PGP 公钥（当前 + 历史版本）
+│   │   ├── CH-Newest.asc       # 当前公钥
+│   │   ├── CH.asc              # 当前公钥副本（下载文件名）
+│   │   └── Legacy-2024-CH.asc  # 2024 历史公钥
+│   ├── signs/                  # 密钥溯源签名（.asc.sig）
 │   └── （其他部署时直接拷贝的静态资源）
 └── src/                        # 源代码根目录（Vite root）
     ├── index.html              # 首页入口
@@ -115,6 +121,7 @@ noctis/
     │   └── img/                # 图片资源（Avatar / BG / V4-Lite）
     ├── config/
     │   ├── links.js            # 链接与站点数据配置
+    │   ├── pgpConfig.js        # PGP 密钥与溯源链配置
     │   └── i18n/
     │       ├── index.js        # 语言包注册表（以语言码为键）
     │       ├── zh.js
@@ -124,7 +131,6 @@ noctis/
     │   ├── bootstrap.js          # 页面初始化入口
     │   ├── cur-effect.js        # 自定义光标效果
     │   ├── dark-mode-manager.js  # 深色模式 / 血族模式管理
-    │   ├── dark-mode-manager.js# 深色模式 / 血族模式管理
     │   ├── i18n-system.js      # 国际化系统
     │   ├── link-manager.js     # 链接管理器入口
     │   ├── link-manager/       # 链接管理器子模块
@@ -150,11 +156,18 @@ noctis/
 ## 配置指南
 
 - **站点数据与链接**：编辑 `src/config/links.js`。它默认导出一个配置对象，包含
-  `personal`（邮箱、会话 ID、PGP 公钥地址）、`socialMedia`、`sponsor`、`relatedSites`、
+  `personal`（邮箱、会话 ID、PGP 密钥配置）、`socialMedia`、`sponsor`、`relatedSites`、
   `meta`（打字机文案）等分组，入口脚本会把它交给 `window.linkManager.initializeAll()` 渲染。
+  `personal` 中的 PGP 字段由 `src/config/pgpConfig.js` 展开注入。
 - **国际化**：语言包位于 `src/config/i18n/`，默认语言 `zh`，回退语言 `en`，另含 `vampire`。
   语言切换支持 `localStorage`（键名 `site-language-preference`）与浏览器语言自动检测。
-- **PGP 公钥**：替换 `public/ch.asc`，并在 `links.js` 的 `personal.pgpKey` 中同步本地与远端地址。
+- **PGP 密钥与溯源链**：编辑 `src/config/pgpConfig.js`。它默认导出 `{ pgpKeys }`，数组每项描述
+  一个密钥版本（`id` / `label` / `status` / `local` / `remote` / `fileName` / `userId` /
+  `fingerprint` / `algorithm` / `timeline` / `provenance`）。验证页据此渲染密钥标签页与溯源链：
+  - 公钥文件放在 `public/keys/`，溯源签名（`.asc.sig`）放在 `public/signs/`；
+  - `provenance.signers` 记录签名者，`provenance.signatures` 列出清签名文件（`path` + `fileName`）；
+  - `timeline.date` 与 `timeline.labelKey` 控制溯源链节点的时间与文案；
+  - 数组首项视为当前密钥，其 `remote` 会启用 OpenPGP.org 跳转按钮，其余版本隐藏该按钮。
 - **GitHub Pages 提示页**：修改 `docs/tips.md` 后运行 `pnpm docs:tips`。生成页会短暂显示文本，然后跳转到 `https://me.nekoc.cc`。
 
 ### 添加一种新语言
