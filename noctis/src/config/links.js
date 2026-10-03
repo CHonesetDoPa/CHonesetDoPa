@@ -3,20 +3,16 @@
  * Page data configuration (personal, social, sponsor, sites, status).
  */
 
-const wechatQRUrl = new URL("../assets/img/app1.webp", import.meta.url).href;
+import pgpConfig from "./pgpConfig.js";
 
-const publicUrl = (file) =>
-  `${import.meta.env.BASE_URL}${file}`.replace(/\/{2,}/g, "/");
+const wechatQRUrl = new URL("../assets/img/app1.webp", import.meta.url).href;
 
 export default {
   personal: {
     email: "CH@nekoc.cc",
     sessionId:
       "05173af7d9a4d731c22b5279fd10a46ef57782894e8b45991ace2bac686cb45876",
-    pgpKey: {
-      local: publicUrl("ch.asc"),
-      remote: "https://keys.openpgp.org/search?q=ch%40nekoc.cc",
-    },
+    ...pgpConfig,
   },
   socialMedia: {
     bilibili: "https://space.bilibili.com/169445500",
