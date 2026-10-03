@@ -188,6 +188,34 @@ export const enTranslations = {
         algorithm: "Algorithm:",
         usage: "How to use:",
       },
+      tabs: {
+        current: "Current Key",
+        legacy: "Legacy Key",
+        legacyWithYear: "Historical Key-{{year}}",
+        history: "Historical Key",
+        listLabel: "PGP key versions",
+      },
+      provenance: {
+        title: "Key provenance signature",
+        showPrevious: "View the previous key's provenance signature",
+        timelineTitle: "Key provenance chain",
+        timelineHint:
+          "Select a node in chronological order to inspect how each key verifies the next generation.",
+        openTimeline: "View provenance chain",
+        closeTimeline: "Close provenance chain",
+        verificationProcess: "Signature verification process",
+        currentDescription:
+          "The previous historical key clear-signed this public key to prove the key rotation relationship.",
+        legacyDescription:
+          "This tab is reserved for archived rotation entries. Replace the file path and fingerprint with the actual historical public key once it is published.",
+        description:
+          "This note describes the clear-sign chain from the previous key to the current key. Please verify the signature independently in GnuPG or another compatible tool.",
+        signer: "Signing key:",
+        target: "Target fingerprint:",
+        clearSignature: "Clear-sign file:",
+        notAvailable:
+          "No public historical signature material is currently published.",
+      },
       copyBtn: "Copy Public Key",
       downloadSuccess: "Download Complete",
       downloadMsg: "CH's PGP public key has been downloaded successfully!",
@@ -195,6 +223,7 @@ export const enTranslations = {
         "Please import the downloaded key file into your PGP software to verify.",
       downloadFailed: "Download Failed",
       downloadFailedMsg: "Unable to download the public key",
+      configurationError: "No PGP key is configured",
       loadFailed: "(Unable to load public key)",
     },
     security: {
