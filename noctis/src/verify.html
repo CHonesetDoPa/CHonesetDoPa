@@ -221,6 +221,17 @@
                   </h3>
                 </div>
                 <div class="timeline">
+                  <div class="timeline-item status-ok">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                      <span class="timeline-date">2026-10-03</span>
+                      <span
+                        class="timeline-text"
+                        data-i18n="verify.timeline.events.event4"
+                        >PGP密钥轮换完成</span
+                      >
+                    </div>
+                  </div>
                   <div class="timeline-item status-warn">
                     <div class="timeline-marker"></div>
                     <div class="timeline-content">
@@ -259,7 +270,7 @@
                   <small
                     ><span data-i18n="verify.timeline.footerLabel"
                       >最后更新: </span
-                    >2025-12-18</small
+                    >2026-10-03</small
                   >
                 </div>
               </div>
@@ -292,107 +303,135 @@
                 </div>
                 <div class="tool">
                   <div class="verification-form">
-                    <div class="key-display">
-                      <p data-i18n="verify.pgp.description">
-                        CH的PGP公钥可用于验证消息的真实性。您可以使用任何PGP兼容软件（如
-                        GnuPG、OpenKeychain）导入此密钥。
-                      </p>
+                    <div
+                      id="pgp-key-tabs"
+                      class="pgp-key-tabs"
+                      role="tablist"
+                      aria-label="PGP key versions"
+                    ></div>
 
-                      <div class="key-meta">
-                        <div class="meta-row">
-                          <span class="meta-label"
-                            ><strong
-                              ><span data-i18n="verify.pgpKey.labels.userId"
-                                >用户ID:</span
-                              ></strong
-                            ></span
-                          >
-                          <span class="meta-value"
-                            >CHonesetDoPa &lt;ch@nekoc.cc&gt;</span
-                          >
+                    <div
+                      id="key-verification-panel"
+                      class="key-verification-panel"
+                      role="tabpanel"
+                      aria-labelledby="verify-key-tab-current"
+                    >
+                      <div class="key-display">
+                        <p data-i18n="verify.pgp.description">
+                          CH的PGP公钥可用于验证消息的真实性。您可以使用任何PGP兼容软件（如
+                          GnuPG、OpenKeychain）导入此密钥。
+                        </p>
+
+                        <div class="key-meta">
+                          <div class="meta-row">
+                            <span class="meta-label"
+                              ><strong
+                                ><span data-i18n="verify.pgpKey.labels.userId"
+                                  >用户ID:</span
+                                ></strong
+                              ></span
+                            >
+                            <span class="meta-value" id="key-user-id"
+                              >CHonesetDoPa &lt;ch@nekoc.cc&gt;</span
+                            >
+                          </div>
+                          <div class="meta-row">
+                            <span class="meta-label"
+                              ><strong
+                                ><span
+                                  data-i18n="verify.pgpKey.labels.fingerprint"
+                                  >指纹:</span
+                                ></strong
+                              ></span
+                            >
+                            <span
+                              class="meta-value fingerprint"
+                              id="key-fingerprint"
+                              >E802 A6BF 8C2B 8ED7 1B9D 08FF C688 1736 D7BC
+                              83D8</span
+                            >
+                          </div>
+                          <div class="meta-row">
+                            <span class="meta-label"
+                              ><strong
+                                ><span
+                                  data-i18n="verify.pgpKey.labels.algorithm"
+                                  >算法:</span
+                                ></strong
+                              ></span
+                            >
+                            <span class="meta-value" id="key-algorithm"
+                              >ECDSA (NIST P-256)</span
+                            >
+                          </div>
                         </div>
-                        <div class="meta-row">
-                          <span class="meta-label"
-                            ><strong
-                              ><span
-                                data-i18n="verify.pgpKey.labels.fingerprint"
-                                >指纹:</span
-                              ></strong
-                            ></span
+
+                        <button
+                          type="button"
+                          class="btn btn-outline btn-toggle-key"
+                          onclick="togglePGPKey()"
+                          aria-expanded="false"
+                        >
+                          <i class="fas fa-eye" aria-hidden="true"></i>
+                          <span data-i18n="verify.pgpKey.buttons.show"
+                            >显示公钥</span
                           >
-                          <span class="meta-value fingerprint"
-                            >E802 A6BF 8C2B 8ED7 1B9D 08FF C688 1736 D7BC
-                            83D8</span
+                        </button>
+
+                        <div class="key-block-wrapper" style="display: none">
+                          <pre class="key-block" id="pgp-key-block"></pre>
+                          <button
+                            type="button"
+                            class="btn-copy-key"
+                            onclick="copyPGPKey()"
+                            aria-label="复制公钥"
+                            title="复制公钥"
+                            data-i18n-aria-label="verify.pgpKey.copyBtn"
+                            data-i18n-title="verify.pgpKey.copyBtn"
                           >
+                            <i class="fas fa-copy" aria-hidden="true"></i>
+                          </button>
                         </div>
-                        <div class="meta-row">
-                          <span class="meta-label"
-                            ><strong
-                              ><span data-i18n="verify.pgpKey.labels.algorithm"
-                                >算法:</span
-                              ></strong
-                            ></span
+
+                        <div class="verification-buttons">
+                          <button
+                            type="button"
+                            class="btn btn-primary"
+                            onclick="downloadPublicKey()"
+                            data-i18n="verify.pgpKey.buttons.local"
                           >
-                          <span class="meta-value">ECDSA (NIST P-256)</span>
+                            <i class="fas fa-download" aria-hidden="true"></i>
+                            下载公钥
+                          </button>
+                          <button
+                            type="button"
+                            class="btn btn-outline"
+                            id="remote-pgp-key-button"
+                            onclick="downloadPGPKey('remote')"
+                            data-i18n="verify.pgpKey.buttons.remote"
+                          >
+                            <i class="fas fa-cloud" aria-hidden="true"></i>
+                            OpenPGP.org
+                          </button>
                         </div>
                       </div>
 
-                      <button
-                        type="button"
-                        class="btn btn-outline btn-toggle-key"
-                        onclick="togglePGPKey()"
-                        aria-expanded="false"
+                      <div
+                        id="verification-result"
+                        class="verification-result"
+                        style="display: none"
                       >
-                        <i class="fas fa-eye" aria-hidden="true"></i>
-                        <span data-i18n="verify.pgpKey.buttons.show"
-                          >显示公钥</span
-                        >
-                      </button>
-
-                      <div class="key-block-wrapper" style="display: none">
-                        <pre class="key-block" id="pgp-key-block"></pre>
-                        <button
-                          type="button"
-                          class="btn-copy-key"
-                          onclick="copyPGPKey()"
-                          aria-label="复制公钥"
-                          title="复制公钥"
-                          data-i18n-aria-label="verify.pgpKey.copyBtn"
-                          data-i18n-title="verify.pgpKey.copyBtn"
-                        >
-                          <i class="fas fa-copy" aria-hidden="true"></i>
-                        </button>
-                      </div>
-
-                      <div class="verification-buttons">
-                        <button
-                          type="button"
-                          class="btn btn-primary"
-                          onclick="downloadPublicKey()"
-                          data-i18n="verify.pgpKey.buttons.local"
-                        >
-                          <i class="fas fa-download" aria-hidden="true"></i>
-                          下载公钥
-                        </button>
-                        <button
-                          type="button"
-                          class="btn btn-outline"
-                          onclick="downloadPGPKey('remote')"
-                          data-i18n="verify.pgpKey.buttons.remote"
-                        >
-                          <i class="fas fa-cloud" aria-hidden="true"></i>
-                          OpenPGP.org
-                        </button>
+                        <!-- 结果将在这里显示 -->
                       </div>
                     </div>
 
                     <div
-                      id="verification-result"
-                      class="verification-result"
-                      style="display: none"
-                    >
-                      <!-- 结果将在这里显示 -->
-                    </div>
+                      id="key-provenance"
+                      class="key-provenance"
+                      role="tabpanel"
+                      aria-live="polite"
+                      hidden
+                    ></div>
                   </div>
                 </div>
               </section>

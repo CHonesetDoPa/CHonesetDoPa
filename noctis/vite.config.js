@@ -7,6 +7,7 @@ import viteCompression from "vite-plugin-compression2";
 import removeConsole from "vite-plugin-remove-console";
 import htmlMinifier from "vite-plugin-html-minifier";
 import path from "path";
+import fs from "node:fs";
 
 /**
  * Injects a <link rel="preload" as="image"> for the hero <picture>.
@@ -31,12 +32,43 @@ function heroPreload() {
   };
 }
 
+/**
+ * Serves public/404.html with a real 404 status for unmatched page requests
+ * during development, mirroring the behavior of static hosts (e.g. Vercel).
+ * Only active in `serve` mode; production builds are unaffected.
+ */
+function dev404() {
+  return {
+    name: "dev-404",
+    apply: "serve",
+    configureServer(server) {
+      // Return a function so this middleware runs after Vite's internal ones.
+      return () => {
+        server.middlewares.use((req, res, next) => {
+          const url = req.url?.split("?")[0] ?? "";
+          const acceptsHtml = req.headers.accept?.includes("text/html");
+          const hasExt = /\.[a-z0-9]+$/i.test(url);
+          if (!acceptsHtml || hasExt) return next();
+
+          const file = path.resolve(import.meta.dirname, "public/404.html");
+          if (!fs.existsSync(file)) return next();
+
+          res.statusCode = 404;
+          res.setHeader("Content-Type", "text/html; charset=utf-8");
+          fs.createReadStream(file).pipe(res);
+        });
+      };
+    },
+  };
+}
+
 export default defineConfig(() => {
   const ASSET_PREFIX = `VampireC`;
 
   return {
     root: "src",
     publicDir: "../public",
+    appType: "mpa",
     plugins: [
       htmlMinifier({
         minify: {
@@ -63,6 +95,7 @@ export default defineConfig(() => {
         external: ["src/js/utils.js"],
       }),
       heroPreload(),
+      dev404(),
     ],
 
     server: {
