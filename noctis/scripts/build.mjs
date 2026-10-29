@@ -20,4 +20,5 @@ if (skipAssets) {
   run(process.execPath, ["scripts/generate-hero-assets.mjs"]);
 }
 run(process.execPath, ["scripts/check-i18n-parity.mjs"]);
+run("pnpm", ["exec", "stylelint", "src/**/*.css"]);
 run("pnpm", ["exec", "vite", "build"]);
