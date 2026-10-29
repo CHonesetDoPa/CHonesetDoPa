@@ -140,7 +140,8 @@
                     <button
                       type="button"
                       class="dark-button"
-                      onclick="dark()"
+                      id="dark-mode-button"
+                      data-action="toggle-theme"
                       style="vertical-align: middle"
                       data-i18n-title="theme.buttonTitle"
                       data-i18n-aria-label="verify.site.darkModeAriaLabel"
@@ -155,7 +156,7 @@
                       type="button"
                       class="dark-button"
                       id="language-switch-btn"
-                      onclick="switchLanguage()"
+                      data-action="switch-language"
                       aria-label="切换语言"
                       data-i18n-aria-label="verify.site.switchLang"
                     >
@@ -274,7 +275,7 @@
                         <button
                           type="button"
                           class="spon"
-                          onclick="sponsor_wechat()"
+                          data-action="sponsor-wechat"
                           data-i18n="sponsor.wechatPay"
                           data-i18n-title="sponsor.buttonTitles.wechatPay"
                           data-i18n-aria-label="sponsor.buttonTitles.wechatPay"
@@ -289,7 +290,7 @@
                         <button
                           type="button"
                           class="spon"
-                          onclick="sponsor_patreon()"
+                          data-action="sponsor-patreon"
                           data-i18n="sponsor.patreon"
                           data-i18n-title="sponsor.buttonTitles.patreon"
                           data-i18n-aria-label="sponsor.buttonTitles.patreon"
@@ -304,7 +305,7 @@
                         <button
                           type="button"
                           class="spon"
-                          onclick="sponsor_afdian()"
+                          data-action="sponsor-afdian"
                           data-i18n="sponsor.afdian"
                           data-i18n-title="sponsor.buttonTitles.afdian"
                           data-i18n-aria-label="sponsor.buttonTitles.afdian"
@@ -319,7 +320,7 @@
                         <button
                           type="button"
                           class="spon"
-                          onclick="sponsor_opencollective()"
+                          data-action="sponsor-opencollective"
                           data-i18n="sponsor.openCollective"
                           data-i18n-title="sponsor.buttonTitles.openCollective"
                           data-i18n-aria-label="sponsor.buttonTitles.openCollective"

@@ -156,7 +156,8 @@
                     <button
                       type="button"
                       class="dark-button"
-                      onclick="dark()"
+                      id="dark-mode-button"
+                      data-action="toggle-theme"
                       style="vertical-align: middle"
                       data-i18n-title="theme.buttonTitle"
                       data-i18n-aria-label="verify.site.darkModeAriaLabel"
@@ -171,7 +172,7 @@
                       type="button"
                       class="dark-button"
                       id="language-switch-btn"
-                      onclick="switchLanguage()"
+                      data-action="switch-language"
                       aria-label="切换语言"
                       data-i18n-aria-label="verify.site.switchLang"
                     >
@@ -369,7 +370,7 @@
                         <button
                           type="button"
                           class="btn btn-outline btn-toggle-key"
-                          onclick="togglePGPKey()"
+                          data-action="toggle-pgp-key"
                           aria-expanded="false"
                         >
                           <i class="fas fa-eye" aria-hidden="true"></i>
@@ -383,7 +384,7 @@
                           <button
                             type="button"
                             class="btn-copy-key"
-                            onclick="copyPGPKey()"
+                            data-action="copy-pgp-key"
                             aria-label="复制公钥"
                             title="复制公钥"
                             data-i18n-aria-label="verify.pgpKey.copyBtn"
@@ -397,7 +398,7 @@
                           <button
                             type="button"
                             class="btn btn-primary"
-                            onclick="downloadPublicKey()"
+                            data-action="download-public-key"
                             data-i18n="verify.pgpKey.buttons.local"
                           >
                             <i class="fas fa-download" aria-hidden="true"></i>
@@ -407,7 +408,8 @@
                             type="button"
                             class="btn btn-outline"
                             id="remote-pgp-key-button"
-                            onclick="downloadPGPKey('remote')"
+                            data-action="download-pgp-key"
+                            data-key-type="remote"
                             data-i18n="verify.pgpKey.buttons.remote"
                           >
                             <i class="fas fa-cloud" aria-hidden="true"></i>
