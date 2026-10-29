@@ -497,7 +497,7 @@ function showKeyConfigurationError() {
   const message = getTranslationText("verify.pgpKey.configurationError");
   const keyBlock = document.getElementById("pgp-key-block");
   const localButton = document.querySelector(
-    '.verification-buttons [onclick="downloadPublicKey()"]',
+    '.verification-buttons [data-action="download-public-key"]',
   );
   const toggleButton = document.querySelector(".btn-toggle-key");
 

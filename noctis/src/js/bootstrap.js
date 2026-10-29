@@ -15,6 +15,7 @@ import "./utils.js";
 import "./typed-init.js";
 import "./cur-effect.js";
 import "./dark-mode-manager.js";
+import "./site-interactions.js";
 // ----------------------
 // Initialize i18n system
 // ----------------------
