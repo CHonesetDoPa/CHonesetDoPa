@@ -12,7 +12,9 @@
     "clear": "rm -rf dist",
     "check-i18n": "node scripts/check-i18n-parity.mjs",
     "lint": "eslint .",
+    "stylelint": "stylelint \"src/**/*.css\"",
     "format": "prettier --write .",
+    "format:check": "prettier --check .",
     "gen-hero": "node scripts/generate-hero-assets.mjs"
   },
   "devDependencies": {
@@ -24,6 +26,7 @@
     "globals": "^17.12.0",
     "lightningcss": "^1.33.0",
     "prettier": "^3.9.6",
+    "stylelint": "^17.16.0",
     "vite": "^8.3.0",
     "vite-plugin-compression2": "^2.5.3",
     "vite-plugin-html-minifier": "^1.0.5",

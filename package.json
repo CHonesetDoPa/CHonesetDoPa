@@ -8,6 +8,7 @@
     "noctis:preview": "pnpm --filter noctis preview",
     "noctis:clear": "pnpm --filter noctis clear",
     "noctis:lint": "pnpm --filter noctis lint",
+    "noctis:stylelint": "pnpm --filter noctis stylelint",
     "noctis:format": "pnpm --filter noctis format",
     "noctis:check-i18n": "pnpm --filter noctis check-i18n",
     "noctis:gen-hero": "pnpm --filter noctis gen-hero",
