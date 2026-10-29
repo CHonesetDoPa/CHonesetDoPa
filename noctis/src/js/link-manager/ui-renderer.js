@@ -91,10 +91,10 @@ export class UIRenderer {
     const emailLink = document.createElement("a");
     emailLink.className = "social-icon";
     emailLink.href = "#";
-    emailLink.onclick = (e) => {
+    emailLink.addEventListener("click", (e) => {
       e.preventDefault();
       if (window.email) window.email();
-    };
+    });
     emailLink.setAttribute("data-i18n-title", "socialMedia.links.email");
     emailLink.setAttribute("data-i18n-aria-label", "socialMedia.links.email");
     emailLink.innerHTML = iconSvg;
@@ -170,10 +170,10 @@ export class UIRenderer {
     const sessionLi = document.createElement("li");
     const sessionLink = document.createElement("a");
     sessionLink.href = "#";
-    sessionLink.onclick = (event) => {
+    sessionLink.addEventListener("click", (event) => {
       event.preventDefault();
       window.session_id && window.session_id();
-    };
+    });
     sessionLink.style.color = "orange";
     sessionLink.style.textDecoration = "none";
     sessionLink.style.cursor = "pointer";

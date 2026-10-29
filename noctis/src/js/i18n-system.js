@@ -72,12 +72,15 @@ class I18n {
 
   async detectLanguage() {
     let detected = null;
+    let hasSavedPreference = false;
     try {
       const autoDetect = this.config.autoDetect || {};
       // 优先读取本地存储的偏好
       const saved = localStorage.getItem(this.config.storageKey);
-      if (saved && this.config.supportedLanguages.includes(saved))
-        detected = saved;
+      hasSavedPreference = Boolean(
+        saved && this.config.supportedLanguages.includes(saved),
+      );
+      if (hasSavedPreference) detected = saved;
       // 其次回退到浏览器语言检测
       if (!detected && autoDetect.enabled) {
         const b = this.detectBrowserLanguage();
@@ -90,7 +93,7 @@ class I18n {
     this.currentLanguage = detected;
     // 仅当本地存储已有偏好时才持久化，
     // 避免把浏览器自动检测结果写死，用户无法回到自动检测。
-    if (localStorage.getItem(this.config.storageKey)) {
+    if (hasSavedPreference) {
       this.saveLanguagePreference(detected);
     }
     return detected;
@@ -253,7 +256,7 @@ class I18n {
   }
 
   // apply translations to DOM
-  async applyLanguage(_language) {
+  async applyLanguage(_language, root = document) {
     try {
       // 通用属性翻译：data-i18n-<attr>="key"，可选 data-i18n-<attr>-vars='{"k":"v"}'
       const attrTargets = [
@@ -275,7 +278,12 @@ class I18n {
       ];
 
       attrTargets.forEach(({ attr, apply }) => {
-        document.querySelectorAll(`[${attr}]`).forEach((el) => {
+        const selector = `[${attr}]`;
+        const elements =
+          root instanceof Element && root.matches(selector)
+            ? [root, ...root.querySelectorAll(selector)]
+            : root.querySelectorAll(selector);
+        elements.forEach((el) => {
           const k = el.getAttribute(attr);
           if (!k) return;
           const vars = this.parseVars(el.getAttribute(`${attr}-vars`));
@@ -470,42 +478,50 @@ function setupGlobalFunctions() {
 
 function setupAutoTranslation() {
   // 复用 I18n 实例的 applyLanguage，避免两套重复的 DOM 翻译逻辑。
-  const translate = () => {
+  const translate = (root = document) => {
     if (i18n && typeof i18n.applyLanguage === "function") {
-      i18n.applyLanguage(i18n.currentLanguage);
+      i18n.applyLanguage(i18n.currentLanguage, root);
     }
   };
   if (document.readyState === "loading")
     document.addEventListener("DOMContentLoaded", translate);
   else translate();
-  if (typeof MutationObserver !== "undefined") {
+  if (typeof MutationObserver !== "undefined" && document.body) {
+    let pendingRoots = new Set();
+    let translateScheduled = false;
+    const scheduleAddedNodes = () => {
+      if (translateScheduled) return;
+      translateScheduled = true;
+      setTimeout(() => {
+        const roots = pendingRoots;
+        pendingRoots = new Set();
+        translateScheduled = false;
+        roots.forEach((root) => translate(root));
+      }, 10);
+    };
     const obs = new MutationObserver((muts) => {
-      let s = false;
-      muts.forEach((m) => {
-        if (m.type === "childList")
-          m.addedNodes.forEach((n) => {
-            if (n.nodeType === Node.ELEMENT_NODE) {
-              if (
-                n.hasAttribute &&
-                (n.hasAttribute("data-i18n") ||
-                  n.hasAttribute("data-i18n-placeholder") ||
-                  n.hasAttribute("data-i18n-title") ||
-                  n.hasAttribute("data-i18n-aria-label") ||
-                  n.hasAttribute("data-i18n-alt") ||
-                  n.hasAttribute("data-i18n-meta-content") ||
-                  n.querySelector(
-                    "[data-i18n], [data-i18n-placeholder], [data-i18n-title], [data-i18n-aria-label], [data-i18n-alt], [data-i18n-meta-content]",
-                  ))
+      muts.forEach((mutation) => {
+        mutation.addedNodes.forEach((node) => {
+          if (node.nodeType === Node.ELEMENT_NODE) {
+            const element = node;
+            if (
+              element.matches(
+                "[data-i18n], [data-i18n-placeholder], [data-i18n-title], [data-i18n-aria-label], [data-i18n-alt], [data-i18n-meta-content]",
+              ) ||
+              element.querySelector(
+                "[data-i18n], [data-i18n-placeholder], [data-i18n-title], [data-i18n-aria-label], [data-i18n-alt], [data-i18n-meta-content]",
               )
-                s = true;
+            ) {
+              pendingRoots.add(element);
             }
-          });
+          }
+        });
       });
-      if (s) setTimeout(translate, 10);
+      if (pendingRoots.size) scheduleAddedNodes();
     });
     obs.observe(document.body, { childList: true, subtree: true });
   }
-  document.addEventListener("i18n:languageChanged", translate);
+  document.addEventListener("i18n:languageChanged", () => translate());
 }
 
 if (document.readyState === "loading")
