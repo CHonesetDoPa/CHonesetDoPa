@@ -94,29 +94,38 @@ class AutoDarkModeManager {
   }
 
   syncFromStorage() {
-    const savedDarkState = localStorage.getItem(this.storageKey);
-    const savedVampireState = localStorage.getItem(this.vampireStorageKey);
+    try {
+      const savedDarkState = localStorage.getItem(this.storageKey);
+      const savedVampireState = localStorage.getItem(this.vampireStorageKey);
+      let stateChanged = false;
 
-    let stateChanged = false;
-
-    if (savedDarkState !== null) {
-      const newDarkState = JSON.parse(savedDarkState);
-      if (newDarkState !== this.isDarkMode) {
-        this.isDarkMode = newDarkState;
-        stateChanged = true;
+      if (savedDarkState !== null) {
+        const newDarkState = JSON.parse(savedDarkState);
+        if (
+          typeof newDarkState === "boolean" &&
+          newDarkState !== this.isDarkMode
+        ) {
+          this.isDarkMode = newDarkState;
+          stateChanged = true;
+        }
       }
-    }
 
-    if (savedVampireState !== null) {
-      const newVampireState = JSON.parse(savedVampireState);
-      if (newVampireState !== this.isVampireMode) {
-        this.isVampireMode = newVampireState;
-        stateChanged = true;
+      if (savedVampireState !== null) {
+        const newVampireState = JSON.parse(savedVampireState);
+        if (
+          typeof newVampireState === "boolean" &&
+          newVampireState !== this.isVampireMode
+        ) {
+          this.isVampireMode = newVampireState;
+          stateChanged = true;
+        }
       }
-    }
 
-    if (stateChanged) {
-      this.applyCurrentMode();
+      if (stateChanged) {
+        this.applyCurrentMode();
+      }
+    } catch (e) {
+      console.warn("Failed to sync mode states:", e);
     }
   }
 

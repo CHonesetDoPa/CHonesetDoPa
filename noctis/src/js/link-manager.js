@@ -14,7 +14,6 @@ class LinkManager {
     this.uiRenderer = new UIRenderer();
 
     this.isInitialized = false;
-    this.languageSwitchTimer = null;
   }
 
   /**
@@ -34,24 +33,6 @@ class LinkManager {
 
     // 渲染由 i18nSystemReady 事件统一触发（见文件底部监听），
     // 避免与事件回调产生双重渲染导致 DOM 重建闪动。
-  }
-
-  /**
-   * 处理语言切换
-   */
-  handleLanguageSwitch() {
-    // 使用防抖避免频繁调用
-    if (this.languageSwitchTimer) {
-      clearTimeout(this.languageSwitchTimer);
-    }
-
-    this.languageSwitchTimer = setTimeout(() => {
-      const config = this.configManager.getConfig();
-      if (config) {
-        this.uiRenderer.renderRelatedSites("related-sites-list", config);
-        this.uiRenderer.updateStatusInfo(config);
-      }
-    }, 50);
   }
 
   /**
@@ -90,9 +71,4 @@ window.linkManager = new LinkManager();
 document.addEventListener("i18nSystemReady", () => {
   console.log("[LinkManager] I18n system ready, rendering components");
   window.linkManager.renderComponents();
-});
-
-document.addEventListener("i18n:languageChanged", () => {
-  console.log("[LinkManager] Language changed, updating status info");
-  window.linkManager.handleLanguageSwitch();
 });

@@ -3,15 +3,42 @@
  * PGP verification page styles.
  */
 
+:root {
+  --card-bg: var(--bg-card);
+  --bg-color: var(--bg-page);
+  --code-bg: #1a1a2e;
+  --border-color: var(--border-soft);
+  --text-color: #333;
+  --text-secondary: var(--text-soft);
+}
+
+.dark-mode {
+  --card-bg: #1e1e1e;
+  --bg-color: #2d2d2d;
+  --code-bg: #0d0d1a;
+  --border-color: #404040;
+  --text-color: #eee;
+  --text-secondary: #aaa;
+}
+
+.vampire-mode {
+  --card-bg: #2d0000;
+  --bg-color: #1a0000;
+  --code-bg: #1a0000;
+  --border-color: #5a2020;
+  --text-color: #ffffffbe;
+  --text-secondary: #cc9999;
+}
+
 /* Global button improvements */
 button:not([class^="swal2-"]),
 .btn,
 input[type="button"],
 input[type="submit"] {
-  text-align: center !important;
-  display: inline-flex !important;
-  align-items: center !important;
-  justify-content: center !important;
+  text-align: center;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   vertical-align: middle;
   white-space: nowrap;
   user-select: none;
@@ -41,7 +68,7 @@ input[type="submit"] {
 
 .key-verification-panel[hidden],
 .key-provenance[hidden] {
-  display: none !important;
+  display: none;
 }
 
 .key-tab {
@@ -67,10 +94,7 @@ input[type="submit"] {
   color: var(--text-color, #222);
 }
 
-.key-tab:focus-visible,
-.btn-toggle-key:focus-visible,
-.btn-copy-key:focus-visible,
-.btn:focus-visible {
+.key-tab:focus-visible {
   outline: 2px solid rgba(51, 102, 255, 0.75);
   outline-offset: 2px;
 }
@@ -151,10 +175,10 @@ input[type="submit"] {
 button.provenance-node {
   position: relative;
   z-index: 1;
-  display: grid !important;
+  display: grid;
   grid-template-columns: 10px 78px minmax(0, 1fr);
-  align-items: flex-start !important;
-  justify-content: initial !important;
+  align-items: flex-start;
+  justify-content: initial;
   gap: 10px;
   width: 100%;
   min-height: 34px;
@@ -165,8 +189,8 @@ button.provenance-node {
   color: #777;
   cursor: pointer;
   font: inherit;
-  text-align: left !important;
-  white-space: normal !important;
+  text-align: left;
+  white-space: normal;
   transition:
     background-color 0.2s ease,
     color 0.2s ease;
@@ -255,7 +279,7 @@ button.provenance-node {
 }
 
 .verification-buttons [hidden] {
-  display: none !important;
+  display: none;
 }
 
 .btn {
@@ -273,6 +297,11 @@ button.provenance-node {
   text-align: center;
   min-height: 40px;
   transition: all 0.3s ease;
+}
+
+.btn:focus-visible {
+  outline: 2px solid rgba(51, 102, 255, 0.75);
+  outline-offset: 2px;
 }
 
 .btn-primary {
@@ -433,33 +462,33 @@ button.provenance-node {
 
 /* Dark mode support */
 .dark-mode .verification-form {
-  background: var(--card-bg-dark, #1e1e1e);
-  border-color: var(--border-color-dark, #404040);
+  background: var(--card-bg, #1e1e1e);
+  border-color: var(--border-color, #404040);
 }
 
 .dark-mode .fingerprint {
-  background: var(--code-bg-dark, #3d3d3d);
-  color: var(--text-color-dark, #fff);
+  background: var(--code-bg, #3d3d3d);
+  color: var(--text-color, #fff);
 }
 
 /* Security announcements dark mode */
 .dark-mode .announcement-item {
-  background: var(--card-bg-dark, #1e1e1e);
-  color: var(--text-color-dark, #fff);
+  background: var(--card-bg, #1e1e1e);
+  color: var(--text-color, #fff);
 }
 
 .dark-mode .announcement-header {
   background: rgba(255, 255, 255, 0.05);
-  border-bottom-color: var(--border-color-dark, #404040);
-  color: var(--text-color-dark, #fff);
+  border-bottom-color: var(--border-color, #404040);
+  color: var(--text-color, #fff);
 }
 
 .dark-mode .announcement-content {
-  color: var(--text-color-dark, #fff);
+  color: var(--text-color, #fff);
 }
 
 .dark-mode .announcement-date {
-  color: var(--text-secondary-dark, #aaa);
+  color: var(--text-secondary, #aaa);
 }
 
 /* Security list dark mode */
@@ -544,6 +573,11 @@ button.provenance-node {
   border-color: #bbb;
 }
 
+.btn-toggle-key:focus-visible {
+  outline: 2px solid rgba(51, 102, 255, 0.75);
+  outline-offset: 2px;
+}
+
 .key-block-wrapper {
   position: relative;
 }
@@ -565,11 +599,6 @@ button.provenance-node {
   opacity: 0;
 }
 
-.key-block-wrapper:hover .btn-copy-key,
-.btn-copy-key:focus-visible {
-  opacity: 1;
-}
-
 .btn-copy-key:hover {
   background: rgba(255, 255, 255, 0.2);
   color: #fff;
@@ -580,6 +609,13 @@ button.provenance-node {
   background: rgba(40, 167, 69, 0.3);
   color: #4caf50;
   border-color: rgba(40, 167, 69, 0.5);
+}
+
+/* Reveal the copy button on wrapper hover or keyboard focus.
+   :focus-visible is listed first so the rule satisfies no-descending-specificity. */
+.btn-copy-key:focus-visible,
+.key-block-wrapper:hover .btn-copy-key {
+  opacity: 1;
 }
 
 .key-block {
@@ -600,17 +636,17 @@ button.provenance-node {
 
 /* Dark mode key display */
 .dark-mode .key-meta {
-  background: var(--bg-color-dark, #2d2d2d);
-  border-color: var(--border-color-dark, #404040);
-  color: var(--text-color-dark, #eee);
+  background: var(--bg-color, #2d2d2d);
+  border-color: var(--border-color, #404040);
+  color: var(--text-color, #eee);
 }
 
 .dark-mode .key-meta .meta-label {
-  color: var(--text-secondary-dark, #aaa);
+  color: var(--text-secondary, #aaa);
 }
 
 .dark-mode .key-meta .meta-value {
-  color: var(--text-color-dark, #eee);
+  color: var(--text-color, #eee);
 }
 
 .dark-mode .key-block {
@@ -625,8 +661,8 @@ button.provenance-node {
 }
 
 .dark-mode .key-tab {
-  border-color: var(--border-color-dark, #404040);
-  color: var(--text-color-dark, #eee);
+  border-color: var(--border-color, #404040);
+  color: var(--text-color, #eee);
 }
 
 .dark-mode .key-tab.active {
@@ -651,27 +687,28 @@ button.provenance-node {
 }
 
 .dark-mode .provenance-timeline::before {
-  background: var(--border-color-dark, #404040);
+  background: var(--border-color, #404040);
 }
 
 .dark-mode .provenance-node {
-  color: var(--text-secondary-dark, #aaa);
+  color: var(--text-secondary, #aaa);
 }
 
 .dark-mode .provenance-node:hover,
 .dark-mode .provenance-node.active {
   background: rgba(255, 255, 255, 0.06);
-  color: var(--text-color-dark, #eee);
+  color: var(--text-color, #eee);
 }
 
+/* stylelint-disable-next-line no-descending-specificity -- theme override must follow the base marker rules to win the cascade */
 .dark-mode .provenance-node-marker {
-  border-color: var(--border-color-dark, #555);
-  background: var(--card-bg-dark, #1e1e1e);
+  border-color: var(--border-color, #555);
+  background: var(--card-bg, #1e1e1e);
 }
 
 .dark-mode .provenance-details {
-  border-color: var(--border-color-dark, #404040);
-  background: var(--bg-color-dark, #2d2d2d);
+  border-color: var(--border-color, #404040);
+  background: var(--bg-color, #2d2d2d);
   color: #ffffffbe;
 }
 
@@ -784,28 +821,29 @@ button.provenance-node {
 
 /* Dark mode */
 .dark-mode .timeline::before {
-  background: var(--border-color-dark, #404040);
+  background: var(--border-color, #404040);
 }
 
+/* stylelint-disable-next-line no-descending-specificity -- theme override must follow the base marker rules to win the cascade */
 .dark-mode .timeline-marker {
-  border-color: var(--border-color-dark, #404040);
-  background: var(--card-bg-dark, #1e1e1e);
+  border-color: var(--border-color, #404040);
+  background: var(--card-bg, #1e1e1e);
 }
 
 .dark-mode .timeline-date {
-  color: var(--text-secondary-dark, #aaa);
+  color: var(--text-secondary, #aaa);
 }
 
 .dark-mode .timeline-text {
-  color: var(--text-color-dark, #eee);
+  color: var(--text-color, #eee);
 }
 
 .dark-mode .timeline-footer {
-  border-top-color: var(--border-color-dark, #404040);
+  border-top-color: var(--border-color, #404040);
 }
 
 .dark-mode .timeline-footer small {
-  color: var(--text-secondary-dark, #aaa);
+  color: var(--text-secondary, #aaa);
 }
 
 .dark-mode .btn-outline {
@@ -841,6 +879,7 @@ button.provenance-node {
   background: #555;
 }
 
+/* stylelint-disable-next-line no-descending-specificity -- theme override must follow the reveal rule (.key-block-wrapper:hover .btn-copy-key) to win the cascade */
 .dark-mode .btn-copy-key {
   background: rgba(255, 255, 255, 0.05);
   border-color: rgba(255, 255, 255, 0.1);
@@ -914,6 +953,7 @@ button.provenance-node {
 }
 
 /* Vampire mode buttons */
+/* stylelint-disable-next-line no-descending-specificity -- dark-mode and vampire-mode are mutually exclusive on <body>; cross-theme ordering is a false positive */
 .vampire-mode .btn-primary {
   background: #2a0a0a;
   border: 1px solid #5a2020;
@@ -996,6 +1036,7 @@ button.provenance-node {
   color: #ffcccc;
 }
 
+/* stylelint-disable-next-line no-descending-specificity -- theme override must follow the base marker rules to win the cascade */
 .vampire-mode .provenance-node-marker {
   border-color: #8a3030;
   background: #2d0000;
@@ -1021,6 +1062,7 @@ button.provenance-node {
   color: #ffc0df;
 }
 
+/* stylelint-disable-next-line no-descending-specificity -- dark-mode and vampire-mode are mutually exclusive on <body>; cross-theme ordering is a false positive */
 .vampire-mode .btn-outline {
   color: #cc9999;
   border-color: #5a2020;
@@ -1033,6 +1075,7 @@ button.provenance-node {
   border-color: #8a3030;
 }
 
+/* stylelint-disable-next-line no-descending-specificity -- dark-mode and vampire-mode are mutually exclusive on <body>; cross-theme ordering is a false positive */
 .vampire-mode .btn-toggle-key {
   color: #cc9999;
   border-color: #5a2020;
@@ -1045,6 +1088,7 @@ button.provenance-node {
   border-color: #8a3030;
 }
 
+/* stylelint-disable-next-line no-descending-specificity -- dark-mode and vampire-mode are mutually exclusive on <body>; cross-theme ordering is a false positive */
 .vampire-mode .btn-toggle-key.active {
   background: #5a2020;
   color: #ffcccc;
@@ -1055,6 +1099,7 @@ button.provenance-node {
   background: #6a2828;
 }
 
+/* stylelint-disable-next-line no-descending-specificity -- theme override must follow the reveal rule (.key-block-wrapper:hover .btn-copy-key) to win the cascade */
 .vampire-mode .btn-copy-key {
   background: rgba(255, 255, 255, 0.05);
   border-color: rgba(90, 32, 32, 0.6);
@@ -1072,3 +1117,17 @@ button.provenance-node {
   color: #66bb6a;
   border-color: rgba(40, 167, 69, 0.35);
 }
+
+/* ========== Reduced motion ========== */
+/* stylelint-disable declaration-no-important -- reduced-motion must override higher-specificity component rules */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+/* stylelint-enable declaration-no-important */
